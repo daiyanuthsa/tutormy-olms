@@ -68,4 +68,12 @@ class User extends Authenticatable implements FilamentUser, MustVerifyEmail
 
         return true;
     }
+    public function portofolio()
+    {
+        return $this->hasOne(Portofolio::class);
+    }
+    public function courses()
+    {
+        return $this->hasMany(CourseStudent::class);
+    }
 }

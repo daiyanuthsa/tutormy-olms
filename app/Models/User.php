@@ -25,6 +25,15 @@ class User extends Authenticatable implements FilamentUser, MustVerifyEmail
         'name',
         'email',
         'password',
+        'photo',
+        'phone',
+        'date_birth',
+        'status',
+        'instagram',
+        'linkedin',
+        'discovery_source',
+        'about',
+        'expectation',
     ];
 
     /**
@@ -35,6 +44,7 @@ class User extends Authenticatable implements FilamentUser, MustVerifyEmail
     protected $hidden = [
         'password',
         'remember_token',
+        
     ];
 
     /**
@@ -47,6 +57,7 @@ class User extends Authenticatable implements FilamentUser, MustVerifyEmail
         return [
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
+            'date_birth'=> 'date',
         ];
     }
     public function canAccessPanel(Panel $panel): bool

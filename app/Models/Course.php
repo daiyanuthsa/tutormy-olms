@@ -2,24 +2,30 @@
 
 namespace App\Models;
 
-
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Str;
 
-class Category extends Model
+class Course extends Model
 {
-    use SoftDeletes;
     //
+    use SoftDeletes;
     protected $fillable = [
         'name',
         'slug',
+        'about',
+        'thumbnail',
+        'category_id',
+        'is_popular',
     ];
-    
-    /**
-     * Get the route key for the model.
-     */
+
+    protected function casts(): array
+    {
+        return [
+            'is_popular' => 'boolean',
+        ];
+    }
     protected function name(): Attribute
     {
         return Attribute::make(
@@ -29,9 +35,12 @@ class Category extends Model
             ],
         );
     }
-
-    public function courses()
+    protected function category()
     {
-        return $this->hasMany(Course::class);
+        return $this->belongsTo(Category::class);
+    }
+    protected function benefits()
+    {
+        return $this->hasMany(CourseBenefit::class);
     }
 }

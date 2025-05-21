@@ -24,6 +24,10 @@ class Article extends Model
             'is_published' => 'boolean',
         ];
     }
+    public function getRouteKeyName()
+    {
+        return 'slug';
+    }
     protected function name(): Attribute
     {
         return Attribute::make(

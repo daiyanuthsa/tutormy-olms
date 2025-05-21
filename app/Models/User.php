@@ -72,6 +72,9 @@ class User extends Authenticatable implements FilamentUser, MustVerifyEmail
     {
         return $this->hasOne(Portofolio::class);
     }
+    public function hasPortofolio($user_id){
+        return $this->portofolio()->where('user_id', $user_id)->exists();
+    }
     public function courses()
     {
         return $this->hasMany(CourseStudent::class);

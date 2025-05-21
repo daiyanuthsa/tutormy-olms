@@ -65,8 +65,28 @@ php artisan key:generate
 php artisan migrate --seed
 ```
 
-### Buat Symbolic Link ke Storage
+### 7. Buat Symbolic Link ke Storage
 
 ```bash
 php artisan storage:link
+```
+
+## Folder Structure
+```bash
+app/
+├── Models/                # Model Eloquent
+├── Http/Controllers/      # Controller logic
+├── Services/
+├── Repositories/
+database/
+├── migrations/            # Struktur tabel
+├── seeders/               # Dummy data
+public/
+├── storage/               # Symbolic link untuk akses file
+resources/
+├── js/                    # View in ReactJS
+routes
+├── web.php                # Web routes
+├── api.php                # API routes
+
 ```

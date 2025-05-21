@@ -19,13 +19,15 @@ TutorMy adalah platform pembelajaran online berbasis Laravel yang memungkinkan p
 
 ## 🛠️ Teknologi yang Digunakan
 
--   Laravel 11+
+-   Laravel 12+
 -   PHP 8.2+
 -   MySQL / MariaDB
--   Tailwind CSS / Bootstrap (opsional)
+-   Inertia 2+
+-   Tailwind CSS 
 -   Filament (admin panel)
--   Laravel Sanctum / Passport (jika ada API)
--   App Service: Storage, Queue (opsional Redis)
+-   Laravel Breeze (jika ada API)
+-   App Service: Storage
+-   Service & Repository Pattern
 
 ---
 

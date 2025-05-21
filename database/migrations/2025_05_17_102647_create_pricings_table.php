@@ -16,7 +16,8 @@ return new class extends Migration
             $table->string('name');
             $table->integer('duration'); // dalam hari
             $table->integer('price');
-            $table->integer('normal_price');
+            $table->integer('normal_price')->nullable();
+            $table->softDeletes();
             $table->timestamps();
         });
     }

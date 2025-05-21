@@ -2,13 +2,15 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Model;
+use Str;
 
 class Article extends Model
 {
     //
     protected $fillable = [
-        'title',
+        'name',
         'slug',
         'content',
         'thumbnail',
@@ -22,5 +24,22 @@ class Article extends Model
             'is_published' => 'boolean',
         ];
     }
-    
+    protected function name(): Attribute
+    {
+        return Attribute::make(
+            set: fn(string $value) => [
+                'name' => $value,
+                'slug' => Str::slug($value),
+            ],
+        );
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
+    }
 }

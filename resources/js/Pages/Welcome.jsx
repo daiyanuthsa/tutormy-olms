@@ -1,18 +1,16 @@
 import { Head, Link } from '@inertiajs/react';
 import React from 'react'
-import PrimaryButton from '@/Components/PrimaryButton';
-import SecondaryButton from '@/Components/SecondaryButton';
-import TertiaryButton from '@/Components/TertiaryButton';
 import MainLayout from '@/Layouts/MainLayout';
+import HeroComponents from './Welcome/HeroComponents';
+import Data from './Welcome/Data';
 
 const Welcome = () => {
     return (
         <MainLayout>
             <Head title="Welcome" />
-            <main className='py-20 space-x-20 container'>
-                <PrimaryButton>Login</PrimaryButton>
-                <SecondaryButton>Cek Selengkapnya</SecondaryButton>
-                <TertiaryButton>Lihat</TertiaryButton>
+            <main className='py-28 container w-full'>
+                <HeroComponents />
+                <Data />
             </main>
         </MainLayout>
     )

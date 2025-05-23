@@ -13,7 +13,7 @@ export default {
     theme: {
         extend: {
             fontFamily: {
-                sans: ["Figtree", ...defaultTheme.fontFamily.sans],
+                inter: ['"Inter"', "sans-serif"],
             },
             container: {
                 center: true,
@@ -52,6 +52,7 @@ export default {
                     3: "#1AAC20",
                 },
                 neutral: {
+                    1: "#D7CDCD",
                     2: "#C2C2C2",
                     3: "#2C2C3C",
                     4: "#22222E",
@@ -75,6 +76,7 @@ export default {
             backgroundImage: (theme) => ({
                 "gradient-light": "linear-gradient(to left, #590994, #C985FC)",
                 "gradient-dark": "linear-gradient(to left, #24063A, #6311A0)",
+                "gradient-dark-down": "linear-gradient(to top, #24063A, #6311A0)",
             }),
         },
     },

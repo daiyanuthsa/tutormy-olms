@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\TipsController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -14,6 +15,9 @@ Route::get('/', function () {
     ]);
 });
 
+Route::get('/tips', [TipsController::class,'index'])->name('tips.index');
+Route::get('/tips/search', [TipsController::class,'searchTips'])->name('tips.search');
+Route::get('/tips/{article}', [TipsController::class, 'tipsDetails'])->name('tips.details');
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');

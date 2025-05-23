@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
+
 use Filament\Models\Contracts\FilamentUser;
 use Filament\Panel;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
@@ -25,6 +25,15 @@ class User extends Authenticatable implements FilamentUser, MustVerifyEmail
         'name',
         'email',
         'password',
+        'photo',
+        'phone',
+        'date_birth',
+        'status',
+        'instagram',
+        'linkedin',
+        'discovery_source',
+        'about',
+        'expectation',
     ];
 
     /**
@@ -35,6 +44,7 @@ class User extends Authenticatable implements FilamentUser, MustVerifyEmail
     protected $hidden = [
         'password',
         'remember_token',
+        
     ];
 
     /**
@@ -47,6 +57,7 @@ class User extends Authenticatable implements FilamentUser, MustVerifyEmail
         return [
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
+            'date_birth'=> 'date',
         ];
     }
     public function canAccessPanel(Panel $panel): bool
@@ -56,5 +67,16 @@ class User extends Authenticatable implements FilamentUser, MustVerifyEmail
         }
 
         return true;
+    }
+    public function portofolio()
+    {
+        return $this->hasOne(Portofolio::class);
+    }
+    public function hasPortofolio($user_id){
+        return $this->portofolio()->where('user_id', $user_id)->exists();
+    }
+    public function courses()
+    {
+        return $this->hasMany(CourseStudent::class);
     }
 }

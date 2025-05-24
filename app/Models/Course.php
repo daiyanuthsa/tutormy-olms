@@ -35,11 +35,11 @@ class Course extends Model
             ],
         );
     }
-    protected function category()
+    public function category()
     {
-        return $this->belongsTo(Category::class);
+        return $this->belongsTo(Category::class,'category_id');
     }
-    protected function benefits()
+    public function benefits()
     {
         return $this->hasMany(CourseBenefit::class);
     }

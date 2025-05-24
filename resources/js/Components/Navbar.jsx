@@ -6,7 +6,7 @@ import { Icon } from '@iconify/react';
 
 const navLinks = [
     { name: 'Home', href: '/' },
-    { name: 'Course', href: '/course' },
+    { name: 'Course', href: '/courses' },
     { name: 'Tips', href: '/tips' },
 ];
 

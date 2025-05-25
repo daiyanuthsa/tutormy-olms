@@ -79,4 +79,14 @@ class User extends Authenticatable implements FilamentUser, MustVerifyEmail
     {
         return $this->hasMany(CourseStudent::class);
     }
+    public function students()
+    {
+        return $this->hasMany(CourseStudent::class, 'student_id');
+    }
+    public function admin()
+    {
+        return $this->whereHas('roles', function ($query) {
+            $query->where('name', 'admin');
+        });
+    }
 }

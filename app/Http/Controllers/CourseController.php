@@ -24,10 +24,10 @@ class CourseController extends Controller
 
     public function show(Course $course)
     {
-        $benefits = $course->benefits()->get();
+        $course->load(['category', 'benefits']);
         if (!$course) {
             abort(404);
         }
-        return inertia('Course/CourseDetails', ['course' => $course, 'benefits' => $benefits]);
+        return inertia('Course/CourseDetails', compact('course'));
     }
 }

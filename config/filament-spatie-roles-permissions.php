@@ -11,7 +11,7 @@ return [
 
     'preload_permissions' => true,
 
-    'navigation_section_group' => 'filament-spatie-roles-permissions::filament-spatie.section.roles_and_permissions', // Default uses language constant
+    'navigation_section_group' => 'Manajemen Admin', // Default uses language constant
 
     'team_model' => \App\Models\Team::class,
 
@@ -67,7 +67,7 @@ return [
      */
     'should_display_relation_managers' => [
         'permissions' => true,
-        'users' => true,
+        'users' => false,
         'roles' => true,
     ],
 
@@ -141,7 +141,6 @@ return [
 
         'guard_names' => [
             'web',
-            'api',
         ],
 
         'permission_affixes' => [

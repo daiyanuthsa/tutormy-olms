@@ -2,11 +2,10 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\CourseResource\Pages;
-use App\Filament\Resources\CourseResource\RelationManagers;
-use App\Models\Course;
+use App\Filament\Resources\TestimonialResource\Pages;
+use App\Filament\Resources\TestimonialResource\RelationManagers;
+use App\Models\Testimonial;
 use Filament\Forms;
-use Filament\Forms\Components\Fieldset;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
@@ -14,46 +13,39 @@ use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
-class CourseResource extends Resource
+class TestimonialResource extends Resource
 {
-    protected static ?string $model = Course::class;
+    protected static ?string $model = Testimonial::class;
+    public static ?string $navigationGroup = 'Manajemen Konten';
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
-    protected static ?string $navigationGroup = 'Manajemen Kelas';
+    protected static ?string $navigationIcon = 'heroicon-o-star';
+
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
-                
                 Forms\Components\TextInput::make('name')
                     ->required()
                     ->maxLength(255),
-                Forms\Components\Select::make('category_id')
+                Forms\Components\TextInput::make('ocupation')
                     ->required()
-                    ->relationship('category', 'name')
-                    ->searchable()
-                    ->preload(),
-                    Forms\Components\FileUpload::make('thumbnail')
-                    ->image()
-                    ->directory('course/thumbnail')
-                    ->visibility('public'),
-                Forms\Components\Toggle::make('is_popular')
-                    ->required(),
-                Forms\Components\Textarea::make('about')
+                    ->maxLength(255),
+                Forms\Components\FileUpload::make('image_url')
+                    ->image(),
+                Forms\Components\Textarea::make('content')
+                    ->required()
                     ->columnSpanFull(),
-                Forms\Components\Repeater::make('benefits')
-                    ->relationship('benefits')
-                    ->schema([
-                        Forms\Components\TextInput::make('name')
-                            ->required(),
+                Forms\Components\Select::make('rating')
+                    ->required()
+                    ->options([
+                        1 => '1 Star',
+                        2 => '2 Stars',
+                        3 => '3 Stars',
+                        4 => '4 Stars',
+                        5 => '5 Stars',
                     ])
-                    ->columnSpanFull(),
-                Fieldset::make('Manfaat')
-                    ->schema([
-                        
-                    ]),
-                
-                
+                    ->default(5)
+                ,
             ]);
     }
 
@@ -63,12 +55,10 @@ class CourseResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('name')
                     ->searchable(),
-                Tables\Columns\TextColumn::make('slug')
+                Tables\Columns\TextColumn::make('ocupation')
                     ->searchable(),
-                
-                Tables\Columns\IconColumn::make('is_popular')
-                    ->boolean(),
-                Tables\Columns\TextColumn::make('category.name')
+                Tables\Columns\ImageColumn::make('image_url'),
+                Tables\Columns\TextColumn::make('rating')
                     ->numeric()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('created_at')
@@ -85,7 +75,7 @@ class CourseResource extends Resource
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
-                //
+                Tables\Filters\TrashedFilter::make(),
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
@@ -93,6 +83,8 @@ class CourseResource extends Resource
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make(),
+                    Tables\Actions\ForceDeleteBulkAction::make(),
+                    Tables\Actions\RestoreBulkAction::make(),
                 ]),
             ]);
     }
@@ -107,9 +99,17 @@ class CourseResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListCourses::route('/'),
-            'create' => Pages\CreateCourse::route('/create'),
-            'edit' => Pages\EditCourse::route('/{record}/edit'),
+            'index' => Pages\ListTestimonials::route('/'),
+            'create' => Pages\CreateTestimonial::route('/create'),
+            'edit' => Pages\EditTestimonial::route('/{record}/edit'),
         ];
+    }
+
+    public static function getEloquentQuery(): Builder
+    {
+        return parent::getEloquentQuery()
+            ->withoutGlobalScopes([
+                SoftDeletingScope::class,
+            ]);
     }
 }

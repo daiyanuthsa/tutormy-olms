@@ -2,11 +2,10 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\CourseResource\Pages;
-use App\Filament\Resources\CourseResource\RelationManagers;
-use App\Models\Course;
+use App\Filament\Resources\AgendaResource\Pages;
+use App\Filament\Resources\AgendaResource\RelationManagers;
+use App\Models\Agenda;
 use Filament\Forms;
-use Filament\Forms\Components\Fieldset;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
@@ -14,46 +13,37 @@ use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
-class CourseResource extends Resource
+class AgendaResource extends Resource
 {
-    protected static ?string $model = Course::class;
+    protected static ?string $model = Agenda::class;
+    protected static ?string $navigationGroup = 'Manajemen Konten';
+    protected static ?string $navigationIcon = 'heroicon-o-calendar-date-range';
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
-    protected static ?string $navigationGroup = 'Manajemen Kelas';
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
-                
                 Forms\Components\TextInput::make('name')
                     ->required()
                     ->maxLength(255),
-                Forms\Components\Select::make('category_id')
+                Forms\Components\DateTimePicker::make('start_date')
                     ->required()
-                    ->relationship('category', 'name')
-                    ->searchable()
-                    ->preload(),
-                    Forms\Components\FileUpload::make('thumbnail')
+                    ->label('Tanggal Mulai'),
+                Forms\Components\FileUpload::make('thumbnail')
                     ->image()
-                    ->directory('course/thumbnail')
-                    ->visibility('public'),
-                Forms\Components\Toggle::make('is_popular')
-                    ->required(),
-                Forms\Components\Textarea::make('about')
+                    ->directory('agenda/thumbnail')
+                    ->visibility('public')
+                    ->required()
                     ->columnSpanFull(),
-                Forms\Components\Repeater::make('benefits')
-                    ->relationship('benefits')
-                    ->schema([
-                        Forms\Components\TextInput::make('name')
-                            ->required(),
-                    ])
+                Forms\Components\Textarea::make('description')
                     ->columnSpanFull(),
-                Fieldset::make('Manfaat')
-                    ->schema([
-                        
-                    ]),
-                
-                
+
+                Forms\Components\TextInput::make('content')
+                    ->required()
+                    ->label('Link Konten')
+                    ->columnSpanFull()
+                    ->maxLength(255),
+
             ]);
     }
 
@@ -65,12 +55,13 @@ class CourseResource extends Resource
                     ->searchable(),
                 Tables\Columns\TextColumn::make('slug')
                     ->searchable(),
-                
-                Tables\Columns\IconColumn::make('is_popular')
-                    ->boolean(),
-                Tables\Columns\TextColumn::make('category.name')
-                    ->numeric()
+                Tables\Columns\TextColumn::make('thumbnail')
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('start_date')
+                    ->dateTime()
                     ->sortable(),
+                Tables\Columns\ToggleColumn::make('is_active')
+                    ->label('Aktif'),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()
@@ -89,6 +80,12 @@ class CourseResource extends Resource
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
+                Tables\Actions\Action::make('view')
+                    ->url(fn ($record) => $record->content)
+                    ->icon('heroicon-o-globe-alt')
+                    ->label('Lihat Konten')
+                    ->openUrlInNewTab()
+                    ->color('primary'),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
@@ -107,9 +104,16 @@ class CourseResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListCourses::route('/'),
-            'create' => Pages\CreateCourse::route('/create'),
-            'edit' => Pages\EditCourse::route('/{record}/edit'),
+            'index' => Pages\ListAgendas::route('/'),
+            'create' => Pages\CreateAgenda::route('/create'),
+            'edit' => Pages\EditAgenda::route('/{record}/edit'),
         ];
+    }
+    public static function getEloquentQuery(): Builder
+    {
+        return parent::getEloquentQuery()
+            ->withoutGlobalScopes([
+                SoftDeletingScope::class,
+            ]);
     }
 }

@@ -8,6 +8,8 @@ use App\Repositories\CourseRepository;
 use App\Repositories\CourseRepositoryInterface;
 use App\Repositories\PricingRepository;
 use App\Repositories\PricingRepositoryInterface;
+use App\Repositories\TransactionRepository;
+use App\Repositories\TransactionRepositoryInterface;
 use Illuminate\Support\Facades\Vite;
 use Illuminate\Support\ServiceProvider;
 
@@ -21,6 +23,7 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(ArticleRepositoryInterface::class, ArticleRepository::class);
         $this->app->bind(CourseRepositoryInterface::class, CourseRepository::class);
         $this->app->bind(PricingRepositoryInterface::class, PricingRepository::class);
+        $this->app->bind(TransactionRepositoryInterface::class, TransactionRepository::class);
     }
 
     /**

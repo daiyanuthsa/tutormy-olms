@@ -1,5 +1,5 @@
 import { Link, usePage } from '@inertiajs/react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import PrimaryButton from '@/Components/PrimaryButton';
 import ApplicationLogo from './ApplicationLogo';
 import { Icon } from '@iconify/react';
@@ -16,7 +16,7 @@ export default function Navbar() {
     const [menuOpen, setMenuOpen] = useState(false);
 
     return (
-        <nav className="fixed w-full z-50 text-white py-4">
+        <nav className="fixed px-2 md:px-5 w-full z-50 text-white py-4">
             <div className="container mx-auto bg-neutral-3 rounded-full py-3 flex items-center justify-between shadow-lg transition-all duration-300">
                 <ApplicationLogo />
 
@@ -26,7 +26,7 @@ export default function Navbar() {
                             <li key={link.href}>
                                 <Link
                                     href={link.href}
-                                    className={`hover:text-primary-500 transition-colors duration-200 ${url === link.href ? 'text-primary-500 font-bold' : ''
+                                    className={`hover:text-primary-2 transition-colors duration-200 ${url === link.href ? 'text-primary-500 font-bold' : ''
                                         }`}
                                 >
                                     {link.name}
@@ -38,7 +38,7 @@ export default function Navbar() {
                         {user ? (
                             <Link
                                 href={route('dashboard')}
-                                className="hover:text-primary-500 font-semibold transition-colors"
+                                className="hover:text-primary-2 font-semibold transition-colors"
                             >
                                 Dashboard
                             </Link>
@@ -46,7 +46,7 @@ export default function Navbar() {
                             <>
                                 <Link
                                     href={route('register')}
-                                    className="hover:text-primary-500 font-semibold transition-colors"
+                                    className="hover:text-primary-2 font-semibold transition-colors"
                                 >
                                     Daftar
                                 </Link>
@@ -67,7 +67,7 @@ export default function Navbar() {
             </div>
 
             <div
-                className={`md:hidden bg-neutral-3 mx-4 mt-2 rounded-xl shadow-lg py-4 transition-all duration-300 ${menuOpen ? 'max-h-[400px] opacity-100' : 'max-h-0 overflow-hidden opacity-0'
+                className={`md:hidden container bg-neutral-3 mt-2 rounded-xl shadow-lg py-4 transition-all duration-300 ${menuOpen ? 'max-h-[400px] opacity-100' : 'max-h-0 overflow-hidden opacity-0'
                     }`}
             >
                 <ul className="flex flex-col gap-4 text-center font-medium container">

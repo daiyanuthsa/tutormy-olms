@@ -34,9 +34,9 @@ const Question = () => {
     }
 
     return (
-        <section>
-            <div className='relative container mx-auto text-white py-16 lg:py-20 space-y-8 overflow-hidden'>
-                <div className="absolute w-60 h-60 lg:w-80 lg:h-96 bg-purple-700 opacity-30 blur-3xl rounded-full right-[-190px] top-16 z-0" />
+        <section className='overflow-hidden '>
+            <div className='relative container mx-auto text-white py-16 lg:py-20 space-y-8'>
+                <div className="absolute w-60 h-60 lg:w-80 lg:h-96 bg-purple-700 opacity-40 blur-3xl rounded-full right-[-190px] top-16 z-0" />
                 <div className='space-y-2 lg:space-y-4 w-full lg:w-1/2'>
                     <p className="text-primary-2 text-sm font-semibold">Frequently Ask Question</p>
                     <h2 className="text-2xl lg:text-4xl font-bold">Pertanyaan yang Sering Diajukan</h2>

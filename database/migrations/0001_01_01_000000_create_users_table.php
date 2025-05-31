@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('photo')->nullable();
             $table->string('phone')->nullable();
             $table->string('status')->nullable();
+            $table->string('gender')->nullable();
             $table->date('date_birth')->nullable();
             $table->string('instagram')->nullable();
             $table->string('linkedin')->nullable();

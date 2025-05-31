@@ -60,29 +60,37 @@ const Login = ({ status, canResetPassword }) => {
                                 <div className='space-y-4'>
                                     <div>
                                         <InputLabel htmlFor="email" value="Email" className="mb-1" />
-                                        <TextInput
-                                            id="email"
-                                            type="email"
-                                            name="email"
-                                            value={data.email}
-                                            className="w-full bg-neutral-3"
-                                            autoComplete="username"
-                                            isFocused={true}
-                                            placeholder="Tulis Email disini"
-                                            onChange={(e) => setData('email', e.target.value)}
-                                        />
+                                        <div className="relative">
+                                            <span className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400">
+                                                <Icon icon="mdi:email-outline" width="20" height="20" />
+                                            </span>
+                                            <TextInput
+                                                id="email"
+                                                type="email"
+                                                name="email"
+                                                value={data.email}
+                                                className="w-full pl-10 bg-neutral-3" 
+                                                autoComplete="username"
+                                                isFocused={true}
+                                                placeholder="Tulis Email disini"
+                                                onChange={(e) => setData('email', e.target.value)}
+                                            />
+                                        </div>
                                         <InputError message={errors.email} className="mt-1 text-red-400" />
                                     </div>
 
                                     <div>
                                         <InputLabel htmlFor="password" value="Password" className="mb-1" />
                                         <div className="relative">
+                                            <span className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400">
+                                                <Icon icon="mdi:lock-outline" width="20" height="20" />
+                                            </span>
                                             <TextInput
                                                 id="password"
                                                 type={showPassword ? "text" : "password"}
                                                 name="password"
                                                 value={data.password}
-                                                className="w-full pr-12 bg-neutral-3"
+                                                className="w-full pl-10 pr-12 bg-neutral-3"
                                                 autoComplete="current-password"
                                                 placeholder="••••••••••"
                                                 onChange={(e) => setData('password', e.target.value)}
@@ -92,7 +100,7 @@ const Login = ({ status, canResetPassword }) => {
                                                 onClick={() => setShowPassword(!showPassword)}
                                                 className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-white"
                                             >
-                                                {showPassword ? <Eye size={20} /> : <EyeOff size={20} />}
+                                                <Icon icon={showPassword ? "mdi:eye-off-outline" : "mdi:eye-outline"} width="20" height="20" />
                                             </button>
                                         </div>
                                         <InputError message={errors.password} className="mt-1 text-red-400" />
@@ -142,7 +150,7 @@ const Login = ({ status, canResetPassword }) => {
 
                             <div className="mt-6 text-center text-sm font-medium">
                                 <span>Belum Punya akun? </span>
-                                <Link href="#" className="text-primary-2 hover:underline">Daftar Sekarang</Link>
+                                <Link href={route('register')} className="text-primary-2 hover:underline">Daftar Sekarang</Link>
                             </div>
                         </div>
                     </div>

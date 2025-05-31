@@ -36,5 +36,10 @@ class DatabaseSeeder extends Seeder
         });
 
         Testimonial::factory(10)->create();
+        $this->call([
+            CourseSeeder::class,
+
+        ]);
+
     }
 }

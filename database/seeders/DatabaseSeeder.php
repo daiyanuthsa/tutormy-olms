@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\Article;
 use App\Models\Category;
+use App\Models\Testimonial;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -19,6 +20,7 @@ class DatabaseSeeder extends Seeder
         $this->call([
             RoleSeeder::class,
             UserSeeder::class,
+            PricingSeeder::class,
         ]);
 
         // Buat 5 kategori
@@ -32,5 +34,7 @@ class DatabaseSeeder extends Seeder
             $article->category_id = fake()->randomElement($categoryIds);
             $article->save();
         });
+
+        Testimonial::factory(10)->create();
     }
 }

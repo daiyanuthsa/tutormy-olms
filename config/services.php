@@ -34,5 +34,10 @@ return [
             'channel' => env('SLACK_BOT_USER_DEFAULT_CHANNEL'),
         ],
     ],
+    'mayar' => [
+        'key' => env('MAYAR_API_KEY'),
+        'endpoint' => env('MAYAR_API_URL', 'https://api.mayar.id/hl/v1/payment'),
+    ],
+
 
 ];

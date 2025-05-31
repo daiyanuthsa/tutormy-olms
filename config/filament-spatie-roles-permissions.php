@@ -20,7 +20,7 @@ return [
     'scope_roles_to_tenant' => true,
     'scope_premissions_to_tenant' => false,
 
-    'super_admin_role_name' => 'Super Admin',
+    'super_admin_role_name' => 'admin',
 
     /*
      * Set as false to remove from navigation.

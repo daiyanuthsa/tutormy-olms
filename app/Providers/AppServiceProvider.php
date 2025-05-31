@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Models\Transaction;
+use App\Models\User;
 use App\Observers\TransactionObserver;
 use App\Repositories\ArticleRepository;
 use App\Repositories\ArticleRepositoryInterface;
@@ -12,6 +13,7 @@ use App\Repositories\PricingRepository;
 use App\Repositories\PricingRepositoryInterface;
 use App\Repositories\TransactionRepository;
 use App\Repositories\TransactionRepositoryInterface;
+use Gate;
 use Illuminate\Support\Facades\Vite;
 use Illuminate\Support\ServiceProvider;
 
@@ -35,6 +37,8 @@ class AppServiceProvider extends ServiceProvider
     {
         Vite::prefetch(concurrency: 3);
         Transaction::observe(TransactionObserver::class);
-
+        Gate::before(function (User $user, string $ability) {
+            return $user->isSuperAdmin() ? true : null;
+        });
     }
 }

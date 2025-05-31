@@ -16,7 +16,7 @@ Route::get('/tips/{article}', [TipsController::class, 'tipsDetails'])->name('tip
 Route::get('/courses', [CourseController::class, 'index'])->name('course.index');
 Route::get('/courses/{course:slug}', [CourseController::class, 'show'])->name('course.details');
 
-Route::get('/checkout/{pricing}', [FrontController::class, 'checkout'])->name('front.checkout');
+
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
@@ -25,6 +25,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    
+    Route::get('/checkout/{pricing}', [FrontController::class, 'checkout'])->name('front.checkout');
 });
 
 

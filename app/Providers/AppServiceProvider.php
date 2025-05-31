@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Models\Transaction;
+use App\Observers\TransactionObserver;
 use App\Repositories\ArticleRepository;
 use App\Repositories\ArticleRepositoryInterface;
 use App\Repositories\CourseRepository;
@@ -32,5 +34,7 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         Vite::prefetch(concurrency: 3);
+        Transaction::observe(TransactionObserver::class);
+
     }
 }

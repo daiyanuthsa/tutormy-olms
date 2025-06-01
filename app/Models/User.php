@@ -3,6 +3,7 @@
 namespace App\Models;
 
 
+use Althinect\FilamentSpatieRolesPermissions\Concerns\HasSuperAdmin;
 use Filament\Models\Contracts\FilamentUser;
 use Filament\Panel;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
@@ -14,7 +15,7 @@ use Spatie\Permission\Traits\HasRoles;
 class User extends Authenticatable implements FilamentUser, MustVerifyEmail
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
-    use HasFactory, Notifiable, HasRoles;
+    use HasFactory, Notifiable, HasRoles, HasSuperAdmin;
 
     /**
      * The attributes that are mass assignable.
@@ -28,6 +29,7 @@ class User extends Authenticatable implements FilamentUser, MustVerifyEmail
         'photo',
         'phone',
         'date_birth',
+        'gender',
         'status',
         'instagram',
         'linkedin',
@@ -78,5 +80,15 @@ class User extends Authenticatable implements FilamentUser, MustVerifyEmail
     public function courses()
     {
         return $this->hasMany(CourseStudent::class);
+    }
+    public function students()
+    {
+        return $this->hasMany(CourseStudent::class, 'student_id');
+    }
+    public function admin()
+    {
+        return $this->whereHas('roles', function ($query) {
+            $query->where('name', 'admin');
+        });
     }
 }

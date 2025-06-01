@@ -9,11 +9,11 @@ import Question from './Welcome/Question';
 import Pricelist from './Welcome/Pricelist';
 import Review from './Welcome/Review';
 
-const Welcome = () => {
+const Welcome = ({ pricing, testimonials }) => {
     return (
         <MainLayout>
             <Head title="Welcome" />
-            <main className='py-28 w-full'>
+            <main className="py-28 w-full">
                 <HeroComponents />
                 <Data />
                 <Class />
@@ -23,8 +23,8 @@ const Welcome = () => {
                 <Review />
             </main>
         </MainLayout>
-    )
-}
+    );
+};
 
 export default Welcome
 

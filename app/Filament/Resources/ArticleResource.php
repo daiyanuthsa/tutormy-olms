@@ -16,7 +16,7 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 class ArticleResource extends Resource
 {
     protected static ?string $model = Article::class;
-    protected static ?string $navigationGroup = 'Content';
+    protected static ?string $navigationGroup = 'Manajemen Konten';
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
     public static function form(Form $form): Form
@@ -82,6 +82,7 @@ class ArticleResource extends Resource
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
+                
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([

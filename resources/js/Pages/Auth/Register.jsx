@@ -1,31 +1,3 @@
-// import InputError from '@/Components/InputError';
-// import InputLabel from '@/Components/InputLabel';
-// import PrimaryButton from '@/Components/PrimaryButton';
-// import TextInput from '@/Components/TextInput';
-// import { Head, Link, useForm } from '@inertiajs/react';
-// import AuthLayout from '@/Layouts/AuthLayout'
-// import React from 'react'
-
-// const Register = () => {
-//     return (
-//         <AuthLayout>
-//             <section className='py-28'>
-//                 <div className='container text-white flex'>
-//                     <div className='lg:w-1/2 w-full'>
-//                         hehe
-//                     </div>
-//                     <div className='w-full lg:w-1/2 hidden lg:block'>
-//                         <img src="/assets/hero-auth.webp" alt="image" className='w-full max-w-[600px] mx-auto' />
-//                     </div>
-//                 </div>
-//             </section>
-//         </AuthLayout>
-//     )
-// }
-
-// export default Register
-
-
 import InputError from '@/Components/InputError';
 import InputLabel from '@/Components/InputLabel';
 import PrimaryButton from '@/Components/PrimaryButton';

@@ -14,10 +14,18 @@ return Application::configure(basePath: dirname(__DIR__))
         $middleware->web(append: [
             \App\Http\Middleware\HandleInertiaRequests::class,
             \Illuminate\Http\Middleware\AddLinkHeadersForPreloadedAssets::class,
+            
+        ]);
+        $middleware->alias([
+            'profile.completed' => \App\Http\Middleware\EnsureProfileIsComplete::class,
         ]);
 
         //
     })
     ->withExceptions(function (Exceptions $exceptions) {
         //
-    })->create();
+    })
+    ->withCommands([
+        \App\Console\Commands\MakeRepositoryCommand::class,
+    ])
+    ->create();

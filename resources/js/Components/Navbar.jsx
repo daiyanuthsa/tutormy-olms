@@ -39,7 +39,7 @@ export default function Navbar() {
                             <li key={link.href}>
                                 <Link
                                     href={link.href}
-                                    className={`hover:text-primary-2 transition-colors duration-200 ${url === link.href ? 'text-primary-1 font-bold' : ''
+                                    className={`hover:text-primary-2 transition-colors duration-200 ${url === link.href ? 'text-primary-2 font-bold' : ''
                                         }`}
                                 >
                                     {link.name}

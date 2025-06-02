@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Eye, EyeOff } from 'lucide-react';
-import Checkbox from '@/Components/Checkbox';
+// import Checkbox from '@/Components/Checkbox';
 import InputError from '@/Components/InputError';
 import InputLabel from '@/Components/InputLabel';
 import PrimaryButton from '@/Components/PrimaryButton';
@@ -109,11 +109,11 @@ const Login = ({ status, canResetPassword }) => {
 
                                 <div className="flex items-center justify-between text-sm">
                                     <label className="flex items-center">
-                                        <Checkbox
+                                        {/* <Checkbox
                                             name="remember"
                                             checked={data.remember}
                                             onChange={(e) => setData('remember', e.target.checked)}
-                                        />
+                                        /> */}
                                         <span className="ml-2">Ingat saya</span>
                                     </label>
                                     {canResetPassword && (

@@ -106,10 +106,12 @@ export default function Navbar() {
                     }`}
             >
                 <ul className="flex flex-col gap-4 text-center items-center font-medium container">
-                    <li className='flex items-center w-max px-3 justify-center gap-2 bg-gradient-light rounded-full py-1'>
-                        <Icon icon="mdi:account-circle" className="text-xl" />
-                        {user.name}
-                    </li>
+                    {user && (
+                        <li className='flex items-center w-max px-3 justify-center gap-2 bg-gradient-light rounded-full py-1'>
+                            <Icon icon="mdi:account-circle" className="text-xl" />
+                            {user.name}
+                        </li>
+                    )}
                     {navLinks.map((link) => (
                         <li key={link.href}>
                             <Link

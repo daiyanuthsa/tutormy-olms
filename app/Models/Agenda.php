@@ -15,13 +15,20 @@ class Agenda extends Model
         'slug',
         'thumbnail',
         'description',
-        'start_date',
-        'content',
+        'event_datetime',
+        'duration_minutes',
+        'registration_link',
+        'registration_deadline',
+        'participant_quota',
+        'recording_url',
         'is_active',
     ];
 
     protected $casts = [
-        'start_date' => 'datetime',
+        'event_datetime' => 'datetime',
+        'registration_deadline'=> 'datetime',
+        'duration_minutes' => 'integer',
+        'participant_quota' => 'integer',
         'is_active' => 'boolean',
     ];
 

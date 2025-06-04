@@ -15,10 +15,14 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('slug')->unique();
-            $table->string('thumbnail')->nullable();
             $table->text('description')->nullable();
-            $table->dateTime('start_date')->nullable();
-            $table->string('content')->nullable();
+            $table->string('thumbnail')->nullable();
+            $table->dateTime('event_datetime')->nullable();
+            $table->integer('duration_minutes')->nullable();
+            $table->string('registration_link')->nullable();
+            $table->dateTime('registration_deadline')->nullable();
+            $table->integer('participant_quota')->nullable();
+            $table->string('recording_url')->nullable();
             $table->boolean('is_active')->default(true);
             $table->timestamps();
             $table->softDeletes();

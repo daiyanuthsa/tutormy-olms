@@ -6,6 +6,7 @@ use App\Filament\Resources\AgendaResource\Pages;
 use App\Filament\Resources\AgendaResource\RelationManagers;
 use App\Models\Agenda;
 use Filament\Forms;
+use Filament\Forms\Components\Fieldset;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
@@ -16,33 +17,75 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 class AgendaResource extends Resource
 {
     protected static ?string $model = Agenda::class;
+
+    protected static ?string $navigationIcon = 'heroicon-o-calendar';
     protected static ?string $navigationGroup = 'Manajemen Konten';
-    protected static ?string $navigationIcon = 'heroicon-o-calendar-date-range';
+    protected static ?string $navigationLabel= 'Webminar';
+    protected static ?string $modelLabel = 'Webminar';
+    protected static ?string $pluralModelLabel = 'Webminar';
+
 
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('name')
-                    ->required()
-                    ->maxLength(255),
-                Forms\Components\DateTimePicker::make('start_date')
-                    ->required()
-                    ->label('Tanggal Mulai'),
-                Forms\Components\FileUpload::make('thumbnail')
-                    ->image()
-                    ->directory('agenda/thumbnail')
-                    ->visibility('public')
-                    ->required()
-                    ->columnSpanFull(),
-                Forms\Components\Textarea::make('description')
-                    ->columnSpanFull(),
+                Fieldset::make('Webminar')
+                    ->schema([
+                        Forms\Components\TextInput::make('name')
+                        ->label('Nama Webminar')
+                            ->required()
+                            ->maxLength(255),
+                        Forms\Components\DateTimePicker::make('event_datetime')
+                            ->required()
+                            ->label('Tanggal dan Waktu Webminar'),
+                        Forms\Components\Textarea::make('description')
+                        ->label('Deskripsi Webminar')
+                            ->columnSpanFull(),
+                        Forms\Components\FileUpload::make('thumbnail')
+                            ->image()
+                            ->maxSize(1024)
+                            ->imageEditor()
+                            ->directory('agendas/thumbnails')
+                            ->imageEditorAspectRatios([
+                                null,
+                                '16:9',
+                                '4:3',
+                                '1:1',
+                            ])
+                            ->imageResizeMode('cover')
+                            ->imageCropAspectRatio('16:9')
+                            ->visibility('public'),
+                        
 
-                Forms\Components\TextInput::make('content')
-                    ->required()
-                    ->label('Link Konten')
-                    ->columnSpanFull()
-                    ->maxLength(255),
+                        Forms\Components\Toggle::make('is_active')
+                            ->default(true)
+                            ->hint('Aktifkan agenda ini untuk ditampilkan di halaman webminar.')
+                            ->required(),
+                    ]),
+                Fieldset::make('Pendaftaran')
+                    ->schema([
+                        Forms\Components\TextInput::make('registration_link')
+                        ->label('Tautan Pendaftaran')
+                            ->maxLength(255)
+                            ->columnSpanFull(),
+                        Forms\Components\DateTimePicker::make('registration_deadline')
+                            ->label('Batas Waktu Pendaftaran')
+                            ,
+                        Forms\Components\TextInput::make('participant_quota')
+                        ->hint('Kosongkan jika tidak membatasi jumlah peserta.')
+                        ->label('Kuota Peserta')
+                            ->numeric(),
+                    ]),
+                Fieldset::make('Rekaman')
+                    ->schema([
+                        Forms\Components\TextInput::make('duration_minutes')
+                            ->numeric()
+                            ->suffix('menit')
+                            ->label('Durasi Rekaman'),
+
+                        Forms\Components\TextInput::make('recording_url')
+                            ->maxLength(255),
+                    ]),
 
             ]);
     }
@@ -57,11 +100,24 @@ class AgendaResource extends Resource
                     ->searchable(),
                 Tables\Columns\TextColumn::make('thumbnail')
                     ->searchable(),
-                Tables\Columns\TextColumn::make('start_date')
+                Tables\Columns\TextColumn::make('event_datetime')
                     ->dateTime()
                     ->sortable(),
-                Tables\Columns\ToggleColumn::make('is_active')
-                    ->label('Aktif'),
+                Tables\Columns\TextColumn::make('duration_minutes')
+                    ->numeric()
+                    ->sortable(),
+                Tables\Columns\TextColumn::make('registration_link')
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('registration_deadline')
+                    ->dateTime()
+                    ->sortable(),
+                Tables\Columns\TextColumn::make('participant_quota')
+                    ->numeric()
+                    ->sortable(),
+                Tables\Columns\TextColumn::make('recording_url')
+                    ->searchable(),
+                Tables\Columns\IconColumn::make('is_active')
+                    ->boolean(),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()
@@ -76,20 +132,16 @@ class AgendaResource extends Resource
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
-                //
+                Tables\Filters\TrashedFilter::make(),
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
-                Tables\Actions\Action::make('view')
-                    ->url(fn ($record) => $record->content)
-                    ->icon('heroicon-o-globe-alt')
-                    ->label('Lihat Konten')
-                    ->openUrlInNewTab()
-                    ->color('primary'),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make(),
+                    Tables\Actions\ForceDeleteBulkAction::make(),
+                    Tables\Actions\RestoreBulkAction::make(),
                 ]),
             ]);
     }
@@ -109,6 +161,7 @@ class AgendaResource extends Resource
             'edit' => Pages\EditAgenda::route('/{record}/edit'),
         ];
     }
+
     public static function getEloquentQuery(): Builder
     {
         return parent::getEloquentQuery()

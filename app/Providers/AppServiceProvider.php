@@ -5,6 +5,8 @@ namespace App\Providers;
 use App\Models\Transaction;
 use App\Models\User;
 use App\Observers\TransactionObserver;
+use App\Repositories\AgendaRepository;
+use App\Repositories\AgendaRepositoryInterface;
 use App\Repositories\ArticleRepository;
 use App\Repositories\ArticleRepositoryInterface;
 use App\Repositories\CourseRepository;
@@ -28,6 +30,7 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(CourseRepositoryInterface::class, CourseRepository::class);
         $this->app->bind(PricingRepositoryInterface::class, PricingRepository::class);
         $this->app->bind(TransactionRepositoryInterface::class, TransactionRepository::class);
+        $this->app->bind(AgendaRepositoryInterface::class, AgendaRepository::class);
     }
 
     /**

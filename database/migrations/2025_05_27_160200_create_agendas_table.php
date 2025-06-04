@@ -18,10 +18,10 @@ return new class extends Migration
             $table->text('description')->nullable();
             $table->string('thumbnail')->nullable();
             $table->dateTime('event_datetime')->nullable();
-            $table->int('duration_minutes')->nullable();
+            $table->integer('duration_minutes')->nullable();
             $table->string('registration_link')->nullable();
             $table->dateTime('registration_deadline')->nullable();
-            $table->int('participant_quota')->nullable();
+            $table->integer('participant_quota')->nullable();
             $table->string('recording_url')->nullable();
             $table->boolean('is_active')->default(true);
             $table->timestamps();

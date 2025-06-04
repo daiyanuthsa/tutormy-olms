@@ -26,7 +26,7 @@ class WebminarController extends Controller
     {
         $webminarDetail = $this->agendaService->getPastAgendaDetail($agenda);
         if (empty($webminarDetail)) {
-            return redirect()->route('agenda.index')->with('error', 'Agenda tidak memiliki rekaman');
+            return redirect()->route('webminar.index')->with('error', 'Agenda tidak memiliki rekaman');
         }
         return Inertia::render('Webminar/Recording', compact('webminarDetail'));
     }

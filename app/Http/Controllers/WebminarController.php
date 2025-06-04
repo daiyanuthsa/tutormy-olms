@@ -17,23 +17,23 @@ class WebminarController extends Controller
     }
     public function index()
     {
-        $agendas = $this->agendaService->getAllAgenda();
+        $webminars = $this->agendaService->getAllAgenda();
 
-        return Inertia::render('Webminar/Index', compact('agendas'));
+        return Inertia::render('Webminar/Index', compact('webminars'));
     }
 
     public function showPastAgenda(Agenda $agenda)
     {
-        $agendaDetail = $this->agendaService->getPastAgendaDetail($agenda);
-        if (empty($agendaDetail)) {
+        $webminarDetail = $this->agendaService->getPastAgendaDetail($agenda);
+        if (empty($webminarDetail)) {
             return redirect()->route('agenda.index')->with('error', 'Agenda tidak memiliki rekaman');
         }
-        return Inertia::render('Webminar/Recording', compact('agendaDetail'));
+        return Inertia::render('Webminar/Recording', compact('webminarDetail'));
     }
     public function showUpcomingAgenda(Agenda $agenda)
     {
-        $agendaDetail = $this->agendaService->getUpcomingAgendaDetail($agenda);
-        return Inertia::render('Webminar/Upcoming', compact('agendaDetail'));
+        $webminarDetail = $this->agendaService->getUpcomingAgendaDetail($agenda);
+        return Inertia::render('Webminar/Upcoming', compact('webminarDetail'));
     }
 
 }

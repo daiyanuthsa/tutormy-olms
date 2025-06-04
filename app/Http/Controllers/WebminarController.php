@@ -7,7 +7,7 @@ use App\Services\AgendaService;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
-class AgendaController extends Controller
+class WebminarController extends Controller
 {
     //
     protected $agendaService;

@@ -1,120 +1,164 @@
+import React, { useState } from 'react';
 import InputError from '@/Components/InputError';
 import InputLabel from '@/Components/InputLabel';
 import PrimaryButton from '@/Components/PrimaryButton';
+import Checkbox from '@/Components/Checkbox';
 import TextInput from '@/Components/TextInput';
-import GuestLayout from '@/Layouts/GuestLayout';
-import { Head, Link, useForm } from '@inertiajs/react';
+import AuthLayout from '@/Layouts/AuthLayout';
+import { Head, useForm } from '@inertiajs/react';
+import { Icon } from '@iconify/react';
 
-export default function Register() {
+const FormField = ({ id, label, icon, type = "text", placeholder, value, onChange, error, showToggle, toggleValue, onToggle }) => (
+    <div>
+        <InputLabel htmlFor={id} value={label} className="mb-1" />
+        <div className="relative">
+            <span className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400">
+                <Icon icon={icon} width="20" height="20" />
+            </span>
+            <TextInput
+                id={id}
+                name={id}
+                type={showToggle ? (toggleValue ? "text" : "password") : type}
+                value={value}
+                className={`w-full ${showToggle ? "pr-12" : ""} pl-10 bg-neutral-3`}
+                placeholder={placeholder}
+                onChange={onChange}
+                required
+            />
+            {showToggle && (
+                <button
+                    type="button"
+                    onClick={onToggle}
+                    className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-white"
+                >
+                    <Icon icon={toggleValue ? "mdi:eye-outline" : "mdi:eye-off-outline"} width="20" height="20" />
+                </button>
+            )}
+        </div>
+        <InputError message={error} className="mt-2 text-red-400" />
+    </div>
+);
+
+const Register = () => {
     const { data, setData, post, processing, errors, reset } = useForm({
         name: '',
         email: '',
+        phone: '',
         password: '',
         password_confirmation: '',
+        remember: false,
     });
+
+    const [showPassword, setShowPassword] = useState(false);
+    const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+
+    const handleChange = (field) => (e) => setData(field, e.target.value);
 
     const submit = (e) => {
         e.preventDefault();
-
         post(route('register'), {
             onFinish: () => reset('password', 'password_confirmation'),
         });
     };
 
+    const handleGoogleLogin = () => {
+        console.log('Google login clicked');
+    };
+
     return (
-        <GuestLayout>
+        <AuthLayout>
             <Head title="Register" />
-
-            <form onSubmit={submit}>
-                <div>
-                    <InputLabel htmlFor="name" value="Name" />
-
-                    <TextInput
-                        id="name"
-                        name="name"
-                        value={data.name}
-                        className="mt-1 block w-full"
-                        autoComplete="name"
-                        isFocused={true}
-                        onChange={(e) => setData('name', e.target.value)}
-                        required
-                    />
-
-                    <InputError message={errors.name} className="mt-2" />
+            <section className='py-28 px-4 md:px-8 h-full'>
+                <div className='max-w-7xl mx-auto text-white flex flex-col lg:flex-row items-center gap-12'>
+                    <div className="w-full lg:w-1/2 flex items-center justify-center border p-5 rounded-xl shadow-md shadow-primary-4 lg:border-none lg:shadow-none">
+                        <div className="w-full max-w-md">
+                            <form onSubmit={submit} className="space-y-4">
+                                <FormField
+                                    id="name"
+                                    label="Nama Lengkap"
+                                    icon="mdi:account-outline"
+                                    placeholder="Tulis Namamu disini"
+                                    value={data.name}
+                                    onChange={handleChange('name')}
+                                    error={errors.name}
+                                />
+                                <FormField
+                                    id="email"
+                                    label="Email"
+                                    icon="mdi:email-outline"
+                                    placeholder="Tulis Email disini"
+                                    value={data.email}
+                                    onChange={handleChange('email')}
+                                    error={errors.email}
+                                />
+                                <FormField
+                                    id="phone"
+                                    label="Nomor WhatsApp"
+                                    icon="mdi:phone-outline"
+                                    placeholder="+62"
+                                    value={data.phone}
+                                    onChange={handleChange('phone')}
+                                    error={errors.phone}
+                                />
+                                <FormField
+                                    id="password"
+                                    label="Kata Sandi"
+                                    icon="mdi:lock-outline"
+                                    placeholder="**********"
+                                    value={data.password}
+                                    onChange={handleChange('password')}
+                                    error={errors.password}
+                                    showToggle
+                                    toggleValue={showPassword}
+                                    onToggle={() => setShowPassword(!showPassword)}
+                                />
+                                <FormField
+                                    id="password_confirmation"
+                                    label="Konfirmasi Kata Sandi"
+                                    icon="mdi:lock-outline"
+                                    placeholder="**********"
+                                    value={data.password_confirmation}
+                                    onChange={handleChange('password_confirmation')}
+                                    error={errors.password_confirmation}
+                                    showToggle
+                                    toggleValue={showConfirmPassword}
+                                    onToggle={() => setShowConfirmPassword(!showConfirmPassword)}
+                                />
+                                <label className="flex items-center">
+                                    <Checkbox
+                                        name="remember"
+                                        checked={data.remember}
+                                        onChange={(e) => setData('remember', e.target.checked)}
+                                    />
+                                    <span className="ml-3">
+                                        By continuing, you agree to Tutormy.id Terms and Privacy Policy.
+                                    </span>
+                                </label>
+                                <button
+                                    type="button"
+                                    onClick={handleGoogleLogin}
+                                    className="w-full bg-primary-4 hover:bg-primary-3 font-medium py-3 px-4 rounded-full transition-colors flex items-center justify-center space-x-2"
+                                >
+                                    <Icon icon="logos:google-icon" width="20" height="20" />
+                                    <span>Continue with Google</span>
+                                </button>
+                                <PrimaryButton
+                                    className="w-full transition-colors"
+                                    disabled={processing}
+                                    onClick={submit}
+                                >
+                                    {processing ? 'Loading...' : 'Register'}
+                                </PrimaryButton>
+                            </form>
+                        </div>
+                    </div>
+                    <div className='w-full lg:w-1/2 hidden lg:block'>
+                        <img src="/assets/hero-auth.webp" alt="image" className='w-full max-w-[600px] mx-auto' />
+                    </div>
                 </div>
-
-                <div className="mt-4">
-                    <InputLabel htmlFor="email" value="Email" />
-
-                    <TextInput
-                        id="email"
-                        type="email"
-                        name="email"
-                        value={data.email}
-                        className="mt-1 block w-full"
-                        autoComplete="username"
-                        onChange={(e) => setData('email', e.target.value)}
-                        required
-                    />
-
-                    <InputError message={errors.email} className="mt-2" />
-                </div>
-
-                <div className="mt-4">
-                    <InputLabel htmlFor="password" value="Password" />
-
-                    <TextInput
-                        id="password"
-                        type="password"
-                        name="password"
-                        value={data.password}
-                        className="mt-1 block w-full"
-                        autoComplete="new-password"
-                        onChange={(e) => setData('password', e.target.value)}
-                        required
-                    />
-
-                    <InputError message={errors.password} className="mt-2" />
-                </div>
-
-                <div className="mt-4">
-                    <InputLabel
-                        htmlFor="password_confirmation"
-                        value="Confirm Password"
-                    />
-
-                    <TextInput
-                        id="password_confirmation"
-                        type="password"
-                        name="password_confirmation"
-                        value={data.password_confirmation}
-                        className="mt-1 block w-full"
-                        autoComplete="new-password"
-                        onChange={(e) =>
-                            setData('password_confirmation', e.target.value)
-                        }
-                        required
-                    />
-
-                    <InputError
-                        message={errors.password_confirmation}
-                        className="mt-2"
-                    />
-                </div>
-
-                <div className="mt-4 flex items-center justify-end">
-                    <Link
-                        href={route('login')}
-                        className="rounded-md text-sm text-gray-600 underline hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-                    >
-                        Already registered?
-                    </Link>
-
-                    <PrimaryButton className="ms-4" disabled={processing}>
-                        Register
-                    </PrimaryButton>
-                </div>
-            </form>
-        </GuestLayout>
+            </section>
+        </AuthLayout>
     );
-}
+};
+
+export default Register;

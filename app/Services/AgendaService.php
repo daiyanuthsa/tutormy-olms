@@ -12,7 +12,7 @@ class AgendaService
     {
         $this->agendaRepository = $agendaRepository;
     }
-    public function getAllAgendas()
+    public function getAllAgenda()
     {
         $upcomingAgendas = $this->agendaRepository->getUpcomingAgenda();
         $pastAgendas = $this->agendaRepository->getPastAgenda();

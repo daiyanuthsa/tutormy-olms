@@ -16,6 +16,10 @@ class ProfileController extends Controller
     /**
      * Display the user's profile form.
      */
+    public function show(){
+        $profiledata = Auth::user()->only(['id', 'name', 'email', 'status', 'about']); // ganti field sesuai kebutuhan
+        return Inertia::render('Dashboard', compact('profiledata'));
+    }
     public function edit(Request $request): Response
     {
         return Inertia::render('Profile/Edit', [
@@ -59,5 +63,28 @@ class ProfileController extends Controller
         $request->session()->regenerateToken();
 
         return Redirect::to('/');
+    }
+
+    public function showCompleteProfileForm(): Response
+    {
+        return Inertia::render('Profile/CompleteProfile', [
+            'status' => session('status'),
+        ]);
+    }
+    public function completeProfile(Request $request)
+    {
+        $user = $request->user();
+        $validated = $request->validate([
+            'status' => ['required', 'string', 'max:255'],
+            'gender' => ['required', 'string', 'in:F,M'],
+            'date_birth' => ['required', 'date'],
+            'expectation' => ['required', 'string', 'max:1000'],
+            'discovery_source' => ['required', 'string', 'max:255'],
+        ]);
+
+        $user->fill($validated);
+        $user->save();
+
+        return Redirect::route('home')->with('status', 'Profile updated successfully.');
     }
 }

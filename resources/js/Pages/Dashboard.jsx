@@ -1,7 +1,7 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { Head } from '@inertiajs/react';
 
-export default function Dashboard() {
+export default function Dashboard(user, profiledata) {
     return (
         <AuthenticatedLayout
             header={
@@ -17,6 +17,10 @@ export default function Dashboard() {
                     <div className="overflow-hidden bg-white shadow-sm sm:rounded-lg">
                         <div className="p-6 text-gray-900">
                             You're logged in!
+                            
+                            <br />
+                            <br />
+                            {JSON.stringify(user.profiledata, null, 2)}
                         </div>
                     </div>
                 </div>

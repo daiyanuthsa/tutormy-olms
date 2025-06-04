@@ -17,21 +17,20 @@ Route::get('/courses', [CourseController::class, 'index'])->name('course.index')
 Route::get('/courses/{course:slug}', [CourseController::class, 'show'])->name('course.details');
 
 
-Route::get('/dashboard', function () {
-    return Inertia::render('Dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/profile',[ProfileController::class, 'show'])->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware(['auth'])->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    Route::get('/complete-profile', [ProfileController::class, 'showCompleteProfileForm'])->name('profile.complete');
+    Route::post('/complete-profile', [ProfileController::class, 'completeProfile'])->name('profile.complete.post');
     
-    Route::get('/checkout/{pricing}', [FrontController::class, 'checkout'])->name('front.checkout')
-    ->middleware('profile.completed');
+    Route::middleware(['profile.completed'])->group(function () {
+        Route::get('/profile/edit', [ProfileController::class, 'edit'])->name('profile.edit');
+        Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+        Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
+        Route::get('/checkout/{pricing}', [FrontController::class, 'checkout'])->name('front.checkout');
+    });
 });
-Route::get('/complete-profile', function () {
-    return Inertia::render('Profile/CompleteProfile', ['status' => session('status')]);
-})->name('profile.complete');
 
 
 Route::get('/test', function () {

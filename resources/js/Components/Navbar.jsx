@@ -41,7 +41,7 @@ export default function Navbar() {
     return (
         <>
             <nav className="fixed w-full z-50 text-white md:px-5 md:py-5">
-                <div className="px-4 sm:px-10 md:container mx-auto bg-neutral-5 md:rounded-full py-5 flex items-center justify-between shadow-lg transition-all duration-300 relative">
+                <div className="px-4 sm:px-10 md:container mx-auto bg-neutral-5 md:rounded-full py-5 lg:py-3 flex items-center justify-between shadow-lg transition-all duration-300 relative">
                     <div className="hidden md:block">
                         <ApplicationLogo />
                     </div>

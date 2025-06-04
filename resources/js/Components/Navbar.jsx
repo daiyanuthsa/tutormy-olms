@@ -119,7 +119,7 @@ export default function Navbar() {
                                         Daftar
                                     </Link>
                                     <Link href={route('login')}>
-                                        <PrimaryButton>Masuk</PrimaryButton>
+                                        <PrimaryButton className='rounded-full'>Masuk</PrimaryButton>
                                     </Link>
                                 </div>
                             )}
@@ -165,12 +165,12 @@ export default function Navbar() {
 
                     {!user && (
                         <div className="mt-8 pt-6 border-t border-gray-600 space-y-3">
-                            <PrimaryButton className="w-full justify-center">
+                            <PrimaryButton className="w-full rounded-full justify-center">
                                 <Link href={route('register')} className="block w-full text-center">
                                     Daftar
                                 </Link>
                             </PrimaryButton>
-                            <PrimaryButton variant="outline" className="w-full justify-center">
+                            <PrimaryButton variant="outline" className="w-full rounded-full justify-center">
                                 <Link href={route('login')} className="block w-full text-center">
                                     Masuk
                                 </Link>

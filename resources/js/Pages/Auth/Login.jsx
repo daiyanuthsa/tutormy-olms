@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Eye, EyeOff } from 'lucide-react';
-// import Checkbox from '@/Components/Checkbox';
+import Checkbox from '@/Components/Checkbox';
 import InputError from '@/Components/InputError';
 import InputLabel from '@/Components/InputLabel';
 import PrimaryButton from '@/Components/PrimaryButton';
@@ -69,7 +69,7 @@ const Login = ({ status, canResetPassword }) => {
                                                 type="email"
                                                 name="email"
                                                 value={data.email}
-                                                className="w-full pl-10 bg-neutral-3" 
+                                                className="w-full pl-10 bg-neutral-3"
                                                 autoComplete="username"
                                                 isFocused={true}
                                                 placeholder="Tulis Email disini"
@@ -109,11 +109,11 @@ const Login = ({ status, canResetPassword }) => {
 
                                 <div className="flex items-center justify-between text-sm">
                                     <label className="flex items-center">
-                                        {/* <Checkbox
+                                        <Checkbox
                                             name="remember"
                                             checked={data.remember}
                                             onChange={(e) => setData('remember', e.target.checked)}
-                                        /> */}
+                                        />
                                         <span className="ml-2">Ingat saya</span>
                                     </label>
                                     {canResetPassword && (
@@ -124,6 +124,13 @@ const Login = ({ status, canResetPassword }) => {
                                 </div>
 
                                 <div className="space-y-4">
+                                    <PrimaryButton
+                                        className="w-full transition-colors"
+                                        disabled={processing}
+                                        onClick={submit}
+                                    >
+                                        {processing ? 'Loading...' : 'Login'}
+                                    </PrimaryButton>
                                     <button
                                         type="button"
                                         onClick={handleGoogleLogin}
@@ -132,19 +139,6 @@ const Login = ({ status, canResetPassword }) => {
                                         <Icon icon="logos:google-icon" width="20" height="20" />
                                         <span>Continue with Google</span>
                                     </button>
-
-                                    <p className="text-xs text-center text-gray-400">
-                                        Dengan mendaftar, saya menyetujui <br className="block md:hidden" />
-                                        Syarat & Ketentuan serta Kebijakan Privasi Tutormy.id
-                                    </p>
-
-                                    <PrimaryButton
-                                        className="w-full transition-colors"
-                                        disabled={processing}
-                                        onClick={submit}
-                                    >
-                                        {processing ? 'Loading...' : 'Login'}
-                                    </PrimaryButton>
                                 </div>
                             </div>
 

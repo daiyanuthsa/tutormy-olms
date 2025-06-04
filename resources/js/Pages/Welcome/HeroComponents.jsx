@@ -17,7 +17,7 @@ const HeroComponents = () => {
                     <p className='text-sm font-medium mb-4'>
                         Dunia kerja terus berkembang, dan kami pastikan kamu tidak tertinggal. Di Tutormy.id, kami menghadirkan materi terkini yang disesuaikan dengan kebutuhan industri saat ini!
                     </p>
-                    <PrimaryButton>
+                    <PrimaryButton className='rounded-full'>
                         Berlangganan Sekarang
                         <Icon icon="line-md:arrow-up" className='ml-2 rotate-45' />
                     </PrimaryButton>

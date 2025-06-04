@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import PrimaryButton from '@/Components/PrimaryButton';
 
 const Class = () => {
     const courses = [
@@ -99,9 +100,9 @@ const Class = () => {
                     </div>
 
                     <div className="flex justify-center">
-                        <button className="bg-primary-3 hover:bg-primary-4 font-semibold py-3 px-5 lg:px-8 rounded-full transition-all duration-300 transform hover:scale-105">
+                        <PrimaryButton variant='secondary' className='rounded-2xl'>
                             Lihat Kelas Lainnya
-                        </button>
+                        </PrimaryButton>
                     </div>
                 </div>
             </div>

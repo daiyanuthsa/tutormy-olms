@@ -69,7 +69,7 @@ const Login = ({ status, canResetPassword }) => {
                                                 type="email"
                                                 name="email"
                                                 value={data.email}
-                                                className="w-full pl-10 bg-neutral-3"
+                                                className="border-none w-full pl-10 bg-neutral-3"
                                                 autoComplete="username"
                                                 isFocused={true}
                                                 placeholder="Tulis Email disini"
@@ -90,7 +90,7 @@ const Login = ({ status, canResetPassword }) => {
                                                 type={showPassword ? "text" : "password"}
                                                 name="password"
                                                 value={data.password}
-                                                className="w-full pl-10 pr-12 bg-neutral-3"
+                                                className="border-none w-full pl-10 pr-12 bg-neutral-3"
                                                 autoComplete="current-password"
                                                 placeholder="••••••••••"
                                                 onChange={(e) => setData('password', e.target.value)}

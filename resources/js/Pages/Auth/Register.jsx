@@ -20,7 +20,7 @@ const FormField = ({ id, label, icon, type = "text", placeholder, value, onChang
                 name={id}
                 type={showToggle ? (toggleValue ? "text" : "password") : type}
                 value={value}
-                className={`w-full ${showToggle ? "pr-12" : ""} pl-10 bg-neutral-3`}
+                className={`w-full ${showToggle ? "pr-12" : ""} pl-10 bg-neutral-3 border-none`}
                 placeholder={placeholder}
                 onChange={onChange}
                 required

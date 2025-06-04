@@ -9,7 +9,7 @@ export default function PrimaryButton({
 
     const variants = {
         fill: 'bg-gradient-light hover:bg-gradient-dark text-white focus:bg-gradient-dark active:bg-gradient-dark',
-        outline: 'border-2 border-primary-3 text-primary-3 bg-transparent hover:bg-primary-3 hover:text-white',
+        outline: 'border-2 border-primary-3 text-primary-3 bg-transparent hover:bg-primary-4 hover:text-white',
         ghost: 'bg-transparent text-primary-3 hover:bg-primary-1/10',
         danger: 'bg-red-600 text-white hover:bg-red-700 focus:ring-red-300',
         secondary: 'bg-primary-3 text-white hover:bg-primary-4 focus:ring-primary-4',

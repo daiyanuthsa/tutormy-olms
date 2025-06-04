@@ -36,13 +36,13 @@ const Login = ({ status, canResetPassword }) => {
 
             <section className='py-28 px-4 md:px-8 h-full'>
                 <div className='max-w-7xl mx-auto text-white flex flex-col lg:flex-row items-center gap-12'>
-                    <div className='w-full lg:w-1/2 hidden lg:block'>
+                    <div className='w-full lg:w-2/3 hidden lg:block'>
                         <img src="/assets/hero-auth.webp" alt="image" className='w-full max-w-[600px] mx-auto' />
                     </div>
 
                     <div className="w-full lg:w-1/2 flex items-center justify-center border p-5 rounded-xl shadow-md shadow-primary-4 lg:border-none lg:shadow-none">
                         <div className="w-full max-w-md">
-                            <div className="mb-6 space-y-2 text-center lg:text-left">
+                            <div className="mb-8 space-y-2 text-center lg:text-left">
                                 <h1 className="text-2xl lg:text-3xl font-bold">
                                     Masuk Sekarang!<br />
                                     Kembangkan Diri dengan
@@ -125,20 +125,20 @@ const Login = ({ status, canResetPassword }) => {
 
                                 <div className="space-y-4">
                                     <PrimaryButton
-                                        className="w-full transition-colors"
+                                        className="w-full rounded-2xl transition-colors"
                                         disabled={processing}
                                         onClick={submit}
                                     >
                                         {processing ? 'Loading...' : 'Login'}
                                     </PrimaryButton>
-                                    <button
-                                        type="button"
+                                    <PrimaryButton
+                                        variant='outline'
                                         onClick={handleGoogleLogin}
-                                        className="w-full bg-primary-4 hover:bg-primary-3 font-medium py-3 px-4 rounded-full transition-colors flex items-center justify-center space-x-2"
+                                        className="rounded-2xl w-full"
                                     >
-                                        <Icon icon="logos:google-icon" width="20" height="20" />
-                                        <span>Continue with Google</span>
-                                    </button>
+                                        <Icon icon="logos:google-icon" width="20" height="20" className='mr-3'/>
+                                        Continue with Google
+                                    </PrimaryButton>
                                 </div>
                             </div>
 

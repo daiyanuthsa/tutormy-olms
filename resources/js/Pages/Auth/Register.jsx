@@ -134,25 +134,25 @@ const Register = () => {
                                         By continuing, you agree to Tutormy.id Terms and Privacy Policy.
                                     </span>
                                 </label>
-                                <button
-                                    type="button"
-                                    onClick={handleGoogleLogin}
-                                    className="w-full bg-primary-4 hover:bg-primary-3 font-medium py-3 px-4 rounded-full transition-colors flex items-center justify-center space-x-2"
-                                >
-                                    <Icon icon="logos:google-icon" width="20" height="20" />
-                                    <span>Continue with Google</span>
-                                </button>
                                 <PrimaryButton
-                                    className="w-full transition-colors"
+                                    className="w-full rounded-2xl transition-colors"
                                     disabled={processing}
                                     onClick={submit}
                                 >
-                                    {processing ? 'Loading...' : 'Register'}
+                                    {processing ? 'Loading...' : 'Create My Account'}
+                                </PrimaryButton>
+                                <PrimaryButton
+                                    variant='outline'
+                                    onClick={handleGoogleLogin}
+                                    className="rounded-2xl w-full"
+                                >
+                                    <Icon icon="logos:google-icon" width="20" height="20" className='mr-3' />
+                                    Continue with Google
                                 </PrimaryButton>
                             </form>
                         </div>
                     </div>
-                    <div className='w-full lg:w-1/2 hidden lg:block'>
+                    <div className='w-full lg:w-2/3 hidden lg:block'>
                         <img src="/assets/hero-auth.webp" alt="image" className='w-full max-w-[600px] mx-auto' />
                     </div>
                 </div>

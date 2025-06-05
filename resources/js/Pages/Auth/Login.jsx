@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Eye, EyeOff } from 'lucide-react';
-// import Checkbox from '@/Components/Checkbox';
+import Checkbox from '@/Components/Checkbox';
 import InputError from '@/Components/InputError';
 import InputLabel from '@/Components/InputLabel';
 import PrimaryButton from '@/Components/PrimaryButton';
@@ -36,13 +36,13 @@ const Login = ({ status, canResetPassword }) => {
 
             <section className='py-28 px-4 md:px-8 h-full'>
                 <div className='max-w-7xl mx-auto text-white flex flex-col lg:flex-row items-center gap-12'>
-                    <div className='w-full lg:w-1/2 hidden lg:block'>
+                    <div className='w-full lg:w-2/3 hidden lg:block'>
                         <img src="/assets/hero-auth.webp" alt="image" className='w-full max-w-[600px] mx-auto' />
                     </div>
 
                     <div className="w-full lg:w-1/2 flex items-center justify-center border p-5 rounded-xl shadow-md shadow-primary-4 lg:border-none lg:shadow-none">
                         <div className="w-full max-w-md">
-                            <div className="mb-6 space-y-2 text-center lg:text-left">
+                            <div className="mb-8 space-y-2 text-center lg:text-left">
                                 <h1 className="text-2xl lg:text-3xl font-bold">
                                     Masuk Sekarang!<br />
                                     Kembangkan Diri dengan
@@ -69,7 +69,7 @@ const Login = ({ status, canResetPassword }) => {
                                                 type="email"
                                                 name="email"
                                                 value={data.email}
-                                                className="w-full pl-10 bg-neutral-3" 
+                                                className="border-none w-full pl-10 bg-neutral-3"
                                                 autoComplete="username"
                                                 isFocused={true}
                                                 placeholder="Tulis Email disini"
@@ -90,7 +90,7 @@ const Login = ({ status, canResetPassword }) => {
                                                 type={showPassword ? "text" : "password"}
                                                 name="password"
                                                 value={data.password}
-                                                className="w-full pl-10 pr-12 bg-neutral-3"
+                                                className="border-none w-full pl-10 pr-12 bg-neutral-3"
                                                 autoComplete="current-password"
                                                 placeholder="••••••••••"
                                                 onChange={(e) => setData('password', e.target.value)}
@@ -109,11 +109,11 @@ const Login = ({ status, canResetPassword }) => {
 
                                 <div className="flex items-center justify-between text-sm">
                                     <label className="flex items-center">
-                                        {/* <Checkbox
+                                        <Checkbox
                                             name="remember"
                                             checked={data.remember}
                                             onChange={(e) => setData('remember', e.target.checked)}
-                                        /> */}
+                                        />
                                         <span className="ml-2">Ingat saya</span>
                                     </label>
                                     {canResetPassword && (
@@ -124,26 +124,20 @@ const Login = ({ status, canResetPassword }) => {
                                 </div>
 
                                 <div className="space-y-4">
-                                    <button
-                                        type="button"
-                                        onClick={handleGoogleLogin}
-                                        className="w-full bg-primary-4 hover:bg-primary-3 font-medium py-3 px-4 rounded-full transition-colors flex items-center justify-center space-x-2"
-                                    >
-                                        <Icon icon="logos:google-icon" width="20" height="20" />
-                                        <span>Continue with Google</span>
-                                    </button>
-
-                                    <p className="text-xs text-center text-gray-400">
-                                        Dengan mendaftar, saya menyetujui <br className="block md:hidden" />
-                                        Syarat & Ketentuan serta Kebijakan Privasi Tutormy.id
-                                    </p>
-
                                     <PrimaryButton
-                                        className="w-full transition-colors"
+                                        className="w-full rounded-2xl transition-colors"
                                         disabled={processing}
                                         onClick={submit}
                                     >
                                         {processing ? 'Loading...' : 'Login'}
+                                    </PrimaryButton>
+                                    <PrimaryButton
+                                        variant='outline'
+                                        onClick={handleGoogleLogin}
+                                        className="rounded-2xl w-full"
+                                    >
+                                        <Icon icon="logos:google-icon" width="20" height="20" className='mr-3'/>
+                                        Continue with Google
                                     </PrimaryButton>
                                 </div>
                             </div>

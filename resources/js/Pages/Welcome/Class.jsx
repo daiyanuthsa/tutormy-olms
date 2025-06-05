@@ -1,4 +1,5 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react';
+import PrimaryButton from '@/Components/PrimaryButton';
 
 const Class = () => {
     const courses = [
@@ -50,7 +51,19 @@ const Class = () => {
             lessons: "180 Pelajaran",
             image: "/assets/hero.png"
         }
-    ]
+    ];
+
+    const [isMobile, setIsMobile] = useState(false);
+
+    useEffect(() => {
+        const checkMobile = () => setIsMobile(window.innerWidth < 768);
+        checkMobile();
+
+        window.addEventListener('resize', checkMobile);
+        return () => window.removeEventListener('resize', checkMobile);
+    }, []);
+
+    const coursesToShow = isMobile ? courses.slice(0, 6) : courses;
 
     return (
         <section>
@@ -67,7 +80,7 @@ const Class = () => {
                     </div>
 
                     <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-12">
-                        {courses.map((course) => (
+                        {coursesToShow.map((course) => (
                             <div key={course.id} className="bg-neutral-5 border-b-2 border-b-primary-2 rounded-b-xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300">
                                 <div className="aspect-video">
                                     <img
@@ -87,14 +100,14 @@ const Class = () => {
                     </div>
 
                     <div className="flex justify-center">
-                        <button className="bg-primary-3 hover:bg-primary-4 font-semibold py-3 px-5 lg:px-8 rounded-full transition-all duration-300 transform hover:scale-105">
+                        <PrimaryButton variant='secondary' className='rounded-2xl'>
                             Lihat Kelas Lainnya
-                        </button>
+                        </PrimaryButton>
                     </div>
                 </div>
             </div>
         </section>
-    )
+    );
 }
 
-export default Class
+export default Class;

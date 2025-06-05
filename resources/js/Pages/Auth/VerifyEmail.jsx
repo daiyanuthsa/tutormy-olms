@@ -2,7 +2,6 @@ import React from 'react'
 import { Head, Link, useForm } from '@inertiajs/react';
 import PrimaryButton from '@/Components/PrimaryButton'
 import ApplicationLogo from '@/Components/ApplicationLogo'
-import { Icon } from '@iconify/react';
 
 const VerifyEmail = ({ status }) => {
     const { post, processing } = useForm({});
@@ -18,14 +17,7 @@ const VerifyEmail = ({ status }) => {
 
             <div className="absolute bottom-0 w-80 h-80 bg-purple-700 opacity-30 blur-3xl rounded-full left-[-100px] top-1/4 z-0" />
 
-            <div className="flex items-center justify-between mb-7">
-                <Link href={route('login')} className="flex-shrink-0">
-                    <PrimaryButton variant='outline' className='rounded-xl md:rounded-2xl text-white px-3 py-2 md:px-4 md:py-2.5 lg:px-6 lg:py-3 text-sm md:text-base'>
-                        <Icon icon="basil:arrow-left-outline" width="20" height="20" className='mr-1.5 md:mr-2 md:w-5 md:h-5' />
-                        <span className="hidden sm:inline">Kembali</span>
-                    </PrimaryButton>
-                </Link>
-
+            <div className="flex items-center justify-between mb-7 mt-7">
                 <div className="absolute left-1/2 transform -translate-x-1/2 flex-shrink-0">
                     <div className="scale-75 sm:scale-90 md:scale-100 lg:scale-110">
                         <ApplicationLogo />
@@ -80,4 +72,4 @@ const VerifyEmail = ({ status }) => {
     )
 }
 
-export default VerifyEmail
+export default VerifyEmail;

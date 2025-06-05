@@ -51,11 +51,19 @@ const Register = () => {
 
     const [showPassword, setShowPassword] = useState(false);
     const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+    const [checkboxError, setCheckboxError] = useState('');
 
     const handleChange = (field) => (e) => setData(field, e.target.value);
 
     const submit = (e) => {
         e.preventDefault();
+
+        if (!data.remember) {
+            setCheckboxError('Kamu harus menyetujui Syarat dan Kebijakan Privasi.');
+            return;
+        }
+
+        setCheckboxError('');
         post(route('register'), {
             onFinish: () => reset('password', 'password_confirmation'),
         });
@@ -124,16 +132,21 @@ const Register = () => {
                                     toggleValue={showConfirmPassword}
                                     onToggle={() => setShowConfirmPassword(!showConfirmPassword)}
                                 />
-                                <label className="flex items-center">
-                                    <Checkbox
-                                        name="remember"
-                                        checked={data.remember}
-                                        onChange={(e) => setData('remember', e.target.checked)}
-                                    />
-                                    <span className="ml-3">
-                                        By continuing, you agree to Tutormy.id Terms and Privacy Policy.
-                                    </span>
-                                </label>
+                                <div>
+                                    <label className="flex items-center">
+                                        <Checkbox
+                                            name="remember"
+                                            checked={data.remember}
+                                            onChange={(e) => setData('remember', e.target.checked)}
+                                        />
+                                        <span className="ml-3">
+                                            Dengan melanjutkan, kamu menyetujui <a href="#" className="underline">Syarat</a> dan <a href="#" className="underline">Kebijakan Privasi</a> Tutormy.id
+                                        </span>
+                                    </label>
+                                    {checkboxError && (
+                                        <p className="text-red-400 mt-2">{checkboxError}</p>
+                                    )}
+                                </div>
                                 <PrimaryButton
                                     className="w-full rounded-2xl transition-colors"
                                     disabled={processing}

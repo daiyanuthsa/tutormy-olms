@@ -1,27 +1,9 @@
 import React, { useState } from 'react'
 import { Plus } from 'lucide-react'
+import Faq from "../../../../public/js/data/Faq"
 
 const Question = () => {
     const [openItems, setOpenItems] = useState(new Set([0]))
-
-    const faqData = [
-        {
-            question: "Siapa saja yang bisa menggunakan Tutormy.id?",
-            answer: "Tutormy.id terbuka untuk pelajar SD, SMP, SMA, mahasiswa, bahkan umum yang ingin meningkatkan pengetahuan di bidang tertentu."
-        },
-        {
-            question: "Siapa saja yang bisa menggunakan Tutormy.id?",
-            answer: "GATAU"
-        },
-        {
-            question: "Siapa saja yang bisa menggunakan Tutormy.id?",
-            answer: "GATAU"
-        },
-        {
-            question: "Siapa saja yang bisa menggunakan Tutormy.id?",
-            answer: "GATAU."
-        }
-    ]
 
     const toggleItem = (index) => {
         const newOpenItems = new Set(openItems)
@@ -44,7 +26,7 @@ const Question = () => {
                 </div>
                 <div className='grid grid-cols-1 md:grid-cols-2 items-center gap-5 xl:gap-0'>
                     <div>
-                        {faqData.map((item, index) => (
+                        {Faq.map((item, index) => (
                             <div key={index} className="mb-4">
                                 <div className="rounded-lg transition-all duration-300 bg-neutral-4 px-6 py-5 relative overflow-hidden">
                                     <div className="absolute left-3 top-5 bottom-5 w-[2px] bg-primary-2 rounded-full" />

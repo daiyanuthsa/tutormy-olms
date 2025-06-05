@@ -38,19 +38,18 @@ const MasterTeacherCard = ({ name, role }) => (
 
 
 const Data = () => (
-    <section className="container text-white space-y-8 lg:space-y-20">
-        <div className="space-y-5 lg:space-y-14">
-            <button className="bg-gradient-dark-down flex gap-2 lg:gap-3 items-center text-lg lg:text-2xl font-bold rounded-xl py-1 lg:py-2 px-4">
-                <Icon icon="logos:whatsapp-icon" className="w-6 h-6 lg:w-9 lg:h-9" />
-                Chat
-            </button>
+    <section className="container text-white space-y-8 lg:space-y-28">
+        <button className="bg-gradient-dark-down fixed flex gap-2 lg:gap-3 items-center text-lg lg:text-2xl font-bold rounded-xl py-1 lg:py-2 px-4 bottom-10 z-50">
+            <Icon icon="logos:whatsapp-icon" className="w-6 h-6 lg:w-9 lg:h-9" />
+            Chat
+        </button>
 
-            <div className="bg-[linear-gradient(to_right,#191B27,#292C40,#5A628D)] rounded-2xl px-6 lg:px-24 py-6 flex flex-col md:flex-row justify-between gap-6 shadow-xl">
-                {stats.map(({ icon, value, label }) => (
-                    <StatItem key={icon} icon={icon} value={value} label={label} />
-                ))}
-            </div>
+        <div className="bg-[linear-gradient(to_right,#191B27,#292C40,#5A628D)] rounded-2xl px-6 lg:px-24 py-6 flex flex-col md:flex-row justify-between gap-6 shadow-xl">
+            {stats.map(({ icon, value, label }) => (
+                <StatItem key={icon} icon={icon} value={value} label={label} />
+            ))}
         </div>
+
 
         <div className="relative bg-gradient-to-b from-[#24063A] to-[#11141D] rounded-3xl px-5 py-7 lg:px-16 lg:py-12 text-center overflow-hidden">
             <div className="absolute top-[-150px] left-1/2 transform -translate-x-1/2 w-[400px] h-[250px] bg-purple-700 opacity-30 blur-3xl rounded-full z-0"></div>

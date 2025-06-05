@@ -12,13 +12,7 @@ const CompleteProfile = () => {
     const [step, setStep] = useState(1);
 
     const nextStep = () => setStep(prev => Math.min(prev + 1, 3));
-    const prevStep = () => {
-        if (step === 1) {
-            Inertia.visit('/');
-        } else {
-            setStep(prev => Math.max(prev - 1, 1));
-        }
-    };
+    const prevStep = () => setStep(prev => Math.max(prev - 1, 1));
 
     return (
         <section>
@@ -31,7 +25,7 @@ const CompleteProfile = () => {
                     <PrimaryButton
                         variant='outline'
                         onClick={prevStep}
-                        className='rounded-xl md:rounded-2xl text-white px-3 py-2 md:px-4 md:py-2.5 lg:px-6 lg:py-3 text-sm md:text-base'>
+                        className={`rounded-xl md:rounded-2xl text-white px-3 py-2 md:px-4 md:py-2.5 lg:px-6 lg:py-3 text-sm md:text-base ${step === 1 ? 'invisible' : ''}`}>
                         <Icon icon="basil:arrow-left-outline" width="16" height="16" className='mr-1.5 md:mr-2 md:w-5 md:h-5' />
                         <span className="hidden sm:inline">Kembali</span>
                     </PrimaryButton>

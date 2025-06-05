@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CourseController;
+use App\Http\Controllers\DocumentController;
 use App\Http\Controllers\FrontController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TipsController;
@@ -14,11 +15,14 @@ Route::get('/', [FrontController::class, 'index'])->name('home');
 Route::get('/tips', [TipsController::class, 'index'])->name('tips.index');
 Route::get('/tips/search', [TipsController::class, 'searchTips'])->name('tips.search');
 Route::get('/tips/{article}', [TipsController::class, 'tipsDetails'])->name('tips.details');
+
 Route::get('/courses', [CourseController::class, 'index'])->name('course.index');
 Route::get('/courses/{course:slug}', [CourseController::class, 'show'])->name('course.details');
+
 Route::get('/webminar', [WebminarController::class,'index'])->name('webminar.index');
 Route::get('/webminar/register/{agenda:slug}', [WebminarController::class,'showUpcomingAgenda'])->name('webminar.upcoming');
 
+Route::get('/documents/{document:slug}', [DocumentController::class, 'show'])->name('document.show');
 
 Route::get('/profile',[ProfileController::class, 'show'])->middleware(['auth', 'verified'])->name('dashboard');
 

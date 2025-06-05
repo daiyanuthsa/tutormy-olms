@@ -25,14 +25,14 @@ Route::get('/profile',[ProfileController::class, 'show'])->middleware(['auth', '
 Route::middleware(['auth'])->group(function () {
     Route::get('/complete-profile', [ProfileController::class, 'showCompleteProfileForm'])->name('profile.complete');
     Route::post('/complete-profile', [ProfileController::class, 'completeProfile'])->name('profile.complete.post');
-    
+
     Route::middleware(['profile.completed'])->group(function () {
         Route::get('/profile/edit', [ProfileController::class, 'edit'])->name('profile.edit');
         Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
         Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
         Route::get('/checkout/{pricing}', [FrontController::class, 'checkout'])->name('front.checkout');
-        
+
         // middleware issubscribed user
         Route::get('/webminar/{agenda:slug}', [WebminarController::class, 'showPastAgenda'])->name('webminar.past');
     });

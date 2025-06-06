@@ -25,9 +25,9 @@ const Login = ({ status, canResetPassword }) => {
         });
     };
 
-    const handleGoogleLogin = () => {
-        // Implementasi Google login
-        console.log('Google login clicked');
+    const handleGoogleLogin = (e) => {
+        e.preventDefault();
+        window.location.href = route("auth.redirect", "google");
     };
 
     return (

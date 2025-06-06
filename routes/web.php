@@ -5,7 +5,7 @@ use App\Http\Controllers\DocumentController;
 use App\Http\Controllers\FrontController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TipsController;
-use App\Http\Controllers\WebminarController;
+use App\Http\Controllers\WebinarController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -19,8 +19,8 @@ Route::get('/tips/{article}', [TipsController::class, 'tipsDetails'])->name('tip
 Route::get('/courses', [CourseController::class, 'index'])->name('course.index');
 Route::get('/courses/{course:slug}', [CourseController::class, 'show'])->name('course.details');
 
-Route::get('/webminar', [WebminarController::class,'index'])->name('webminar.index');
-Route::get('/webminar/register/{agenda:slug}', [WebminarController::class,'showUpcomingAgenda'])->name('webminar.upcoming');
+Route::get('/webinar', [WebinarController::class,'index'])->name('webinar.index');
+Route::get('/webinar/register/{agenda:slug}', [WebinarController::class,'showUpcomingAgenda'])->name('webinar.upcoming');
 
 Route::get('/documents/{document:slug}', [DocumentController::class, 'show'])->name('document.show');
 
@@ -38,7 +38,7 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/checkout/{pricing}', [FrontController::class, 'checkout'])->name('front.checkout');
 
         // middleware issubscribed user
-        Route::get('/webminar/{agenda:slug}', [WebminarController::class, 'showPastAgenda'])->name('webminar.past');
+        Route::get('/webinar/{agenda:slug}', [WebinarController::class, 'showPastAgenda'])->name('webinar.past');
     });
 });
 

@@ -5,8 +5,8 @@ namespace App\Http\Controllers\Socialite;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Auth;
-use Illuminate\Http\Request;
 use Laravel\Socialite\Facades\Socialite;
+use Illuminate\Support\Str;
 
 class ProviderCallbackController extends Controller
 {
@@ -22,19 +22,31 @@ class ProviderCallbackController extends Controller
 
         $socialUser = Socialite::driver($provider)->user();
 
-        $user = User::updatedOrCreate(
-            [
-                
+        if (empty($socialUser->email)) {
+            return redirect()->route('login')->withErrors(['error' => 'No email address returned from provider.']);
+        }
+
+        // Cek user berdasarkan email
+        $user = User::where('email', $socialUser->email)->first();
+
+        if ($user) {
+            // Update provider info jika belum ada
+            $user->update([
                 'provider_id' => $socialUser->id,
-                'provider_name' => $provider,
-            ],
-            [
+                'provider' => $provider,
+                'provider_token' => $socialUser->token,
+            ]);
+        } else {
+            // Buat user baru
+            $user = User::create([
                 'email' => $socialUser->email,
                 'name' => $socialUser->getName(),
+                'provider_id' => $socialUser->id,
+                'provider' => $provider,
                 'provider_token' => $socialUser->token,
-                'provider_refresh_token' => $socialUser->refreshToken ?? null,
-            ]
-        );
+                'password' => bcrypt(Str::random(9)),
+            ]);
+        }
         // Log the user in
         Auth::login($user, true);
 

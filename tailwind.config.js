@@ -76,6 +76,7 @@ export default {
             },
             backgroundImage: (theme) => ({
                 "gradient-light": "linear-gradient(to right, #590994, #C985FC)",
+                "gradient-light-left": "linear-gradient(to right, #C392F0, #59307E)",
                 "gradient-dark": "linear-gradient(to left, #24063A, #6311A0)",
                 "gradient-dark-down": "linear-gradient(to top, #24063A, #6311A0)",
             }),

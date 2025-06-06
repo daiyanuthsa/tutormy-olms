@@ -1,8 +1,11 @@
-export default function CourseDetails({ course }) {
+import React from 'react'
+
+const CourseDetails = () => {
     return (
-        <div className="text-white">
-            <h1>Daftar kelas</h1>
-            <pre>{JSON.stringify(course, null, 2)}</pre>
+        <div>
+
         </div>
-    );
+    )
 }
+
+export default CourseDetails

@@ -38,6 +38,16 @@ return [
         'key' => env('MAYAR_API_KEY'),
         'endpoint' => env('MAYAR_API_URL', 'https://api.mayar.id/hl/v1/payment'),
     ],
+    'github' => [
+        'client_id' => env('GITHUB_CLIENT_ID'),
+        'client_secret' => env('GITHUB_CLIENT_SECRET'),
+        'redirect' => env('APP_URL').'/login/github/callback',
+    ],
+    'google' => [
+        'client_id' => env('GOOGLE_CLIENT_ID'),
+        'client_secret' => env('GOOGLE_CLIENT_SECRET'),
+        'redirect' => env('GOOGLE_REDIRECT_URI'),
+    ],
 
 
 ];

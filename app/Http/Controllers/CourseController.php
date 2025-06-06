@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Course;
 use App\Repositories\CourseRepositoryInterface;
 use Illuminate\Http\Request;
+use Inertia\Inertia;
 
 class CourseController extends Controller
 {
@@ -29,5 +30,18 @@ class CourseController extends Controller
             abort(404);
         }
         return inertia('Course/CourseDetails', compact('course'));
+    }
+    public function search(Request $request){
+        $keyword = $request->input('keyword');
+        if (!$keyword) {
+            return redirect()->route('course.index')->withErrors(['error' => 'Keyword is required']);
+        }
+
+        $courses = $this->courseRepository->getByKeyword($keyword);
+
+        return Inertia::render('Course/CourseSearch', [
+            'courses' => $courses,
+            'keyword' => $keyword,
+        ]);
     }
 }

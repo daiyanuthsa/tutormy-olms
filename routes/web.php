@@ -22,6 +22,7 @@ Route::get('/tips/search', [TipsController::class, 'searchTips'])->name('tips.se
 Route::get('/tips/{article}', [TipsController::class, 'tipsDetails'])->name('tips.details');
 
 Route::get('/courses', [CourseController::class, 'index'])->name('course.index');
+Route::get('/courses/search', [CourseController::class, 'search'])->name('course.search');
 Route::get('/courses/{course:slug}', [CourseController::class, 'show'])->name('course.details');
 
 Route::get('/webinar', [WebinarController::class,'index'])->name('webinar.index');

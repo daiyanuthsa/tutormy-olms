@@ -19,7 +19,7 @@ class CourseRepository implements CourseRepositoryInterface
     {
         // TODO: Implement logic to get courses by keyword
         return Course::where('name', 'like', "%{$keyword}%")
-            ->orWhere('description', 'like', "%{$keyword}%")
+            ->orWhere('about', 'like', "%{$keyword}%")
             ->latest()
             ->get();
     }

@@ -2,8 +2,10 @@
 
 namespace App\Providers;
 
+use App\Models\DocumentVersion;
 use App\Models\Transaction;
 use App\Models\User;
+use App\Observers\DocumentVersionObserver;
 use App\Observers\TransactionObserver;
 use App\Repositories\AgendaRepository;
 use App\Repositories\AgendaRepositoryInterface;
@@ -40,6 +42,7 @@ class AppServiceProvider extends ServiceProvider
     {
         Vite::prefetch(concurrency: 3);
         Transaction::observe(TransactionObserver::class);
+        DocumentVersion::observe(DocumentVersionObserver::class);
         Gate::before(function (User $user, string $ability) {
             return $user->isSuperAdmin() ? true : null;
         });

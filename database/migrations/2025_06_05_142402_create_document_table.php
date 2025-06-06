@@ -18,6 +18,22 @@ return new class extends Migration
             $table->text('description')->nullable();
             $table->timestamps();
         });
+
+        Schema::create('document_versions', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('document_id')->constrained('documents')->cascadeOnDelete();
+            $table->string('version_number')->unique();
+            $table->string('title');
+            $table->text('content');
+            $table->string('language_code')->default('id'); // Default language set to English
+            $table->date('effective_date')->nullable(); // Path to the file if applicable
+            $table->boolean('is_published')->default(false); // Indicates if the version is published
+            $table->boolean('is_active')->default(false); // Indicates if the version is currently active
+            $table->foreignId('published_by_user_id')->nullable()->constrained('users')->nullOnDelete(); // User who published the version, nullable if not published
+            $table->foreignId('created_by_user_id')->nullable()->constrained('users')->nullOnDelete(); // User who created the version
+            $table->timestamps();
+            $table->softDeletes(); // Soft delete for version history
+        });
     }
 
     /**
@@ -25,6 +41,7 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('document');
+        Schema::dropIfExists('document_versions');
+        Schema::dropIfExists('documents');
     }
 };

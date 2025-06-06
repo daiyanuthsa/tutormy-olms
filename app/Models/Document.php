@@ -32,10 +32,9 @@ class Document extends Model
     public function activeVersion(): HasOne
     {
         return $this->hasOne(DocumentVersion::class, 'document_id')
-        ->where('is_active', true)
-        ->where('is_published', true)
-        ->orderBy('effective_date', 'desc')
-        ->limit(1);
+            ->where('is_active', true)
+            ->where('is_published', true)
+            ->orderBy('effective_date', 'desc');
     }
     
 }

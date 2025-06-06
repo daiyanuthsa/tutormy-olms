@@ -13,7 +13,7 @@ class DocumentController extends Controller
      */
     public function show(Document $document)
     {
-        $document = $document->with(['activeVersion'])->get();
+        $document->load('activeVersion');
         return Inertia::render('Document/Show', compact('document'));
     }
 }

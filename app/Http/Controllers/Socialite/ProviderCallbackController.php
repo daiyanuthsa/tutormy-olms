@@ -45,6 +45,7 @@ class ProviderCallbackController extends Controller
                 'provider' => $provider,
                 'provider_token' => $socialUser->token,
                 'password' => bcrypt(Str::random(9)),
+                'email_verified_at'=> now(), // Set email as verified
             ]);
         }
         // Log the user in

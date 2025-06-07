@@ -1,0 +1,49 @@
+# Nama workflow yang akan tampil di tab Actions
+name: Manual Deploy Laravel to Production
+
+# Pemicu: Workflow ini hanya akan berjalan saat dipicu secara manual
+on:
+  workflow_dispatch:
+
+# Izin: Diperlukan untuk checkout kode dan menulis commit
+permissions:
+  contents: write
+
+# Daftar pekerjaan (jobs) yang akan dijalankan
+jobs:
+  build-and-deploy:
+    # Menggunakan runner Ubuntu versi terbaru
+    runs-on: ubuntu-latest
+
+    # Langkah-langkah (steps) yang akan dieksekusi
+    steps:
+      # Langkah 1: Checkout kode dari branch yang dipilih (misalnya, 'main')
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      # Langkah 4: Setup Node.js untuk build aset frontend
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20' # Sesuaikan dengan versi Node.js Anda
+
+      # Langkah 5: Install dependensi NPM dan build aset
+      - name: Install NPM Dependencies and Build
+        run: |
+          npm install
+          npm run build
+
+      # Langkah 6: Commit hasil build dan push ke branch 'production'
+      # Action ini akan secara otomatis melakukan commit semua perubahan (termasuk file build baru)
+      # dan melakukan force-push ke branch 'production'.
+      - name: Commit and Push to Production
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "Deploy: Build frontend assets and sync to production branch"
+          branch: production
+          # Opsi push --force untuk menimpa history di branch production
+          # Ini sesuai dengan permintaan Anda untuk "force merge"
+          push_options: --force
+          # Opsi ini penting untuk menambahkan file hasil build (misal: public/build)
+          # yang mungkin ada di dalam .gitignore
+          add_options: --force

@@ -32,7 +32,9 @@ jobs:
         run: |
           npm install
           npm run build
-
+          
+      - name: Force Add Build Directory
+        run: git add --force public/build
       # Langkah 6: Commit hasil build dan push ke branch 'production'
       # Action ini akan secara otomatis melakukan commit semua perubahan (termasuk file build baru)
       # dan melakukan force-push ke branch 'production'.

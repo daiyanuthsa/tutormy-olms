@@ -33,19 +33,31 @@ jobs:
           npm install
           npm run build
           
-      - name: Force Add Build Directory
-        run: git add --force public/build
-      # Langkah 6: Commit hasil build dan push ke branch 'production'
-      # Action ini akan secara otomatis melakukan commit semua perubahan (termasuk file build baru)
-      # dan melakukan force-push ke branch 'production'.
       - name: Commit and Push to Production
-        uses: stefanzweifel/git-auto-commit-action@v5
-        with:
-          commit_message: "Deploy: Build frontend assets and sync to production branch"
-          branch: production
-          # Opsi push --force untuk menimpa history di branch production
-          # Ini sesuai dengan permintaan Anda untuk "force merge"
-          push_options: --force
-          # Opsi ini penting untuk menambahkan file hasil build (misal: public/build)
-          # yang mungkin ada di dalam .gitignore
-          add_options: --force
+        run: |
+          # Konfigurasi identitas Git untuk runner
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          
+          # Secara paksa tambahkan folder build yang diabaikan
+          # Ini adalah perintah kunci untuk mengatasi .gitignore
+          git add -f public/build
+          
+          # Cek status untuk melihat apakah ada file yang siap di-commit
+          # Opsi --porcelain akan memberikan output jika ada perubahan, atau kosong jika tidak ada
+          # Kita simpan outputnya ke dalam sebuah variabel
+          STATUS=$(git status --porcelain)
+          
+          # Periksa apakah variabel STATUS tidak kosong
+          if [ -n "$STATUS" ]; then
+            echo "✅ Changes detected in the build directory. Proceeding to commit."
+            # Lakukan commit
+            git commit -m "Deploy: Build frontend assets and sync to production branch"
+            
+            # Lakukan force push ke branch production
+            git push --force origin HEAD:production
+            
+            echo "🚀 Successfully deployed to production branch."
+          else
+            echo "✅ No changes detected in build files. Nothing to commit."
+          fi

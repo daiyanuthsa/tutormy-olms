@@ -25,13 +25,18 @@ class CourseController extends Controller
 
     public function show(Course $course)
     {
-        $course->load(['category', 'benefits']);
+        // $course->load(['category', 'benefits']);
+        $course = $this->courseRepository->getCourseForPublicView($course->id);
+        if (!Auth()->check()) {
+            $course->group_url = null;
+        }
         if (!$course) {
             abort(404);
         }
         return inertia('Course/CourseDetails', compact('course'));
     }
-    public function search(Request $request){
+    public function search(Request $request)
+    {
         $keyword = $request->input('keyword');
         if (!$keyword) {
             return redirect()->route('course.index')->withErrors(['error' => 'Keyword is required']);

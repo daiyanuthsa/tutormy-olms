@@ -15,6 +15,7 @@ class Course extends Model
         'name',
         'slug',
         'about',
+        'group_url',
         'thumbnail',
         'category_id',
         'is_popular',
@@ -42,5 +43,9 @@ class Course extends Model
     public function benefits()
     {
         return $this->hasMany(CourseBenefit::class);
+    }
+    public function sections()
+    {
+        return $this->hasMany(CourseSection::class, 'course_id');
     }
 }

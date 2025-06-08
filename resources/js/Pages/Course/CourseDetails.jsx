@@ -1,4 +1,4 @@
-import React from 'react'
+import React from "react";
 
 const CourseDetails = (course) => {
     return (
@@ -7,8 +7,9 @@ const CourseDetails = (course) => {
                 Detail Kursus
             </h1>
             <pre>{JSON.stringify(course, null, 2)}</pre>
+
         </div>
     );
-}
+};
 
-export default CourseDetails
+export default CourseDetails;

@@ -47,6 +47,8 @@ class ProviderCallbackController extends Controller
                 'password' => bcrypt(Str::random(9)),
                 'email_verified_at'=> now(), // Set email as verified
             ]);
+            // Assign default role if needed
+            $user->assignRole('student'); // Uncomment if you have roles set up
         }
         // Log the user in
         Auth::login($user, true);

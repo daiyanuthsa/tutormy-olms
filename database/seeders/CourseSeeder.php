@@ -14,13 +14,50 @@ class CourseSeeder extends Seeder
     public function run(): void
     {
         //
-        Course::create([
+        $course1 = Course::create([
             'name' => 'Laravel for Beginners',
             'about' => 'Learn the basics of Laravel, a powerful PHP framework.',
             'slug'=> 'laravel-for-beginners',
+            'group_url'=> 'https://tutormy.id/group/laravel-for-beginners',
             'thumbnail'=> 'https://images.unsplash.com/photo-1743419672503-3e363bcd3634?&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
             'is_popular' => true,
             'category_id' => 1,
+        ]);
+        $section1 = $course1->sections()->create([
+            'name' => 'Getting Started',
+            'position' => 1,
+        ]);
+        $section1->contents()->createMany([
+            [
+                'name' => 'Introduction',
+                'content' => 'Welcome to Laravel!',
+                'free_access' => true,
+                'position' => 1,
+            ],
+            [
+                'name' => 'Installation',
+                'content' => 'How to install Laravel.',
+                'free_access' => false,
+                'position' => 2,
+            ],
+        ]);
+        $section2 = $course1->sections()->create([
+            'name' => 'Routing and Controllers',
+            'position' => 2,
+        ]);
+        $section2->contents()->createMany([
+            [
+                'name' => 'Routing Basics',
+                'content' => 'Learn about routing in Laravel.',
+                'free_access' => false,
+                'position' => 1,
+            ],
+            [
+                'name' => 'Controllers',
+                'content' => 'How to create and use controllers.',
+                'free_access' => false,
+                'position' => 2,
+            ],
         ]);
         Course::create([
             'name' => 'Advanced Laravel Techniques',
@@ -39,6 +76,7 @@ class CourseSeeder extends Seeder
             'is_popular' => true,
             'category_id' => 2,
         ]);
+
         
     }
 }

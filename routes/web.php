@@ -41,6 +41,9 @@ Route::middleware(['auth'])->group(function () {
         Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
         Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
+        Route::get('/courses/join/{course:slug}', [CourseController::class, 'join'])
+            ->name('course.join');
+
         Route::get('/checkout/{pricing}', [FrontController::class, 'checkout'])->name('front.checkout');
 
         // middleware issubscribed user

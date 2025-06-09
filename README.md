@@ -13,7 +13,6 @@ TutorMy adalah platform pembelajaran online berbasis Laravel yang memungkinkan p
 -   🧾 Sertifikat Digital Otomatis
 -   📊 Dashboard Admin, Mentor, dan Siswa
 -   📁 Upload Materi & Video
--   📱 API Ready (opsional)
 
 ---
 
@@ -25,7 +24,7 @@ TutorMy adalah platform pembelajaran online berbasis Laravel yang memungkinkan p
 -   Inertia 2+
 -   Tailwind CSS 
 -   Filament (admin panel)
--   Laravel Breeze (jika ada API)
+-   Laravel Breeze
 -   App Service: Storage
 -   Service & Repository Pattern
 

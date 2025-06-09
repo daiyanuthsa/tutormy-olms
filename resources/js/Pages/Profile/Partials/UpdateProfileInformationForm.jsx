@@ -20,8 +20,8 @@ export default function UpdateProfileInformation({
     ];
 
     const GENDER_OPTIONS = [
-        { value: "laki-laki", label: "Laki-laki" },
-        { value: "perempuan", label: "Perempuan" },
+        { value: "M", label: "Laki-laki" },
+        { value: "F", label: "Perempuan" },
     ];
 
     const { data, setData, patch, errors, processing, recentlySuccessful } =
@@ -169,7 +169,7 @@ export default function UpdateProfileInformation({
                         ))}
                     </div>
 
-                    <InputError className="mt-2" message={errors.date_birth} />
+                    <InputError className="mt-2" message={errors.gender} />
                 </div>
 
                 {mustVerifyEmail && user.email_verified_at === null && (

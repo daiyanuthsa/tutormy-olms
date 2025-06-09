@@ -1,10 +1,10 @@
 import React from "react";
 
-const CourseDetails = (course) => {
+const CourseJoin = (course) => {
     return (
         <div className="text-white ">
             <h1 className="text-white text-2xl font-bold mb-4">
-                Detail Kursus
+                Halaman Join Kelas
             </h1>
             <pre>{JSON.stringify(course, null, 2)}</pre>
 
@@ -12,4 +12,4 @@ const CourseDetails = (course) => {
     );
 };
 
-export default CourseDetails;
+export default CourseJoin;

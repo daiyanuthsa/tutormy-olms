@@ -16,6 +16,8 @@ return new class extends Migration
 
             $table->string('name');
             $table->text('content');
+            $table->boolean('free_access')->default(true);
+            $table->unsignedBigInteger('position')->default(0);
             $table->foreignId('course_section_id')->constrained('course_sections')->cascadeOnDelete();
             $table->softDeletes();
             

@@ -40,11 +40,21 @@ class TipsController extends Controller
         ]);
     }
 
-    public function tipsDetails(Article $article)
+    public function tipsDetails($slug)
     {
-        return Inertia::render('Tips/Details', [
-            'article' => $article
+        $jsonPath = public_path('data/articles.json');
+        $articles = collect(json_decode(file_get_contents($jsonPath), true));
+
+        $article = $articles->firstWhere('slug', $slug);
+
+        if (!$article) {
+            abort(404, 'Artikel tidak ditemukan');
+        }
+
+        return inertia('Tips/Details', [
+            'article' => $article,
         ]);
     }
+
 
 }

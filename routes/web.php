@@ -49,6 +49,7 @@ Route::middleware(['auth'])->group(function () {
         // middleware issubscribed user
         Route::get('/webinar/{agenda:slug}', [WebinarController::class, 'showPastAgenda'])->name('webinar.past');
     });
+    Route::post('/booking/payment/doku', [FrontController::class, 'paymentStore'])->name('payment.store');
 });
 
 

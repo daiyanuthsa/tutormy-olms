@@ -19,7 +19,7 @@ Route::get('/auth/{provider}/callback', ProviderCallbackController::class)->name
 
 Route::get('/tips', [TipsController::class, 'index'])->name('tips.index');
 Route::get('/tips/search', [TipsController::class, 'searchTips'])->name('tips.search');
-Route::get('/tips/{article}', [TipsController::class, 'tipsDetails'])->name('tips.details');
+Route::get('/tips/{article:slug}', [TipsController::class, 'tipsDetails'])->name('tips.details');
 
 Route::get('/courses', [CourseController::class, 'index'])->name('course.index');
 Route::get('/courses/search', [CourseController::class, 'search'])->name('course.search');

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Article;
+use App\Models\Category;
 use App\Services\ArticleService;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
@@ -17,11 +18,13 @@ class TipsController extends Controller
     }
     public function index(Request $request)
     {
-  
+        
         $articles = $this->articleService->getAllArticles();
+        $category = Category::all();
 
         return Inertia::render('Tips/Index', [
-            'articles' => $articles
+            'articles' => $articles,
+            'categories' => $category->map->only( ['id', 'name']),
         ]);
     }
 
@@ -40,11 +43,14 @@ class TipsController extends Controller
         ]);
     }
 
-    public function tipsDetails(Article $article)
+    public function tipsDetails(Article $article,)
     {
-        return Inertia::render('Tips/Details', [
-            'article' => $article
+       
+        return inertia('Tips/Details', [
+            'article' => $article,
+            'writer' => $article->user->only(['id', 'name', 'status','photo']),
         ]);
     }
+
 
 }

@@ -2,19 +2,19 @@ import React from 'react'
 import { Icon } from '@iconify/react'
 import { Link } from '@inertiajs/react'
 
-const ArticleContent = ({ article }) => {
+const ArticleContent = ({ article, author }) => {
     return (
-        <section className='space-y-10'>
-            <div className='space-y-7'>
+        <section className="space-y-10">
+            <div className="space-y-7">
                 <h1 className="text-2xl font-bold">{article.category_name}</h1>
                 <div>
                     <img
-                        src={article.thumbnail || '/images/default-article.jpg'}
+                        src={`/storage/${article.thumbnail}`}
                         alt={article.name}
                         className="w-full h-80 object-cover rounded-lg"
                     />
                 </div>
-                <div className='flex gap-7 justify-end'>
+                <div className="flex gap-7 justify-end">
                     <div className="flex items-center gap-2">
                         <Icon icon="mdi:eye-outline" className="w-5 h-5" />
                         <span>2.5m</span>
@@ -25,11 +25,15 @@ const ArticleContent = ({ article }) => {
                     </div>
                 </div>
             </div>
-            <div className='space-y-12'>
-                <div className='space-y-2'>
+            <div className="space-y-12">
+                <div className="space-y-2">
                     <h1 className="text-3xl font-bold">{article.name}</h1>
-                    <p className='text-sm font-medium'>Oleh: {article.author_name} - {article.role_author}</p>
-                    <p className='text-xs'>{article.published_at} {article.published_time}</p>
+                    <p className="text-sm font-medium">
+                        Oleh: {author.name} - {author.status}
+                    </p>
+                    <p className="text-xs">
+                        {article.published_at} {article.published_time}
+                    </p>
                 </div>
 
                 <div
@@ -37,35 +41,36 @@ const ArticleContent = ({ article }) => {
                     dangerouslySetInnerHTML={{ __html: article.content }}
                 />
             </div>
-            <div className='space-y-8'>
-                <div className='flex justify-between'>
+            <div className="space-y-8">
+                <div className="flex justify-between">
                     <h2 className="text-2xl font-bold">Pelajari Lebih Dalam</h2>
-                    <Link href="/tips" className="text-primary-500 hover:underline font-medium">
+                    <Link
+                        href="/tips"
+                        className="text-primary-500 hover:underline font-medium"
+                    >
                         Lihat semua
                     </Link>
                 </div>
-                <div>
-                    ambil dari card course
-                </div>
+                <div>ambil dari card course</div>
             </div>
-            <div className='space-y-3'>
+            <div className="space-y-3">
                 <h2 className="text-2xl font-bold">Content Editor</h2>
-                <div className='flex gap-4 items-start'>
+                <div className="flex gap-4 items-start">
                     <div className="w-20 h-20">
                         <img
-                            src={article.image_author}
+                            src={`/storage/${author.photo}`}
                             alt="Foto Penulis"
                             className="w-full h-full object-cover rounded-full"
                         />
                     </div>
                     <div>
-                        <p>{article.author_name}</p>
-                        <p>{article.role_author}</p>
+                        <p>{author.name}</p>
+                        <p>{author.status}</p>
                     </div>
                 </div>
             </div>
         </section>
-    )
+    );
 }
 
 export default ArticleContent

@@ -17,7 +17,7 @@ class TipsController extends Controller
     }
     public function index(Request $request)
     {
-  
+        // return $articles = $this->articleService->getAllArticles();
         $articles = $this->articleService->getAllArticles();
 
         return Inertia::render('Tips/Index', [
@@ -40,19 +40,22 @@ class TipsController extends Controller
         ]);
     }
 
-    public function tipsDetails($slug)
+    public function tipsDetails(Article $article,)
     {
-        $jsonPath = public_path('data/articles.json');
-        $articles = collect(json_decode(file_get_contents($jsonPath), true));
+        // $jsonPath = public_path('data/articles.json');
+        // $articles = collect(json_decode(file_get_contents($jsonPath), true));
 
-        $article = $articles->firstWhere('slug', $slug);
+        // $article = $articles->firstWhere('slug', $slug);
 
-        if (!$article) {
-            abort(404, 'Artikel tidak ditemukan');
-        }
-
+        // if (!$article) {
+        //     abort(404, 'Artikel tidak ditemukan');
+        // }
+        // $article = $this->articleService->getArticleBySlug($slug);
+// return $article;
+       
         return inertia('Tips/Details', [
             'article' => $article,
+            'writer' => $article->user->only(['id', 'name', 'status','photo']),
         ]);
     }
 

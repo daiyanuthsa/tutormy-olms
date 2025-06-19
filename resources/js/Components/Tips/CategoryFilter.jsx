@@ -32,20 +32,24 @@ const CategoryFilter = ({ categories, activeCategory, onCategoryChange }) => {
             onMouseMove={handleMouseMove}
         >
             <button
-                onClick={() => onCategoryChange('')}
-                className={`text-lg whitespace-nowrap transition ${activeCategory === '' ? 'text-primary-3' : 'text-white'
-                    }`}
+                onClick={() => onCategoryChange("")}
+                className={`text-lg whitespace-nowrap transition ${
+                    activeCategory === "" ? "text-primary-3" : "text-white"
+                }`}
             >
                 Semua
             </button>
             {categories.map((cat) => (
                 <button
-                    key={cat}
-                    onClick={() => onCategoryChange(cat)}
-                    className={`text-lg whitespace-nowrap transition ${activeCategory === cat ? 'text-primary-3' : 'text-white'
-                        }`}
+                    key={cat.id}
+                    onClick={() => onCategoryChange(cat.id)}
+                    className={`text-lg whitespace-nowrap transition ${
+                        activeCategory === cat.id
+                            ? "text-primary-3"
+                            : "text-white"
+                    }`}
                 >
-                    {cat}
+                    {cat.name}
                 </button>
             ))}
         </div>

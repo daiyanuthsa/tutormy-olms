@@ -12,25 +12,11 @@ const formatDate = (dateStr) =>
         day: "numeric",
     });
 
-const categories = [
-    "Discover",
-    "Design",
-    "Code",
-    "Soft Skills",
-    "User-Interface",
-    "User-Experience",
-    "Front-End",
-    "Back-End",
-    "Softdev",
-];
+
 
 export default function Index({
     articles,
-    data,
-    current_page,
-    last_page,
-    per_page,
-    total,
+    categories
 }) {
     const { url, props } = usePage();
     const queryParams = new URLSearchParams(window.location.search);
@@ -74,7 +60,7 @@ export default function Index({
         return pages;
     }, [currentPage, articles.last_page]);
 
-    const filteredArticles = articles.data.filter((a) => a.is_published);
+    // const filteredArticles = articles.data.filter((a) => a.is_published);
 
     return (
         <MainLayout>
@@ -113,7 +99,7 @@ export default function Index({
                 )}
 
                 <div className="grid grid-rows-3 gap-12">
-                    {filteredArticles.map((article) => (
+                    {articles?.data?.map((article) => (
                         <ArticleCard
                             key={article.id}
                             article={{
@@ -158,7 +144,7 @@ export default function Index({
                     </div>
                 )}
 
-                {filteredArticles.length === 0 && (
+                {articles?.data?.length === 0 && (
                     <div className="text-center mt-10 text-xl text-gray-400">
                         {searchQuery || selectedCategory
                             ? "Tidak ada tips atau artikel yang ditemukan."

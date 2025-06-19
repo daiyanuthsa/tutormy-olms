@@ -13,6 +13,7 @@ export default function PrimaryButton({
         ghost: 'bg-transparent text-primary-3 hover:bg-primary-1/10',
         danger: 'bg-red-600 text-white hover:bg-red-700 focus:ring-red-300',
         secondary: 'bg-primary-3 text-white hover:bg-primary-4 focus:ring-primary-4',
+        tertiary: 'bg-gradient-to-r from-[#C392F0] to-[#59307E] hover:bg-gradient-dark'
     };
 
     const disabledStyles = disabled ? 'opacity-25 cursor-not-allowed' : '';

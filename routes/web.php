@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
 Route::get('/', [FrontController::class, 'index'])->name('home');
+Route::get('/pricing', [FrontController::class, 'pricing'])->name('pricing');
 
 Route::get('/auth/{provider}/redirect', ProviderRedirectController::class)->name('auth.redirect');
 Route::get('/auth/{provider}/callback', ProviderCallbackController::class)->name('auth.callback');

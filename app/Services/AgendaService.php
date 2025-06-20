@@ -1,14 +1,15 @@
-<?php 
+<?php
 namespace App\Services;
 use App\Models\Agenda;
 
 
+use App\Repositories\AgendaRepository;
 use App\Repositories\AgendaRepositoryInterface;
 
 class AgendaService
 {
     private $agendaRepository;
-    public function __construct(AgendaRepositoryInterface $agendaRepository)
+    public function __construct(AgendaRepository $agendaRepository)
     {
         $this->agendaRepository = $agendaRepository;
     }

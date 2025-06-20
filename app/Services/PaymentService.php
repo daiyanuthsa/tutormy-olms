@@ -2,14 +2,16 @@
 
 namespace App\Services;
 use App\Models\Pricing;
+use App\Repositories\PricingRepository;
 use Auth;
 
 class PaymentService
 {
     protected $pricingRepository;
     protected $dokuService;
-
-    public function __construct($pricingRepository, $dokuService)
+    public function __construct(
+        PricingRepository $pricingRepository,
+        DokuService $dokuService)
     {
         $this->pricingRepository = $pricingRepository;
         $this->dokuService = $dokuService;
@@ -27,7 +29,7 @@ class PaymentService
 
         // Retrieve the pricing package by product ID
 
-        $pricing = $this->pricingRepository->getPackageById($pricingId);
+        $pricing = $this->pricingRepository->getPricingById($pricingId);
 
         $tax = 0.12;
         $totalTax = $pricing->price * $tax;

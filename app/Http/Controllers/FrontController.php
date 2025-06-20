@@ -47,6 +47,13 @@ class FrontController extends Controller
         ));
     }
 
+    public function pricing(Request $request)
+    {
+        $pricings = $this->pricingService->getAllpricing(3);
+       
+        return Inertia::render('Transaction/Pricing', compact('pricings'));
+    }
+
     public function paymentStore()
     {
         $response = null;

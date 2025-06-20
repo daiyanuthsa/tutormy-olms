@@ -17,6 +17,7 @@ use App\Repositories\PricingRepository;
 use App\Repositories\PricingRepositoryInterface;
 use App\Repositories\TransactionRepository;
 use App\Repositories\TransactionRepositoryInterface;
+use App\Services\DokuService;
 use Gate;
 use Illuminate\Support\Facades\Vite;
 use Illuminate\Support\ServiceProvider;
@@ -28,11 +29,12 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        $this->app->bind(ArticleRepositoryInterface::class, ArticleRepository::class);
-        $this->app->bind(CourseRepositoryInterface::class, CourseRepository::class);
-        $this->app->bind(PricingRepositoryInterface::class, PricingRepository::class);
-        $this->app->bind(TransactionRepositoryInterface::class, TransactionRepository::class);
-        $this->app->bind(AgendaRepositoryInterface::class, AgendaRepository::class);
+        $this->app->singleton(ArticleRepositoryInterface::class, ArticleRepository::class);
+        $this->app->singleton(CourseRepositoryInterface::class, CourseRepository::class);
+        $this->app->singleton(PricingRepositoryInterface::class, PricingRepository::class);
+        $this->app->singleton(TransactionRepositoryInterface::class, TransactionRepository::class);
+        $this->app->singleton(AgendaRepositoryInterface::class, AgendaRepository::class);
+       // $this->app->bind(DokuService::class, DokuService::class);
     }
 
     /**

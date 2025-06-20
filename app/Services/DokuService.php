@@ -12,7 +12,7 @@ class DokuService
     protected $secretKey;
     protected $apiUrl;
 
-    protected function __construct()
+    public function __construct()
     {
         // Initialize any required properties or dependencies here
         $this->clientId = config('doku.merchant_id');

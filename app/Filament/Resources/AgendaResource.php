@@ -133,6 +133,25 @@ class AgendaResource extends Resource
             ])
             ->filters([
                 Tables\Filters\TrashedFilter::make(),
+                Tables\Filters\SelectFilter::make('is_active')
+                    ->options([
+                        true => 'Aktif',
+                        false => 'Tidak Aktif',
+                    ])
+                    ->default(true),
+                Tables\Filters\SelectFilter::make('event_status')
+                    ->label('Status Webminar')
+                    ->options([
+                        'upcoming' => 'Yang Akan Datang',
+                        'past' => 'Sudah Lewat',
+                    ])
+                    ->query(function (Builder $query, array $data) {
+                        if ($data['value'] === 'upcoming') {
+                            $query->where('event_datetime', '>=', now());
+                        } elseif ($data['value'] === 'past') {
+                            $query->where('event_datetime', '<', now());
+                        }
+                    }),
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),

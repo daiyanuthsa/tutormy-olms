@@ -18,6 +18,8 @@ class ArticleResource extends Resource
     protected static ?string $model = Article::class;
     protected static ?string $navigationGroup = 'Manajemen Konten';
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationLabel = 'Tips';
+    protected static ?string $modelLabel = 'Tips';
 
     public static function form(Form $form): Form
     {
@@ -58,16 +60,16 @@ class ArticleResource extends Resource
                 ,
                 Tables\Columns\TextColumn::make('name')
                     ->searchable(),
-                
-                // Tables\Columns\TextColumn::make('user_id')
-                //     ->numeric()
-                //     ->sortable(),
+
+                Tables\Columns\TextColumn::make('user.name')
+                    ->label(label: 'Penulis')
+                    ->sortable(),
                 // Tables\Columns\TextColumn::make('category_id')
                 //     ->numeric()
                 //     ->sortable(),
-                
+
                 Tables\Columns\ToggleColumn::make('is_published')
-                    ,
+                ,
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()
@@ -82,7 +84,7 @@ class ArticleResource extends Resource
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
-                
+
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([

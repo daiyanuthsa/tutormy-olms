@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
 Route::get('/', [FrontController::class, 'index'])->name('home');
+Route::get('/pricing', [FrontController::class, 'pricing'])->name('pricing');
 
 Route::get('/auth/{provider}/redirect', ProviderRedirectController::class)->name('auth.redirect');
 Route::get('/auth/{provider}/callback', ProviderCallbackController::class)->name('auth.callback');
@@ -49,6 +50,7 @@ Route::middleware(['auth'])->group(function () {
         // middleware issubscribed user
         Route::get('/webinar/{agenda:slug}', [WebinarController::class, 'showPastAgenda'])->name('webinar.past');
     });
+    Route::post('/booking/payment/doku', [FrontController::class, 'paymentStore'])->name('payment.store');
 });
 
 

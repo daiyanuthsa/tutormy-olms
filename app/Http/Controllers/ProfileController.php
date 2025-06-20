@@ -67,6 +67,7 @@ class ProfileController extends Controller
 
     public function showCompleteProfileForm(): Response
     {
+        
         return Inertia::render('Profile/CompleteProfile', [
             'status' => session('status'),
         ]);

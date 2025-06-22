@@ -4,51 +4,6 @@ import React, { useState } from "react";
 export default function Pricing({ pricings }) {
     const [selectedPlan, setSelectedPlan] = useState(2);
 
-    const plans = [
-        {
-            id: "pemula-left",
-            name: "Paket Pemula",
-            duration: "12 Bulan",
-            price: "Rp 1.224.000,-",
-            monthlyPrice: "Rp 125.000",
-            features: [
-                "200 + Materi Belajar",
-                "20+ Akses Seluruh Materi",
-                "50+ Konsultasi Mentor Ahli",
-                "24/7 Dukungan eror",
-                "Materi dan dukungan Prioritas",
-            ],
-        },
-        {
-            id: "profesional",
-            name: "Paket Profesional",
-            duration: "12 Bulan",
-            price: "Rp 1.224.000,-",
-            monthlyPrice: "Rp 125.000",
-            popular: true,
-            features: [
-                "200 + Materi Belajar",
-                "20+ Akses Seluruh Materi",
-                "50+ Konsultasi Mentor Ahli",
-                "24/7 Dukungan eror",
-                "Materi dan dukungan Prioritas",
-            ],
-        },
-        {
-            id: "pemula-right",
-            name: "Paket Pemula",
-            duration: "12 Bulan",
-            price: "Rp 1.224.000,-",
-            monthlyPrice: "Rp 125.000",
-            features: [
-                "200 + Materi Belajar",
-                "20+ Akses Seluruh Materi",
-                "50+ Konsultasi Mentor Ahli",
-                "24/7 Dukungan eror",
-                "Materi dan dukungan Prioritas",
-            ],
-        },
-    ];
     const features = [
         "200 + Materi Belajar",
         "20+ Akses Seluruh Materi",

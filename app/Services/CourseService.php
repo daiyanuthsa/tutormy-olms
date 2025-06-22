@@ -38,6 +38,16 @@ class CourseService
                 'course_section_id' => $firstSection ? $firstSection->id : null,
                 'section_content_id' => $firstSectionContentId,
             ]);
+        } else {
+            // Jika sudah terdaftar, ambil data course student user
+            $courseStudent = $course->courseStudents()->where('user_id', $user->id)->first();
+            $firstSection = $courseStudent->courseSection;
+            $firstSectionContentId = $courseStudent->section_content_id;
+            return redirect()->route('learning.show', [
+                'course' => $course->slug,
+                'courseSection' => $firstSection ? $firstSection->id : null,
+                'sectionContent' => $firstSectionContentId,
+            ]);
         }
         return [
             'user_name' => $user->name,

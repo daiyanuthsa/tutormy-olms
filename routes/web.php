@@ -44,6 +44,8 @@ Route::middleware(['auth'])->group(function () {
 
         Route::get('/courses/join/{course:slug}', [CourseController::class, 'join'])
             ->name('course.join');
+        Route::get('learning/{course:slug}/{courseSection}/{sectionContent}', [CourseController::class, 'learning'])
+            ->name('learning.show');
 
         Route::get('/checkout/{pricing}', [FrontController::class, 'checkout'])->name('front.checkout');
 

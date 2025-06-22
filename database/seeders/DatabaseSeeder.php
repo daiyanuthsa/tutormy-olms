@@ -42,5 +42,6 @@ class DatabaseSeeder extends Seeder
             DocumentSeeder::class,
         ]);
 
+        
     }
 }

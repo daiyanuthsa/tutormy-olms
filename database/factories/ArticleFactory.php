@@ -26,7 +26,7 @@ class ArticleFactory extends Factory
             'user_id' => 1,                      // buat user baru
             'category_id' => Category::factory(),              // buat kategori baru
             'content' => $this->faker->paragraphs(5, true),
-            'thumbnail' => $this->faker->imageUrl(640, 480, 'articles', true),
+            'thumbnail' => 'post/thumbnail/01JY4DSHPBSP5WPB36AFZ36Z95.jpg',
             'is_published' => true,       // 80% published
         ];
     }

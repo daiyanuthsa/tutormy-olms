@@ -16,15 +16,33 @@ class CourseService
 
     public function enrollUser(Course $course)
     {
-        $user = Auth::user();
+        $user = auth()->user();
 
-        // chekk if the user is already enrolled in the course
+        // Ambil section pertama dari course
+        $firstSection = $course->sections()->orderBy('position')->first();
+
+        // Ambil section content pertama dari section tersebut
+        $firstSectionContentId = null;
+        if ($firstSection) {
+            $firstSectionContent = $firstSection->contents()->orderBy('position')->first();
+            if ($firstSectionContent) {
+                $firstSectionContentId = $firstSectionContent->id;
+            }
+        }
+
+        // Cek jika user sudah terdaftar
         if (!$course->courseStudents()->where('user_id', $user->id)->exists()) {
             $course->courseStudents()->create([
                 'user_id' => $user->id,
                 'is_active' => true,
+                'course_section_id' => $firstSection ? $firstSection->id : null,
+                'section_content_id' => $firstSectionContentId,
             ]);
         }
-        return $user->name;
+        return [
+            'user_name' => $user->name,
+            'section_id' => $firstSection->id,
+            'section_content_id' => $firstSectionContentId,
+        ];
     }
 }

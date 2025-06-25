@@ -60,3 +60,11 @@ Route::get('/test', function () {
     return Inertia::render('Auth/VerifyEmail', ['status' => session('status')]);
 });
 require __DIR__ . '/auth.php';
+
+Route::get('/payment-success', function () {
+    return Inertia::render('Transaction/PaymentSuccess/Success');
+})->name('payment.success');
+
+Route::get('/welcome-class', function () {
+    return Inertia::render('Popup/WelcomeClass');
+})->name('payment.success');

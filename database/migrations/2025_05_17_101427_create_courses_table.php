@@ -13,11 +13,11 @@ return new class extends Migration
     {
         Schema::create('courses', function (Blueprint $table) {
             $table->id();
-            
             $table->string('name');
             $table->string('slug')->unique();
             $table->string('thumbnail')->nullable();
             $table->text('about')->nullable();
+            $table->string('group_url')->nullable();
             $table->boolean('is_popular')->default(false);
             $table->foreignId('category_id')->constrained('categories')->cascadeOnDelete();
             $table->timestamps();

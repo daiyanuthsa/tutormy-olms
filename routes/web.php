@@ -13,13 +13,14 @@ use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
 Route::get('/', [FrontController::class, 'index'])->name('home');
+Route::get('/pricing', [FrontController::class, 'pricing'])->name('pricing');
 
 Route::get('/auth/{provider}/redirect', ProviderRedirectController::class)->name('auth.redirect');
 Route::get('/auth/{provider}/callback', ProviderCallbackController::class)->name('auth.callback');
 
 Route::get('/tips', [TipsController::class, 'index'])->name('tips.index');
 Route::get('/tips/search', [TipsController::class, 'searchTips'])->name('tips.search');
-Route::get('/tips/{article}', [TipsController::class, 'tipsDetails'])->name('tips.details');
+Route::get('/tips/{article:slug}', [TipsController::class, 'tipsDetails'])->name('tips.details');
 
 Route::get('/courses', [CourseController::class, 'index'])->name('course.index');
 Route::get('/courses/search', [CourseController::class, 'search'])->name('course.search');
@@ -41,11 +42,15 @@ Route::middleware(['auth'])->group(function () {
         Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
         Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
+        Route::get('/courses/join/{course:slug}', [CourseController::class, 'join'])
+            ->name('course.join');
+
         Route::get('/checkout/{pricing}', [FrontController::class, 'checkout'])->name('front.checkout');
 
         // middleware issubscribed user
         Route::get('/webinar/{agenda:slug}', [WebinarController::class, 'showPastAgenda'])->name('webinar.past');
     });
+    Route::post('/booking/payment/doku', [FrontController::class, 'paymentStore'])->name('payment.store');
 });
 
 
@@ -53,3 +58,11 @@ Route::get('/test', function () {
     return Inertia::render('Auth/VerifyEmail', ['status' => session('status')]);
 });
 require __DIR__ . '/auth.php';
+
+Route::get('/payment-success', function () {
+    return Inertia::render('Transaction/PaymentSuccess/Success');
+})->name('payment.success');
+
+Route::get('/welcome-class', function () {
+    return Inertia::render('Popup/WelcomeClass');
+})->name('payment.success');

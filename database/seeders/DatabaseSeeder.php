@@ -21,6 +21,7 @@ class DatabaseSeeder extends Seeder
             RoleSeeder::class,
             UserSeeder::class,
             PricingSeeder::class,
+            PermissionSeeder::class,
         ]);
 
         // Buat 5 kategori

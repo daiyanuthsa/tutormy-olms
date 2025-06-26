@@ -72,16 +72,32 @@ export default {
                     1: "#A41111",
                     2: "#7B0D0D",
                     3: "#510909",
+                    4: "#A41111",
                 },
             },
             backgroundImage: (theme) => ({
                 "gradient-light": "linear-gradient(to right, #590994, #C985FC)",
-                "gradient-light-left": "linear-gradient(to right, #C392F0, #59307E)",
+                "gradient-light-left":
+                    "linear-gradient(to right, #C392F0, #59307E)",
                 "gradient-dark": "linear-gradient(to left, #24063A, #6311A0)",
-                "gradient-dark-down": "linear-gradient(to top, #24063A, #6311A0)",
+                "gradient-dark-down":
+                    "linear-gradient(to top, #24063A, #6311A0)",
             }),
         },
     },
 
-    plugins: [forms],
+    plugins: [
+        forms,
+        function ({ addUtilities }) {
+            addUtilities({
+                ".no-scrollbar": {
+                    "-ms-overflow-style": "none",
+                    "scrollbar-width": "none",
+                },
+                ".no-scrollbar::-webkit-scrollbar": {
+                    display: "none",
+                },
+            });
+        },
+    ],
 };

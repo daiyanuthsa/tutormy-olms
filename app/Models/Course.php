@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Str;
 
@@ -15,6 +16,7 @@ class Course extends Model
         'name',
         'slug',
         'about',
+        'group_url',
         'thumbnail',
         'category_id',
         'is_popular',
@@ -42,5 +44,13 @@ class Course extends Model
     public function benefits()
     {
         return $this->hasMany(CourseBenefit::class);
+    }
+    public function sections()
+    {
+        return $this->hasMany(CourseSection::class, 'course_id');
+    }
+    public function courseStudents() : HasMany
+    {
+        return $this->hasMany(CourseStudent::class, 'course_id');
     }
 }

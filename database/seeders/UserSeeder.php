@@ -14,9 +14,9 @@ class UserSeeder extends Seeder
      */
     public function run(): void
     {
-        $admin =User::create([
+        $admin = User::create([
             'name' => 'Admin User',
-            'email' => 'admin@tutormy.com',
+            'email' => 'C',
             'password' => Hash::make('password123'), // Password harus di-hash!
             'email_verified_at' => now(), // Opsional: Menandai email sudah diverifikasi
             // tambahkan field lain jika ada di tabel users Anda
@@ -31,5 +31,14 @@ class UserSeeder extends Seeder
             // tambahkan field lain jika ada di tabel users Anda
         ]);
         $student->assignRole('student');
+
+        $mentor = User::create([
+            'name' => 'Mentor 1',
+            'email' => 'mentor@tutormy.id',
+            'password' => Hash::make('password123'), // Password harus di-hash!
+            'email_verified_at' => now(), // Opsional: Menandai email sudah diverifikasi
+            // tambahkan field lain jika ada di tabel users Anda
+        ]);
+        $mentor->assignRole('mentor');
     }
 }

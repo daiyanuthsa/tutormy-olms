@@ -24,36 +24,50 @@ class CourseResource extends Resource
     {
         return $form
             ->schema([
-                
-                Forms\Components\TextInput::make('name')
-                    ->required()
-                    ->maxLength(255),
-                Forms\Components\Select::make('category_id')
-                    ->required()
-                    ->relationship('category', 'name')
-                    ->searchable()
-                    ->preload(),
-                    Forms\Components\FileUpload::make('thumbnail')
-                    ->image()
-                    ->directory('course/thumbnail')
-                    ->visibility('public'),
-                Forms\Components\Toggle::make('is_popular')
-                    ->required(),
-                Forms\Components\Textarea::make('about')
-                    ->columnSpanFull(),
-                Forms\Components\Repeater::make('benefits')
-                    ->relationship('benefits')
+                Forms\Components\Section::make('Informasi Kelas')
+                    ->columns(2)
                     ->schema([
                         Forms\Components\TextInput::make('name')
+                            ->required()
+                            ->maxLength(255),
+                        Forms\Components\Select::make('category_id')
+                            ->required()
+                            ->relationship('category', 'name')
+                            ->searchable()
+                            ->preload(),
+                        Forms\Components\FileUpload::make('thumbnail')
+                            ->image()
+                            ->directory('course/thumbnail')
+                            ->visibility('public'),
+                        Forms\Components\TextInput::make('group_url')
+                            ->label('group URL')
+                            ->url()
+                            ->placeholder('https://example.com/group-url')
+                            ,
+                        Forms\Components\Toggle::make('is_popular')
                             ->required(),
-                    ])
-                    ->columnSpanFull(),
-                Fieldset::make('Manfaat')
-                    ->schema([
-                        
+                        Forms\Components\Textarea::make('about')
+                            ->columnSpanFull(),
+
                     ]),
-                
-                
+
+                Forms\Components\Section::make('Manfaat')
+                    ->schema([
+                        Forms\Components\Repeater::make('benefits')
+                            ->label('')
+                            ->relationship('benefits')
+                            ->schema([
+                                Forms\Components\TextInput::make('name')
+                                    ->label('Nama Manfaat')
+                                    ->required(),
+                            ])
+                            ->columnSpanFull()
+                            ->createItemButtonLabel('Tambah Manfaat')
+                            ->defaultItems(2),
+                    ])
+                ,
+
+
             ]);
     }
 
@@ -65,7 +79,7 @@ class CourseResource extends Resource
                     ->searchable(),
                 Tables\Columns\TextColumn::make('slug')
                     ->searchable(),
-                
+
                 Tables\Columns\IconColumn::make('is_popular')
                     ->boolean(),
                 Tables\Columns\TextColumn::make('category.name')
@@ -100,7 +114,8 @@ class CourseResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+                //
+            RelationManagers\SectionsRelationManager::class,
         ];
     }
 

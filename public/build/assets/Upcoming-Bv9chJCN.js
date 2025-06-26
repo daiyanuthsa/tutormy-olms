@@ -1,0 +1,1 @@
+import{j as r}from"./app-CVFknPTs.js";function t({webinarDetail:e}){return r.jsxs("div",{className:"text-white",children:[r.jsx("h1",{children:"Daftar webinar"}),r.jsx("pre",{children:JSON.stringify(e,null,2)})]})}export{t as default};

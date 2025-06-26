@@ -1,0 +1,1 @@
+import{j as t}from"./app-CVFknPTs.js";function a({article:e}){return t.jsxs("div",{className:"p-6 text-white",children:[t.jsx("h1",{className:"text-2xl font-bold mb-2",children:e.name}),t.jsx("div",{className:"text-gray-700",children:e.content})]})}export{a as default};

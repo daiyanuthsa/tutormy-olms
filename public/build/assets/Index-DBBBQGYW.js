@@ -1,0 +1,1 @@
+import{j as e}from"./app-CVFknPTs.js";function i({articles:r}){return e.jsxs("div",{className:"text-white",children:[e.jsx("h1",{children:"Daftar Artikel"}),e.jsx("pre",{children:JSON.stringify(r,null,2)})]})}export{i as default};

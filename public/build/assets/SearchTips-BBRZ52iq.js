@@ -1,0 +1,1 @@
+import{j as r}from"./app-CVFknPTs.js";function t({articles:e,keyword:i}){return r.jsxs("div",{children:[r.jsx("h1",{className:"text-white",children:"Daftar Artikel"}),r.jsxs("h2",{children:["Hasil pencarian untuk: ",i]}),r.jsx("pre",{children:JSON.stringify(e,null,2)})]})}export{t as default};

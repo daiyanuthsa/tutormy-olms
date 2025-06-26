@@ -72,6 +72,7 @@ export default {
                     1: "#A41111",
                     2: "#7B0D0D",
                     3: "#510909",
+                    4: "#A41111",
                 },
             },
             backgroundImage: (theme) => ({

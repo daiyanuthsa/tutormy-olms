@@ -1,0 +1,1 @@
+import{j as e}from"./app-DLtIWMbB.js";function i({courses:r,keyword:s}){return e.jsxs("div",{className:"text-white",children:[e.jsx("h1",{className:"text-white",children:"Daftar Artikel"}),e.jsxs("h2",{children:["Hasil pencarian untuk: ",s]}),e.jsx("pre",{children:JSON.stringify(r,null,2)})]})}export{i as default};

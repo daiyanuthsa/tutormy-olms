@@ -1,0 +1,1 @@
+import{j as o,Y as s}from"./app-DLtIWMbB.js";const t="/build/assets/Logo-D7l-uALG.webp";function a(r){return o.jsx(s,{href:"/",children:o.jsx("img",{src:t,alt:"logo",className:"w-36 -mt-2"})})}export{a as A};

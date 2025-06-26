@@ -1,75 +1,24 @@
-import React, { useState, useEffect } from 'react'
-import BenefitData from "../../../../public/js/data/Benefits"
+import PrimaryButton from '@/Components/PrimaryButton'
+import React from 'react'
 
-const BenefitSection = () => {
-    const [currentSlide, setCurrentSlide] = useState(0);
-
-    useEffect(() => {
-        const interval = setInterval(() => {
-            setCurrentSlide(prev => (prev + 1) % 2);
-        }, 3000);
-
-        return () => clearInterval(interval);
-    }, []);
-
+const Benefit = () => {
     return (
-        <section>
-            <div className='container text-white py-16 lg:py-20 space-y-9'>
-                <div className='flex justify-center'>
-                    <h2 className="text-center text-2xl lg:text-4xl font-bold xl:w-1/2">
-                        Apa yang kamu dapatkan apabila belajar di platform Tutormy!
-                    </h2>
-                </div>
-                <div className='grid grid-cols-1 md:grid-cols-2 gap-8 items-center'>
-                    <div className='flex justify-center items-center'>
-                        <img
-                            src="/assets/benefit-component.webp"
-                            alt="Tutormy Learning Platform"
-                            className='w-60 md:w-96 lg:w-[450px] h-auto'
-                        />
-                    </div>
-                    <div className='overflow-hidden'>
-                        <div
-                            className='flex transition-transform duration-500 ease-in-out'
-                            style={{ transform: `translateX(-${currentSlide * 100}%)` }}
-                        >
-                            <div className='w-full flex-shrink-0 space-y-4 p-4'>
-                                {BenefitData.slice(0, 3).map((benefit, index) => (
-                                    <div
-                                        key={`slide1-${index}`}
-                                        className='bg-neutral-4 rounded-3xl px-4 py-4 lg:px-7 transition-all duration-500 ease-in-out transform hover:scale-105 hover:bg-gray-750'
-                                    >
-                                        <h3 className='lg:text-xl font-semibold mb-3'>
-                                            {benefit.title}
-                                        </h3>
-                                        <p className='text-sm lg:text-base leading-relaxed'>
-                                            {benefit.description}
-                                        </p>
-                                    </div>
-                                ))}
-                            </div>
+        <section className="relative text-white py-16 lg:py-20">
+            <div className="relative w-full">
+                <img src="/assets/benefit-image.webp" alt="benefit" className="w-full h-auto object-cover" />
 
-                            <div className='w-full flex-shrink-0 space-y-4 p-4'>
-                                {BenefitData.slice(3, 6).map((benefit, index) => (
-                                    <div
-                                        key={`slide2-${index}`}
-                                        className='bg-neutral-4 rounded-3xl px-4 py-4 lg:px-7 transition-all duration-500 ease-in-out transform hover:scale-105 hover:bg-gray-750'
-                                    >
-                                        <h3 className='lg:text-xl font-semibold mb-3'>
-                                            {benefit.title}
-                                        </h3>
-                                        <p className='text-sm lg:text-base leading-relaxed'>
-                                            {benefit.description}
-                                        </p>
-                                    </div>
-                                ))}
-                            </div>
-                        </div>
-                    </div>
+                <div className="absolute top-0 left-0 right-0 h-full bg-gradient-to-b from-primary-4/70 to-transparent z-10 pointer-events-none" />
+
+                <div className="absolute inset-0 flex flex-col gap-1 lg:gap-6 items-center justify-center text-center container z-20">
+                    <h2 className="text-sm lg:text-4xl font-bold max-w-4xl">
+                        "The people who are crazy enough to think they can change the world are the ones who do."
+                    </h2>
+                    <p className="text-xs lg:text-2xl font-bold">-Steve Jobs-</p>
+                    <PrimaryButton className="rounded-2xl">Langganan Sekarang</PrimaryButton>
                 </div>
             </div>
         </section>
     )
 }
 
-export default BenefitSection
+export default Benefit

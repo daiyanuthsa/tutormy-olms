@@ -4,7 +4,7 @@ const Faq = [
         answer: "Tutormy.id terbuka untuk pelajar SD, SMP, SMA, mahasiswa, bahkan umum yang ingin meningkatkan pengetahuan di bidang tertentu.",
     },
     {
-        question: "Siapa saja yang bisa menggunakan Tutormy.id?",
+        question: "Saya benar benar ingin mempelajari tentang digital course aplah platform ini cukup lengkap?",
         answer: "GATAU",
     },
     {
@@ -12,7 +12,7 @@ const Faq = [
         answer: "GATAU",
     },
     {
-        question: "Siapa saja yang bisa menggunakan Tutormy.id?",
+        question: "Saya benar benar ingin mempelajari tentang digital course aplah platform ini cukup lengkap?",
         answer: "GATAU.",
     },
 ];

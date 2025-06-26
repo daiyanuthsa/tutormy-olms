@@ -1,1 +1,0 @@
-import{j as e}from"./app-CVFknPTs.js";function s({checkout:r,pricing:t}){return e.jsxs("div",{className:"text-white",children:[e.jsx("h1",{children:"Data Prepare checkout"}),e.jsx("pre",{children:JSON.stringify(r,null,2)}),e.jsx("pre",{children:JSON.stringify(t,null,2)})]})}export{s as default};

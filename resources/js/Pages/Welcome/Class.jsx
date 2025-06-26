@@ -100,9 +100,7 @@ const Class = () => {
                     </div>
 
                     <div className="flex justify-center">
-                        <PrimaryButton variant='secondary' className='rounded-2xl'>
-                            Lihat Kelas Lainnya
-                        </PrimaryButton>
+                        <div className="text-center text-2xl lg:text-4xl font-semibold">Modul + materinya hingga seperti "NETFLIX" yang tentunya sesuai kebutuhan indutri & tren!</div>
                     </div>
                 </div>
             </div>

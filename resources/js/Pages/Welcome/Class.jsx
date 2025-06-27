@@ -2,56 +2,6 @@ import React, { useState, useEffect } from 'react';
 import PrimaryButton from '@/Components/PrimaryButton';
 
 const Class = ( { courses }) => {
-    // const courses = [
-    //     {
-    //         id: 1,
-    //         title: "Product Development Series",
-    //         lessons: "180 Pelajaran",
-    //         image: "/assets/hero.png"
-    //     },
-    //     {
-    //         id: 2,
-    //         title: "Product Development Series",
-    //         lessons: "180 Pelajaran",
-    //         image: "/assets/hero.png"
-    //     },
-    //     {
-    //         id: 3,
-    //         title: "Product Development Series",
-    //         lessons: "180 Pelajaran",
-    //         image: "/assets/hero.png"
-    //     },
-    //     {
-    //         id: 4,
-    //         title: "Product Development Series",
-    //         lessons: "180 Pelajaran",
-    //         image: "/assets/hero.png"
-    //     },
-    //     {
-    //         id: 5,
-    //         title: "Product Development Series",
-    //         lessons: "180 Pelajaran",
-    //         image: "/assets/hero.png"
-    //     },
-    //     {
-    //         id: 6,
-    //         title: "Product Development Series",
-    //         lessons: "180 Pelajaran",
-    //         image: "/assets/hero.png"
-    //     },
-    //     {
-    //         id: 7,
-    //         title: "Product Development Series",
-    //         lessons: "180 Pelajaran",
-    //         image: "/assets/hero.png"
-    //     },
-    //     {
-    //         id: 8,
-    //         title: "Product Development Series",
-    //         lessons: "180 Pelajaran",
-    //         image: "/assets/hero.png"
-    //     }
-    // ];
 
     const [isMobile, setIsMobile] = useState(false);
 

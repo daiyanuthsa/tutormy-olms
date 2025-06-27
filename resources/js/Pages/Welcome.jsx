@@ -17,7 +17,7 @@ const Divider = () => (
     </div>
 )
 
-const Welcome = ({ pricing, testimonials }) => {
+const Welcome = ({ pricing, testimonials, courses }) => {
     return (
         <MainLayout>
             <Head title="Welcome" />
@@ -29,7 +29,7 @@ const Welcome = ({ pricing, testimonials }) => {
                 <Divider />
                 <Bonus />
                 <Divider />
-                <Class />
+                <Class courses={courses} />
                 <Divider />
                 <Data />
                 <Divider />

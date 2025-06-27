@@ -49,6 +49,14 @@ class Course extends Model
     {
         return $this->hasMany(CourseSection::class, 'course_id');
     }
+    
+
+    public function contentsCount()
+    {
+        return $this->sections()->with('contents')->get()->sum(function ($section) {
+            return $section->contents->count();
+        });
+    }
     public function courseStudents() : HasMany
     {
         return $this->hasMany(CourseStudent::class, 'course_id');

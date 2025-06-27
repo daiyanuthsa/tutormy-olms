@@ -23,7 +23,7 @@ class PaymentService
      * @param Pricing $pricing
      * @return array
      */
-    public function createPayment($pricingId): array
+    public function createPayment($pricingId): ?string
     {
         $user = Auth::user();
 
@@ -39,11 +39,11 @@ class PaymentService
         $params = [
             'order' => [
                 'amount' => (int) $grandTotal,
-                "invoice_number" => '',
+                "invoice_number" => 'TM-' . time() . '-' . $user->id,
                 'currency' => 'IDR',
                 'callback_url' => '',
                 'callback_callback_url_cancel' => '',
-                'callback_url_result' => '',
+                'callback_url_result' => route('payment.success'),
                 'language' => 'ID',
                 'auto_redirect' => true,
                 "disable_retry_payment" => true,
@@ -81,6 +81,10 @@ class PaymentService
             ],
         ];
         return $this->dokuService->createPaymentLink($params);
+        // $result = $this->dokuService->createPaymentLink($params);
+
+        // // Ambil url dari response DOKU
+        // return $result['response']['payment']['url'] ?? null;
     }
 }
 ?>

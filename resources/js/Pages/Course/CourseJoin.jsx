@@ -6,7 +6,10 @@ const CourseJoin = (course) => {
             <h1 className="text-white text-2xl font-bold mb-4">
                 Halaman Join Kelas
             </h1>
-            <pre>{JSON.stringify(course, null, 2)}</pre>
+            <pre>{JSON.stringify(course.course, null, 2)}</pre>
+            <p>Nama Siswa: {course.studentName}</p>
+            <p>ID Seksi: {course.sectionId}</p>
+            <p>ID Konten: {course.contentId}</p>
 
         </div>
     );

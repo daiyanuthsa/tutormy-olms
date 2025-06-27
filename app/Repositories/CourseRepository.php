@@ -81,4 +81,23 @@ class CourseRepository implements CourseRepositoryInterface
 
         return $course;
     }
+    public function getCourseThumbnail(int $limit): Collection
+    {
+        return Course::with(['sections.contents'])
+            ->select('id', 'name', 'thumbnail', 'slug')
+            ->limit($limit)
+            ->get()
+            ->map(function ($course) {
+                // Hitung total konten dari semua section
+                $contentCount = $course->sections->pluck('contents')->flatten()->count();
+
+                return [
+                    'name' => $course->name,
+                    'thumbnail' => $course->thumbnail,
+                    'section_content_count' => $contentCount,
+                    'slug' => $course->slug,
+                    'id' => $course->id,
+                ];
+            });
+    }
 }

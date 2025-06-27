@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Pricing;
 use App\Models\Testimonial;
+use App\Repositories\CourseRepository;
+use App\Services\CourseService;
 use App\Services\PricingService;
 use App\Services\TransactionService;
 use Illuminate\Http\Request;
@@ -16,22 +18,26 @@ class FrontController extends Controller
     protected $pricingService;
     protected $transactionService;
     protected $paymentService;
+    protected $courseRepository;
 
     public function __construct(
         PricingService $pricingService,
         TransactionService $transactionService, // Replace with the correct type if available, e.g., TransactionService $transactionService
-        \App\Services\PaymentService $paymentService
+        \App\Services\PaymentService $paymentService,
+        CourseRepository $courseRepository // Assuming you have a CourseService for handling courses
     )
     {
         $this->pricingService = $pricingService;
         $this->transactionService = $transactionService;
         $this->paymentService = $paymentService;
+        $this->courseRepository = $courseRepository;
     }
     public function index()
     {
         $pricing = $this->pricingService->getAllpricing(3);
         $testimonials = Testimonial::all();
-        return Inertia::render('Welcome', compact('pricing', 'testimonials'));
+        $courses = $this->courseRepository->getCourseThumbnail(3);
+        return Inertia::render('Welcome', compact('pricing', 'testimonials','courses'));
     }
 
     public function checkout(Pricing $pricing){

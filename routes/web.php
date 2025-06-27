@@ -67,4 +67,4 @@ Route::get('/payment-success', function () {
 
 Route::get('/welcome-class', function () {
     return Inertia::render('Popup/WelcomeClass');
-})->name('payment.success');
+})->name('course.join');

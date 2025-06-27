@@ -2,6 +2,8 @@ import React from "react";
 import { Head } from "@inertiajs/react";
 import { Icon } from "@iconify/react";
 import MainLayout from "@/Layouts/MainLayout";
+import { useEffect } from "react";
+import axios from "axios";
 
 const FEATURES = [
     "200 + Materi Belajar",
@@ -10,6 +12,17 @@ const FEATURES = [
     "24/7 Dukungan eror",
     "Materi dan dukungan Prioritas",
 ];
+// Money formatter for Indonesian Rupiah
+const formatRupiah = (value) => {
+    if (!value) return "";
+    // Remove non-digit characters
+    const number = Number(String(value).replace(/[^\d]/g, ""));
+    return number.toLocaleString("id-ID", {
+        style: "currency",
+        currency: "IDR",
+        minimumFractionDigits: 0,
+    });
+};
 
 
 const InfoItem = ({ label, value }) => (
@@ -40,6 +53,49 @@ const ActionButton = ({ variant, label }) => {
         </button>
     );
 };
+const CheckoutButton = () => {
+    useEffect(() => {
+        const handleCheckout = async () => {
+            try {
+                const response = await axios.post("/booking/payment/doku");
+                console.log("Payment link response:", response.data);
+
+                // Lihat semua isi response
+                alert(JSON.stringify(response.data, null, 2));
+                const paymentLink = response?.data?.url;
+                if (window.loadJokulCheckout && paymentLink) {
+                    window.loadJokulCheckout(paymentLink);
+                } else {
+                    console.error("Jokul Checkout library belum dimuat atau payment link tidak tersedia");
+                }
+            } catch (error) {
+                console.error("Gagal mendapatkan payment link:", error);
+            }
+        };
+
+        const button = document.getElementById("checkout-button");
+        if (button) {
+            button.addEventListener("click", handleCheckout);
+        }
+
+        return () => {
+            if (button) {
+                button.removeEventListener("click", handleCheckout);
+            }
+        };
+    }, []);
+
+    return (
+        <button
+            id="checkout-button"
+            className="flex-1 py-3 px-6 rounded-2xl font-semibold transition-colors bg-primary-3 hover:bg-primary-2"
+        >
+            Checkout Now
+        </button>
+    );
+};
+
+
 
 const PaymentSummary = ({ checkout, user, auth }) => (
     <div className="bg-neutral-5 py-6 px-6 lg:px-8 rounded-2xl space-y-5">
@@ -51,31 +107,62 @@ const PaymentSummary = ({ checkout, user, auth }) => (
             </div>
             <div>
                 <h4 className="font-semibold lg:text-lg">{auth?.user?.name}</h4>
-                <p className="text-sm">{auth?.user?.name}</p>
+                <p className="text-sm">{auth?.user?.status}</p>
             </div>
         </div>
 
         <div className="grid grid-cols-2 gap-4">
-            <InfoItem label="Tanggal Pembayaran" value="Sen, 11 Januari 2028" />
+            <InfoItem
+                label="Tanggal Pembayaran"
+                value={
+                    checkout.started_at
+                        ? new Date(checkout.started_at).toLocaleDateString(
+                              "id-ID",
+                              {
+                                  weekday: "short",
+                                  year: "numeric",
+                                  month: "long",
+                                  day: "numeric",
+                              }
+                          )
+                        : "Belum Tersedia"
+                }
+            />
             <InfoItem
                 label="Tanggal Berakhir Paket"
-                value="Sen, 11 Januari 2028"
+                value={
+                    checkout.ended_at
+                        ? new Date(checkout.ended_at).toLocaleDateString(
+                              "id-ID",
+                              {
+                                  weekday: "short",
+                                  year: "numeric",
+                                  month: "long",
+                                  day: "numeric",
+                              }
+                          )
+                        : "Belum Tersedia"
+                }
             />
         </div>
 
         <div>
             <h4 className="text-xl font-semibold mb-4">Keterangan Paket</h4>
             <div className="space-y-3">
-                <DetailItem label="Durasi Akses" value="3 Bulan" />
-                <DetailItem label="Harga Paket" value="Rp 600.000,00" />
-                <DetailItem label="PPN 12%" value="Rp 72.000,00" />
+                <DetailItem label="Nama Paket" value={checkout.pricing.name} />
+                <DetailItem label="Durasi Akses" value={checkout.pricing.duration + " Bulan"} />
+                <DetailItem label="Harga Paket" value={formatRupiah(checkout.total_sub_amount)} />
+                <DetailItem
+                    label="PPN 12%"
+                    value={formatRupiah(checkout.total_tax_amount)}
+                />
                 <hr className="border-gray-700 my-4" />
                 <div className="flex justify-between lg:text-lg">
                     <span className="text-primary-2 font-semibold">
                         Grand Total
                     </span>
                     <span className="text-primary-2 font-bold">
-                        Rp 672.000,00
+                        {formatRupiah(checkout.total_grand_amount)}
                     </span>
                 </div>
             </div>
@@ -83,7 +170,8 @@ const PaymentSummary = ({ checkout, user, auth }) => (
 
         <div className="flex space-x-3">
             <ActionButton variant="outline" label="Batalkan" />
-            <ActionButton variant="solid" label="Bayar Sekarang" />
+            {/* <ActionButton variant="solid" label="Bayar Sekarang" /> */}
+            <CheckoutButton />
         </div>
     </div>
 );
@@ -134,14 +222,14 @@ const PackageDetails = () => (
     </div>
 );
 
-const Checkout = ({ pricing, auth, checkout }) => {
+const Checkout = ({ auth, checkout }) => {
     return (
         <MainLayout>
-            <Head title="Chec  kout" />
-            <section className="container mx-auto pb-20 pt-40 text-white">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
-                    <PaymentSummary checkout={checkout} auth={auth} />
-                    <PackageDetails />
+            <Head title="Checkout" />
+            <section className="container mx-auto pb-20 pt-40 text-white flex items-center justify-center">
+                <div className="w-2/3">
+                    <PaymentSummary checkout={checkout} auth={auth}  />
+                    {/* <PackageDetails /> */}
                 </div>
             </section>
             

@@ -48,7 +48,6 @@ class FrontController extends Controller
         }
        
         return Inertia::render('Transaction/Checkout', compact(
-            'pricing',
             'checkout'
         ));
     }
@@ -71,11 +70,11 @@ class FrontController extends Controller
                 $response = response()->json(['error' => 'Pricing ID not found in session'], 400);
             } else {
                 $paymentLink = $this->paymentService->createPayment($pricingId);
-                Log::Info('Payment link created successfully: ' . (isset($paymentLink['url']) ? $paymentLink['url'] : 'N/A'));
-                if (!$paymentLink || !isset($paymentLink['url'])) {
+                Log::Info('Payment link response: ' . json_encode($paymentLink));
+                if (!$paymentLink ) {
                     $response = response()->json(['error' => 'Payment link creation failed'], 500);
                 } else {
-                    $response = response()->json(['url' => $paymentLink['url']], 200);
+                    $response = response()->json(['url' => $paymentLink], 200);
                 }
             }
         } catch (\Exception $e) {

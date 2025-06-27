@@ -1,30 +1,30 @@
 import PrimaryButton from "@/Components/PrimaryButton";
 import React from "react";
 
-const Review = () => {
-    const testimonials = [
-        {
-            id: 1,
-            text: "Lorem ipsum dolor sit amet consectetur. Odio dolor arcu ullamcorper dictum nulla phasellus nisl ac commodo. Mi mattis amet interdum urna.",
-            name: "Rania Yasmin",
-            role: "Product Designer at BCC",
-            avatar: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150&h=150&fit=crop&crop=face",
-        },
-        {
-            id: 2,
-            text: "Lorem ipsum dolor sit amet consectetur. Odio dolor arcu ullamcorper dictum nulla phasellus nisl ac commodo. Mi mattis amet interdum urna.",
-            name: "Rania Yasmin",
-            role: "Product Designer at BCC",
-            avatar: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150&h=150&fit=crop&crop=face",
-        },
-        {
-            id: 3,
-            text: "Lorem ipsum dolor sit amet consectetur. Odio dolor arcu ullamcorper dictum nulla phasellus nisl ac commodo. Mi mattis amet interdum urna.",
-            name: "Rania Yasmin",
-            role: "Product Designer at BCC",
-            avatar: "https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?w=150&h=150&fit=crop&crop=face",
-        },
-    ];
+const Review = ({testimonials}) => {
+    // const testimonials = [
+    //     {
+    //         id: 1,
+    //         text: "Lorem ipsum dolor sit amet consectetur. Odio dolor arcu ullamcorper dictum nulla phasellus nisl ac commodo. Mi mattis amet interdum urna.",
+    //         name: "Rania Yasmin",
+    //         role: "Product Designer at BCC",
+    //         avatar: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150&h=150&fit=crop&crop=face",
+    //     },
+    //     {
+    //         id: 2,
+    //         text: "Lorem ipsum dolor sit amet consectetur. Odio dolor arcu ullamcorper dictum nulla phasellus nisl ac commodo. Mi mattis amet interdum urna.",
+    //         name: "Rania Yasmin",
+    //         role: "Product Designer at BCC",
+    //         avatar: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150&h=150&fit=crop&crop=face",
+    //     },
+    //     {
+    //         id: 3,
+    //         text: "Lorem ipsum dolor sit amet consectetur. Odio dolor arcu ullamcorper dictum nulla phasellus nisl ac commodo. Mi mattis amet interdum urna.",
+    //         name: "Rania Yasmin",
+    //         role: "Product Designer at BCC",
+    //         avatar: "https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?w=150&h=150&fit=crop&crop=face",
+    //     },
+    // ];
     const handleScrollToPricelist = () => {
         const section = document.getElementById("pricelist");
         if (section) {
@@ -35,9 +35,9 @@ const Review = () => {
     return (
         <section className="text-white overflow-hidden flex items-center">
             <div className="container mx-auto py-16 lg:py-20 space-y-16">
-                <div className=" ">
+                <div>
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
-                        {testimonials.map((testimonial) => (
+                        {testimonials.slice(0, 3).map((testimonial) => (
                             <div
                                 key={testimonial.id}
                                 className="rounded-2xl p-1 shadow-2xl"
@@ -50,7 +50,7 @@ const Review = () => {
                                 <div className="bg-neutral-5 rounded-2xl h-full xl:h-80 flex flex-col justify-between p-6 lg:p-12">
                                     <div className="flex-1 mb-10 xl:mb-0">
                                         <p className="text-gray-300 text-sm leading-relaxed">
-                                            {testimonial.text}
+                                            {testimonial.content}
                                         </p>
                                     </div>
 

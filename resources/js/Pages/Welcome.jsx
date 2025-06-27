@@ -23,7 +23,7 @@ const Welcome = ({ pricing, testimonials }) => {
             <Head title="Welcome" />
             <main className="py-28 w-full">
                 <HeroComponents />
-                <Review />
+                <Review testimonials={testimonials} />
                 <Divider />
                 <Get />
                 <Divider />

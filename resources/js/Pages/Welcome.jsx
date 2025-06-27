@@ -33,7 +33,7 @@ const Welcome = ({ pricing, testimonials }) => {
                 <Divider />
                 <Data />
                 <Divider />
-                <Pricelist />
+                <Pricelist pricings={pricing} />
                 <Divider />
                 <Benefit />
                 <Divider />

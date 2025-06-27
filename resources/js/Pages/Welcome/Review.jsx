@@ -1,5 +1,5 @@
-import PrimaryButton from '@/Components/PrimaryButton';
-import React from 'react';
+import PrimaryButton from "@/Components/PrimaryButton";
+import React from "react";
 
 const Review = () => {
     const testimonials = [
@@ -8,23 +8,29 @@ const Review = () => {
             text: "Lorem ipsum dolor sit amet consectetur. Odio dolor arcu ullamcorper dictum nulla phasellus nisl ac commodo. Mi mattis amet interdum urna.",
             name: "Rania Yasmin",
             role: "Product Designer at BCC",
-            avatar: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150&h=150&fit=crop&crop=face"
+            avatar: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150&h=150&fit=crop&crop=face",
         },
         {
             id: 2,
             text: "Lorem ipsum dolor sit amet consectetur. Odio dolor arcu ullamcorper dictum nulla phasellus nisl ac commodo. Mi mattis amet interdum urna.",
             name: "Rania Yasmin",
             role: "Product Designer at BCC",
-            avatar: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150&h=150&fit=crop&crop=face"
+            avatar: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150&h=150&fit=crop&crop=face",
         },
         {
             id: 3,
             text: "Lorem ipsum dolor sit amet consectetur. Odio dolor arcu ullamcorper dictum nulla phasellus nisl ac commodo. Mi mattis amet interdum urna.",
             name: "Rania Yasmin",
             role: "Product Designer at BCC",
-            avatar: "https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?w=150&h=150&fit=crop&crop=face"
-        }
+            avatar: "https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?w=150&h=150&fit=crop&crop=face",
+        },
     ];
+    const handleScrollToPricelist = () => {
+        const section = document.getElementById("pricelist");
+        if (section) {
+            section.scrollIntoView({ behavior: "smooth" });
+        }
+    };
 
     return (
         <section className="text-white overflow-hidden flex items-center">
@@ -36,8 +42,9 @@ const Review = () => {
                                 key={testimonial.id}
                                 className="rounded-2xl p-1 shadow-2xl"
                                 style={{
-                                    background: 'linear-gradient(135deg, #8b5cf6, #a855f7, #c084fc)',
-                                    padding: '2px'
+                                    background:
+                                        "linear-gradient(135deg, #8b5cf6, #a855f7, #c084fc)",
+                                    padding: "2px",
                                 }}
                             >
                                 <div className="bg-neutral-5 rounded-2xl h-full xl:h-80 flex flex-col justify-between p-6 lg:p-12">
@@ -68,9 +75,18 @@ const Review = () => {
                     </div>
                 </div>
 
-                <div className='flex flex-col items-center space-y-8'>
-                    <h2 className="text-center text-white text-2xl lg:text-4xl font-bold">Hasil yang mereka dapatkan setelah belajar + terapin beberapa materi praktikal!</h2>
-                    <PrimaryButton variant='secondary' className='rounded-2xl'>Langganan Sekarang</PrimaryButton>
+                <div className="flex flex-col items-center space-y-8">
+                    <h2 className="text-center text-white text-2xl lg:text-4xl font-bold">
+                        Hasil yang mereka dapatkan setelah belajar + terapin
+                        beberapa materi praktikal!
+                    </h2>
+                    <PrimaryButton
+                        onClick={handleScrollToPricelist}
+                        variant="secondary"
+                        className="rounded-2xl"
+                    >
+                        Langganan Sekarang
+                    </PrimaryButton>
                     <img src="/assets/testimoni.webp" alt="image" />
                 </div>
             </div>

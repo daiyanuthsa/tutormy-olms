@@ -50,7 +50,7 @@ const Pricelist = () => {
     ];
 
     return (
-        <section>
+        <section id='pricelist'>
             <div className='container mx-auto py-16 lg:py-20 space-y-20 text-white'>
                 <div className='space-y-5 flex flex-col items-center'>
                     <h2 className="text-center text-2xl lg:text-4xl font-bold">Pilih Akses Materimu Sekarang !</h2>

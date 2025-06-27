@@ -1,18 +1,58 @@
-import React, { useState } from 'react';
-import { Head } from '@inertiajs/react';
+import React, { useState } from "react";
+import { Head, router } from "@inertiajs/react";
 import ProgressBar from "../../Components/CompleteProfile/ProgressBar";
 import Step1 from "../../Components/CompleteProfile/Step1";
 import Step2 from "../../Components/CompleteProfile/Step2";
 import Step3 from "../../Components/CompleteProfile/Step3";
-import ApplicationLogo from '@/Components/ApplicationLogo';
-import PrimaryButton from '@/Components/PrimaryButton';
-import { Icon } from '@iconify/react';
+import ApplicationLogo from "@/Components/ApplicationLogo";
+import PrimaryButton from "@/Components/PrimaryButton";
+import { Icon } from "@iconify/react";
 
 const CompleteProfile = () => {
     const [step, setStep] = useState(1);
+    const [form, setForm] = useState({
+        status: "",
+        gender: "",
+        birthdate: "",
+        expectation: "",
+        discovery_source: "",
+    });
 
-    const nextStep = () => setStep(prev => Math.min(prev + 1, 3));
-    const prevStep = () => setStep(prev => Math.max(prev - 1, 1));
+    const nextStep = (data) => {
+        if (step === 1) {
+            setForm((prev) => ({
+                ...prev,
+                status: data.status,
+                gender: data.gender === "laki-laki" ? "M" : "F", // mapping ke F/M
+                birthdate: data.birthdate,
+            }));
+            setStep(2);
+        } else if (step === 2) {
+            setForm((prev) => ({
+                ...prev,
+                expectation: data.reason,
+            }));
+            setStep(3);
+        }
+    };
+    const prevStep = () => setStep((prev) => Math.max(prev - 1, 1));
+
+    // Handler untuk Step3
+    const handleSubmit = ({ source }) => {
+        setForm((prev) => ({
+            ...prev,
+            discovery_source: source,
+        }));
+
+        // POST ke endpoint
+        router.post(route("profile.complete.post"), {
+            status: form.status,
+            gender: form.gender,
+            date_birth: form.birthdate,
+            expectation: form.expectation,
+            discovery_source: source,
+        });
+    };
 
     return (
         <section>
@@ -23,10 +63,18 @@ const CompleteProfile = () => {
             <div className="min-h-screen text-white px-4 sm:px-6 md:px-12 lg:px-20 py-6 md:py-8 relative">
                 <div className="flex items-center justify-between mb-7">
                     <PrimaryButton
-                        variant='outline'
+                        variant="outline"
                         onClick={prevStep}
-                        className={`rounded-xl md:rounded-2xl text-white px-3 py-2 md:px-4 md:py-2.5 lg:px-6 lg:py-3 text-sm md:text-base ${step === 1 ? 'invisible' : ''}`}>
-                        <Icon icon="basil:arrow-left-outline" width="16" height="16" className='mr-1.5 md:mr-2 md:w-5 md:h-5' />
+                        className={`rounded-xl md:rounded-2xl text-white px-3 py-2 md:px-4 md:py-2.5 lg:px-6 lg:py-3 text-sm md:text-base ${
+                            step === 1 ? "invisible" : ""
+                        }`}
+                    >
+                        <Icon
+                            icon="basil:arrow-left-outline"
+                            width="16"
+                            height="16"
+                            className="mr-1.5 md:mr-2 md:w-5 md:h-5"
+                        />
                         <span className="hidden sm:inline">Kembali</span>
                     </PrimaryButton>
 
@@ -40,11 +88,18 @@ const CompleteProfile = () => {
                 </div>
 
                 <div className="flex flex-1 justify-center items-center">
-                    <div id='form' className="w-full max-w-xl">
+                    <div id="form" className="w-full max-w-xl">
                         <ProgressBar currentStep={step} />
                         {step === 1 && <Step1 nextStep={nextStep} />}
-                        {step === 2 && <Step2 nextStep={nextStep} prevStep={prevStep} />}
-                        {step === 3 && <Step3 prevStep={prevStep} />}
+                        {step === 2 && (
+                            <Step2 nextStep={nextStep} prevStep={prevStep} />
+                        )}
+                        {step === 3 && (
+                            <Step3
+                                prevStep={prevStep}
+                                nextStep={handleSubmit}
+                            />
+                        )}
                     </div>
                 </div>
             </div>

@@ -19,7 +19,6 @@ const CourseCard = ({ course }) => {
                 <div className="bg-neutral-700 px-2 py-1 font-bold rounded-full text-xs lg:text-sm inline-block max-w-max">
                     <span>{course.lessons || 'N/A'} Pelajaran</span>
                 </div>
-
             </div>
         </div>
     );

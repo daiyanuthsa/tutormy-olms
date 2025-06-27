@@ -1,30 +1,54 @@
-import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
-import { Head } from '@inertiajs/react';
+import ClassUser from '@/Components/ProfileDashboard/ClassUser'
+import Hero from '@/Components/ProfileDashboard/Hero'
+import Portofolio from '@/Components/ProfileDashboard/Portofolio'
+import MainLayout from '@/Layouts/MainLayout'
+import { Head } from '@inertiajs/react'
+import React from 'react'
 
-export default function Dashboard(user, profiledata) {
+const Dashboard = () => {
     return (
-        <AuthenticatedLayout
-            header={
-                <h2 className="text-xl font-semibold leading-tight text-gray-800">
-                    Dashboard
-                </h2>
-            }
-        >
-            <Head title="Dashboard" />
+        <MainLayout>
+            <Head title='Dashboard' />
 
-            <div className="py-12">
-                <div className="mx-auto max-w-7xl sm:px-6 lg:px-8">
-                    <div className="overflow-hidden bg-white shadow-sm sm:rounded-lg">
-                        <div className="p-6 text-gray-900">
-                            You're logged in!
-                            
-                            <br />
-                            <br />
-                            {JSON.stringify(user.profiledata, null, 2)}
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </AuthenticatedLayout>
-    );
+            <main className='pt-28 w-full space-y-7'>
+                <Hero />
+                <ClassUser />
+                <Portofolio />
+            </main>
+        </MainLayout>
+    )
 }
+
+export default Dashboard
+
+
+// import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
+// import { Head } from '@inertiajs/react';
+
+// export default function Dashboard(user, profiledata) {
+//     return (
+//         <AuthenticatedLayout
+//             header={
+//                 <h2 className="text-xl font-semibold leading-tight text-gray-800">
+//                     Dashboard
+//                 </h2>
+//             }
+//         >
+//             <Head title="Dashboard" />
+
+//             <div className="py-12">
+//                 <div className="mx-auto max-w-7xl sm:px-6 lg:px-8">
+//                     <div className="overflow-hidden bg-white shadow-sm sm:rounded-lg">
+//                         <div className="p-6 text-gray-900">
+//                             You're logged in!
+                            
+//                             <br />
+//                             <br />
+//                             {JSON.stringify(user.profiledata, null, 2)}
+//                         </div>
+//                     </div>
+//                 </div>
+//             </div>
+//         </AuthenticatedLayout>
+//     );
+// }

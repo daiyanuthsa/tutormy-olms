@@ -12,10 +12,11 @@ return new class extends Migration {
     {
         Schema::create('course_students', function (Blueprint $table) {
             $table->id();
-
             $table->boolean('is_active')->default(true);
             $table->foreignId('course_id')->constrained('courses')->cascadeOnDelete();
             $table->foreignId('user_id')->constrained('users')->cascadeOnDelete();
+            $table->integer('course_section_id')->nullable();
+            $table->integer('section_content_id')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

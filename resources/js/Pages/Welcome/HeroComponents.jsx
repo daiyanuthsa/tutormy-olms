@@ -3,6 +3,13 @@ import { Icon } from '@iconify/react'
 import React from 'react'
 
 const HeroComponents = () => {
+    const handleScrollToPricelist = () => {
+        const section = document.getElementById('pricelist');
+        if (section) {
+            section.scrollIntoView({ behavior: 'smooth' });
+        }
+    };
+
     return (
         <section
             className="relative pt-5 sm:pt-10 bg-cover pb-16 lg:bg-contain bg-no-repeat bg-center overflow-hidden"
@@ -17,7 +24,7 @@ const HeroComponents = () => {
                     <p className='text-sm font-medium mb-4'>
                         Dunia kerja terus berkembang, dan kami pastikan kamu tidak tertinggal. Di Tutormy.id, kami menghadirkan materi terkini yang disesuaikan dengan kebutuhan industri saat ini!
                     </p>
-                    <PrimaryButton className='rounded-full'>
+                    <PrimaryButton className='rounded-full' onClick={handleScrollToPricelist}>
                         Berlangganan Sekarang
                         <Icon icon="line-md:arrow-up" className='ml-2 rotate-45' />
                     </PrimaryButton>

@@ -1,7 +1,7 @@
 import React, { useMemo } from "react";
 import MainLayout from "@/Layouts/MainLayout";
-import ArticleCard from "@/components/tips/ArticleCard";
-import SearchBar from "@/components/tips/SearchBar";
+import ArticleCard from '@/Components/Tips/ArticleCard.jsx';
+import SearchBar from "@/Components/Tips/SearchBar";
 import CategoryFilter from "@/components/tips/CategoryFilter";
 import { usePage, Head, router } from "@inertiajs/react";
 
@@ -12,12 +12,7 @@ const formatDate = (dateStr) =>
         day: "numeric",
     });
 
-
-
-export default function Index({
-    articles,
-    categories
-}) {
+export default function Index({ articles, categories }) {
     const { url, props } = usePage();
     const queryParams = new URLSearchParams(window.location.search);
     const searchQuery = queryParams.get("search") || "";
@@ -54,7 +49,8 @@ export default function Index({
             const start = Math.max(2, currentPage - 1);
             const end = Math.min(articles.last_page - 1, currentPage + 1);
             for (let i = start; i <= end; i++) pages.push(i);
-            if (currentPage < articles.last_page - 2) pages.push("ellipsis-right");
+            if (currentPage < articles.last_page - 2)
+                pages.push("ellipsis-right");
             pages.push(articles.last_page);
         }
         return pages;

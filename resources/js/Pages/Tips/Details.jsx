@@ -1,6 +1,6 @@
 import React from "react";
 import { Link, Head } from "@inertiajs/react";
-import RelatedTips from "@/components/tips/RelatedTips";
+import RelatedTips from "@/components/tips/RelatedTips.jsx";
 import ArticleContent from "@/components/tips/ArticleContent";
 import CategorySidebar from "@/components/tips/CategorySidebar";
 import Footer from "@/Components/Footer";
@@ -20,8 +20,6 @@ const formatTime = (dateStr) =>
     });
 
 export default function Details({ article, writer }) {
-
-
     const currentArticle = {
         ...article,
         published_at: formatDate(article.created_at),

@@ -1,52 +1,68 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useMemo } from 'react';
 import { Head } from '@inertiajs/react';
 import MainLayout from '@/Layouts/MainLayout';
 import CourseSearch from '@/Components/Course/CourseSearch';
 import CourseFilter from '@/Components/Course/CourseFilter';
 import CourseCard from '@/Components/Course/CourseCard';
-import { DUMMY_COURSES, DUMMY_CATEGORIES } from '../../../../public/js/data/DummyData'; 
+import { DUMMY_COURSES, DUMMY_CATEGORIES } from '../../../../public/js/data/DummyData';
+
+const filterCourses = (courses, category, keyword) => {
+    let result = courses;
+
+    if (category && category !== 'Discover') {
+        result = result.filter(course =>
+            course.category?.name === category
+        );
+    }
+
+    if (keyword) {
+        const term = keyword.toLowerCase();
+        result = result.filter(course =>
+            course.title.toLowerCase().includes(term) ||
+            course.description?.toLowerCase().includes(term)
+        );
+    }
+
+    return result;
+};
 
 const Course = () => {
     const [searchTerm, setSearchTerm] = useState('');
     const [activeCategory, setActiveCategory] = useState('Discover');
-    const [filteredCourses, setFilteredCourses] = useState([]);
 
-    useEffect(() => {
-        let currentFilteredCourses = DUMMY_COURSES; 
+    const filteredCourses = useMemo(
+        () => filterCourses(DUMMY_COURSES, activeCategory, searchTerm),
+        [searchTerm, activeCategory]
+    );
 
-        if (activeCategory && activeCategory !== 'Discover') {
-            currentFilteredCourses = currentFilteredCourses.filter(course =>
-                course.category && course.category.name === activeCategory
-            );
-        }
+    const handleSearchChange = (e) => setSearchTerm(e.target.value);
+    const handleSearchSubmit = (e) => e.preventDefault();
+    const handleFilterChange = (category) => setActiveCategory(category);
 
-        if (searchTerm) {
-            const lowerCaseSearchTerm = searchTerm.toLowerCase();
-            currentFilteredCourses = currentFilteredCourses.filter(course =>
-                course.title.toLowerCase().includes(lowerCaseSearchTerm) ||
-                (course.description && course.description.toLowerCase().includes(lowerCaseSearchTerm))
-            );
-        }
-
-        setFilteredCourses(currentFilteredCourses);
-    }, [searchTerm, activeCategory]);
-
-    const handleFilterChange = (category) => {
-        setActiveCategory(category);
-    };
-
-    const handleSearchChange = (e) => {
-        setSearchTerm(e.target.value);
-    };
-
-    const handleSearchSubmit = (e) => {
-        e.preventDefault();
-    };
+    const renderCoursesSection = (title, desc) => (
+        <>
+            <section className="py-12">
+                <div className="container">
+                    <h2 className="text-2xl font-bold">{title}</h2>
+                    <p>{desc}</p>
+                </div>
+            </section>
+            <section className="container grid grid-cols-2 lg:grid-cols-4 gap-6">
+                {filteredCourses.length > 0 ? (
+                    filteredCourses.map(course => (
+                        <CourseCard key={course.id} course={course} />
+                    ))
+                ) : (
+                    <div className="col-span-full text-center">No courses found.</div>
+                )}
+            </section>
+        </>
+    );
 
     return (
         <MainLayout>
-            <Head title='Course' />
-            <main className="py-28 w-full text-white">
+            <Head title="Course" />
+            <main className="py-24 lg:py-28 w-full text-white">
                 <CourseSearch
                     value={searchTerm}
                     onChange={handleSearchChange}
@@ -54,61 +70,48 @@ const Course = () => {
                 />
 
                 <CourseFilter
-                    categories={DUMMY_CATEGORIES} // Gunakan DUMMY_CATEGORIES dari import
+                    categories={DUMMY_CATEGORIES}
                     activeCategory={activeCategory}
                     onCategoryChange={handleFilterChange}
                 />
 
-                <div>
-                    <section className='py-12'>
-                        <div className="container">
-                            <h2 className="text-2xl font-bold">Popular Course</h2>
-                            <p>Lorem ipsum dolor sit amet consectetur. Odio dolor arcu ullamcorper dictum nulla ph</p>
-                        </div>
-                    </section>
-
-                    <section className="container grid grid-cols-2 lg:grid-cols-4 gap-6">
+                {searchTerm ? (
+                    <section className="container py-12">
+                        <h2 className="text-2xl font-bold mb-2">
+                            Hasil dari pencarian untuk "{searchTerm}"
+                        </h2>
                         {filteredCourses.length > 0 ? (
-                            filteredCourses.map(course => (
-                                <CourseCard key={course.id} course={course} />
-                            ))
+                            <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 mt-6">
+                                {filteredCourses.map((course) => (
+                                    <CourseCard key={course.id} course={course} />
+                                ))}
+                            </div>
                         ) : (
-                            <div className="col-span-full text-center">No courses found.</div>
+                            <div className='space-y-7 flex flex-col items-center justify-center mt-10'>
+                                <p className="text-center lg:text-2xl font-bold">Ooops ! Kelas yang kamu cari belum ada</p>
+                                <img src="/assets/404.webp" alt="image" className='w-40 lg:w-64'/>
+                                <p className="text-center">Saat ini Kelas yang anda cari maish belum adanih, silakan periksa kembali Kelas yang kamu cari besok hari</p>
+                            </div>
                         )}
                     </section>
-                </div>
-
-                <div>
-                    <section className='py-12'>
-                        <div className="container">
-                            <h2 className="text-2xl font-bold">Course Course</h2>
-                            <p>Lorem ipsum dolor sit amet consectetur. Odio dolor arcu ullamcorper dictum nulla ph</p>
-                        </div>
-                    </section>
-
-                    <section className="container grid grid-cols-2 lg:grid-cols-4 gap-6">
-                        {filteredCourses.length > 0 ? (
-                            filteredCourses.map(course => (
-                                <CourseCard key={course.id} course={course} />
-                            ))
-                        ) : (
-                            <div className="col-span-full text-center">No courses found.</div>
-                        )}
-                    </section>
-                </div>
+                ) : (
+                    <>
+                        {renderCoursesSection("Popular Course", "Lorem ipsum dolor sit amet consectetur. Odio dolor arcu ullamcorper dictum nulla ph")}
+                        {renderCoursesSection("Course Course", "Lorem ipsum dolor sit amet consectetur. Odio dolor arcu ullamcorper dictum nulla ph")}
+                    </>
+                )}
 
                 <section className="py-12 container">
-                    <div className="px-12 text-white py-8 flex flex-col lg:flex-row gap-4 items-start lg:justify-between lg:items-center bg-primary-4 rounded-2xl">
+                    <div className="p-6 lg:px-12 text-white lg:py-8 flex flex-col lg:flex-row gap-4 items-start lg:justify-between lg:items-center bg-primary-4 rounded-2xl">
                         <div className="space-y-2">
                             <h2 className="text-xl font-semibold">Akses Semua Materi Belajar Sekarang</h2>
                             <p className="text-neutral-1 font-semibold">Mulai dari Rp 150.000,- saja!</p>
                         </div>
-                        <button className="py-2.5 px-16 bg-gradient-to-r from-zinc-800 to-slate-500 rounded-2xl inline-flex justify-center items-center">
+                        <button className="py-2.5 px-8 lg:px-16 bg-gradient-to-r from-zinc-800 to-slate-500 rounded-2xl inline-flex justify-center items-center">
                             Upgrade Premium
                         </button>
                     </div>
                 </section>
-
             </main>
         </MainLayout>
     );

@@ -61,7 +61,7 @@ export default function Index({ articles, categories }) {
     return (
         <MainLayout>
             <Head title="Tips" />
-            <div className="container mx-auto py-28 text-white space-y-12">
+            <div className="container mx-auto py-24 lg:py-28 text-white space-y-12">
                 <div className="space-y-10 pt-12">
                     <SearchBar
                         initialQuery={searchQuery}

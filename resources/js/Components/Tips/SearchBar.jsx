@@ -34,13 +34,13 @@ export default function SearchBar({ initialQuery, onSearch }) {
         />
       </div>
 
-      <PrimaryButton
+      <button
+
         onClick={performSearch}
-        variant='tertiary'
-        className='rounded-full whitespace-nowrap'
+        className="bg-gradient-light-left font-extrabold px-10 py-2.5 rounded-full text-white hover:opacity-90 transition-opacity"
       >
         Search
-      </PrimaryButton>
+      </button>
     </div>
   );
 }

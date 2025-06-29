@@ -25,19 +25,28 @@ const FilterButton = ({ label, filter, activeFilter, setActiveFilter }) => {
     )
 }
 
-const CourseCard = ({ course }) => {
+const CourseCard = ({ course, isPublicView = false }) => {
     const isCompleted = course.status === 'completed'
+    const isOngoing = course.status === 'ongoing'
+
     const progressColor = isCompleted ? 'bg-primary-4' : 'bg-primary-4'
-    const actionText = isCompleted ? 'Unduh Sertifikat' : 'Lanjutkan'
+
+    const actionText = isPublicView
+        ? isCompleted
+            ? 'Cek Kredensial'
+            : 'Lihat Kelas'
+        : isCompleted
+            ? 'Unduh Sertifikat'
+            : 'Lanjutkan'
 
     return (
         <div className='bg-neutral-5 border-b-2 border-b-primary-2 rounded-b-xl overflow-hidden'>
             <div className="aspect-video">
                 <img
-                    src="/assets/hero.png"
+                    src={course.image}
                     alt="image"
-                    className="w-full h-full object-cover">
-                </img>
+                    className="w-full h-full object-cover"
+                />
             </div>
 
             <div className="p-4 space-y-3">
@@ -64,7 +73,8 @@ const CourseCard = ({ course }) => {
     )
 }
 
-const ClassUser = () => {
+
+const ClassUser = ({ isPublicView = false, hideHeader = false }) => {
     const [activeFilter, setActiveFilter] = useState('all')
 
     const filteredCourses = useMemo(() => (
@@ -74,22 +84,32 @@ const ClassUser = () => {
     return (
         <section className='text-white min-h-screen'>
             <div className='container mx-auto space-y-6'>
-                <div className='flex justify-between items-center'>
-                    <div className='flex items-center gap-4'>
-                        <h1 className="text-xl font-semibold">Kelas yang sedang diikuti</h1>
-                    </div>
-                    <button className='text-lg font-semibold flex items-center hover:text-purple-400 gap-2'>
-                        Tambah <Icon icon="ic:round-plus" className='w-6 h-6' />
-                    </button>
-                </div>
+                {!hideHeader && (
+                    <>
+                        <div className='flex justify-between items-center'>
+                            <div className='flex items-center gap-4'>
+                                <h1 className="text-xl font-semibold">
+                                    {isPublicView ? 'Kelas yang diikuti oleh pengguna ini' : 'Kelas yang sedang diikuti'}
+                                </h1>
+                            </div>
+                            {!isPublicView && (
+                                <button className='text-lg font-semibold flex items-center hover:text-purple-400 gap-2'>
+                                    Tambah <Icon icon="ic:round-plus" className='w-6 h-6' />
+                                </button>
+                            )}
+                        </div>
 
-                <div className='flex gap-5'>
-                    <FilterButton label="Sedang diikuti" filter="ongoing" activeFilter={activeFilter} setActiveFilter={setActiveFilter} />
-                    <FilterButton label="Selesai" filter="completed" activeFilter={activeFilter} setActiveFilter={setActiveFilter} />
-                </div>
+                        <div className='flex gap-5'>
+                            <FilterButton label="Sedang diikuti" filter="ongoing" activeFilter={activeFilter} setActiveFilter={setActiveFilter} />
+                            <FilterButton label="Selesai" filter="completed" activeFilter={activeFilter} setActiveFilter={setActiveFilter} />
+                        </div>
+                    </>
+                )}
 
                 <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6'>
-                    {filteredCourses.map(course => <CourseCard key={course.id} course={course} />)}
+                    {filteredCourses.map(course => (
+                        <CourseCard key={course.id} course={course} isPublicView={isPublicView} />
+                    ))}
                 </div>
             </div>
         </section>

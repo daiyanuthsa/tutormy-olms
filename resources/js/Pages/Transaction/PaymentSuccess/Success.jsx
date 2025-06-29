@@ -5,12 +5,12 @@ import ImageLoad from '../../../../../public/assets/loading.webp'
 import PrimaryButton from '@/Components/PrimaryButton'
 
 const Success = () => {
-    const isLoading = true 
+    const isLoading = false 
 
     return (
         <PopUpLayout>
             <div className='flex items-center justify-center'>
-                <div className='bg-neutral-4 w-[320px] lg:w-[520px] h-[380px] lg:h-[420px] py-10 px-5 lg:p-16 space-y-4 flex flex-col items-center justify-center rounded-2xl -rotate-1'>
+                <div className='bg-neutral-4 w-[320px] lg:w-[520px] h-[380px] lg:h-[420px] py-10 px-5 lg:p-16 space-y-4 flex flex-col items-center justify-center rounded-2xl '>
                     {isLoading ? (
                         <>
                             <img

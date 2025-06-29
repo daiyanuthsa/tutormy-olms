@@ -53,6 +53,9 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/webinar/{agenda:slug}', [WebinarController::class, 'showPastAgenda'])->name('webinar.past');
     });
     Route::post('/booking/payment/doku', [FrontController::class, 'paymentStore'])->name('payment.store');
+    Route::get('/payment-success', function () {
+        return Inertia::render('Transaction/PaymentSuccess/Success');
+    })->name('payment.success');
 });
 
 
@@ -61,9 +64,7 @@ Route::get('/test', function () {
 });
 require __DIR__ . '/auth.php';
 
-Route::get('/payment-success', function () {
-    return Inertia::render('Transaction/PaymentSuccess/Success');
-})->name('payment.success');
+
 
 Route::get('/welcome-class', function () {
     return Inertia::render('Popup/WelcomeClass');

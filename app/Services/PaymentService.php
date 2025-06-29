@@ -42,7 +42,7 @@ class PaymentService
                 "invoice_number" => 'TM-' . time() . '-' . $user->id,
                 'currency' => 'IDR',
                 'callback_url' => '',
-                'callback_callback_url_cancel' => '',
+                'callback_callback_url_cancel' => route('pricing'),
                 'callback_url_result' => route('payment.success'),
                 'language' => 'ID',
                 'auto_redirect' => true,
@@ -70,6 +70,7 @@ class PaymentService
                     'VIRTUAL_ACCOUNT_BNI',
                     'VIRTUAL_ACCOUNT_BRI',
                     'VIRTUAL_ACCOUNT_MANDIRI',
+                    "VIRTUAL_ACCOUNT_BCA",
                     'QRIS',
                 ]
             ],

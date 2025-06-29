@@ -66,3 +66,17 @@ Route::get('/payment-success', function () {
 Route::get('/welcome-class', function () {
     return Inertia::render('Popup/WelcomeClass');
 })->name('payment.success');
+
+Route::get('/profile-public', function () {
+    return Inertia::render('ProfileUser/PublicProfile', [
+        'user' => auth()->user(),
+    ]);
+})->name('payment.success');
+
+Route::get('/course/{slug}', function ($slug) {
+    return Inertia::render('Course/CourseDetails', ['slug' => $slug]);
+});
+
+Route::get('/course/{slug}/learn', function ($slug) {
+    return Inertia::render('Course/CourseKonten', ['slug' => $slug]);
+});

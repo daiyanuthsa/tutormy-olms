@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Course;
+use App\Repositories\CourseRepository;
 use App\Repositories\CourseRepositoryInterface;
 use App\Services\CourseService;
 use Auth;
@@ -15,7 +16,7 @@ class CourseController extends Controller
     protected $courseService;
 
     public function __construct(
-        CourseRepositoryInterface $courseRepository,
+        CourseRepository $courseRepository,
         CourseService $courseService
     ) {
         $this->courseService = $courseService;
@@ -28,7 +29,7 @@ class CourseController extends Controller
 
     public function index()
     {
-        $courses = $this->courseRepository->getAllByCategory();
+        $courses = $this->courseRepository->getCourseThumbnail();
         // dd($courses);
         return inertia('Course/Course', ['courses' => $courses]);
     }
@@ -37,6 +38,7 @@ class CourseController extends Controller
     {
         // $course->load(['category', 'benefits']);
         $course = $this->courseRepository->getCourseForPublicView($course->id);
+        $course->load([ 'benefits', 'sections.contents']);
         if (!Auth()->check()) {
             $course->group_url = null;
         }
@@ -45,18 +47,22 @@ class CourseController extends Controller
         }
         return inertia('Course/CourseDetails', compact('course'));
     }
-    public function join(Course $course)
-    {
+public function join(Course $course)
+{
+    $studentName = $this->courseService->enrollUser($course);
+    $course->load(['category']);
 
-        $studentName = $this->courseService->enrollUser($course);
-
-        return Inertia::render('Course/CourseJoin', [
-            'course' => $course,
-            'studentName' => $studentName['user_name'],
-            'sectionId' => $studentName['section_id'],
-            'contentId' => $studentName['section_content_id'],
-        ]);
+    if ($studentName instanceof \Illuminate\Http\RedirectResponse) {
+        return $studentName;
     }
+
+    return Inertia::render('Popup/WelcomeClass', [
+        'course' => $course,
+        'studentName' => $studentName['user_name'],
+        'sectionId' => $studentName['section_id'],
+        'contentId' => $studentName['section_content_id'],
+    ]);
+}
     public function search(Request $request)
     {
         $keyword = $request->input('keyword');

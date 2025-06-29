@@ -9,61 +9,45 @@ import CurriculumAccordion from '@/Components/Course/CurriculumAccordion';
 import NotFound from '@/Components/Course/NotFound';
 import { Icon } from '@iconify/react';
 
-const CourseDetails = () => {
-    const { slug } = usePage().props;
-    const course = DUMMY_COURSES.find(c => c.slug === slug);
 
-    if (!course) {
-        return (
-            <MainLayout>
-                <Head title="Kelas Tidak Ditemukan" />
-                <NotFound message={`Kelas dengan slug "${slug}" tidak ditemukan.`} />
-            </MainLayout>
-        );
-    }
+const CourseDetails = ({ course }) => {
+    // const { slug } = usePage().props;
+    // const course = course.find(c => c.slug === slug);
+
+    // if (!course) {
+    //     return (
+    //         <MainLayout>
+    //             <Head title="Kelas Tidak Ditemukan" />
+    //             <NotFound message={`Kelas dengan slug "${slug}" tidak ditemukan.`} />
+    //         </MainLayout>
+    //     );
+    // }
 
     return (
         <MainLayout>
-            <Head title={course.title} />
+            <Head title={course.name} />
             <section className="text-white py-24 lg:py-28 container space-y-11">
-                <Breadcrumb title={course.title} />
+                <Breadcrumb title={course.name} />
                 <CourseOverview course={course} />
 
-                <div className="flex flex-col lg:flex-row items-start gap-16">
-                    <div className="space-y-10">
+                <div className="flex flex-col lg:flex-row w-full items-start gap-16">
+                    <div className="space-y-10 flex-1 w-full">
                         <div className="space-y-5">
                             <h6 className="lg:text-2xl font-bold">Tentang Kelas ini</h6>
-                            <p>{course.description}</p>
+                            <p>{course.about}</p>
                         </div>
                         <div className="space-y-5">
                             <h6 className="lg:text-2xl font-bold">Apa yang Kamu pelajari ?</h6>
-                            <BenefitList items={course.what_you_will_learn} />
+                            <BenefitList items={course.benefits} />
                         </div>
                         <div className="space-y-5">
                             <h6 className="lg:text-2xl font-bold">Kurikulum</h6>
-                            <CurriculumAccordion curriculum={course.curriculum} />
+                            <CurriculumAccordion curriculum={course.sections} />
                         </div>
                     </div>
 
-                    <aside className="w-full lg:w-2/5 space-y-10">
-                        <div className="bg-neutral-4 rounded-xl p-6 space-y-4">
-                            <div className="space-y-2">
-                                <p className="text-3xl font-bold">Rp {course.price}</p>
-                                <p className="text-xl font-medium">Paket {course.package_name}</p>
-                            </div>
-                            <p className="font-medium">Benefit</p>
-                            <div className="space-y-2">
-                                {course.benefits.map((benefit, i) => (
-                                    <div key={i} className="flex items-center gap-3">
-                                        <div className="p-1 w-6 h-6 flex items-center justify-center rounded-full bg-primary-1/20">
-                                            <Icon icon="streamline-sharp:star-badge-solid" className="w-5 h-5" />
-                                        </div>
-                                        <p className="lg:text-base font-bold">{benefit}</p>
-                                    </div>
-                                ))}
-                            </div>
-                        </div>
-
+                    <aside className="lg:w-2/5 w-1/10 space-y-10">
+                        {/* ...aside content... */}
                         <div
                             className="relative rounded-xl overflow-hidden bg-primary-3 text-white"
                             style={{
@@ -92,6 +76,9 @@ const CourseDetails = () => {
             </section>
         </MainLayout>
     );
+    // return (
+    //     <pre>{JSON.stringify(course, null, 2)}</pre>
+    // );
 };
 
 export default CourseDetails;

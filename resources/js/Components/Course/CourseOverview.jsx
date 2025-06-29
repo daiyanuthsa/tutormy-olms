@@ -7,15 +7,21 @@ const CourseOverview = ({ course }) => (
     <div className="flex flex-col lg:flex-row gap-6 lg:gap-12 items-center">
         <img
             src="/assets/hero-auth.webp"
-            alt={course.title}
+            alt={course.name}
             className="w-full max-w-lg h-44 lg:h-80 object-cover rounded-2xl"
         />
         <div className="space-y-5 w-full">
-            <h1 className="text-2xl xl:text-4xl font-bold">{course.title}</h1>
+            <h1 className="text-2xl xl:text-4xl font-bold">{course.name}</h1>
             <div className="flex items-center gap-5">
-                <img src="/assets/teacher.png" alt="mentor" className="w-14 h-14 rounded-full object-cover" />
+                <img
+                    src="/assets/teacher.png"
+                    alt="mentor"
+                    className="w-14 h-14 rounded-full object-cover"
+                />
                 <div className="space-y-1 font-bold">
-                    <p className="text-base lg:text-2xl">{course.mentor_name}</p>
+                    <p className="text-base lg:text-2xl">
+                        {course.mentor_name}
+                    </p>
                     <p className="text-sm">{course.mentor_title}</p>
                 </div>
             </div>
@@ -32,20 +38,23 @@ const CourseOverview = ({ course }) => (
             <div className="flex flex-wrap gap-3">
                 {course.hasPaid ? (
                     <>
-                        <Link href={`/course/${course.slug}/learn`}>
+                        <Link href={`/courses/join/${course.slug}/learn`}>
                             <PrimaryButton className="rounded-full">
                                 Belajar Sekarang
                             </PrimaryButton>
                         </Link>
                         <Link href={`/courses/${course.slug}/group`}>
                             <PrimaryButton className="rounded-full">
-                                <Icon icon="logos:whatsapp-icon" className="w-6 h-6 mr-2" />
+                                <Icon
+                                    icon="logos:whatsapp-icon"
+                                    className="w-6 h-6 mr-2"
+                                />
                                 Lihat Grup
                             </PrimaryButton>
                         </Link>
                     </>
                 ) : (
-                    <Link href={`/checkout/${course.slug}`}>
+                    <Link href={`/courses/join/${course.slug}`}>
                         <PrimaryButton className="rounded-full">
                             Gabung Kelas
                         </PrimaryButton>

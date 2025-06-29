@@ -3,11 +3,11 @@ import { Icon } from '@iconify/react'
 import PrimaryButton from '@/Components/PrimaryButton'
 import PopUpLayout from '@/Layouts/PopUpLayout'
 
-const WelcomeClass = () => {
+const WelcomeClass = ({ course, studentName, sectionId, contentId }) => {
     return (
         <PopUpLayout>
             <div className='flex items-center justify-center'>
-                <div className='bg-neutral-4 w-[320px] lg:w-[520px] h-auto py-8 px-5 space-y-3 flex flex-col items-center justify-center rounded-2xl -rotate-1 text-center'>
+                <div className='bg-neutral-4 w-[320px] lg:w-[520px] h-auto py-8 px-5 space-y-3 flex flex-col items-center justify-center rounded-2xl text-center'>
                     <img src="/assets/hand.webp" alt="icon" className='w-28' />
 
                     <div>
@@ -35,17 +35,17 @@ const WelcomeClass = () => {
                         <div className='flex-1 text-left'>
                             <div className='mb-2'>
                                 <span className='bg-purple-500 text-white text-xs px-3 py-1 rounded-full font-medium'>
-                                    Front-End
+                                    {course.category.name}
                                 </span>
                             </div>
                             <div className="text-white text-base font-semibold mb-2">
-                                Product Development Series
+                                {course.name}
                             </div>
                             <div className='space-y-1 text-sm text-gray-300'>
-                                <div className='flex items-center gap-2'>
+                                {/* <div className='flex items-center gap-2'>
                                     <Icon icon="icons8:student" className="w-4 h-4" />
                                     <span>120 Juta Siswa</span>
-                                </div>
+                                </div> */}
                                 <div className='flex items-center gap-2'>
                                     <Icon icon="mdi:video-outline" className="w-4 h-4" />
                                     <span>26 Video Pembelajaran</span>
@@ -55,15 +55,26 @@ const WelcomeClass = () => {
                     </div>
 
                     <div className='space-x-6'>
-                        <PrimaryButton variant='outline' className='rounded-full text-white'>
+                        <PrimaryButton 
+                        onClick={() => {
+                            // Handle view other classes
+                            window.location.href = '/courses';
+                        }}
+                        variant='outline' className='rounded-full text-white'>
                             Lihat Kelas Lainnya
                         </PrimaryButton>
-                        <PrimaryButton className='rounded-full'>
+                        <PrimaryButton
+                        onClick={() => {
+                            // Handle start learning
+                            window.location.href = `/course/${course.slug}/learn?section=${sectionId}&content=${contentId}`;
+                        }}
+                        className='rounded-full'>
                             Mulai Belajar
                         </PrimaryButton>
                     </div>
                 </div>
             </div>
+            
         </PopUpLayout>
     )
 }

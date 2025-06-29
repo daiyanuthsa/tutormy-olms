@@ -12,6 +12,13 @@ use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
+Route::match(
+    ['get', 'post'],
+    '/booking/payment/doku/notification',
+    [FrontController::class, 'paymentDokuNotification']
+)
+    ->name('front.payment_midtrans_notification');
+
 Route::get('/', [FrontController::class, 'index'])->name('home');
 Route::get('/pricing', [FrontController::class, 'pricing'])->name('pricing');
 
@@ -66,7 +73,7 @@ require __DIR__ . '/auth.php';
 
 Route::get('/welcome-class', function () {
     return Inertia::render('Popup/WelcomeClass');
-})->name('payment.success');
+})->name('learning.show');
 
 Route::get('/profile-public', function () {
     return Inertia::render('ProfileUser/PublicProfile', [
@@ -78,6 +85,6 @@ Route::get('/course/{slug}', function ($slug) {
     return Inertia::render('Course/CourseDetails', ['slug' => $slug]);
 });
 
-Route::get('/course/{slug}/learn', function ($slug) {
-    return Inertia::render('Course/CourseKonten', ['slug' => $slug]);
-});
+// Route::get('/course/{slug}/learn', function ($slug) {
+//     return Inertia::render('Course/CourseKonten', ['slug' => $slug]);
+// })->name('learning.show');

@@ -26,12 +26,12 @@ const filterCourses = (courses, category, keyword) => {
     return result;
 };
 
-const Course = () => {
+const Course = ({courses}) => {
     const [searchTerm, setSearchTerm] = useState('');
     const [activeCategory, setActiveCategory] = useState('Discover');
 
     const filteredCourses = useMemo(
-        () => filterCourses(DUMMY_COURSES, activeCategory, searchTerm),
+        () => filterCourses(courses, activeCategory, searchTerm),
         [searchTerm, activeCategory]
     );
 

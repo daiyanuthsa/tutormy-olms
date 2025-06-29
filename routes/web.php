@@ -85,6 +85,6 @@ Route::get('/course/{slug}', function ($slug) {
     return Inertia::render('Course/CourseDetails', ['slug' => $slug]);
 });
 
-// Route::get('/course/{slug}/learn', function ($slug) {
-//     return Inertia::render('Course/CourseKonten', ['slug' => $slug]);
-// })->name('learning.show');
+Route::get('/courses/learn/{slug}', function ($slug) {
+    return Inertia::render('Course/CourseKonten', ['slug' => $slug]);
+})->name('learning.show');

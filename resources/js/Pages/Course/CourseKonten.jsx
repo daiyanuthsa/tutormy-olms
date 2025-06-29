@@ -8,9 +8,9 @@ import LessonNavigator from './Content/LessonNavigator';
 import VideoDescription from './Content/VideoDescription';
 import CourseMeta from './Content/CourseMeta';
 
-const CourseKonten = () => {
-    const { slug } = usePage().props;
-    const course = DUMMY_COURSES.find(c => c.slug === slug);
+const CourseKonten = ({ course, sectionId, contentId }) => {
+    // const { slug } = usePage().props;
+    // const course = course.find(c => c.slug === slug);
 
     const allLessons = course?.curriculum?.flatMap(section =>
         section.lessons.map(lesson => ({
@@ -32,17 +32,17 @@ const CourseKonten = () => {
         setActiveLessonIndex(i => i + offset);
     };
 
-    if (isInvalid) {
-        return (
-            <MainLayout>
-                <Head title="Kelas Tidak Ditemukan" />
-                <section className="text-white py-20 container text-center space-y-4">
-                    <h1 className="text-3xl font-bold">Oops!</h1>
-                    <p>Kelas dengan slug <code>{slug}</code> tidak ditemukan.</p>
-                </section>
-            </MainLayout>
-        );
-    }
+    // if (isInvalid) {
+    //     return (
+    //         <MainLayout>
+    //             <Head title="Kelas Tidak Ditemukan" />
+    //             <section className="text-white py-20 container text-center space-y-4">
+    //                 <h1 className="text-3xl font-bold">Oops!</h1>
+    //                 <p>Kelas dengan slug <code>{slug}</code> tidak ditemukan.</p>
+    //             </section>
+    //         </MainLayout>
+    //     );
+    // }
 
     return (
         <MainLayout>

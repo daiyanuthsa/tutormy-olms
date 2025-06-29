@@ -83,4 +83,9 @@ class FrontController extends Controller
 
         return $response;
     }
+
+    public function paymentDokuNotification(Request $request)
+    {
+        // Handle Doku payment notification
+    }
 }

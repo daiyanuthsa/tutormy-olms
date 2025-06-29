@@ -12,6 +12,13 @@ use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
+Route::match(
+    ['get', 'post'],
+    '/booking/payment/doku/notification',
+    [FrontController::class, 'paymentDokuNotification']
+)
+    ->name('front.payment_midtrans_notification');
+
 Route::get('/', [FrontController::class, 'index'])->name('home');
 Route::get('/pricing', [FrontController::class, 'pricing'])->name('pricing');
 
@@ -51,6 +58,9 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/webinar/{agenda:slug}', [WebinarController::class, 'showPastAgenda'])->name('webinar.past');
     });
     Route::post('/booking/payment/doku', [FrontController::class, 'paymentStore'])->name('payment.store');
+    Route::get('/payment-success', function () {
+        return Inertia::render('Transaction/PaymentSuccess/Success');
+    })->name('payment.success');
 });
 
 
@@ -59,13 +69,11 @@ Route::get('/test', function () {
 });
 require __DIR__ . '/auth.php';
 
-Route::get('/payment-success', function () {
-    return Inertia::render('Transaction/PaymentSuccess/Success');
-})->name('payment.success');
+
 
 Route::get('/welcome-class', function () {
     return Inertia::render('Popup/WelcomeClass');
-})->name('payment.success');
+})->name('learning.show');
 
 Route::get('/profile-public', function () {
     return Inertia::render('ProfileUser/PublicProfile', [
@@ -77,6 +85,9 @@ Route::get('/course/{slug}', function ($slug) {
     return Inertia::render('Course/CourseDetails', ['slug' => $slug]);
 });
 
-Route::get('/course/{slug}/learn', function ($slug) {
-    return Inertia::render('Course/CourseKonten', ['slug' => $slug]);
-});
+// web-design-hack/1/12
+Route::get('/courses/learning/{course:slug}/{courseSection}/{sectionContent}', [CourseController::class, 'learning'])
+    ->name('courses.learning');
+// Route::get('/courses/learn/{slug}', function ($slug) {
+//     return Inertia::render('Course/CourseKonten', ['slug' => $slug]);
+// })->name('learning.show');

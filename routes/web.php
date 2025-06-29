@@ -85,6 +85,9 @@ Route::get('/course/{slug}', function ($slug) {
     return Inertia::render('Course/CourseDetails', ['slug' => $slug]);
 });
 
-Route::get('/courses/learn/{slug}', function ($slug) {
-    return Inertia::render('Course/CourseKonten', ['slug' => $slug]);
-})->name('learning.show');
+// web-design-hack/1/12
+Route::get('/courses/learning/{course:slug}/{courseSection}/{sectionContent}', [CourseController::class, 'learning'])
+    ->name('courses.learning');
+// Route::get('/courses/learn/{slug}', function ($slug) {
+//     return Inertia::render('Course/CourseKonten', ['slug' => $slug]);
+// })->name('learning.show');

@@ -94,7 +94,7 @@ public function join(Course $course)
             'section_content_id' => $contentId,
         ]);
 
-        return Inertia::render('Course/Learning', [
+        return Inertia::render('Course/CourseKonten', [
             'course' => $course,
             'sectionId' => $sectionId,
             'contentId' => $contentId,

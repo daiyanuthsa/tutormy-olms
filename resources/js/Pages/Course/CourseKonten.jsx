@@ -8,7 +8,7 @@ import LessonNavigator from './Content/LessonNavigator';
 import VideoDescription from './Content/VideoDescription';
 import CourseMeta from './Content/CourseMeta';
 
-const CourseKonten = ({ course }) => {
+const CourseKonten = ({ course, sectionId, contentId }) => {
     // const { slug } = usePage().props;
     // const course = course.find(c => c.slug === slug);
 

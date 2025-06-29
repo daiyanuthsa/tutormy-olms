@@ -2,9 +2,10 @@ export const DUMMY_COURSES = [
     {
         id: 1,
         title: "Product Development Series - Core Concepts",
+        slug: "product-development-series---core-concepts",
         description:
             "Pelajari dasar-dasar pengembangan produk dari ide hingga peluncuran. Kelas ini mencakup strategi, alat, dan studi kasus nyata untuk mengubah ide menjadi produk yang sukses di pasar. Cocok untuk pemula hingga manajer produk yang ingin memperdalam pengetahuannya.",
-        image_url: "/assets/hero.png", 
+        image_url: "/assets/hero.png",
         lessons_count: 180,
         category: { name: "Design", slug: "design" },
         mentor_name: "Ir. Bagus Prasetya, M.Kom.",
@@ -13,8 +14,9 @@ export const DUMMY_COURSES = [
         students_joined: 100,
         price: 50000,
         package_name: "Premium",
+        hasPaid: true,
         benefits: [
-            "Front-End Developer", 
+            "Front-End Developer",
             "Sertifikat Kelulusan",
             "Akses Penuh Pembelajaran",
             "Kemudahan Akses Laptop, tablet, mobile",
@@ -40,6 +42,8 @@ export const DUMMY_COURSES = [
                         duration: "15 Menit",
                         is_locked: false,
                         type: "video",
+                        description:
+                            "Gambaran umum tentang apa itu pengembangan produk dan mengapa penting dipelajari.",
                     },
                     {
                         id: 2,
@@ -47,6 +51,8 @@ export const DUMMY_COURSES = [
                         duration: "10 Menit",
                         is_locked: false,
                         type: "video",
+                        description:
+                            "Membahas alasan mengapa pengembangan produk menjadi kunci dalam dunia bisnis digital.",
                     },
                 ],
             },
@@ -60,6 +66,8 @@ export const DUMMY_COURSES = [
                         duration: "20 Menit",
                         is_locked: true,
                         type: "video",
+                        description:
+                            "Strategi dan teknik dalam menghasilkan ide produk yang relevan dan potensial.",
                     },
                     {
                         id: 4,
@@ -67,6 +75,8 @@ export const DUMMY_COURSES = [
                         duration: "25 Menit",
                         is_locked: true,
                         type: "video",
+                        description:
+                            "Cara melakukan riset pasar dan menganalisis kompetitor secara efektif.",
                     },
                     {
                         id: 5,
@@ -74,6 +84,8 @@ export const DUMMY_COURSES = [
                         duration: "18 Menit",
                         is_locked: true,
                         type: "video",
+                        description:
+                            "Mempelajari tools untuk memetakan value produk dan kebutuhan pelanggan.",
                     },
                 ],
             },
@@ -87,6 +99,8 @@ export const DUMMY_COURSES = [
                         duration: "30 Menit",
                         is_locked: true,
                         type: "video",
+                        description:
+                            "Pengenalan terhadap prinsip dan praktik UX dalam desain produk digital.",
                     },
                     {
                         id: 7,
@@ -94,6 +108,8 @@ export const DUMMY_COURSES = [
                         duration: "35 Menit",
                         is_locked: true,
                         type: "video",
+                        description:
+                            "Panduan membuat wireframe awal menggunakan Figma sebagai tools desain.",
                     },
                     {
                         id: 8,
@@ -101,6 +117,8 @@ export const DUMMY_COURSES = [
                         duration: "22 Menit",
                         is_locked: true,
                         type: "video",
+                        description:
+                            "Membuat prototype interaktif untuk uji coba pengalaman pengguna.",
                     },
                 ],
             },
@@ -114,6 +132,8 @@ export const DUMMY_COURSES = [
                         duration: "40 Menit",
                         is_locked: true,
                         type: "video",
+                        description:
+                            "Pengenalan metode Agile dan kerangka kerja Scrum dalam pengembangan produk.",
                     },
                     {
                         id: 10,
@@ -121,6 +141,8 @@ export const DUMMY_COURSES = [
                         duration: "28 Menit",
                         is_locked: true,
                         type: "video",
+                        description:
+                            "Strategi membawa produk ke pasar dan menjangkau pengguna pertama.",
                     },
                 ],
             },
@@ -134,6 +156,8 @@ export const DUMMY_COURSES = [
                         duration: "20 Menit",
                         is_locked: true,
                         type: "video",
+                        description:
+                            "Menentukan dan menganalisis metrik penting dalam evaluasi produk.",
                     },
                     {
                         id: 12,
@@ -141,6 +165,8 @@ export const DUMMY_COURSES = [
                         duration: "25 Menit",
                         is_locked: true,
                         type: "video",
+                        description:
+                            "Teknik iterasi produk dan penerapan A/B testing untuk validasi fitur.",
                     },
                 ],
             },
@@ -149,6 +175,7 @@ export const DUMMY_COURSES = [
     {
         id: 2,
         title: "Fundamental Web Design with Figma",
+        slug: "fundamental-web-design-with-figma",
         description:
             "Buat desain website yang menarik dan fungsional dari nol menggunakan Figma. Pelajari prinsip-prinsip desain web modern, alat-alat Figma, dan praktik terbaik untuk menciptakan pengalaman pengguna yang memukau.",
         image_url: "/assets/hero.png",
@@ -160,6 +187,7 @@ export const DUMMY_COURSES = [
         students_joined: 95,
         price: 45000,
         package_name: "Basic",
+        hasPaid: false,
         benefits: [
             "Dasar Desain Web",
             "Penggunaan Figma Efektif",
@@ -183,6 +211,8 @@ export const DUMMY_COURSES = [
                         duration: "10 Menit",
                         is_locked: false,
                         type: "video",
+                        description:
+                            "Mengenal Figma sebagai tools desain UI/UX berbasis cloud dan keunggulannya.",
                     },
                     {
                         id: 2,
@@ -190,6 +220,8 @@ export const DUMMY_COURSES = [
                         duration: "15 Menit",
                         is_locked: false,
                         type: "video",
+                        description:
+                            "Menjelajahi tampilan dan fungsi utama di dalam dashboard Figma.",
                     },
                 ],
             },
@@ -203,6 +235,8 @@ export const DUMMY_COURSES = [
                         duration: "20 Menit",
                         is_locked: true,
                         type: "video",
+                        description:
+                            "Panduan memilih dan menerapkan tipografi yang sesuai untuk website.",
                     },
                     {
                         id: 4,
@@ -210,84 +244,12 @@ export const DUMMY_COURSES = [
                         duration: "25 Menit",
                         is_locked: true,
                         type: "video",
+                        description:
+                            "Penerapan teori warna untuk menciptakan desain web yang harmonis dan menarik.",
                     },
                 ],
             },
         ],
-    },
-    {
-        id: 3,
-        title: "React.js for Beginners",
-        description:
-            "Kuasai dasar-dasar React.js untuk membangun aplikasi web interaktif. Pelajari komponen, state, props, dan konsep fundamental lainnya yang dibutuhkan untuk memulai pengembangan dengan React.",
-        image_url: "/assets/hero.png",
-        lessons_count: 90,
-        category: { name: "Front-End", slug: "front-end" },
-        mentor_name: "Budi Hartono, S.Kom.",
-        mentor_title: "Front-End Developer at Startup X",
-        total_videos: 20,
-        students_joined: 80,
-        price: 55000,
-        package_name: "Standard",
-        benefits: ["Dasar React.js", "Sertifikat Partisipasi", "Proyek Mini"],
-        what_you_will_learn: [
-            "Membuat komponen fungsional di React.",
-            "Mengelola state dan props.",
-            "Menangani event di React.",
-            "Dasar-dasar Hooks (useState, useEffect).",
-        ],
-        curriculum: [],
-    },
-    {
-        id: 4,
-        title: "Python for Data Science",
-        description:
-            "Pelajari Python dan library-nya (NumPy, Pandas, Matplotlib) untuk analisis data. Kursus ini akan membimbing Anda dari dasar hingga kemampuan untuk melakukan eksplorasi data, visualisasi, dan pemodelan sederhana.",
-        image_url: "/assets/hero.png",
-        lessons_count: 150,
-        category: { name: "Code", slug: "code" },
-        mentor_name: "Dr. Citra Indah, M.Kom.",
-        mentor_title: "Data Scientist & Researcher",
-        total_videos: 25,
-        students_joined: 110,
-        price: 70000,
-        package_name: "Premium",
-        benefits: [
-            "Analisis Data Python",
-            "Pemodelan Data",
-            "Sertifikat Profesional",
-            "Studi Kasus Industri",
-        ],
-        what_you_will_learn: [
-            "Dasar-dasar Python untuk data science.",
-            "Penggunaan NumPy untuk komputasi numerik.",
-            "Analisis data dengan Pandas DataFrames.",
-            "Visualisasi data dengan Matplotlib dan Seaborn.",
-        ],
-        curriculum: [],
-    },
-    {
-        id: 5,
-        title: "Effective Communication Skills",
-        description:
-            "Tingkatkan kemampuan komunikasi Anda di dunia kerja. Pelajari teknik presentasi, negosiasi, dan membangun hubungan profesional yang efektif.",
-        image_url: "/assets/hero.png",
-        lessons_count: 60,
-        category: { name: "Soft Skills", slug: "soft-skills" },
-        mentor_name: "Pak Budi Daya, M.Psi.",
-        mentor_title: "HR & Communication Coach",
-        total_videos: 10,
-        students_joined: 60,
-        price: 30000,
-        package_name: "Basic",
-        benefits: ["Komunikasi Efektif", "Sertifikat Partisipasi"],
-        what_you_will_learn: [
-            "Teknik mendengarkan aktif.",
-            "Memberikan feedback yang konstruktif.",
-            "Berpresentasi dengan percaya diri.",
-            "Negosiasi dalam berbagai situasi.",
-        ],
-        curriculum: [],
     },
 ];
 

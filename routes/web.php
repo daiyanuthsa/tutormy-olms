@@ -44,8 +44,6 @@ Route::middleware(['auth'])->group(function () {
 
         Route::get('/courses/join/{course:slug}', [CourseController::class, 'join'])
             ->name('course.join');
-        Route::get('learning/{course:slug}/{courseSection}/{sectionContent}', [CourseController::class, 'learning'])
-            ->name('learning.show');
 
         Route::get('/checkout/{pricing}', [FrontController::class, 'checkout'])->name('front.checkout');
 
@@ -68,4 +66,18 @@ require __DIR__ . '/auth.php';
 
 Route::get('/welcome-class', function () {
     return Inertia::render('Popup/WelcomeClass');
-})->name('course.join');
+})->name('payment.success');
+
+Route::get('/profile-public', function () {
+    return Inertia::render('ProfileUser/PublicProfile', [
+        'user' => auth()->user(),
+    ]);
+})->name('payment.success');
+
+Route::get('/course/{slug}', function ($slug) {
+    return Inertia::render('Course/CourseDetails', ['slug' => $slug]);
+});
+
+Route::get('/course/{slug}/learn', function ($slug) {
+    return Inertia::render('Course/CourseKonten', ['slug' => $slug]);
+});

@@ -34,6 +34,12 @@ class Transaction extends Model
     public function user(){
         return $this->belongsTo(User::class);
     }
+    public function student()
+    {
+        return $this->belongsTo(User::class, 'user_id')->whereHas('roles', function ($query) {
+            $query->where('name', 'student');
+        });
+    }
     public function pricing(){
         return $this->belongsTo(Pricing::class);
     }

@@ -195,28 +195,29 @@ class TransactionResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('booking_trx_id')
                     ->searchable(),
-                Tables\Columns\TextColumn::make('user_id')
+                Tables\Columns\TextColumn::make('user.name')
                     ->numeric()
                     ->sortable(),
-                Tables\Columns\TextColumn::make('pricing_id')
+                Tables\Columns\TextColumn::make('pricing.name')
                     ->numeric()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('sub_total_amount')
                     ->numeric()
+                    ->toggleable(isToggledHiddenByDefault: true)
                     ->sortable(),
                 Tables\Columns\TextColumn::make('total_tax_amount')
                     ->numeric()
+                    ->toggleable(isToggledHiddenByDefault: true)
                     ->sortable(),
                 Tables\Columns\TextColumn::make('grand_total_amount')
                     ->numeric()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('uniq_code')
                     ->numeric()
+                    ->toggleable(isToggledHiddenByDefault: true)
                     ->sortable(),
                 Tables\Columns\IconColumn::make('is_paid')
                     ->boolean(),
-                Tables\Columns\TextColumn::make('proof')
-                    ->searchable(),
                 Tables\Columns\TextColumn::make('started_at')
                     ->dateTime()
                     ->sortable(),

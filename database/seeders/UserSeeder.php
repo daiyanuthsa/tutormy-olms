@@ -16,7 +16,7 @@ class UserSeeder extends Seeder
     {
         $admin = User::create([
             'name' => 'Admin User',
-            'email' => 'C',
+            'email' => 'admin@tutormy.com',
             'password' => Hash::make('password123'), // Password harus di-hash!
             'email_verified_at' => now(), // Opsional: Menandai email sudah diverifikasi
             // tambahkan field lain jika ada di tabel users Anda

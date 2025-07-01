@@ -14,6 +14,11 @@ return Application::configure(basePath: dirname(__DIR__))
         $middleware->trustProxies(
             at: '*'
         );
+        $middleware->validateCsrfTokens(
+            except: [
+                '/booking/payment/doku/notification',
+            ]
+        );
         $middleware->web(append: [
             \App\Http\Middleware\HandleInertiaRequests::class,
             \Illuminate\Http\Middleware\AddLinkHeadersForPreloadedAssets::class,

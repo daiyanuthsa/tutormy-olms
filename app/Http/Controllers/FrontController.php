@@ -87,5 +87,8 @@ class FrontController extends Controller
     public function paymentDokuNotification(Request $request)
     {
         // Handle Doku payment notification
+        Log::info('Doku payment notification received', [
+            'request' => $request->all()
+        ]);
     }
 }

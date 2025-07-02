@@ -19,7 +19,7 @@ class WebinarController extends Controller
     {
         $webinars = $this->agendaService->getAllAgenda();
 
-        return Inertia::render('Webinar/Index', compact('webinars'));
+        return Inertia::render('Webinar/Indaex', compact('webinars'));
     }
 
     public function showPastAgenda(Agenda $agenda)

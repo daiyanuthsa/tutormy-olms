@@ -92,12 +92,9 @@ const Bonus = () => {
                                 </div>
                             </div>
 
-                            <PrimaryButton
-                                variant="danger"
-                                className="rounded-xl"
-                            >
+                            <button className="bg-error-4 py-2.5 px-4 font-bold lg:text-2xl">
                                 Value: {bonus.value}
-                            </PrimaryButton>
+                            </button>
                         </div>
                     </div>
                 ))}
@@ -106,9 +103,9 @@ const Bonus = () => {
                     <h2 className="text-2xl lg:text-4xl font-bold">
                         Total Value!
                     </h2>
-                    <PrimaryButton variant="danger" className="rounded-xl">
+                    <button className="bg-error-4 py-2.5 px-4 font-bold text-2xl lg:text-4xl">
                         Value: {formatValue(totalValue)}
-                    </PrimaryButton>
+                    </button>
                     <p className="text-center text-xl lg:text-4xl font-semibold">
                         Kamu bisa dapat semua benefit + bonus senilai value
                         tersebut, dengan Diskon 98% "Khusus HARI INI"

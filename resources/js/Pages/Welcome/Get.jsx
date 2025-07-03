@@ -4,102 +4,101 @@ const steps = [
     {
         id: '01',
         title: 'Kemudahan Akses Materi Selamanya !',
-        desc: 'Bayar sekali, nikmati akses selamanya. Semua materi bisa kamu pelajari ulang kapan saja tanpa batas waktu. Belajar jadi fleksibel tanpa takut ketinggalan—karena kamu bisa kembali kapan pun kamu butuh.',
-        imgPosition: 'right',
+        desc: 'Bayar sekali, nikmati akses selamanya. Semua materi bisa kamu pelajari ulang kapan saja tanpa batas waktu.',
+        imgPosition: 'left',
     },
     {
         id: '02',
         title: 'Update Otomatis ke 100+ Modul Terbaru',
-        desc: 'Tanpa biaya tambahan, kamu akan terus dapat materi baru yang relevan dengan perkembangan teknologi jadi selalu up-to-date tanpa perlu bayar ulang.',
-        imgPosition: 'left',
+        desc: 'Tanpa biaya tambahan, kamu akan terus dapat materi baru yang relevan dengan perkembangan teknologi.',
+        imgPosition: 'right',
     },
     {
         id: '03',
         title: 'Komunitas Belajar Seumur Hidup',
-        desc: 'Gabung dalam komunitas aktif tempat kamu bisa bertanya, berdiskusi, dan sampai saling membantu! Hidup! Bukan hanya belajar, tapi berusaha memanjat bersama.',
-        imgPosition: 'right',
+        desc: 'Gabung dalam komunitas aktif tempat kamu bisa bertanya, berdiskusi, dan saling membantu!',
+        imgPosition: 'left',
     },
     {
         id: '04',
         title: 'Belajar Langsung dari Mentor Praktisi',
-        desc: 'Materi kamu dapat belajar dari pengalaman nyata para praktisi industri. Kamu belajar langsung dari mereka yang sudah berpengalaman di bidang masing-masing.',
-        imgPosition: 'left',
+        desc: 'Materi kamu dapat belajar dari pengalaman nyata para praktisi industri.',
+        imgPosition: 'right',
     },
     {
         id: '05',
         title: 'Modul Belajar dari Basic hingga Mahir',
-        desc: 'Ngga perlu takut mulai dari 0! Semua materi disusun bertahap dari yang paling administrasi step by step sampai pushan, semua hingga jadi mahir.',
-        imgPosition: 'right',
+        desc: 'Ngga perlu takut mulai dari 0! Semua materi disusun bertahap dari yang paling dasar hingga mahir.',
+        imgPosition: 'left',
     },
 ];
 
-const StepItem = ({ id, title, desc, imgPosition, isLast }) => {
-    const isImageLeft = imgPosition === 'right';
-
-    return (
-        <div className="relative">
-            <div className="grid grid-cols-5 gap-8 items-center">
-                {isImageLeft ? (
-                    <>
-                        <div className="col-span-2">
-                            <div className="w-full rounded-lg overflow-hidden shadow-lg">
-                                <img src="/assets/get-image.webp" alt="image" />
-                            </div>
-                        </div>
-
-                        <div className="col-span-1"></div>
-
-                        <div className="col-span-2">
-                            <h3 className="text-xl font-bold mb-3 text-purple-300">{title}</h3>
-                            <p className="text-gray-300 leading-relaxed text-sm">{desc}</p>
-                        </div>
-                    </>
-                ) : (
-                    <>
-                        <div className="col-span-2 text-right">
-                            <h3 className="text-xl font-bold mb-3 text-purple-300">{title}</h3>
-                            <p className="text-gray-300 leading-relaxed text-sm">{desc}</p>
-                        </div>
-
-                        <div className="col-span-1"></div>
-
-                        <div className="col-span-2">
-                            <div className="w-full rounded-lg overflow-hidden shadow-lg">
-                                <img src="/assets/get-image.webp" alt="image" />
-                            </div>
-                        </div>
-                    </>
-                )}                                                                                                                                              
-            </div>
-
-            <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex flex-col items-center z-10">
-                <div className="w-12 h-12 bg-purple-600 rounded-lg flex items-center justify-center text-white text-lg font-bold shadow-lg">
-                    {id}
-                </div>
-            </div>
-
-            {!isLast && (
-                <div className="absolute top-full left-1/2 transform -translate-x-1/2 w-0.5 h-24 bg-purple-400 z-0"></div>
-            )}
-        </div>
-    );
-};
-
 const Get = () => {
     return (
-        <div className="min-h-screen text-white">
-            <div className="container mx-auto py-16">
+        <div className="bg-neutral-900 text-white py-16 px-4">
+            <div className="container mx-auto max-w-7xl">
                 <h2 className="text-center text-2xl lg:text-4xl font-bold mb-16">
                     Apa yang kamu dapatkan apabila belajar di platform Tutormy!
                 </h2>
 
-                <div className="max-w-6xl mx-auto">
-                    {steps.map((step, index) => (
-                        <StepItem
+                <div className="relative">
+                    <div className="absolute left-1/2 top-0 h-full w-1 bg-primary-1 transform -translate-x-1/2 z-0" />
+
+                    {steps.map((step) => (
+                        <div
                             key={step.id}
-                            {...step}
-                            isLast={index === steps.length - 1}
-                        />
+                            className="grid grid-cols-3 items-center space-y-6 md:space-y-3 md:gap-6 relative"
+                        >
+                            {step.imgPosition === 'left' && (
+                                <>
+                                    <div className="col-span-1">
+                                        <img
+                                            src="/assets/get-image.webp"
+                                            alt={step.title}
+                                            className="rounded-xl w-full shadow-lg"
+                                        />
+                                    </div>
+                                    <div className="col-span-1 flex justify-center items-center relative z-10">
+                                        <div className="bg-gradient-to-r from-primary-4 to-primary-1 p-0.5 rounded-lg">
+                                            <div className="w-8 h-8 md:w-12 md:h-12 bg-neutral-800 text-white text-sm md:text-base font-bold rounded-lg flex items-center justify-center shadow-md">
+                                                {step.id}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className="col-span-1">
+                                        <h3 className="text-purple-300 font-bold text-sm lg:text-2xl mb-2">
+                                            {step.title}
+                                        </h3>
+                                        <p className="hidden lg:block text-gray-300 font-medium text-sm">{step.desc}</p>
+                                    </div>
+                                </>
+                            )}
+
+                            {step.imgPosition === 'right' && (
+                                <>
+                                    <div className="col-span-1">
+                                        <h3 className="text-purple-300 font-bold text-sm lg:text-2xl mb-2">
+                                            {step.title}
+                                        </h3>
+                                        <p className="hidden lg:block text-gray-300 font-medium text-sm">{step.desc}</p>
+                                    </div>
+                                    <div className="col-span-1 flex justify-center items-center relative z-10">
+                                        <div className="bg-gradient-to-r from-primary-4 to-primary-1 p-0.5 rounded-lg">
+                                            <div className="w-8 h-8 md:w-12 md:h-12 bg-neutral-800 text-white text-sm md:text-base font-bold rounded-lg flex items-center justify-center shadow-md">
+                                                {step.id}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className="col-span-1">
+                                        <img
+                                            src="/assets/get-image.webp"
+                                            alt={step.title}
+                                            className="rounded-xl w-full shadow-lg"
+                                        />
+                                    </div>
+                                </>
+                            )}
+                        </div>
                     ))}
                 </div>
             </div>

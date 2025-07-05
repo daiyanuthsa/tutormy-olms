@@ -79,7 +79,7 @@ Route::get('/profile-public', function () {
     return Inertia::render('ProfileUser/PublicProfile', [
         'user' => auth()->user(),
     ]);
-})->name('payment.success');
+})->name('profile.public');
 
 Route::get('/course/{slug}', function ($slug) {
     return Inertia::render('Course/CourseDetails', ['slug' => $slug]);

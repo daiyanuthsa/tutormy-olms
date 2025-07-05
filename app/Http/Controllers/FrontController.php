@@ -90,5 +90,15 @@ class FrontController extends Controller
         Log::info('Doku payment notification received', [
             'request' => $request->all()
         ]);
+        try{
+            $result = $this->paymentService->handleNotification($request);
+            return response()->json($result);
+        } catch (\Exception $e) {
+            Log::error('Error processing Doku notification', [
+                'error' => $e->getMessage(),
+                'trace' => $e->getTraceAsString()
+            ]);
+            return response()->json(['error' => 'Failed to process notification'], 500);
+        }
     }
 }

@@ -91,3 +91,6 @@ Route::get('/courses/learning/{course:slug}/{courseSection}/{sectionContent}', [
 // Route::get('/courses/learn/{slug}', function ($slug) {
 //     return Inertia::render('Course/CourseKonten', ['slug' => $slug]);
 // })->name('learning.show');
+Route::get('/{any}', function () {
+    return Inertia::render('EmpatKosongEmpat');
+});

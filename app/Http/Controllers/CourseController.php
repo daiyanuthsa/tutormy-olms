@@ -93,6 +93,7 @@ public function join(Course $course)
             'course_section_id' => $sectionId,
             'section_content_id' => $contentId,
         ]);
+        $course = $this->courseRepository->getCourseForPublicView($course->id);
 
         return Inertia::render('Course/CourseKonten', [
             'course' => $course,

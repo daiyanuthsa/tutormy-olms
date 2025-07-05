@@ -7,6 +7,10 @@ import PrimaryButton from '@/Components/PrimaryButton'
 const Success = () => {
     const isLoading = false 
 
+    const handleStartLearning = () => {
+        window.location.href = '/courses'
+    }
+
     return (
         <PopUpLayout>
             <div className='flex items-center justify-center'>
@@ -31,7 +35,9 @@ const Success = () => {
                             <img src={ImageSuccess} alt="success" className='w-24 lg:w-44' />
                             <h2 className="text-center lg:text-2xl font-bold">Pembayaran Paket Berhasil !</h2>
                             <p className="text-center text-xs lg:text-sm font-medium">Yuk mulai langkah pertama menuju kesuksesanmu disini ! </p>
-                            <PrimaryButton className='rounded-full'>Mulai Belajar</PrimaryButton>
+                            <PrimaryButton className='rounded-full' onClick={handleStartLearning}>
+                                Mulai Belajar
+                            </PrimaryButton>
                         </>
                     )}
                 </div>

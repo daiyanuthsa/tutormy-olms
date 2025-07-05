@@ -73,17 +73,8 @@ Route::get('/test', function () {
 require __DIR__ . '/auth.php';
 
 
-
-Route::get('/welcome-class', function () {
-    return Inertia::render('Popup/WelcomeClass');
-})->name('learning.show');
-
 Route::get('/profile-public', function () {
     return Inertia::render('ProfileUser/PublicProfile', [
         'user' => auth()->user(),
     ]);
 })->name('profile.public');
-
-Route::get('/course/{slug}', function ($slug) {
-    return Inertia::render('Course/CourseDetails', ['slug' => $slug]);
-});

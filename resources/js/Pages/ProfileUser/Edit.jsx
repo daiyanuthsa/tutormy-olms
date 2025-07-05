@@ -3,6 +3,7 @@ import MainLayout from "@/Layouts/MainLayout";
 import { Icon } from "@iconify/react";
 import PrimaryButton from "@/Components/PrimaryButton";
 import { useForm } from "@inertiajs/react";
+import UpdatePasswordForm from "@/Pages/Profile/Partials/UpdatePasswordForm";
 
 const MAX_CHARS = 1000;
 
@@ -39,7 +40,6 @@ const RadioOption = ({ name, value, label, checked, onChange }) => (
         <span className="text-sm">{label}</span>
     </label>
 );
-
 
 const ProfilePhoto = () => (
     <div className="flex flex-col items-center gap-5">
@@ -229,14 +229,12 @@ const Edit = ({ auth, errors: serverErrors }) => {
                             <h6 className="text-2xl font-bold">
                                 Selamat Datang kembali, {user.name}!
                             </h6>
-                            
                         </div>
 
                         <div className="flex flex-col lg:flex-row items-start gap-6 lg:gap-12">
                             <ProfilePhoto />
 
                             <div className="flex-1 space-y-6">
-                               
                                 <FormSection
                                     data={data}
                                     setData={setData}
@@ -245,11 +243,9 @@ const Edit = ({ auth, errors: serverErrors }) => {
                                     handleSubmit={handleSubmit}
                                 />
 
-                                {/* <div className="flex items-center justify-center">
-                                    <PrimaryButton className="rounded-2xl w-80">
-                                        Simpan
-                                    </PrimaryButton>
-                                </div> */}
+                                <div className="mx-8 p-4 shadow sm:rounded-lg sm:p-8">
+                                    <UpdatePasswordForm className="max-w-xl" />
+                                </div>
                             </div>
                         </div>
                     </div>

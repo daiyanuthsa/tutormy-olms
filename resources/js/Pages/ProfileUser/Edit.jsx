@@ -80,6 +80,7 @@ const FormSection = ({ data, setData, errors, processing, handleSubmit }) => (
         onSubmit={handleSubmit}
     >
         <div className="col-span-1 lg:col-span-2">
+            <p className="text-xl font-semibold mb-4">About</p>
             <textarea
                 value={data.about}
                 onChange={(e) => setData("about", e.target.value)}
@@ -214,6 +215,9 @@ const Edit = ({ auth, errors: serverErrors }) => {
         e.preventDefault();
         patch(route("profile.update"), {
             preserveScroll: true,
+            onSuccess: () => {
+                alert("Profil berhasil diperbarui!");
+            },
         });
     };
     return (
@@ -225,14 +229,14 @@ const Edit = ({ auth, errors: serverErrors }) => {
                             <h6 className="text-2xl font-bold">
                                 Selamat Datang kembali, {user.name}!
                             </h6>
-                            <p>Yuk lanjutkan progres belajarmu hari ini!</p>
+                            
                         </div>
 
                         <div className="flex flex-col lg:flex-row items-start gap-6 lg:gap-12">
                             <ProfilePhoto />
 
                             <div className="flex-1 space-y-6">
-                                <AboutSection />
+                               
                                 <FormSection
                                     data={data}
                                     setData={setData}

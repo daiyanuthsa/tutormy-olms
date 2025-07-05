@@ -3,6 +3,7 @@
 
 namespace App\Services;
 use App\Models\User;
+use App\Repositories\TransactionRepository;
 use Config;
 use Log;
 
@@ -11,6 +12,7 @@ class DokuService
     protected $clientId;
     protected $secretKey;
     protected $apiUrl;
+
 
     public function __construct()
     {
@@ -108,45 +110,6 @@ class DokuService
         return $url;
     }
 
-    public function handleNotification($request)
-    {
-        $headers = $request->headers->all();
-        $bodyRaw = $request->getContent();
-        $payload = json_decode($bodyRaw, true);
 
-        Log::info('DOKU Notification Received:', [
-            'headers' => $headers,
-            'body' => $payload
-        ]);
-
-        if (!isset($payload['order']['invoice_number'])) {
-            return [
-                'message' => 'Invalid payload: missing invoice_number',
-                'status' => 400
-            ];
-        }
-        // Extract invoice number and status from payload
-        // TODO: Customize this based on your actual payload structure
-        $invoice = $payload['order']['invoice_number'];
-        $status = $payload['transaction']['status'] ?? 'UNKNOWN';
-
-        // Call internal services
-        $transaction = $this->transactionService->findByInvoice($invoice);
-
-        if (!$transaction) {
-            return [
-                'message' => 'Transaction not found',
-                'status' => 404
-            ];
-        }
-
-        // Update payment status
-        $this->paymentService->updatePaymentStatus($invoice, $status);
-
-        return [
-            'message' => 'Notification processed successfully',
-            'status' => 200
-        ];
-    }
 }
 ?>

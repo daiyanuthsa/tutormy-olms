@@ -40,5 +40,26 @@ class TransactionService
             'ended_at'
         );
     }
+
+    public function createTransaction($payload, Pricing $pricing)
+    {
+        $transactionData = [
+            'user_id' => $payload['customer']['id'],
+            'pricing_id' => $pricing->id,
+            'sub_total_amount' => $pricing->price,
+            'total_tax_amount' => $pricing->price * 0.12,
+            'grand_total_amount' => $payload['order']['amount'],
+            'payment_type' => 'Doku',
+            'uniq_code' => 11111, // Assuming uniq_code is not provided in the payload
+            'is_paid' => false,
+            'status' => 'PENDING',
+            'booking_trx_id' => $payload['order']['invoice_number'],
+            'started_at' => null,
+            'ended_at' => null,
+        ];
+        return $this->transactionRepository->createTransaction($transactionData);
+    }
+
+   
 }
 ?>

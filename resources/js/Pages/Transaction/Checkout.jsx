@@ -57,11 +57,16 @@ const CheckoutButton = () => {
     useEffect(() => {
         const handleCheckout = async () => {
             try {
-                const response = await axios.post("/booking/payment/doku");
+                const csrfToken = document
+                    .querySelector('meta[name="csrf-token"]')
+                    ?.getAttribute("content");
+                const response = await axios.post("/booking/payment/doku", {
+                    headers: {
+                        "X-CSRF-TOKEN": csrfToken,
+                    },
+                });
                 console.log("Payment link response:", response.data);
 
-                // Lihat semua isi response
-                alert(JSON.stringify(response.data, null, 2));
                 const paymentLink = response?.data?.url;
                 if (window.loadJokulCheckout && paymentLink) {
                     window.loadJokulCheckout(paymentLink);
@@ -239,12 +244,3 @@ const Checkout = ({ auth, checkout }) => {
 
 export default Checkout;
 
-// export default function Checkout({ checkout, pricing }) {
-//     return (
-//         <div className=">
-//             <h1>Data Prepare checkout</h1>
-//             <pre>{JSON.stringify(checkout, null, 2)}</pre>
-//             <pre>{JSON.stringify(pricing, null, 2)}</pre>
-//         </div>
-//     );
-// }

@@ -16,7 +16,7 @@ Route::match(
     ['get', 'post'],
     '/booking/payment/doku/notification',
     [FrontController::class, 'paymentDokuNotification']
-)
+)->middleware('verify.doku')
     ->name('front.payment_midtrans_notification');
 
 Route::get('/', [FrontController::class, 'index'])->name('home');
@@ -33,12 +33,12 @@ Route::get('/courses', [CourseController::class, 'index'])->name('course.index')
 Route::get('/courses/search', [CourseController::class, 'search'])->name('course.search');
 Route::get('/courses/{course:slug}', [CourseController::class, 'show'])->name('course.details');
 
-Route::get('/webinar', [WebinarController::class,'index'])->name('webinar.index');
-Route::get('/webinar/register/{agenda:slug}', [WebinarController::class,'showUpcomingAgenda'])->name('webinar.upcoming');
+Route::get('/webinar', [WebinarController::class, 'index'])->name('webinar.index');
+Route::get('/webinar/register/{agenda:slug}', [WebinarController::class, 'showUpcomingAgenda'])->name('webinar.upcoming');
 
 Route::get('/documents/{document:slug}', [DocumentController::class, 'show'])->name('document.show');
 
-Route::get('/profile',[ProfileController::class, 'show'])->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/profile', [ProfileController::class, 'show'])->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/complete-profile', [ProfileController::class, 'showCompleteProfileForm'])->name('profile.complete');

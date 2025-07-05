@@ -26,6 +26,7 @@ return Application::configure(basePath: dirname(__DIR__))
         ]);
         $middleware->alias([
             'profile.completed' => \App\Http\Middleware\EnsureProfileIsComplete::class,
+            'verify.doku' => \App\Http\Middleware\VerifyDokuSignature::class,
         ]);
 
         //

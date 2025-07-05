@@ -51,6 +51,9 @@ Route::middleware(['auth'])->group(function () {
 
         Route::get('/courses/join/{course:slug}', [CourseController::class, 'join'])
             ->name('course.join');
+        // web-design-hack/1/12
+        Route::get('/courses/learning/{course:slug}/{courseSection}/{sectionContent}', [CourseController::class, 'learning'])
+            ->name('courses.learning');
 
         Route::get('/checkout/{pricing}', [FrontController::class, 'checkout'])->name('front.checkout');
 
@@ -83,14 +86,4 @@ Route::get('/profile-public', function () {
 
 Route::get('/course/{slug}', function ($slug) {
     return Inertia::render('Course/CourseDetails', ['slug' => $slug]);
-});
-
-// web-design-hack/1/12
-Route::get('/courses/learning/{course:slug}/{courseSection}/{sectionContent}', [CourseController::class, 'learning'])
-    ->name('courses.learning');
-// Route::get('/courses/learn/{slug}', function ($slug) {
-//     return Inertia::render('Course/CourseKonten', ['slug' => $slug]);
-// })->name('learning.show');
-Route::get('/{any}', function () {
-    return Inertia::render('EmpatKosongEmpat');
 });

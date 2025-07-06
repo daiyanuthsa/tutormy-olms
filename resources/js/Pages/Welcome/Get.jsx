@@ -35,7 +35,7 @@ const steps = [
 
 const Get = () => {
     return (
-        <div className="bg-neutral-900 text-white py-16 px-4">
+        <div className=" text-white py-16 px-4">
             <div className="container mx-auto max-w-7xl">
                 <h2 className="text-center text-2xl lg:text-4xl font-bold mb-16">
                     Apa yang kamu dapatkan apabila belajar di platform Tutormy!
@@ -77,10 +77,11 @@ const Get = () => {
                             {step.imgPosition === 'right' && (
                                 <>
                                     <div className="col-span-1">
-                                        <h3 className="text-purple-300 font-bold text-sm lg:text-2xl mb-2">
+                                        <h3 className="text-purple-300 text-right font-bold text-sm lg:text-2xl mb-2">
                                             {step.title}
                                         </h3>
-                                        <p className="hidden lg:block text-gray-300 font-medium text-sm">{step.desc}</p>
+                                        <p className="hidden lg:block text-gray-300 text-right
+                                        font-medium text-sm">{step.desc}</p>
                                     </div>
                                     <div className="col-span-1 flex justify-center items-center relative z-10">
                                         <div className="bg-gradient-to-r from-primary-4 to-primary-1 p-0.5 rounded-lg">

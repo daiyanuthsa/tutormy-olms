@@ -60,7 +60,7 @@ export default function Details({ article, writer }) {
                         </div>
                     </div>
                 </div>
-                <Footer />
+                
             </MainLayout>
             {/* <main className="font-inter">
                 

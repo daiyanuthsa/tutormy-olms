@@ -101,7 +101,7 @@ const Course = ({courses}) => {
                     </>
                 )}
 
-                <section className="py-12 container">
+                {/* <section className="py-12 container">
                     <div className="p-6 lg:px-12 text-white lg:py-8 flex flex-col lg:flex-row gap-4 items-start lg:justify-between lg:items-center bg-primary-4 rounded-2xl">
                         <div className="space-y-2">
                             <h2 className="text-xl font-semibold">Akses Semua Materi Belajar Sekarang</h2>
@@ -111,7 +111,7 @@ const Course = ({courses}) => {
                             Upgrade Premium
                         </button>
                     </div>
-                </section>
+                </section> */}
             </main>
         </MainLayout>
     );

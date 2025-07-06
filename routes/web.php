@@ -48,7 +48,7 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/profile/edit', [ProfileController::class, 'edit'])->name('profile.edit');
         Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
         Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-
+        // middleware isSubscribed user
         Route::get('/courses/join/{course:slug}', [CourseController::class, 'join'])
             ->name('course.join');
         // web-design-hack/1/12
@@ -57,7 +57,7 @@ Route::middleware(['auth'])->group(function () {
 
         Route::get('/checkout/{pricing}', [FrontController::class, 'checkout'])->name('front.checkout');
 
-        // middleware issubscribed user
+        
         Route::get('/webinar/{agenda:slug}', [WebinarController::class, 'showPastAgenda'])->name('webinar.past');
     });
     Route::post('/booking/payment/doku', [FrontController::class, 'paymentStore'])->name('payment.store');

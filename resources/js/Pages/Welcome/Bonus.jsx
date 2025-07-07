@@ -59,7 +59,7 @@ const Bonus = () => {
 
                 {bonuses.map((bonus, index) => (
                     <div key={index} className="space-y-8 justify-items-center">
-                        <div className="relative w-4/5  overflow-hidden rounded-xl">
+                        <div className="relative lg:w-4/5 sm:w-full overflow-hidden rounded-xl">
                             <img
                                 src={bonus.image}
                                 alt={`bonus-${index + 1}`}

@@ -49,16 +49,20 @@ Route::middleware(['auth'])->group(function () {
         Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
         Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
         // middleware isSubscribed user
-        Route::get('/courses/join/{course:slug}', [CourseController::class, 'join'])
-            ->name('course.join');
-        // web-design-hack/1/12
-        Route::get('/courses/learning/{course:slug}/{courseSection}/{sectionContent}', [CourseController::class, 'learning'])
-            ->name('courses.learning');
+        Route::middleware(['isSubscribed'])->group(function () {
+            Route::get('/courses/join/{course:slug}', [CourseController::class, 'join'])
+                ->name('course.join');
+            // web-design-hack/1/12
+            Route::get('/courses/learning/{course:slug}/{courseSection}/{sectionContent}', [CourseController::class, 'learning'])
+                ->name('courses.learning');
+
+            Route::get('/webinar/{agenda:slug}', [WebinarController::class, 'showPastAgenda'])->name('webinar.past');
+        });
+        
 
         Route::get('/checkout/{pricing}', [FrontController::class, 'checkout'])->name('front.checkout');
 
         
-        Route::get('/webinar/{agenda:slug}', [WebinarController::class, 'showPastAgenda'])->name('webinar.past');
     });
     Route::post('/booking/payment/doku', [FrontController::class, 'paymentStore'])->name('payment.store');
     Route::get('/payment-success', function () {

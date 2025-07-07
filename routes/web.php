@@ -35,6 +35,7 @@ Route::get('/courses/{course:slug}', [CourseController::class, 'show'])->name('c
 
 Route::get('/webinar', [WebinarController::class, 'index'])->name('webinar.index');
 Route::get('/webinar/register/{agenda:slug}', [WebinarController::class, 'showUpcomingAgenda'])->name('webinar.upcoming');
+Route::get('/webinar/{agenda:slug}', [WebinarController::class, 'showPastAgenda'])->name('webinar.past');
 
 Route::get('/documents/{document:slug}', [DocumentController::class, 'show'])->name('document.show');
 
@@ -56,10 +57,9 @@ Route::middleware(['auth'])->group(function () {
             Route::get('/courses/learning/{course:slug}/{courseSection}/{sectionContent}', [CourseController::class, 'learning'])
                 ->name('courses.learning');
 
-            Route::get('/webinar/{agenda:slug}', [WebinarController::class, 'showPastAgenda'])->name('webinar.past');
-        });
-        
+             });
 
+       
         Route::get('/checkout/{pricing}', [FrontController::class, 'checkout'])->name('front.checkout');
 
         

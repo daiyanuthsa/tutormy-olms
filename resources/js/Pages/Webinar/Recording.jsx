@@ -2,7 +2,7 @@ import MainLayout from "@/Layouts/MainLayout";
 import { Icon } from "@iconify/react";
 
 export default function Recording({ webinarDetail }) {
-    if (!webinarDetail) return null;
+    // if (!webinarDetail) return null;
 
     const formattedDate = new Date(webinarDetail.event_datetime).toLocaleDateString('id-ID', {
         day: 'numeric',
@@ -66,7 +66,7 @@ export default function Recording({ webinarDetail }) {
                                 <iframe
                                     src={webinarDetail.recording_url}
                                     title="Rekaman Webinar"
-                                    className="w-full h-96 rounded-xl border"
+                                    className="w-full h-96 lg:h-full rounded-xl border"
                                     allowFullScreen
                                 ></iframe>
                             ) : (

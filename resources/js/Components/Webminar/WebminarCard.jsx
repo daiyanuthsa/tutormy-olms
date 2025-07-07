@@ -14,7 +14,7 @@ const WebminarCard = ({ webinar }) => {
     const accessLabel = isUpcoming ? 'Gratis' : 'Akses terbatas'
     const accessIcon = isUpcoming ? 'mdi:ticket-percent-outline' : 'mdi:lock'
 
-    const link = `/webinar/register/${webinar.slug}`
+    const link = `/webinar${isUpcoming ? '/register' : ''}/${webinar.slug}`
 
     return (
         <Link href={link} className="block hover:opacity-90 transition">

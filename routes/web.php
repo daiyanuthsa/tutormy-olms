@@ -82,3 +82,11 @@ Route::get('/profile-public', function () {
         'user' => auth()->user(),
     ]);
 })->name('profile.public');
+
+Route::get('/riwayat-pembelian', function () {
+    return Inertia::render('RiwayatPembelian/Index');
+})->name('riwayat-pembelian');
+
+Route::get('/course-sertifikat', function () {
+    return Inertia::render('Course/Sertifikat');
+})->name('course-sertifikat');

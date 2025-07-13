@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CertificateController;
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\DocumentController;
 use App\Http\Controllers\FrontController;
@@ -60,12 +61,10 @@ Route::middleware(['auth'])->group(function () {
             Route::get('/courses/finished/{course:slug}', [CourseController::class, 'finished'])
                 ->name('courses.learning');
 
+            Route::get('/courses/certificate/{course:slug}', [CertificateController::class, 'show'])
+                ->name('courses.certificate.show');
              });
-
-       
         Route::get('/checkout/{pricing}', [FrontController::class, 'checkout'])->name('front.checkout');
-
-        
     });
     Route::post('/booking/payment/doku', [FrontController::class, 'paymentStore'])->name('payment.store');
     Route::get('/payment-success', function () {

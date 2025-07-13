@@ -41,18 +41,44 @@ class CourseService
         } else {
             // Jika sudah terdaftar, ambil data course student user
             $courseStudent = $course->courseStudents()->where('user_id', $user->id)->first();
-            $firstSection = $courseStudent->courseSection;
+            // dd($courseStudent);
+            $courseSectionId = $courseStudent->course_section_id;
             $firstSectionContentId = $courseStudent->section_content_id;
-            return redirect()->route('learning.show', [
-                'course' => $course->slug,
-                'courseSection' => $firstSection ? $firstSection->id : null,
-                'sectionContent' => $firstSectionContentId,
-            ]);
+            return redirect("/courses/learning/{$course->slug}/{$courseSectionId}/{$firstSectionContentId}");
         }
         return [
             'user_name' => $user->name,
             'section_id' => $firstSection->id,
             'section_content_id' => $firstSectionContentId,
         ];
+    }
+    public function isfinished(Course $course)
+    {
+        $user = auth()->user();
+        $courseStudent = $course->courseStudents()->where('user_id', $user->id)->first();
+
+        if (!$courseStudent) {
+            return response()->json(['message' => 'User not enrolled in course'], 404);
+        }
+
+        // Ambil section terakhir dari course
+        $lastSection = $course->sections()->orderByDesc('position')->first();
+
+        // Ambil content terakhir dari section terakhir
+        $lastSectionContentId = null;
+        if ($lastSection) {
+            $lastSectionContent = $lastSection->contents()->orderByDesc('position')->first();
+            if ($lastSectionContent) {
+            $lastSectionContentId = $lastSectionContent->id;
+            }
+        }
+
+        // Cek apakah course_section_id dan section_content_id pada courseStudent adalah yang terakhir
+        $isFinished = (
+            $courseStudent->course_section_id == ($lastSection ? $lastSection->id : null) &&
+            $courseStudent->section_content_id == $lastSectionContentId
+        );
+
+        return (['is_finished' => $isFinished]);
     }
 }

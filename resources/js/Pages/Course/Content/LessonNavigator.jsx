@@ -97,18 +97,27 @@ const LessonNavigator = ({
             >
                 ← Sebelum
             </button>
-            <button
-                onClick={() => handleChangeLesson(1)}
-                disabled={isLast}
-                className={`text-sm font-medium px-4 py-2 rounded-xl
+            {isLast ? (
+                <button
+                    onClick={() => router.visit(`/courses/finished/${courseSlug}`)}
+                    className="text-sm font-medium px-4 py-2 rounded-xl border border-primary-2"
+                >
+                    Selesai
+                </button>
+            ) : (
+                <button
+                    onClick={() => handleChangeLesson(1)}
+                    disabled={isLast}
+                    className={`text-sm font-medium px-4 py-2 rounded-xl
         ${
             isLast
                 ? "bg-neutral-4 cursor-not-allowed"
                 : "border border-primary-2"
         }`}
-            >
-                Sesudah →
-            </button>
+                >
+                    Sesudah →
+                </button>
+            )}
         </div>
     </div>
 );

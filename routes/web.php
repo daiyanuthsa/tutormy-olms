@@ -57,6 +57,9 @@ Route::middleware(['auth'])->group(function () {
             Route::get('/courses/learning/{course:slug}/{courseSection}/{sectionContent}', [CourseController::class, 'learning'])
                 ->name('courses.learning');
 
+            Route::get('/courses/finished/{course:slug}', [CourseController::class, 'finished'])
+                ->name('courses.learning');
+
              });
 
        

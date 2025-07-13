@@ -102,4 +102,22 @@ public function join(Course $course)
         ]);
     }
 
+    public function finished(Course $course)
+    {
+        $isFinished = $this->courseService->isfinished($course);
+
+        if (!$isFinished['is_finished']) {
+            return $this->courseService->enrollUser($course);
+        }
+
+        $course->load(['category'])->with(['contentsCount']);
+        $courseArr = $course->only(['id', 'name', 'slug', 'category_id', 'thumbnail', ]);
+        $courseArr['category'] = $course->category ? $course->category->only(['id', 'name']) : null;
+        $courseArr['contentsCount'] = $course->contentsCount();
+
+        return Inertia::render('Course/CourseFinished', [
+            'course' => $courseArr,
+        ]);
+    }
+
 }

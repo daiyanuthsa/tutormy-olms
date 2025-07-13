@@ -21,10 +21,6 @@ class CourseController extends Controller
     ) {
         $this->courseService = $courseService;
         $this->courseRepository = $courseRepository;
-        // Inject the course repository
-        // This allows us to use the repository methods in this controller
-        // This is a good practice for separating concerns and making the code more testable{
-
     }
 
     public function index()

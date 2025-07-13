@@ -63,6 +63,8 @@ Route::middleware(['auth'])->group(function () {
 
             Route::get('/courses/certificate/{course:slug}', [CertificateController::class, 'show'])
                 ->name('courses.certificate.show');
+            Route::post('/courses/certificate/{course:slug}', [CertificateController::class,'store'])
+                ->name('courses.certificate.store');
              });
         Route::get('/checkout/{pricing}', [FrontController::class, 'checkout'])->name('front.checkout');
     });

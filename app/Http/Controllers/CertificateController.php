@@ -10,7 +10,7 @@ class CertificateController extends Controller
 {
     //
     public function show(Course $course){
-        return Inertia::render('Course/CourseFinished', [
+        return Inertia::render('Course/Sertifikat', [
             'course' => $course
         ]);
     }

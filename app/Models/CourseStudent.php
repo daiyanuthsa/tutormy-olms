@@ -32,7 +32,7 @@ class CourseStudent extends Model
     {
         return $this->belongsTo(Course::class);
     }
-    public function sertificate()
+    public function certificate()
     {
         return $this->hasOne(CourseCertificate::class, 'course_student_id', 'id');
     }

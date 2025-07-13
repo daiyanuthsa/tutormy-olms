@@ -5,6 +5,11 @@ import { Icon } from '@iconify/react'
 import ApplicationLogo from '@/Components/ApplicationLogo'
 
 const Sertifikat = () => {
+    const handleBack = () => {
+        window.history.back();
+    };
+
+
     return (
         <section className="font-inter">
             <Head title="Raih Sertifikat" />
@@ -15,6 +20,7 @@ const Sertifikat = () => {
                 <div className="flex items-center justify-between mb-10 relative z-10">
                     <PrimaryButton
                         variant="outline"
+                        onClick={handleBack}
                         className="rounded-xl md:rounded-2xl text-white px-3 py-2 md:px-4 md:py-2.5 lg:px-6 lg:py-3 text-sm md:text-base"
                     >
                         <Icon

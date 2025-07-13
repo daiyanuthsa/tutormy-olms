@@ -34,7 +34,7 @@ class CourseController extends Controller
     {
         // $course->load(['category', 'benefits']);
         $course = $this->courseRepository->getCourseForPublicView($course->id);
-        $course->load([ 'benefits', 'sections.contents']);
+        $course->load(['benefits', 'sections.contents']);
         if (!Auth()->check()) {
             $course->group_url = null;
         }
@@ -43,22 +43,22 @@ class CourseController extends Controller
         }
         return inertia('Course/CourseDetails', compact('course'));
     }
-public function join(Course $course)
-{
-    $studentName = $this->courseService->enrollUser($course);
-    $course->load(['category']);
+    public function join(Course $course)
+    {
+        $studentName = $this->courseService->enrollUser($course);
+        $course->load(['category']);
 
-    if ($studentName instanceof \Illuminate\Http\RedirectResponse) {
-        return $studentName;
+        if ($studentName instanceof \Illuminate\Http\RedirectResponse) {
+            return $studentName;
+        }
+
+        return Inertia::render('Popup/WelcomeClass', [
+            'course' => $course,
+            'studentName' => $studentName['user_name'],
+            'sectionId' => $studentName['section_id'],
+            'contentId' => $studentName['section_content_id'],
+        ]);
     }
-
-    return Inertia::render('Popup/WelcomeClass', [
-        'course' => $course,
-        'studentName' => $studentName['user_name'],
-        'sectionId' => $studentName['section_id'],
-        'contentId' => $studentName['section_content_id'],
-    ]);
-}
     public function search(Request $request)
     {
         $keyword = $request->input('keyword');
@@ -107,7 +107,7 @@ public function join(Course $course)
         }
 
         $course->load(['category'])->with(['contentsCount']);
-        $courseArr = $course->only(['id', 'name', 'slug', 'category_id', 'thumbnail', ]);
+        $courseArr = $course->only(['id', 'name', 'slug', 'category_id', 'thumbnail',]);
         $courseArr['category'] = $course->category ? $course->category->only(['id', 'name']) : null;
         $courseArr['contentsCount'] = $course->contentsCount();
 

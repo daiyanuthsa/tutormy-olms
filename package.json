@@ -24,6 +24,7 @@
     "dependencies": {
         "@iconify/react": "^6.0.0",
         "iconify": "^1.4.0",
-        "lucide-react": "^0.511.0"
+        "lucide-react": "^0.511.0",
+        "tailwind-scrollbar-hide": "^4.0.0"
     }
 }

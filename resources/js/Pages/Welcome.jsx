@@ -17,23 +17,23 @@ const Divider = () => (
     </div>
 )
 
-const Welcome = ({ pricing, testimonials }) => {
+const Welcome = ({ pricing, testimonials, courses }) => {
     return (
         <MainLayout>
             <Head title="Welcome" />
             <main className="py-28 w-full">
                 <HeroComponents />
-                <Review />
+                <Review testimonials={testimonials} />
                 <Divider />
                 <Get />
                 <Divider />
                 <Bonus />
                 <Divider />
-                <Class />
+                <Class courses={courses} />
                 <Divider />
                 <Data />
                 <Divider />
-                <Pricelist />
+                <Pricelist pricings={pricing} />
                 <Divider />
                 <Benefit />
                 <Divider />

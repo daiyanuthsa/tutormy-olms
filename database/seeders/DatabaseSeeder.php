@@ -40,7 +40,9 @@ class DatabaseSeeder extends Seeder
         $this->call([
             CourseSeeder::class,
             DocumentSeeder::class,
+            WebinarSeeder::class,
         ]);
 
+        
     }
 }

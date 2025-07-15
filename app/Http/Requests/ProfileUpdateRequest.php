@@ -29,6 +29,7 @@ class ProfileUpdateRequest extends FormRequest
             'date_birth' => ['date', 'nullable'],
             'status' => ['nullable','string','max:30'],
             'gender' => ['nullable','string', 'in:M,F'],
+            'about' => ['string', 'max:1000', 'nullable'],
         ];
     }
 }

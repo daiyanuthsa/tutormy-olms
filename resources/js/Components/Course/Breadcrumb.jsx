@@ -1,25 +1,12 @@
 import React from 'react';
-import { Link } from '@inertiajs/react';    
+import { Link } from '@inertiajs/react';
 
-const Breadcrumb = ({ path }) => {
-    return (
-        <nav className="text-neutral-3 text-sm">
-            <ol className="list-none p-0 inline-flex">
-                {path.map((item, index) => (
-                    <li key={item.label} className="flex items-center">
-                        {index > 0 && <span className="mx-2">/</span>}
-                        {item.url ? (
-                            <Link href={item.url} className="hover:text-primary-3 transition-colors">
-                                {item.label}
-                            </Link>
-                        ) : (
-                            <span className="text-primary-3">{item.label}</span>
-                        )}
-                    </li>
-                ))}
-            </ol>
-        </nav>
-    );
-};
+const Breadcrumb = ({ title }) => (
+    <nav className="text-sm text-primary-1 flex gap-2 items-center">
+        <Link href="/courses" className="hover:text-white">Course</Link>
+        <span>/</span>
+        <span className="text-white font-semibold">{title}</span>
+    </nav>
+);
 
 export default Breadcrumb;

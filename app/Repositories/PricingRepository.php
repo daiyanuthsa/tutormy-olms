@@ -22,4 +22,11 @@ class PricingRepository implements PricingRepositoryInterface
 	{
 		return Pricing::findOrFail($id);
 	}
+	public function getPricingByName($name): Pricing
+	{
+		if (!$name) {
+			throw new \InvalidArgumentException('Name is required');
+		}
+		return Pricing::whereRaw('LOWER(name) = ?', [strtolower($name)])->firstOrFail();
+	}
 }

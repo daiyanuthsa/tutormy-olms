@@ -2,21 +2,23 @@ import React from 'react';
 
 const CourseFilter = ({ categories, activeCategory, onCategoryChange }) => {
     return (
-        <section>
-            <div className="container flex flex-wrap justify-center md:justify-start gap-12 text-white">
-                {categories.map((category) => (
-                    <button
-                        key={category.slug}
-                        onClick={() => onCategoryChange(category.name)}
-                        className={`font-semibold text-lg 
-                            ${activeCategory === category.name
-                                ? 'text-primary-3'
-                                : 'hover:text-primary-3'
-                            }`}
-                    >
-                        {category.name}
-                    </button>
-                ))}
+        <section className="overflow-x-auto">
+            <div className="container">
+                <div className="flex gap-6 lg:gap-12 whitespace-nowrap overflow-x-auto pb-2 scrollbar-hide">
+                    {categories.map((category) => (
+                        <button
+                            key={category.slug}
+                            onClick={() => onCategoryChange(category.name)}
+                            className={`text-base md:text-lg font-semibold transition-colors duration-200 whitespace-nowrap 
+                ${activeCategory === category.name
+                                    ? 'text-primary-3'
+                                    : 'text-white hover:text-primary-3'
+                                }`}
+                        >
+                            {category.name}
+                        </button>
+                    ))}
+                </div>
             </div>
         </section>
     );

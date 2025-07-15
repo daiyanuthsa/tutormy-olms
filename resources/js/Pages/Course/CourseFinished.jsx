@@ -1,7 +1,7 @@
-import PopUpLayout from '@/Layouts/PopUpLayout'
-import PrimaryButton from '@/Components/PrimaryButton'
-import { Icon } from '@iconify/react'
-import React from 'react'
+import PopUpLayout from "@/Layouts/PopUpLayout";
+import PrimaryButton from "@/Components/PrimaryButton";
+import { Icon } from "@iconify/react";
+import React from "react";
 
 const CourseFinished = ({ course }) => {
     return (
@@ -62,13 +62,16 @@ const CourseFinished = ({ course }) => {
                         <PrimaryButton
                             variant="outline"
                             className="rounded-full text-white w-full md:w-auto"
+                            onClick={() => {
+                                window.location.href = `/courses/certificate/${course.slug}`;
+                            }}
                         >
                             Download Sertifikat
                         </PrimaryButton>
                         <PrimaryButton
                             className="rounded-full w-full md:w-auto"
                             onClick={() => {
-                                window.location.href = '/courses'
+                                window.location.href = "/courses";
                             }}
                         >
                             Course Lainnya
@@ -78,9 +81,9 @@ const CourseFinished = ({ course }) => {
             </div>
         </PopUpLayout>
     );
-}
+};
 
-export default CourseFinished
+export default CourseFinished;
 
 // import MainLayout from "@/Layouts/MainLayout";
 // import React from "react";

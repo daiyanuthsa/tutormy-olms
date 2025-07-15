@@ -1,0 +1,1 @@
+import{j as e}from"./app-2fikJ7z7.js";function t({document:s}){return e.jsxs("div",{className:"text-white",children:[e.jsxs("h1",{children:["Dokumment ",s.name]}),e.jsx("pre",{children:JSON.stringify(s,null,2)})]})}export{t as default};

@@ -1,1 +1,0 @@
-import{j as e}from"./app-DLtIWMbB.js";const i=s=>e.jsxs("div",{className:"text-white ",children:[e.jsx("h1",{className:"text-white text-2xl font-bold mb-4",children:"Kelas Selesai"}),e.jsx("pre",{children:JSON.stringify(s,null,2)})]});export{i as default};

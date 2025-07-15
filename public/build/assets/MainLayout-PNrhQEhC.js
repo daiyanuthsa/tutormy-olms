@@ -1,0 +1,1 @@
+import{j as r}from"./app-2fikJ7z7.js";import{F as o}from"./Footer-xo8RAPr7.js";import{N as t}from"./Navbar-CbCecJkb.js";const m=({children:s})=>r.jsxs("div",{className:"font-inter bg-neutral-6",children:[r.jsx(t,{}),r.jsx("div",{children:s}),r.jsx(o,{})]});export{m as M};

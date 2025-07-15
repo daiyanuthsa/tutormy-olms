@@ -1,0 +1,1 @@
+import{j as t}from"./app-2fikJ7z7.js";const r=e=>t.jsxs("div",{className:"text-white ",children:[t.jsx("h1",{className:"text-white text-2xl font-bold mb-4",children:"Detail Kursus"}),t.jsx("pre",{children:JSON.stringify(e,null,2)})]});export{r as default};

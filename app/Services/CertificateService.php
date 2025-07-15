@@ -76,7 +76,10 @@ class CertificateService
         $dompdf = new Dompdf($options);
 
         // Generate HTML from a Blade view
-        $html = View::make('certificates.template', $certificate)->render();
+        $html = View::make(
+            'certificates.template',
+            ['certificate' => $certificate]
+        )->render();
 
         // Load HTML to Dompdf
         $dompdf->loadHtml($html);

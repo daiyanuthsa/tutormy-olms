@@ -3,8 +3,39 @@ import { Head } from '@inertiajs/react'
 import React from 'react'
 import { Icon } from '@iconify/react'
 import ApplicationLogo from '@/Components/ApplicationLogo'
+import { usePage, router } from '@inertiajs/react';
 
 const Sertifikat = () => {
+    const handleBack = () => {
+        window.history.back();
+    };
+
+
+    const [nama, setNama] = React.useState('');
+    const [loading, setLoading] = React.useState(false);
+
+    const { props } = usePage();
+    const course = props.course;
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        setLoading(true);
+        router.post(
+            route("courses.certificate.store", { course: course.slug }),
+            {
+                name_on_certificate: nama,
+            },
+            {
+                onSuccess: () => {
+                    router.visit(route("dashboard"));
+                },
+                onFinish: () => {
+                    setLoading(false);
+                },
+            }
+        );
+    };
+
     return (
         <section className="font-inter">
             <Head title="Raih Sertifikat" />
@@ -15,6 +46,7 @@ const Sertifikat = () => {
                 <div className="flex items-center justify-between mb-10 relative z-10">
                     <PrimaryButton
                         variant="outline"
+                        onClick={handleBack}
                         className="rounded-xl md:rounded-2xl text-white px-3 py-2 md:px-4 md:py-2.5 lg:px-6 lg:py-3 text-sm md:text-base"
                     >
                         <Icon
@@ -49,14 +81,17 @@ const Sertifikat = () => {
                             </p>
                         </div>
 
-                        <div className="flex flex-col items-center gap-6">
+                        <form onSubmit={handleSubmit} className="flex flex-col items-center gap-6">
                             <div className="relative w-full md:w-2/3">
                                 <input
                                     type="text"
                                     id="nama"
                                     name="nama"
                                     placeholder=" "
+                                    value={nama}
+                                    onChange={e => setNama(e.target.value)}
                                     className="block w-full px-4 pt-6 pb-2 text-white bg-transparent border border-white rounded-xl appearance-none focus:outline-none focus:ring-2 focus:ring-purple-500"
+                                    required
                                 />
                                 <label
                                     htmlFor="nama"
@@ -66,10 +101,14 @@ const Sertifikat = () => {
                                 </label>
                             </div>
 
-                            <PrimaryButton className="rounded-full w-full md:w-1/3">
-                                Submit
+                            <PrimaryButton
+                                className="rounded-full w-full md:w-1/3"
+                                type="submit"
+                                disabled={loading}
+                            >
+                                {loading ? 'Mengirim...' : 'Submit'}
                             </PrimaryButton>
-                        </div>
+                        </form>
                     </div>
                 </div>
             </div>

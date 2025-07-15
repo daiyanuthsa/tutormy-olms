@@ -25,6 +25,11 @@
             text-decoration: none;
             border-radius: 6px;
         }
+        .link {
+            color: #1d72b8;
+            text-decoration: none;
+            font-weight: bold;
+        }
     </style>
 </head>
 <body>
@@ -41,7 +46,7 @@
 
         <a href="{{ $url }}" class="button" target="_blank">Lihat Sertifikat</a>
 
-        <p style="margin-top: 30px;">Terima kasih telah mengikuti kelas ini.</p>
+        <p class="link" style="margin-top: 30px;">Terima kasih telah mengikuti kelas ini.</p>
         <p>Salam hangat, <br> Tim Kelas Online</p>
     </div>
 </body>

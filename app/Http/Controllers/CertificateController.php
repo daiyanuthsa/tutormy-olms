@@ -39,4 +39,14 @@ class CertificateController extends Controller
 
         return Inertia::location(route('dashboard'));
     }
+    public function generate()
+    {
+        // Dummy data for testing certificate generation
+        $user = Auth::user();
+        $course = Course::first();
+        $nameOnCertificate = 'John Doe';
+        $data = compact('user', 'course', 'nameOnCertificate');
+        Log::info('Generating certificate for user: ' . $user->id . ', course: ' . $course->id . ', name: ' . $nameOnCertificate);
+        return $this->certificateService->generateCertificate($data);
+    }
 }

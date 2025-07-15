@@ -2,6 +2,7 @@
 
 namespace App\Jobs;
 
+use App\Mail\CertificateMail;
 use App\Repositories\CertificateRepository;
 use App\Services\CertificateService;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -25,7 +26,6 @@ class GenerateCertificateJob implements ShouldQueue
     
     }
 
-
     /**
      * Execute the job.
      */
@@ -35,22 +35,29 @@ class GenerateCertificateJob implements ShouldQueue
 
         foreach ($certificates as $certificate) {
             try {
+                Log::info('[GenerateCertificateJob] Mulai proses sertifikat', ['certificate_id' => $certificate->id ?? null]);
+
                 // generate PDF / sertifikat
                 $filePath = $this->certificateService->generateCertificate($certificate);
+                Log::info('[GenerateCertificateJob] Sertifikat berhasil digenerate', ['certificate_id' => $certificate->id ?? null, 'file_path' => $filePath]);
 
                 // update database
                 $certificate->update([
-                    'file_path' => $filePath,
+                    'path' => $filePath,
                     'status' => 'done',
                     'sent_at' => now(),
                 ]);
+                Log::info('[GenerateCertificateJob] Status sertifikat diupdate', ['certificate_id' => $certificate->id ?? null]);
 
                 // kirim email
-                Mail::to($certificate->user->email)->send(new CertificateMail($certificate));
+                $email = $certificate->courseStudent->user->email ?? null;
+                Log::info('[GenerateCertificateJob] Mengirim email sertifikat', ['certificate_id' => $certificate->id ?? null, 'email' => $email]);
+                Mail::to($email)->send(new CertificateMail($certificate));
+                Log::info('[GenerateCertificateJob] Email sertifikat terkirim', ['certificate_id' => $certificate->id ?? null, 'email' => $email]);
 
             } catch (\Exception $e) {
                 $certificate->update(['status' => 'failed']);
-                Log::error("Gagal membuat sertifikat: " . $e->getMessage());
+                Log::error("Gagal membuat sertifikat: " . $e->getMessage(), ['certificate_id' => $certificate->id ?? null]);
             }
         }
     }

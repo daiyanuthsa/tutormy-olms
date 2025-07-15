@@ -73,7 +73,8 @@ Route::middleware(['auth'])->group(function () {
         return Inertia::render('Transaction/PaymentSuccess/Success');
     })->name('payment.success');
 });
-
+Route::get('/test-certificate', [CertificateController::class, 'generate'])
+    ->name('test.certificate.generate');
 
 Route::get('/test', function () {
     return Inertia::render('Auth/VerifyEmail', ['status' => session('status')]);

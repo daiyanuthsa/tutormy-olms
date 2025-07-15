@@ -1,1 +1,0 @@
-import{j as e}from"./app-2fikJ7z7.js";const i=t=>e.jsxs("div",{className:"text-white ",children:[e.jsx("h1",{className:"text-white text-2xl font-bold mb-4",children:"Halaman Join Kelas"}),e.jsx("pre",{children:JSON.stringify(t,null,2)})]});export{i as default};

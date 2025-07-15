@@ -1,1 +1,0 @@
-import{j as e}from"./app-2fikJ7z7.js";function t({webinarDetail:i}){return e.jsxs("div",{className:"text-white",children:[e.jsx("h1",{children:"Detail webinar"}),e.jsx("pre",{children:JSON.stringify(i,null,2)})]})}export{t as default};

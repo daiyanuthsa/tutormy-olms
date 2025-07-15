@@ -5,6 +5,7 @@ use App\Models\Course;
 use App\Models\CourseStudent;
 use App\Models\User;
 use App\Repositories\CertificateRepository;
+use Inertia\Inertia;
 
 
 class CertificateService
@@ -44,16 +45,19 @@ class CertificateService
         $courseStudent = CourseStudent::where('user_id', $user->id)
             ->where('course_id', $course->id)
             ->first();
+            
         if (!$courseStudent) {
             return redirect()->route('course.details', ['course' => $course->slug]);
         }
         $certificate = $this->certificateRepository->getCertificate($courseStudent->id);
+        
         if ($certificate) {
-            // Misal: return path file sertifikat, atau URL, atau objeknya
-            return redirect()->away(asset('storage/' . $certificate->file_path));
+            return redirect()->away(asset('storage/' . $certificate->path));
         }
         // Jika belum ada, return null (bisa juga redirect ke pembuatan sertifikat di controller)
-        return null;
+        return Inertia::render('Course/Sertifikat', [
+            'course' => $course
+        ]);
     }
 
     public function generateCertificate($data)

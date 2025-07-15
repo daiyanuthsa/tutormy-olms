@@ -18,26 +18,24 @@ class CertificateController extends Controller
         $this->certificateService = $certificateService;
         // You can add middleware or other initializations here if needed
     }
-    public function show(Course $course){
+    public function show(Course $course)
+    {
         $user = Auth::user();
 
-        $this->certificateService->checkOrRedirectCertificate($user, $course);
-        
-        return Inertia::render('Course/Sertifikat', [
-            'course' => $course
-        ]);
+        return $this->certificateService->checkOrRedirectCertificate($user, $course);
     }
-    public function store(Request $request, Course $course){
+    public function store(Request $request, Course $course)
+    {
         $validated = $request->validate([
             'name_on_certificate' => 'required|string|max:255',
         ]);
-        Log::info('Certificate request validation passed: '.$validated['name_on_certificate']);
+        Log::info('Certificate request validation passed: ' . $validated['name_on_certificate']);
         $this->certificateService->createPendingCertificate(
             auth()->user(),
             $course,
             $validated['name_on_certificate']
         );
-        Log::info('Certificate request created for user: '.$course->id.' with name: '.$validated['name_on_certificate']);
+        Log::info('Certificate request created for user: ' . $course->id . ' with name: ' . $validated['name_on_certificate']);
 
         return Inertia::location(route('dashboard'));
     }

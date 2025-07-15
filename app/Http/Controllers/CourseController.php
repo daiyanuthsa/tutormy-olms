@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Course;
+use App\Repositories\CourseRepository;
 use App\Repositories\CourseRepositoryInterface;
 use App\Services\CourseService;
+use Auth;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
@@ -14,20 +16,16 @@ class CourseController extends Controller
     protected $courseService;
 
     public function __construct(
-        CourseRepositoryInterface $courseRepository,
+        CourseRepository $courseRepository,
         CourseService $courseService
     ) {
         $this->courseService = $courseService;
         $this->courseRepository = $courseRepository;
-        // Inject the course repository
-        // This allows us to use the repository methods in this controller
-        // This is a good practice for separating concerns and making the code more testable{
-
     }
 
     public function index()
     {
-        $courses = $this->courseRepository->getAllByCategory();
+        $courses = $this->courseRepository->getCourseThumbnail();
         // dd($courses);
         return inertia('Course/Course', ['courses' => $courses]);
     }
@@ -36,6 +34,7 @@ class CourseController extends Controller
     {
         // $course->load(['category', 'benefits']);
         $course = $this->courseRepository->getCourseForPublicView($course->id);
+        $course->load(['benefits', 'sections.contents']);
         if (!Auth()->check()) {
             $course->group_url = null;
         }
@@ -46,12 +45,18 @@ class CourseController extends Controller
     }
     public function join(Course $course)
     {
-
         $studentName = $this->courseService->enrollUser($course);
+        $course->load(['category']);
 
-        return Inertia::render('Course/CourseJoin', [
+        if ($studentName instanceof \Illuminate\Http\RedirectResponse) {
+            return $studentName;
+        }
+
+        return Inertia::render('Popup/WelcomeClass', [
             'course' => $course,
-            'studentName' => $studentName,
+            'studentName' => $studentName['user_name'],
+            'sectionId' => $studentName['section_id'],
+            'contentId' => $studentName['section_content_id'],
         ]);
     }
     public function search(Request $request)
@@ -66,6 +71,48 @@ class CourseController extends Controller
         return Inertia::render('Course/CourseSearch', [
             'courses' => $courses,
             'keyword' => $keyword,
+        ]);
+    }
+
+    public function learning(Course $course, $sectionId, $contentId)
+    {
+        $user = Auth::user();
+        // Get the course student record for the authenticated user
+        $courseStudent = $course->courseStudents()->where('user_id', $user->id)->first();
+
+        if (!$courseStudent) {
+            return redirect()->route('course.index')->withErrors(['error' => 'You are not enrolled in this course']);
+        }
+
+        // Update the course section and content IDs
+        $courseStudent->update([
+            'course_section_id' => $sectionId,
+            'section_content_id' => $contentId,
+        ]);
+        $course = $this->courseRepository->getCourseForPublicView($course->id);
+
+        return Inertia::render('Course/CourseKonten', [
+            'course' => $course,
+            'sectionId' => $sectionId,
+            'contentId' => $contentId,
+        ]);
+    }
+
+    public function finished(Course $course)
+    {
+        $isFinished = $this->courseService->isfinished($course);
+
+        if (!$isFinished['is_finished']) {
+            return $this->courseService->enrollUser($course);
+        }
+
+        $course->load(['category'])->with(['contentsCount']);
+        $courseArr = $course->only(['id', 'name', 'slug', 'category_id', 'thumbnail',]);
+        $courseArr['category'] = $course->category ? $course->category->only(['id', 'name']) : null;
+        $courseArr['contentsCount'] = $course->contentsCount();
+
+        return Inertia::render('Course/CourseFinished', [
+            'course' => $courseArr,
         ]);
     }
 

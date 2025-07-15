@@ -22,9 +22,19 @@ const MasterTeacherCard = ({ name, role }) => (
 const Data = () => {
     return (
         <section className="container mx-auto py-16 lg:py-20 text-white space-y-20">
-
-            <button className="fixed bottom-10 right-5 md:right-8 lg:right-28 z-50 flex items-center gap-3 bg-success-2 text-lg lg:text-2xl font-bold rounded-xl py-2 px-4">
-                <Icon icon="logos:whatsapp-icon" className="w-6 h-6 lg:w-9 lg:h-9" />
+            <button
+                onClick={() =>
+                    window.open(
+                        "https://wa.me/6281234567890?text=Halo%20saya%20ingin%20bertanya",
+                        "_blank"
+                    )
+                }
+                className="fixed bottom-10 right-5 md:right-8 lg:right-28 z-50 flex items-center gap-3 bg-success-2 text-lg lg:text-2xl font-bold rounded-xl py-2 px-4"
+            >
+                <Icon
+                    icon="logos:whatsapp-icon"
+                    className="w-6 h-6 lg:w-9 lg:h-9"
+                />
                 Whatsapp
             </button>
 
@@ -32,10 +42,12 @@ const Data = () => {
                 <div className="absolute top-[-150px] left-1/2 -translate-x-1/2 w-[400px] h-[250px] bg-purple-700 opacity-30 blur-3xl rounded-full z-0" />
                 <div className="relative z-10">
                     <h2 className="text-2xl lg:text-4xl font-bold mb-6 xl:px-32 2xl:px-60">
-                        Master Teacher yang akan membantu kamu selama proses belajar!
+                        Master Teacher yang akan membantu kamu selama proses
+                        belajar!
                     </h2>
                     <p className="lg:text-xl mb-7 opacity-90 xl:px-40 2xl:px-80">
-                        Yuk belajar bareng Master Teacher kami dan raih skill yang kamu butuhkan untuk masa depan cerahmu!
+                        Yuk belajar bareng Master Teacher kami dan raih skill
+                        yang kamu butuhkan untuk masa depan cerahmu!
                     </p>
                     <div className="grid grid-cols-2 lg:grid-cols-5 gap-6 max-w-6xl mx-auto">
                         {[...Array(5)].map((_, index) => (
@@ -51,7 +63,9 @@ const Data = () => {
 
             <div className="flex flex-col items-center gap-6 lg:gap-8 text-center">
                 <h5 className="text-xl lg:text-4xl font-semibold">
-                    Kuota TERBATAS untuk dapatkan bonus senilai <span className="font-bold">Rp10.500.000</span> + Diskon hingga 98%.
+                    Kuota TERBATAS untuk dapatkan bonus senilai{" "}
+                    <span className="font-bold">Rp10.500.000</span> + Diskon
+                    hingga 98%.
                 </h5>
 
                 <h6 className="text-xl lg:text-3xl font-bold">
@@ -69,7 +83,7 @@ const Data = () => {
                 </PrimaryButton>
             </div>
         </section>
-    )
+    );
 }
 
 export default Data

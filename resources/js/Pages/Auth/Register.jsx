@@ -76,8 +76,8 @@ const Register = () => {
     return (
         <AuthLayout>
             <Head title="Register" />
-            <section className='py-28 px-4 md:px-8 h-full'>
-                <div className='max-w-7xl mx-auto text-white flex flex-col lg:flex-row items-center gap-12'>
+            <section className="py-28 px-4 md:px-8 h-full">
+                <div className="max-w-7xl mx-auto text-white flex flex-col lg:flex-row items-center gap-12">
                     <div className="w-full lg:w-1/2 flex items-center justify-center border p-5 rounded-xl shadow-md shadow-primary-4 lg:border-none lg:shadow-none">
                         <div className="w-full max-w-md">
                             <form onSubmit={submit} className="space-y-4">
@@ -87,7 +87,7 @@ const Register = () => {
                                     icon="mdi:account-outline"
                                     placeholder="Tulis Namamu disini"
                                     value={data.name}
-                                    onChange={handleChange('name')}
+                                    onChange={handleChange("name")}
                                     error={errors.name}
                                 />
                                 <FormField
@@ -96,7 +96,7 @@ const Register = () => {
                                     icon="mdi:email-outline"
                                     placeholder="Tulis Email disini"
                                     value={data.email}
-                                    onChange={handleChange('email')}
+                                    onChange={handleChange("email")}
                                     error={errors.email}
                                 />
                                 <FormField
@@ -105,7 +105,7 @@ const Register = () => {
                                     icon="mdi:phone-outline"
                                     placeholder="+62"
                                     value={data.phone}
-                                    onChange={handleChange('phone')}
+                                    onChange={handleChange("phone")}
                                     error={errors.phone}
                                 />
                                 <FormField
@@ -114,11 +114,13 @@ const Register = () => {
                                     icon="mdi:lock-outline"
                                     placeholder="**********"
                                     value={data.password}
-                                    onChange={handleChange('password')}
+                                    onChange={handleChange("password")}
                                     error={errors.password}
                                     showToggle
                                     toggleValue={showPassword}
-                                    onToggle={() => setShowPassword(!showPassword)}
+                                    onToggle={() =>
+                                        setShowPassword(!showPassword)
+                                    }
                                 />
                                 <FormField
                                     id="password_confirmation"
@@ -126,25 +128,46 @@ const Register = () => {
                                     icon="mdi:lock-outline"
                                     placeholder="**********"
                                     value={data.password_confirmation}
-                                    onChange={handleChange('password_confirmation')}
+                                    onChange={handleChange(
+                                        "password_confirmation"
+                                    )}
                                     error={errors.password_confirmation}
                                     showToggle
                                     toggleValue={showConfirmPassword}
-                                    onToggle={() => setShowConfirmPassword(!showConfirmPassword)}
+                                    onToggle={() =>
+                                        setShowConfirmPassword(
+                                            !showConfirmPassword
+                                        )
+                                    }
                                 />
                                 <div>
                                     <label className="flex items-center">
                                         <Checkbox
                                             name="remember"
                                             checked={data.remember}
-                                            onChange={(e) => setData('remember', e.target.checked)}
+                                            onChange={(e) =>
+                                                setData(
+                                                    "remember",
+                                                    e.target.checked
+                                                )
+                                            }
                                         />
                                         <span className="ml-3">
-                                            Dengan melanjutkan, kamu menyetujui <a href="#" className="underline">Syarat</a> dan <a href="#" className="underline">Kebijakan Privasi</a> Tutormy.id
+                                            Dengan melanjutkan, kamu menyetujui{" "}
+                                            <a
+                                                href="/documents/privacy-policy"
+                                                className="underline"
+                                            >
+                                                Syarat dan Kebijakan Privasi
+                                            </a>{" "}
+                                            
+                                            Tutormy.id
                                         </span>
                                     </label>
                                     {checkboxError && (
-                                        <p className="text-red-400 mt-2">{checkboxError}</p>
+                                        <p className="text-red-400 mt-2">
+                                            {checkboxError}
+                                        </p>
                                     )}
                                 </div>
                                 <PrimaryButton
@@ -152,21 +175,32 @@ const Register = () => {
                                     disabled={processing}
                                     onClick={submit}
                                 >
-                                    {processing ? 'Loading...' : 'Create My Account'}
+                                    {processing
+                                        ? "Loading..."
+                                        : "Create My Account"}
                                 </PrimaryButton>
                                 <PrimaryButton
-                                    variant='outline'
+                                    variant="outline"
                                     onClick={handleGoogleLogin}
                                     className="rounded-2xl w-full"
                                 >
-                                    <Icon icon="logos:google-icon" width="20" height="20" className='mr-3' />
+                                    <Icon
+                                        icon="logos:google-icon"
+                                        width="20"
+                                        height="20"
+                                        className="mr-3"
+                                    />
                                     Continue with Google
                                 </PrimaryButton>
                             </form>
                         </div>
                     </div>
-                    <div className='w-full lg:w-2/3 hidden lg:block'>
-                        <img src="/assets/hero-auth.webp" alt="image" className='w-full max-w-[600px] mx-auto' />
+                    <div className="w-full lg:w-2/3 hidden lg:block">
+                        <img
+                            src="/assets/hero-auth.webp"
+                            alt="image"
+                            className="w-full max-w-[600px] mx-auto"
+                        />
                     </div>
                 </div>
             </section>

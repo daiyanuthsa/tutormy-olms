@@ -4,57 +4,13 @@ import React, { useState } from "react";
 export default function Pricing({ pricings }) {
     const [selectedPlan, setSelectedPlan] = useState(2);
 
-    const plans = [
-        {
-            id: "pemula-left",
-            name: "Paket Pemula",
-            duration: "12 Bulan",
-            price: "Rp 1.224.000,-",
-            monthlyPrice: "Rp 125.000",
-            features: [
-                "200 + Materi Belajar",
-                "20+ Akses Seluruh Materi",
-                "50+ Konsultasi Mentor Ahli",
-                "24/7 Dukungan eror",
-                "Materi dan dukungan Prioritas",
-            ],
-        },
-        {
-            id: "profesional",
-            name: "Paket Profesional",
-            duration: "12 Bulan",
-            price: "Rp 1.224.000,-",
-            monthlyPrice: "Rp 125.000",
-            popular: true,
-            features: [
-                "200 + Materi Belajar",
-                "20+ Akses Seluruh Materi",
-                "50+ Konsultasi Mentor Ahli",
-                "24/7 Dukungan eror",
-                "Materi dan dukungan Prioritas",
-            ],
-        },
-        {
-            id: "pemula-right",
-            name: "Paket Pemula",
-            duration: "12 Bulan",
-            price: "Rp 1.224.000,-",
-            monthlyPrice: "Rp 125.000",
-            features: [
-                "200 + Materi Belajar",
-                "20+ Akses Seluruh Materi",
-                "50+ Konsultasi Mentor Ahli",
-                "24/7 Dukungan eror",
-                "Materi dan dukungan Prioritas",
-            ],
-        },
-    ];
     const features = [
-        "200 + Materi Belajar",
-        "20+ Akses Seluruh Materi",
-        "50+ Konsultasi Mentor Ahli",
-        "24/7 Dukungan eror",
-        "Materi dan dukungan Prioritas",
+        "Akses hingga 300+ menit modul pembelajaran",
+        "Komunitas belajar seumur hidup",
+        "Sesi Live Eksklusif di Luar Platform",
+        "Gratis All Access (Rekaman Webinar Series, Ebook, dll)",
+        "Expert Guest Speaker Eksklusif untuk Member",
+        "Akses ke Event Offline & Networking",
     ];
     // Money formatter for Indonesian Rupiah
     const formatRupiah = (value) => {
@@ -81,8 +37,9 @@ export default function Pricing({ pricings }) {
                             Pilih Akses Materimu Sekarang !
                         </h2>
                         <p className="text-center lg:text-xl max-w-2xl">
-                            Lorem ipsum dolor sit amet consectetur. Odio dolor
-                            arcu ullamcorper dictum nulla ph
+                            Pilih paket belajar yang paling sesuai dengan tujuan
+                            dan budgetmu. Kuasai skill baru dan raih potensimu
+                            dalam hitungan minggu.
                         </p>
                     </div>
 
@@ -129,7 +86,9 @@ export default function Pricing({ pricings }) {
                                             </div>
                                             <div className="text-xs md:text-sm line-through">
                                                 {plan.normal_price
-                                                    ? formatRupiah(plan.normal_price)
+                                                    ? formatRupiah(
+                                                          plan.normal_price
+                                                      )
                                                     : ""}
                                                 <span className="">/bulan</span>
                                             </div>

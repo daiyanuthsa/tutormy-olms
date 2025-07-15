@@ -45,7 +45,7 @@ const ArticleContent = ({ article, author }) => {
                 <div className="flex justify-between">
                     <h2 className="text-2xl font-bold">Pelajari Lebih Dalam</h2>
                     <Link
-                        href="/tips"
+                        href="/courses"
                         className="text-primary-500 hover:underline font-medium"
                     >
                         Lihat semua

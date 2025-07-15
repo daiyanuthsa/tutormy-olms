@@ -93,6 +93,7 @@ export default function Navbar() {
                                                 Profil
                                             </Link>
                                             <Link
+                                                href={route('riwayat-pembelian')}
                                                 className="block px-4 py-3 hover:bg-gradient-dark"
                                             >
                                                 <Icon icon="mdi:history" className="inline mr-2" />

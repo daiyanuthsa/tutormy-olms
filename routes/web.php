@@ -49,6 +49,7 @@ Route::middleware(['auth'])->group(function () {
     Route::middleware(['profile.completed'])->group(function () {
         Route::get('/profile/edit', [ProfileController::class, 'edit'])->name('profile.edit');
         Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+        Route::post('/profile/picture', [ProfileController::class, 'updateProfilePicture'])->name('profile.photo.update');
         Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
         // middleware isSubscribed user
         Route::middleware(['isSubscribed'])->group(function () {

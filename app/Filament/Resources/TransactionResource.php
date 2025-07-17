@@ -88,7 +88,7 @@ class TransactionResource extends Resource
                                         ->numeric()
                                         ->prefix('IDR')
                                         ->readOnly()
-                                        ->helperText('Harga sudah include PPN 11%'),
+                                        ->helperText('Harga sudah include PPN 12%'),
                             ]),
                             Grid::make(2)
                                 ->schema([
@@ -101,8 +101,7 @@ class TransactionResource extends Resource
                                                 $set('ended_at', $endedAt->format('Y-m-d')); // Set the calculated end date
                                             }
                                         })
-                                        ->required()
-                                        ->minDate(now()->subDay()),
+                                        ->required(),
 
                                     Forms\Components\DatePicker::make('ended_at')
                                         ->readOnly()
@@ -167,6 +166,13 @@ class TransactionResource extends Resource
                                 ->options([
                                     'Midtrans' => 'Midtrans',
                                     'Manual' => 'Manual',
+                                ])
+                                ->required(),
+                                Forms\Components\Select::make('status')
+                                ->options([
+                                    'SUCCESS' => 'Berhasil',
+                                    'PENDING' => 'Menunggu',
+                                    'FAILED' => 'Gagal',
                                 ])
                                 ->required(),
 

@@ -8,6 +8,7 @@ use App\Repositories\CourseRepository;
 use App\Services\CourseService;
 use App\Services\PricingService;
 use App\Services\TransactionService;
+use Auth;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Log;
@@ -25,8 +26,7 @@ class FrontController extends Controller
         TransactionService $transactionService, // Replace with the correct type if available, e.g., TransactionService $transactionService
         \App\Services\PaymentService $paymentService,
         CourseRepository $courseRepository // Assuming you have a CourseService for handling courses
-    )
-    {
+    ) {
         $this->pricingService = $pricingService;
         $this->transactionService = $transactionService;
         $this->paymentService = $paymentService;
@@ -37,16 +37,17 @@ class FrontController extends Controller
         $pricing = $this->pricingService->getAllpricing(3);
         $testimonials = Testimonial::all();
         $courses = $this->courseRepository->getCourseThumbnail(3);
-        return Inertia::render('Welcome', compact('pricing', 'testimonials','courses'));
+        return Inertia::render('Welcome', compact('pricing', 'testimonials', 'courses'));
     }
 
-    public function checkout(Pricing $pricing){
+    public function checkout(Pricing $pricing)
+    {
 
-        $checkout=$this->transactionService->prepareCheckout($pricing);
+        $checkout = $this->transactionService->prepareCheckout($pricing);
         if ($checkout['alreadySubscribed']) {
             return redirect()->route('course.index')->with('error', 'You already subscribed to this package');
         }
-       
+
         return Inertia::render('Transaction/Checkout', compact(
             'checkout'
         ));
@@ -55,7 +56,7 @@ class FrontController extends Controller
     public function pricing(Request $request)
     {
         $pricings = $this->pricingService->getAllpricing(3);
-       
+
         return Inertia::render('Transaction/Pricing', compact('pricings'));
     }
 
@@ -71,7 +72,7 @@ class FrontController extends Controller
             } else {
                 $paymentLink = $this->paymentService->createPayment($pricingId);
                 Log::Info('Payment link response: ' . json_encode($paymentLink));
-                if (!$paymentLink ) {
+                if (!$paymentLink) {
                     $response = response()->json(['error' => 'Payment link creation failed'], 500);
                 } else {
                     $response = response()->json(['url' => $paymentLink], 200);
@@ -90,7 +91,7 @@ class FrontController extends Controller
         Log::info('Doku payment notification received', [
             'request' => $request->all()
         ]);
-        try{
+        try {
             $result = $this->paymentService->handleNotification($request);
             return response()->json($result);
         } catch (\Exception $e) {
@@ -100,5 +101,16 @@ class FrontController extends Controller
             ]);
             return response()->json(['error' => 'Failed to process notification'], 500);
         }
+    }
+
+    public function showTransactionHistory()
+    {
+        $user = Auth::user();
+
+        $transactions = $this->transactionService->getUserTransactions($user->id);
+
+        return Inertia::render('RiwayatPembelian/Index', [
+            'transactions' => $transactions,
+        ]);
     }
 }

@@ -4,6 +4,9 @@
 namespace App\Repositories;
 
 use App\Models\Course;
+use App\Models\CourseStudent;
+use App\Models\SectionContent;
+use Carbon\Carbon;
 use Illuminate\Support\Collection;
 
 class CourseRepository implements CourseRepositoryInterface
@@ -99,5 +102,73 @@ class CourseRepository implements CourseRepositoryInterface
                     'id' => $course->id,
                 ];
             });
+    }
+
+    public function getUserCourseProgress($userId)
+    {
+        return CourseStudent::with([
+            'course',
+            'certificate',
+            'course.sections.contents',
+        ])
+            ->where('user_id', $userId)
+            ->get()
+            ->map(function ($courseStudent) {
+                $totalContents = $courseStudent->course->sections->flatMap->contents->count();
+                $currentPosition = $this->getCurrentProgress($courseStudent);
+
+                $progress = $totalContents > 0 ? round(($currentPosition / $totalContents) * 100) : 0;
+
+                // Determine status & button
+                $certificate = $courseStudent->certificate;
+                $isFinished = $progress >= 100;
+
+                $status = match (true) {
+                    !$certificate => 'ongoing',
+                    filled($certificate->path) => 'completed',
+                    default => 'ongoing',
+                };                
+
+                return [
+                    'title' => $courseStudent->course->name,
+                    'lessons' => $totalContents,
+                    'image' => $courseStudent->course->thumbnail,
+                    'progress' => $progress,
+                    'status' => $status,
+                    'is_finished' => $isFinished,
+                    'next_course_path' => route('courses.learning', [
+                        'course' => $courseStudent->course->slug,
+                        'courseSection' => $courseStudent->course_section_id,
+                        'sectionContent' => $courseStudent->section_content_id,
+                    ]),
+                    'certificate_path' => $certificate?->path,
+                ];
+            });
+            
+    }
+
+    protected function getCurrentProgress($courseStudent)
+    {
+        $courseId = $courseStudent->course_id;
+        $currentContentId = $courseStudent->section_content_id;
+
+        // Ambil semua konten dari course ini secara berurutan (berdasarkan section dan urutan content)
+        $allContents = SectionContent::whereHas('section', function ($query) use ($courseId) {
+            $query->where('course_id', $courseId);
+        })
+            ->with('section')
+            // ->orderBy('section.position') // pastikan section punya kolom order
+            ->orderBy('position')         // pastikan section_content juga punya kolom order
+            ->get();
+        // Hitung total konten
+        $total = $allContents->count();
+
+        // Cari posisi konten yang terakhir diselesaikan user
+        $currentIndex = $allContents->pluck('id')->search($currentContentId);
+
+        // Jika tidak ditemukan (belum ada progres), set ke 0
+        $completed = $currentIndex !== false ? $currentIndex + 1 : 0;
+
+        return $completed;
     }
 }

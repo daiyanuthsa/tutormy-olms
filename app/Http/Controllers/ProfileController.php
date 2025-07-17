@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ProfileUpdateRequest;
+use App\Repositories\CourseRepository;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -17,9 +18,16 @@ class ProfileController extends Controller
     /**
      * Display the user's profile form.
      */
+    private $courseRepository;
+    public function __construct(CourseRepository $courseRepository)
+    {
+        $this->courseRepository = $courseRepository;
+    }
     public function show(){
         $profiledata = Auth::user()->only(['id', 'name', 'email', 'status', 'about']); // ganti field sesuai kebutuhan
-        return Inertia::render('Dashboard', compact('profiledata'));
+        $courses = $this->courseRepository->getUserCourseProgress(Auth::id()); // Ambil semua kursus untuk ditampilkan di dashboard
+// dd($courses);
+        return Inertia::render('Dashboard', compact('profiledata', 'courses'));
     }
     public function edit(Request $request): Response
     {

@@ -5,14 +5,14 @@ import MainLayout from '@/Layouts/MainLayout'
 import { Head } from '@inertiajs/react'
 import React from 'react'
 
-const Dashboard = ({ profiledata }) => {
+const Dashboard = ({ profiledata, courses }) => {
     return (
         <MainLayout>
             <Head title="Dashboard" />
 
             <main className="pt-28 w-full space-y-7">
                 <Hero profiledata={profiledata} />
-                <ClassUser />
+                <ClassUser courses={courses} />
                 <Portofolio />
             </main>
         </MainLayout>

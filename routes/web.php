@@ -60,13 +60,15 @@ Route::middleware(['auth'])->group(function () {
                 ->name('courses.learning');
 
             Route::get('/courses/finished/{course:slug}', [CourseController::class, 'finished'])
-                ->name('courses.learning');
+                ->name('courses.finished');
 
             Route::get('/courses/certificate/{course:slug}', [CertificateController::class, 'show'])
                 ->name('courses.certificate.show');
-            Route::post('/courses/certificate/{course:slug}', [CertificateController::class,'store'])
+            Route::post('/courses/certificate/{course:slug}', [CertificateController::class, 'store'])
                 ->name('courses.certificate.store');
-             });
+
+            Route::get('/riwayat-pembelian', [FrontController::class, 'showTransactionHistory'])->name('riwayat-pembelian');
+        });
         Route::get('/checkout/{pricing}', [FrontController::class, 'checkout'])->name('front.checkout');
     });
     Route::post('/booking/payment/doku', [FrontController::class, 'paymentStore'])->name('payment.store');
@@ -89,9 +91,9 @@ Route::get('/profile-public', function () {
     ]);
 })->name('profile.public');
 
-Route::get('/riwayat-pembelian', function () {
-    return Inertia::render('RiwayatPembelian/Index');
-})->name('riwayat-pembelian');
+// Route::get('/riwayat-pembelian', function () {
+//     return Inertia::render('RiwayatPembelian/Index');
+// })->name('riwayat-pembelian');
 
 Route::get('/course-sertifikat', function () {
     return Inertia::render('Course/Sertifikat');

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\ProfileUpdateRequest;
 use App\Repositories\CourseRepository;
+use App\Repositories\PortofolioRepository;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -19,15 +20,21 @@ class ProfileController extends Controller
      * Display the user's profile form.
      */
     private $courseRepository;
-    public function __construct(CourseRepository $courseRepository)
-    {
+    private $portofolioRepository;
+
+    public function __construct(
+        CourseRepository $courseRepository,
+        PortofolioRepository $portofolioRepository
+    ) {
         $this->courseRepository = $courseRepository;
+        $this->portofolioRepository = $portofolioRepository;
     }
-    public function show(){
+    public function show()
+    {
         $profiledata = Auth::user()->only(['id', 'name', 'email', 'status', 'about']); // ganti field sesuai kebutuhan
         $courses = $this->courseRepository->getUserCourseProgress(Auth::id()); // Ambil semua kursus untuk ditampilkan di dashboard
-// dd($courses);
-        return Inertia::render('Dashboard', compact('profiledata', 'courses'));
+        $portofolios = $this->portofolioRepository->getbyUserId(Auth::id()); // Ambil portofolio berdasarkan user ID
+        return Inertia::render('Dashboard', compact('profiledata', 'courses','portofolios'));
     }
     public function edit(Request $request): Response
     {
@@ -76,7 +83,7 @@ class ProfileController extends Controller
 
     public function showCompleteProfileForm(): Response
     {
-        
+
         return Inertia::render('Profile/CompleteProfile', [
             'status' => session('status'),
         ]);
@@ -110,14 +117,32 @@ class ProfileController extends Controller
         if ($user->photo && Storage::disk('public')->exists($user->photo)) {
             Storage::disk('public')->delete($user->photo);
         }
-    
+
         // Simpan foto baru
         $path = $request->file('profile_photo')->store('user/profile_photos', 'public');
-       
+
         // Update user
         $user->photo = $path;
         $user->save();
 
         return Redirect::route('profile.edit')->with('status', 'Profile picture updated successfully.');
+    }
+
+    public function updatePortofolio(Request $request)
+    {
+        $request->validate([
+            'name' => ['required', 'string', 'max:255'],
+            'thumbnail' => ['required', 'image', 'max:2048'],
+            'link' => ['required', 'url', 'max:255'],
+        ]);
+        $path = $request->file('thumbnail')->store('user/portofolio', 'public');
+        $user = Auth::user();
+        $this->portofolioRepository->create([
+            'user_id' => $user->id,
+            'name' => $request->name,
+            'thumbnail' => $path,
+            'link' => $request->link,
+        ]);
+        return Redirect::route('dashboard')->with('status', 'Portofolio updated successfully.');
     }
 }

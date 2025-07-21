@@ -3,6 +3,7 @@
 
 namespace App\Repositories;
 
+use App\Models\Category;
 use App\Models\Course;
 use App\Models\CourseStudent;
 use App\Models\SectionContent;
@@ -26,6 +27,11 @@ class CourseRepository implements CourseRepositoryInterface
             ->orWhere('about', 'like', "%{$keyword}%")
             ->latest()
             ->get();
+    }
+
+    public function getCourseCategory()
+    {
+        return Category::whereHas('courses')->get();
     }
 
     /**

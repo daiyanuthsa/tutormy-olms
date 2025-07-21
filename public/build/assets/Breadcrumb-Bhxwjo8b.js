@@ -1,0 +1,1 @@
+import{j as e,Y as t}from"./app-DYODpaQq.js";const a=({title:s})=>e.jsxs("nav",{className:"text-sm text-primary-1 flex gap-2 items-center",children:[e.jsx(t,{href:"/courses",className:"hover:text-white",children:"Course"}),e.jsx("span",{children:"/"}),e.jsx("span",{className:"text-white font-semibold",children:s})]});export{a as B};

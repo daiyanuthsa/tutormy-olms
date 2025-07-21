@@ -26,8 +26,9 @@ class CourseController extends Controller
     public function index()
     {
         $courses = $this->courseRepository->getCourseThumbnail();
+        $categories = $this->courseRepository->getCourseCategory();
         // dd($courses);
-        return inertia('Course/Course', ['courses' => $courses]);
+        return inertia('Course/Course', ['courses' => $courses, 'categories' => $categories ]);
     }
 
     public function show(Course $course)

@@ -2,7 +2,7 @@ import React, { useMemo } from "react";
 import MainLayout from "@/Layouts/MainLayout";
 import ArticleCard from '@/Components/Tips/ArticleCard.jsx';
 import SearchBar from "@/Components/Tips/SearchBar";
-import CategoryFilter from "@/components/tips/CategoryFilter";
+import CategoryFilter from "@/Components/Tips/CategoryFilter";
 import { usePage, Head, router } from "@inertiajs/react";
 
 const formatDate = (dateStr) =>

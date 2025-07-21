@@ -1,9 +1,7 @@
 import React from "react";
 import { Link, Head } from "@inertiajs/react";
-import RelatedTips from "@/components/tips/RelatedTips";
-import ArticleContent from "@/components/tips/ArticleContent";
-import CategorySidebar from "@/components/tips/CategorySidebar";
-import Footer from "@/Components/Footer";
+import RelatedTips from "@/Components/Tips/RelatedTips";
+import ArticleContent from "@/Components/Tips/ArticleContent";
 import MainLayout from "@/Layouts/MainLayout";
 
 const formatDate = (dateStr) =>

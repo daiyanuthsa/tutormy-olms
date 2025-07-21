@@ -1,6 +1,6 @@
 import React from "react";
 import { Link, Head } from "@inertiajs/react";
-import RelatedTips from "@/components/tips/RelatedTips.jsx";
+import RelatedTips from "@/components/tips/RelatedTips";
 import ArticleContent from "@/components/tips/ArticleContent";
 import CategorySidebar from "@/components/tips/CategorySidebar";
 import Footer from "@/Components/Footer";

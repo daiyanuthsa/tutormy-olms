@@ -79,8 +79,7 @@ export default function Index({ articles, categories }) {
                 <div className="space-y-3">
                     <h2 className="text-4xl font-bold">Tips Terbaru</h2>
                     <div>
-                        Lorem ipsum dolor sit amet consectetur. Odio dolor arcu
-                        ullamcorper dictum nulla ph
+                        Temukan berbagai tips menarik yang bisa membantu kamu dalam belajar dan mengembangkan diri.
                     </div>
                 </div>
 

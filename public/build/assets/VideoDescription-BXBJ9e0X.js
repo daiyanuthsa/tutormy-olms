@@ -1,0 +1,1 @@
+import{j as s}from"./app-BBtMbu0q.js";const i=({description:e})=>s.jsxs("div",{children:[s.jsx("h6",{className:"lg:text-2xl font-bold",children:"Deskripsi Video"}),s.jsx("p",{className:"text-neutral-2 mt-4",children:e})]});export{i as default};

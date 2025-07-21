@@ -33,8 +33,8 @@ class ProfileController extends Controller
     {
         $profiledata = Auth::user()->only(['id', 'name', 'email', 'status', 'about']); // ganti field sesuai kebutuhan
         $courses = $this->courseRepository->getUserCourseProgress(Auth::id()); // Ambil semua kursus untuk ditampilkan di dashboard
-        $portofolios = $this->portofolioRepository->getbyUserId(Auth::id()); // Ambil portofolio berdasarkan user ID
-        return Inertia::render('Dashboard', compact('profiledata', 'courses','portofolios'));
+        $portofolio = $this->portofolioRepository->getbyUserId(Auth::id()); // Ambil portofolio berdasarkan user ID
+        return Inertia::render('Dashboard', compact('profiledata', 'courses','portofolio'));
     }
     public function edit(Request $request): Response
     {
@@ -129,20 +129,44 @@ class ProfileController extends Controller
     }
 
     public function updatePortofolio(Request $request)
-    {
+    {// 1. Validasi input, thumbnail dibuat opsional
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
-            'thumbnail' => ['required', 'image', 'max:2048'],
+            'thumbnail' => ['nullable', 'image', 'max:2048'], // 'required' diubah menjadi 'nullable'
             'link' => ['required', 'url', 'max:255'],
         ]);
-        $path = $request->file('thumbnail')->store('user/portofolio', 'public');
+
         $user = Auth::user();
-        $this->portofolioRepository->create([
-            'user_id' => $user->id,
+
+        // 2. Siapkan data yang akan di-update atau dibuat
+        $data = [
             'name' => $request->name,
-            'thumbnail' => $path,
             'link' => $request->link,
-        ]);
+        ];
+
+        // 3. Handle upload thumbnail jika ada file baru
+        if ($request->hasFile('thumbnail')) {
+            // Cari portofolio yang ada untuk menghapus thumbnail lama
+            $portfolio = $this->portofolioRepository->getbyUserId($user->id); // Asumsi ada method ini
+
+            if ($portfolio && $portfolio->thumbnail) {
+                Storage::disk('public')->delete($portfolio->thumbnail);
+            }
+
+            // Simpan file baru dan tambahkan path ke array data
+            $path = $request->file('thumbnail')->store('user/portofolio', 'public');
+            $data['thumbnail'] = $path;
+        }
+
+        // 4. Gunakan updateOrCreate
+        // Laravel akan mencari portofolio dengan 'user_id' yang cocok.
+        // Jika ditemukan, akan di-update dengan data dari $data.
+        // Jika tidak ditemukan, akan dibuat baris baru dengan gabungan kedua data.
+        $this->portofolioRepository->updateOrCreate(
+            ['user_id' => $user->id], // Kondisi untuk mencari
+            $data                     // Data untuk di-update atau dibuat
+        );
+
         return Redirect::route('dashboard')->with('status', 'Portofolio updated successfully.');
     }
 }

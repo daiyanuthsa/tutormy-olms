@@ -36,5 +36,8 @@ class Category extends Model
         return $this->hasMany(Course::class);
     }
 
-    
+    public function agendas()
+    {
+        return $this->hasMany(Agenda::class);
+    }
 }

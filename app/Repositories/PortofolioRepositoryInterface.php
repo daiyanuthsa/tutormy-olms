@@ -6,8 +6,6 @@ interface PortofolioRepositoryInterface
 {
     // Define your interface methods here
     public function getbyUserId($userId);
+    public function updateOrCreate(array $attributes, array $values);
 
-    public function create(array $data);
-    public function update($id, array $data);
-    // public function delete($id);
 }

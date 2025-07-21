@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
-import { Icon } from '@iconify/react';
-import PrimaryButton from '../PrimaryButton';
-import { EmptyState, PortfolioGrid, } from './PortofolioComponents';
+import React, { useState } from "react";
+import { Icon } from "@iconify/react";
+import PrimaryButton from "../PrimaryButton";
+import { EmptyState, PortfolioGrid } from "./PortofolioComponents";
 import { router } from "@inertiajs/react";
 
 const PortfolioPopup = ({
@@ -68,10 +68,8 @@ const PortfolioPopup = ({
     </div>
 );
 
-const Portofolio = ({ portofolios }) => {
-    console.log(portofolios);
-    // const [portfolios, setPortfolios] = useState([]);
-    const [portfolios, setPortfolios] = useState(portofolios || []);
+const Portofolio = ({ portfolio }) => {
+
     const [showPopup, setShowPopup] = useState(false);
     const [formData, setFormData] = useState({
         name: "",
@@ -79,72 +77,83 @@ const Portofolio = ({ portofolios }) => {
         thumbnail: null,
     });
 
+
     const handleInputChange = (field, value) => {
         setFormData((prev) => ({ ...prev, [field]: value }));
     };
 
-    const handleAddPortfolio = () => {
-        if (
-            formData.name.trim() &&
-            formData.link.trim() &&
-            formData.thumbnail
-        ) {
-            const data = new FormData();
-            data.append("name", formData.name);
-            data.append("link", formData.link);
-            data.append("thumbnail", formData.thumbnail);
-
-            router.post("/profile/portofolio/update", data, {
-                forceFormData: true,
-                onSuccess: (page) => {
-                    const result = page.props.flash?.portfolio || {}; // atau dari response session
-
-                    const newPortfolio = {
-                        id: Date.now(),
-                        name: formData.name,
-                        link: formData.link,
-                        thumbnailUrl:
-                            result.thumbnail_url ||
-                            URL.createObjectURL(formData.thumbnail),
-                    };
-
-                    setPortfolios([...portfolios, newPortfolio]);
-                    setFormData({ name: "", link: "", thumbnail: null });
-                    setShowPopup(false);
-                },
-                onError: (errors) => {
-                    console.error("Validation errors:", errors);
-                    alert("Terdapat kesalahan validasi.");
-                },
-                onFinish: () => {
-                    // Opsional: loading selesai
-                },
+    const handleOpenPopup = () => {
+        if (portfolio) {
+            // Mode "Ubah": isi form dengan data yang ada
+            setFormData({
+                name: portfolio.name,
+                link: portfolio.link,
+                thumbnail: null, // Reset thumbnail, karena user mungkin tidak ingin mengubahnya
             });
+        } else {
+            // Mode "Tambah": pastikan form kosong
+            setFormData({ name: "", link: "", thumbnail: null });
         }
+        setShowPopup(true);
     };
 
+    const handleSavePortfolio = () => {
+        const data = new FormData();
+        data.append("name", formData.name);
+        data.append("link", formData.link);
+
+        // Hanya tambahkan thumbnail jika ada file baru yang dipilih
+        if (formData.thumbnail) {
+            data.append("thumbnail", formData.thumbnail);
+        }
+        // Inertia akan mengirim sebagai multipart/form-data
+        router.post("/profile/portofolio/update", data, {
+
+            onSuccess: (page) => {
+                setShowPopup(false);
+            },
+            onError: (errors) => {
+                console.error("Validation errors:", errors);
+                alert(
+                    "Terdapat kesalahan. Pastikan semua field terisi dengan benar."
+                );
+            },
+        });
+    };
+console.log(portfolio);
     return (
         <section className="text-white min-h-screen">
             <div className="container mx-auto space-y-6">
                 <div className="flex justify-between items-center">
                     <h1 className="text-xl font-semibold">Portofolio Saya</h1>
                     <button
-                        onClick={() => setShowPopup(true)}
-                        disabled={portfolios.length > 0}
-                        className={`text-lg font-semibold flex items-center gap-2 transition-colors ${
-                            portfolios.length > 0
-                                ? "text-gray-500 cursor-not-allowed"
-                                : "hover:text-purple-400"
-                        }`}
+                        onClick={handleOpenPopup}
+                        className="text-lg font-semibold flex items-center gap-2 transition-colors hover:text-purple-400"
                     >
-                        Tambah <Icon icon="ic:round-plus" className="w-6 h-6" />
+                        {portfolio ? (
+                            <>
+                                Ubah{" "}
+                                <Icon
+                                    icon="ic:round-edit"
+                                    className="w-6 h-6"
+                                />
+                            </>
+                        ) : (
+                            <>
+                                Tambah{" "}
+                                <Icon
+                                    icon="ic:round-plus"
+                                    className="w-6 h-6"
+                                />
+                            </>
+                        )}
                     </button>
                 </div>
 
-                {portfolios.length === 0 ? (
-                    <EmptyState />
+                {portfolio ? (
+                    <PortfolioGrid portfolio={portfolio} />
                 ) : (
-                    <PortfolioGrid portfolios={portfolios} />
+                    <EmptyState />
                 )}
 
                 {showPopup && (
@@ -152,7 +161,7 @@ const Portofolio = ({ portofolios }) => {
                         formData={formData}
                         setFormData={setFormData}
                         onClose={() => setShowPopup(false)}
-                        onSave={handleAddPortfolio}
+                        onSave={handleSavePortfolio}
                         onChange={handleInputChange}
                     />
                 )}

@@ -35,6 +35,7 @@ Route::get('/courses/search', [CourseController::class, 'search'])->name('course
 Route::get('/courses/{course:slug}', [CourseController::class, 'show'])->name('course.details');
 
 Route::get('/webinar', [WebinarController::class, 'index'])->name('webinar.index');
+Route::get('/webinar/search', [WebinarController::class, 'search'])->name('webinar.search');
 Route::get('/webinar/register/{agenda:slug}', [WebinarController::class, 'showUpcomingAgenda'])->name('webinar.upcoming');
 Route::get('/webinar/{agenda:slug}', [WebinarController::class, 'showPastAgenda'])->name('webinar.past');
 

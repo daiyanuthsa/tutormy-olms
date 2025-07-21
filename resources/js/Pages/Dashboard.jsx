@@ -5,8 +5,7 @@ import MainLayout from '@/Layouts/MainLayout'
 import { Head } from '@inertiajs/react'
 import React from 'react'
 
-const Dashboard = ({ profiledata, courses, portofolios }) => {
-
+const Dashboard = ({ profiledata, courses, portofolio }) => {
     return (
         <MainLayout>
             <Head title="Dashboard" />
@@ -14,7 +13,7 @@ const Dashboard = ({ profiledata, courses, portofolios }) => {
             <main className="pt-28 w-full space-y-7">
                 <Hero profiledata={profiledata} />
                 <ClassUser courses={courses} />
-                <Portofolio portofolios={portofolios} />
+                <Portofolio portfolio={portofolio} />
             </main>
         </MainLayout>
     );

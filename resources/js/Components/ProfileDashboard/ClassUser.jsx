@@ -55,7 +55,7 @@ const CourseCard = ({ course, isPublicView = false }) => {
     };
 
     return (
-        <div className="bg-neutral-5 border-b-2 border-b-primary-2 rounded-b-xl overflow-hidden">
+        <div  className="bg-neutral-5 border-b-2 border-b-primary-2 rounded-b-xl overflow-hidden">
             <div className="aspect-video">
                 <img
                     src={course.image}
@@ -110,7 +110,6 @@ const ClassUser = ({ isPublicView = false, hideHeader = false, courses }) => {
                 : courses.filter((c) => c.status === activeFilter),
         [activeFilter]
     );
-
     return (
         <section className="text-white min-h-screen">
             <div className="container mx-auto space-y-6">
@@ -146,7 +145,7 @@ const ClassUser = ({ isPublicView = false, hideHeader = false, courses }) => {
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                     {filteredCourses.map((course) => (
                         <CourseCard
-                            key={course.id}
+                            key={course.course_id}
                             course={course}
                             isPublicView={isPublicView}
                         />

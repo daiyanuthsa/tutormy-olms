@@ -130,6 +130,7 @@ class CourseRepository implements CourseRepositoryInterface
                 };                
 
                 return [
+                    'course_id' => $courseStudent->course_id,
                     'title' => $courseStudent->course->name,
                     'lessons' => $totalContents,
                     'image' => $courseStudent->course->thumbnail,

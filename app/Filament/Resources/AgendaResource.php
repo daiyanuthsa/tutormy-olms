@@ -31,10 +31,17 @@ class AgendaResource extends Resource
             ->schema([
                 Fieldset::make('Webminar')
                     ->schema([
+
                         Forms\Components\TextInput::make('name')
                         ->label('Nama Webminar')
                             ->required()
                             ->maxLength(255),
+                        Forms\Components\Select::make(name: 'category_id')
+                            ->label('Kategori Webminar')
+
+                            ->relationship('category', 'name')
+                            ->searchable()
+                            ->preload(),
                         Forms\Components\DateTimePicker::make('event_datetime')
                             ->required()
                             ->label('Tanggal dan Waktu Webminar'),

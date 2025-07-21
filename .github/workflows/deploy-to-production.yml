@@ -17,9 +17,20 @@ jobs:
 
     # Langkah-langkah (steps) yang akan dieksekusi
     steps:
-      # Langkah 1: Checkout kode dari branch yang dipilih (misalnya, 'main')
-      - name: Checkout Code
+      # Langkah 1: Checkout branch 'production' itu sendiri
+      # 'fetch-depth: 0' penting agar kita bisa mengambil riwayat branch lain
+      - name: Checkout production branch
         uses: actions/checkout@v4
+        with:
+          ref: production
+          fetch-depth: 0
+      
+      # Langkah 2: Konfigurasi Git dan gabungkan (merge) 'main'
+      - name: Merge main branch
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git merge origin/main -m "Merge main branch for production build"
 
       # Langkah 4: Setup Node.js untuk build aset frontend
       - name: Setup Node.js
@@ -32,32 +43,45 @@ jobs:
         run: |
           npm install
           npm run build
-          
+      # Langkah 5: Commit dan Push (tanpa --force)
       - name: Commit and Push to Production
         run: |
-          # Konfigurasi identitas Git untuk runner
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          
-          # Secara paksa tambahkan folder build yang diabaikan
-          # Ini adalah perintah kunci untuk mengatasi .gitignore
+          # Tambahkan file build
           git add -f public/build
           
-          # Cek status untuk melihat apakah ada file yang siap di-commit
-          # Opsi --porcelain akan memberikan output jika ada perubahan, atau kosong jika tidak ada
-          # Kita simpan outputnya ke dalam sebuah variabel
-          STATUS=$(git status --porcelain)
-          
-          # Periksa apakah variabel STATUS tidak kosong
-          if [ -n "$STATUS" ]; then
-            echo "✅ Changes detected in the build directory. Proceeding to commit."
-            # Lakukan commit
-            git commit -m "Deploy: Build frontend assets and sync to production branch"
-            
-            # Lakukan force push ke branch production
-            git push --force origin HEAD:production
-            
-            echo "🚀 Successfully deployed to production branch."
+          # Cek apakah ada perubahan untuk di-commit
+          if ! git diff --staged --quiet; then
+            echo "✅ Changes detected. Committing and pushing..."
+            git commit -m "Deploy: Build frontend assets"
+            git push origin production # <-- TIDAK ADA --force
           else
-            echo "✅ No changes detected in build files. Nothing to commit."
+            echo "✅ No changes in build files. Nothing to push."
           fi
+      # - name: Commit and Push to Production
+      #   run: |
+      #     # Konfigurasi identitas Git untuk runner
+      #     git config user.name "github-actions[bot]"
+      #     git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          
+      #     # Secara paksa tambahkan folder build yang diabaikan
+      #     # Ini adalah perintah kunci untuk mengatasi .gitignore
+      #     git add -f public/build
+          
+      #     # Cek status untuk melihat apakah ada file yang siap di-commit
+      #     # Opsi --porcelain akan memberikan output jika ada perubahan, atau kosong jika tidak ada
+      #     # Kita simpan outputnya ke dalam sebuah variabel
+      #     STATUS=$(git status --porcelain)
+          
+      #     # Periksa apakah variabel STATUS tidak kosong
+      #     if [ -n "$STATUS" ]; then
+      #       echo "✅ Changes detected in the build directory. Proceeding to commit."
+      #       # Lakukan commit
+      #       git commit -m "Deploy: Build frontend assets and sync to production branch"
+            
+      #       # Lakukan force push ke branch production
+      #       git push --force origin HEAD:production
+            
+      #       echo "🚀 Successfully deployed to production branch."
+      #     else
+      #       echo "✅ No changes detected in build files. Nothing to commit."
+      #     fi

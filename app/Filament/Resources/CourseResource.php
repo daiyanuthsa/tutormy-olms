@@ -79,7 +79,9 @@ class CourseResource extends Resource
                     ->searchable(),
                 Tables\Columns\TextColumn::make('slug')
                     ->searchable(),
-
+// Tables\Columns\TextColumn::make('contentsCount')
+                    
+//                     ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\IconColumn::make('is_popular')
                     ->boolean(),
                 Tables\Columns\TextColumn::make('category.name')

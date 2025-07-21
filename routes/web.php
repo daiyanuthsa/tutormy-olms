@@ -35,6 +35,7 @@ Route::get('/courses/search', [CourseController::class, 'search'])->name('course
 Route::get('/courses/{course:slug}', [CourseController::class, 'show'])->name('course.details');
 
 Route::get('/webinar', [WebinarController::class, 'index'])->name('webinar.index');
+Route::get('/webinar/search', [WebinarController::class, 'search'])->name('webinar.search');
 Route::get('/webinar/register/{agenda:slug}', [WebinarController::class, 'showUpcomingAgenda'])->name('webinar.upcoming');
 Route::get('/webinar/{agenda:slug}', [WebinarController::class, 'showPastAgenda'])->name('webinar.past');
 
@@ -51,6 +52,7 @@ Route::middleware(['auth'])->group(function () {
         Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
         Route::post('/profile/picture', [ProfileController::class, 'updateProfilePicture'])->name('profile.photo.update');
         Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+        Route::post('/profile/portofolio/update', [ProfileController::class, 'updatePortofolio'])->name('portofolio.update');
         // middleware isSubscribed user
         Route::middleware(['isSubscribed'])->group(function () {
             Route::get('/courses/join/{course:slug}', [CourseController::class, 'join'])
@@ -79,9 +81,6 @@ Route::middleware(['auth'])->group(function () {
 Route::get('/test-certificate', [CertificateController::class, 'generate'])
     ->name('test.certificate.generate');
 
-Route::get('/test', function () {
-    return Inertia::render('Auth/VerifyEmail', ['status' => session('status')]);
-});
 require __DIR__ . '/auth.php';
 
 
@@ -95,6 +94,6 @@ Route::get('/profile-public', function () {
 //     return Inertia::render('RiwayatPembelian/Index');
 // })->name('riwayat-pembelian');
 
-Route::get('/course-sertifikat', function () {
-    return Inertia::render('Course/Sertifikat');
-})->name('course-sertifikat');
+// Route::get('/course-sertifikat', function () {
+//     return Inertia::render('Course/Sertifikat');
+// })->name('course-sertifikat');

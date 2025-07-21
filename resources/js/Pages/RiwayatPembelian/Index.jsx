@@ -126,8 +126,11 @@ const Index = ({ transactions }) => {
                     </header>
 
                     <div className="space-y-4">
-                        {transactions.length > 0 ? (
-                            transactions.map(
+                        
+                    </div>
+                    {transactions.length > 0 ? (
+                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+                            {transactions.map(
                                 ({
                                     id,
                                     booking_trx_id,
@@ -141,89 +144,102 @@ const Index = ({ transactions }) => {
                                 }) => (
                                     <div
                                         key={id}
-                                        className="flex flex-col gap-4 rounded-lg bg-neutral-4 p-3 sm:flex-row sm:items-center sm:justify-between"
+                                        className="bg-gradient-to-br from-card-bg to-card-bg-hover rounded-2xl p-6 border border-white/10 hover:border-purple-500/50 transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl hover:shadow-purple-500/10 relative overflow-hidden group"
                                     >
-                                        <div className="flex flex-col sm:flex-row sm:items-center gap-4 flex-1">
-                                            <div className="w-full sm:w-20 lg:w-36 h-28 flex-shrink-0 overflow-hidden rounded-lg bg-gray-700">
-                                                <img
-                                                    src="/assets/hero.png"
-                                                    alt={pricing.name}
-                                                    className="h-full w-full object-cover"
-                                                />
+                                        {/* <!-- Card Header --> */}
+                                        <div className="flex items-center gap-4 mb-5">
+                                            {/* <!-- Icon --> */}
+                                            <div className="w-14 h-14 bg-gradient-to-br from-purple-500 to-purple-600 rounded-xl flex items-center justify-center text-2xl flex-shrink-0">
+                                                📚
                                             </div>
 
-                                            <div className="flex flex-col gap-1 text-sm sm:text-base">
-                                                <div className="flex flex-wrap items-center gap-2">
-                                                    <h3 className="font-semibold text-white text-base sm:text-xl">
-                                                        {pricing.name}
-                                                    </h3>
-                                                    <StatusBadge
-                                                        status={status}
-                                                        ended_at={ended_at}
-                                                    />
-                                                </div>
-                                                <div className="text-neutral-300 text-sm">
+                                            {/* <!-- Plan Details --> */}
+                                            <div className="flex-1">
+                                                <h3 className="text-xl font-semibold mb-1">
+                                                    {pricing.name}
+                                                </h3>
+                                                <div className="text-sm text-slate-400">
                                                     {booking_trx_id}
                                                 </div>
-                                                <div className="text-neutral-400 text-sm">
-                                                    Total Pembayaran
-                                                </div>
-                                                <div className="text-base font-semibold text-white sm:text-lg">
-                                                    {formatRupiah(
-                                                        grand_total_amount
-                                                    )}
-                                                </div>
+                                            </div>
+
+                                            {/* <!-- Status Badge --> */}
+                                            {/* <div className="bg-green-500 text-white px-3 py-1 rounded-full text-xs font-medium">
+                                                Aktif
+                                            </div> */}
+                                            <StatusBadge
+                                                status={status}
+                                                ended_at={ended_at}
+                                            />
+                                        </div>
+
+                                        {/* <!-- Price Section --> */}
+                                        <div className="bg-purple-500/10 rounded-xl p-4 mb-5">
+                                            <div className="text-2xl font-bold text-purple-400 mb-1">
+                                                {formatRupiah(
+                                                    grand_total_amount
+                                                )}
+                                            </div>
+                                            <div className="text-sm text-slate-400">
+                                                Total Pembayaran
                                             </div>
                                         </div>
-                                        <div className="flex flex-row gap-8 sm:items-center ">
-                                            <div className="text-left text-sm sm:text-base">
-                                                <p className="text-neutral-400">
+
+                                        {/* <!-- Transaction Info Grid --> */}
+                                        <div className="grid grid-cols-2 gap-4">
+                                            <div className="text-center">
+                                                <div className="text-xs text-slate-500 uppercase tracking-wide mb-1">
                                                     Tanggal Transaksi
-                                                </p>
-                                                <p className="font-semibold text-white">
+                                                </div>
+                                                <div className="font-semibold">
                                                     {formatTanggalIndo(
                                                         created_at
                                                     )}
-                                                </p>
+                                                </div>
                                             </div>
-                                            <div className=" text-left text-sm sm:text-base">
-                                                <p className="text-neutral-400">
-                                                    Paket berakhir
-                                                </p>
-                                                <p className="font-semibold text-white">
+                                            <div className="text-center">
+                                                <div className="text-xs text-slate-500 uppercase tracking-wide mb-1">
+                                                    Paket Berakhir
+                                                </div>
+                                                <div className="font-semibold">
                                                     {formatTanggalIndo(
                                                         ended_at
                                                     )}
-                                                </p>
+                                                </div>
                                             </div>
                                         </div>
+
+                                        {/* <!-- Subtle background decoration --> */}
+                                        <div className="absolute -top-10 -right-10 w-20 h-20 bg-purple-500/5 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                                        <div className="absolute -bottom-10 -left-10 w-32 h-32 bg-blue-500/5 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
                                     </div>
                                 )
-                            )
-                        ) : (
-                            <div className="text-center flex flex-col items-center justify-center gap-2 mt-12">
-                                <div className="text-center lg:text-2xl font-bold">
-                                    Kamu belum pernah membeli paket Belajar
-                                </div>
-                                <img
-                                    src="/assets/no-riwayat.webp"
-                                    alt="icon"
-                                    className="w-80 h-60"
-                                />
-                                <div className="text-center">
-                                    Beli Paket Belajar Sekarang
-                                </div>
-                                <PrimaryButton
-                                    variant="secondary"
-                                    className="rounded-full"
-                                >
-                                    Beli Sekarang
-                                </PrimaryButton>
+                            )}
+                        </div>
+                    ) : (
+                        <div className="text-center flex flex-col items-center justify-center gap-2 mt-12">
+                            <div className="text-center lg:text-2xl font-bold">
+                                Kamu belum pernah membeli paket Belajar
                             </div>
-                        )}
-                    </div>
+                            <img
+                                src="/assets/no-riwayat.webp"
+                                alt="icon"
+                                className="w-80 h-60"
+                            />
+                            <div className="text-center">
+                                Beli Paket Belajar Sekarang
+                            </div>
+                            <PrimaryButton
+                                variant="secondary"
+                                className="rounded-full"
+                            >
+                                Beli Sekarang
+                            </PrimaryButton>
+                        </div>
+                    )}
                 </div>
             </section>
+            
         </MainLayout>
     );
 };

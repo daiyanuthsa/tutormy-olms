@@ -21,7 +21,7 @@ const WebminarCard = ({ webinar }) => {
             <div>
                 <div className='h-40 md:h-60 bg-neutral-3 rounded-t-xl overflow-hidden'>
                     <img
-                        src={webinar.thumbnail}
+                        src={'storage/'+webinar.thumbnail}
                         alt={webinar.name}
                         className='w-full h-full object-cover'
                     />

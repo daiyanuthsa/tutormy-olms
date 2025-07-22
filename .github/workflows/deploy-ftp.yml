@@ -1,9 +1,5 @@
 name: Build and Deploy to Hostinger
 
-on:
-  push:
-    branches:
-      - production # Ganti ke 'production' jika perlu
 
 jobs:
   build-and-deploy:

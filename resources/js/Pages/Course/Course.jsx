@@ -26,7 +26,7 @@ const filterCourses = (courses, category, keyword) => {
     return result;
 };
 
-const Course = ({courses}) => {
+const Course = ({courses, categories}) => {
     const [searchTerm, setSearchTerm] = useState('');
     const [activeCategory, setActiveCategory] = useState('Discover');
 
@@ -70,7 +70,7 @@ const Course = ({courses}) => {
                 />
 
                 <CourseFilter
-                    categories={DUMMY_CATEGORIES}
+                    categories={categories}
                     activeCategory={activeCategory}
                     onCategoryChange={handleFilterChange}
                 />
@@ -83,21 +83,40 @@ const Course = ({courses}) => {
                         {filteredCourses.length > 0 ? (
                             <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 mt-6">
                                 {filteredCourses.map((course) => (
-                                    <CourseCard key={course.id} course={course} />
+                                    <CourseCard
+                                        key={course.id}
+                                        course={course}
+                                    />
                                 ))}
                             </div>
                         ) : (
-                            <div className='space-y-7 flex flex-col items-center justify-center mt-10'>
-                                <p className="text-center lg:text-2xl font-bold">Ooops ! Kelas yang kamu cari belum ada</p>
-                                <img src="/assets/404.webp" alt="image" className='w-40 lg:w-64'/>
-                                <p className="text-center">Saat ini Kelas yang anda cari maish belum adanih, silakan periksa kembali Kelas yang kamu cari besok hari</p>
+                            <div className="space-y-7 flex flex-col items-center justify-center mt-10">
+                                <p className="text-center lg:text-2xl font-bold">
+                                    Ooops ! Kelas yang kamu cari belum ada
+                                </p>
+                                <img
+                                    src="/assets/404.webp"
+                                    alt="image"
+                                    className="w-40 lg:w-64"
+                                />
+                                <p className="text-center">
+                                    Saat ini Kelas yang anda cari maish belum
+                                    adanih, silakan periksa kembali Kelas yang
+                                    kamu cari besok hari
+                                </p>
                             </div>
                         )}
                     </section>
                 ) : (
                     <>
-                        {renderCoursesSection("Popular Course", "Lorem ipsum dolor sit amet consectetur. Odio dolor arcu ullamcorper dictum nulla ph")}
-                        {renderCoursesSection("Course Course", "Lorem ipsum dolor sit amet consectetur. Odio dolor arcu ullamcorper dictum nulla ph")}
+                        {renderCoursesSection(
+                            "Popular Course",
+                            "Lorem ipsum dolor sit amet consectetur. Odio dolor arcu ullamcorper dictum nulla ph"
+                        )}
+                        {renderCoursesSection(
+                            "Course Course",
+                            "Lorem ipsum dolor sit amet consectetur. Odio dolor arcu ullamcorper dictum nulla ph"
+                        )}
                     </>
                 )}
 

@@ -1,35 +1,30 @@
 import React from 'react';
 
 const steps = [
+
     {
         id: '01',
-        title: 'Kemudahan Akses Materi Selamanya !',
-        desc: 'Bayar sekali, nikmati akses selamanya. Semua materi bisa kamu pelajari ulang kapan saja tanpa batas waktu.',
+        title: 'Update Otomatis ke 100+ Modul Terbaru',
+        desc: 'Tanpa biaya tambahan, kamu akan terus dapat materi baru yang relevan dengan perkembangan teknologi.',
         imgPosition: 'left',
     },
     {
         id: '02',
-        title: 'Update Otomatis ke 100+ Modul Terbaru',
-        desc: 'Tanpa biaya tambahan, kamu akan terus dapat materi baru yang relevan dengan perkembangan teknologi.',
+        title: 'Komunitas Belajar Seumur Hidup',
+        desc: 'Gabung dalam komunitas aktif tempat kamu bisa bertanya, berdiskusi, dan saling membantu!',
         imgPosition: 'right',
     },
     {
         id: '03',
-        title: 'Komunitas Belajar Seumur Hidup',
-        desc: 'Gabung dalam komunitas aktif tempat kamu bisa bertanya, berdiskusi, dan saling membantu!',
+        title: 'Belajar Langsung dari Mentor Praktisi',
+        desc: 'Materi kamu dapat belajar dari pengalaman nyata para praktisi industri.',
         imgPosition: 'left',
     },
     {
         id: '04',
-        title: 'Belajar Langsung dari Mentor Praktisi',
-        desc: 'Materi kamu dapat belajar dari pengalaman nyata para praktisi industri.',
-        imgPosition: 'right',
-    },
-    {
-        id: '05',
         title: 'Modul Belajar dari Basic hingga Mahir',
         desc: 'Ngga perlu takut mulai dari 0! Semua materi disusun bertahap dari yang paling dasar hingga mahir.',
-        imgPosition: 'left',
+        imgPosition: 'right',
     },
 ];
 

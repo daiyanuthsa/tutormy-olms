@@ -3,7 +3,7 @@ import { Transition } from "@headlessui/react";
 import MainLayout from "@/Layouts/MainLayout";
 import { Icon } from "@iconify/react";
 import PrimaryButton from "@/Components/PrimaryButton";
-import { useForm } from "@inertiajs/react";
+import { useForm, router } from "@inertiajs/react";
 import UpdatePasswordForm from "@/Pages/Profile/Partials/UpdatePasswordForm";
 
 const MAX_CHARS = 1000;
@@ -42,15 +42,15 @@ const RadioOption = ({ name, value, label, checked, onChange }) => (
     </label>
 );
 
-const ProfilePhoto = () => {
+const ProfilePhoto = ({ photo }) => {
     const [showModal, setShowModal] = useState(false);
     const [preview, setPreview] = useState(null);
     const fileInputRef = useRef();
-    const { data, setData, put, processing, reset, recentlySuccessful } = useForm({ photo: null });
+    const { data, setData, put, processing, reset, recentlySuccessful } = useForm({ profile_photo: null });
 
     const handleFileChange = (e) => {
         const file = e.target.files[0];
-        setData("photo", file);
+        setData("profile_photo", file);
 
         if (!file) return setPreview(null);
 
@@ -61,25 +61,39 @@ const ProfilePhoto = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        put(route("profile.photo.update"), {
+        const formData = new FormData(); // ✅ Tambahkan ini!
+        formData.append("profile_photo", data.profile_photo); // pastikan ini adalah file
+        router.post(route("profile.photo.update"), formData, {
             preserveScroll: true,
-            onSuccess: () => {
+            onFinish: () => {
+                setShowModal(false);
                 reset();
                 setPreview(null);
-                setShowModal(false);
             },
         });
     };
+
+    // Tentukan sumber foto: jika null, pakai default
+    let photoUrl = photo;
+    if (!photoUrl) {
+        photoUrl = "/assets/teacher.png";
+    } else {
+        // Tambahkan prefix /storage/ jika path dari backend
+        photoUrl = "/storage/" + photoUrl.replace(/^storage[\\/]/, "");
+    }
 
     return (
         <>
             <div className="flex flex-col items-center gap-5">
                 <img
-                    src="/assets/teacher.png"
+                    src={preview || photoUrl}
                     alt="profile"
                     className="w-24 h-24 md:w-28 md:h-28 rounded-full object-cover"
                 />
-                <button className="border px-4 py-2.5 text-xs rounded-full" onClick={() => setShowModal(true)}>
+                <button
+                    className="border px-4 py-2.5 text-xs rounded-full"
+                    onClick={() => setShowModal(true)}
+                >
                     Upload foto baru
                 </button>
             </div>
@@ -87,11 +101,14 @@ const ProfilePhoto = () => {
             {showModal && (
                 <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
                     <div className="bg-neutral-4 border-primary-3 border rounded-2xl p-6 w-[90%] max-w-md">
-                        <h2 className="text-lg font-semibold mb-4">Upload Foto Baru</h2>
+                        <h2 className="text-lg font-semibold mb-4">
+                            Upload Foto Baru
+                        </h2>
                         <form onSubmit={handleSubmit} className="space-y-4">
                             <input
                                 type="file"
                                 accept="image/*"
+                                name="profile_photo"
                                 onChange={handleFileChange}
                                 ref={fileInputRef}
                                 className="text-sm"
@@ -99,7 +116,11 @@ const ProfilePhoto = () => {
                             {preview && (
                                 <div className="mt-4">
                                     <p className="text-sm mb-2">Preview:</p>
-                                    <img src={preview} alt="Preview" className="w-28 h-28 rounded-full object-cover" />
+                                    <img
+                                        src={preview}
+                                        alt="Preview"
+                                        className="w-28 h-28 rounded-full object-cover"
+                                    />
                                 </div>
                             )}
                             <div className="flex justify-end gap-2 mt-6">
@@ -114,7 +135,11 @@ const ProfilePhoto = () => {
                                 >
                                     Batal
                                 </PrimaryButton>
-                                <PrimaryButton type="submit" disabled={processing} className="rounded-full px-4 py-2">
+                                <PrimaryButton
+                                    type="submit"
+                                    disabled={processing}
+                                    className="rounded-full px-4 py-2"
+                                >
                                     Simpan
                                 </PrimaryButton>
                             </div>
@@ -125,7 +150,9 @@ const ProfilePhoto = () => {
                                 leave="transition-opacity duration-300"
                                 leaveTo="opacity-0"
                             >
-                                <p className="text-green-600 text-sm mt-2">Foto berhasil diubah!</p>
+                                <p className="text-green-600 text-sm mt-2">
+                                    Foto berhasil diubah!
+                                </p>
                             </Transition>
                         </form>
                     </div>
@@ -210,6 +237,7 @@ const FormSection = ({ data, setData, errors, processing, handleSubmit }) => (
     </form>
 );
 
+
 const Edit = ({ auth }) => {
     const user = auth?.user || {};
     const formatDate = (date) => (date ? date.split("T")[0] : "");
@@ -238,7 +266,7 @@ const Edit = ({ auth }) => {
                     <div className="container mx-auto space-y-6">
                         <h6 className="text-2xl font-bold">Selamat Datang kembali, {user.name}!</h6>
                         <div className="flex flex-col lg:flex-row items-start gap-6 lg:gap-12">
-                            <ProfilePhoto />
+                            <ProfilePhoto photo={user.photo} />
                             <div className="flex-1 space-y-20">
                                 <FormSection data={data} setData={setData} errors={errors} processing={processing} handleSubmit={handleSubmit} />
                                 <div className="shadow sm:rounded-lg">

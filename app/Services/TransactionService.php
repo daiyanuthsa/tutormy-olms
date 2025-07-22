@@ -60,6 +60,33 @@ class TransactionService
         return $this->transactionRepository->createTransaction($transactionData);
     }
 
+    public function getUserTransactions($userId)
+    {
+        $transactions = $this->transactionRepository->getUserTransactions($userId);
+
+        // Ambil hanya data yang diperlukan
+        return $transactions->map(function ($transaction) {
+            return [
+            'id' => $transaction->id,
+            'booking_trx_id' => $transaction->booking_trx_id,
+            'pricing' => [
+                'id' => $transaction->pricing->id,
+                'name' => $transaction->pricing->name,
+                'duration' => $transaction->pricing->duration,
+                'price' => $transaction->pricing->price,
+            ],
+            'sub_total_amount' => $transaction->sub_total_amount,
+            'total_tax_amount' => $transaction->total_tax_amount,
+            'grand_total_amount' => $transaction->grand_total_amount,
+            'payment_type' => $transaction->payment_type,
+            'status' => $transaction->status,
+            'started_at' => $transaction->started_at,
+            'ended_at' => $transaction->ended_at,
+            'created_at' => $transaction->created_at,
+            ];
+        });
+    }
+
    
 }
 ?>

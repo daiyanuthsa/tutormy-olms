@@ -2,7 +2,7 @@ import React, { useMemo } from "react";
 import MainLayout from "@/Layouts/MainLayout";
 import ArticleCard from '@/Components/Tips/ArticleCard.jsx';
 import SearchBar from "@/Components/Tips/SearchBar";
-import CategoryFilter from "@/components/tips/CategoryFilter";
+import CategoryFilter from "@/Components/Tips/CategoryFilter";
 import { usePage, Head, router } from "@inertiajs/react";
 
 const formatDate = (dateStr) =>
@@ -79,8 +79,7 @@ export default function Index({ articles, categories }) {
                 <div className="space-y-3">
                     <h2 className="text-4xl font-bold">Tips Terbaru</h2>
                     <div>
-                        Lorem ipsum dolor sit amet consectetur. Odio dolor arcu
-                        ullamcorper dictum nulla ph
+                        Temukan berbagai tips menarik yang bisa membantu kamu dalam belajar dan mengembangkan diri.
                     </div>
                 </div>
 

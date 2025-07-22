@@ -1,1 +1,0 @@
-import{j as e}from"./app-DYODpaQq.js";const s=()=>e.jsx("div",{className:"aspect-video bg-black rounded-xl overflow-hidden",children:e.jsxs("video",{controls:!0,className:"w-full h-full",children:[e.jsx("source",{src:"/video/sample.mp4",type:"video/mp4"}),"Your browser does not support the video tag."]})});export{s as default};

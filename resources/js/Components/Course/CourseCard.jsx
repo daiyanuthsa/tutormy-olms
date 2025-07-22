@@ -3,10 +3,10 @@ import { Link } from '@inertiajs/react';
 const CourseCard = ({ course }) => {
     return (
         <Link href={`/courses/${course.slug}`}>
-            <div className="text-white bg-neutral-5 border-b-2 border-b-primary-2 rounded-b-xl overflow-hidden shadow-lg hover:shadow-xl transition duration-300 hover:scale-105">
+            <div className="text-white bg-neutral-5 border-b-2 border-b-primary-2 rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition duration-300 hover:scale-105">
                 <div className="aspect-video">
                     <img
-                        src={course.image}
+                        src={'storage/'+course.thumbnail}
                         alt={course.name}
                         className="w-full h-full object-cover"
                     />

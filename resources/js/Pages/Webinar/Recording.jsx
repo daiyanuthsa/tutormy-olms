@@ -108,10 +108,7 @@ export default function Recording({ webinarDetail }) {
                         <div className="md:w-1/2 xl:w-auto rounded-xl overflow-hidden bg-neutral-3">
                             <div className="lg:h-96 relative">
                                 <img
-                                    src={
-                                        webinarDetail.thumbnail ||
-                                        "/assets/hero.png"
-                                    }
+                                    src={`/storage/${webinarDetail.thumbnail || "assets/hero.png"}`}
                                     alt={webinarDetail.name}
                                     className="w-full h-full object-cover"
                                 />
@@ -183,9 +180,13 @@ export default function Recording({ webinarDetail }) {
                                                 className="absolute inset-0 w-full h-full cursor-pointer group"
                                                 onClick={handlePlay}
                                                 style={{
-                                                    backgroundImage: `url(${webinarDetail.thumbnail || "/assets/hero.png"})`,
+                                                    backgroundImage: `url(${
+                                                        webinarDetail.thumbnail ||
+                                                        "/assets/hero.png"
+                                                    })`,
                                                     backgroundSize: "cover",
-                                                    backgroundPosition: "center",
+                                                    backgroundPosition:
+                                                        "center",
                                                 }}
                                             >
                                                 <div className="absolute inset-0 bg-black/50 flex items-center justify-center transition-opacity duration-300 group-hover:opacity-100">

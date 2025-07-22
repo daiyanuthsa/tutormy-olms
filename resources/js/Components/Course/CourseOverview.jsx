@@ -6,7 +6,7 @@ import { Icon } from '@iconify/react';
 const CourseOverview = ({ course }) => (
     <div className="flex flex-col lg:flex-row gap-6 lg:gap-12 items-center">
         <img
-            src="/assets/hero-auth.webp"
+            src={`/storage/${course.thumbnail || "assets/hero.png"}`}
             alt={course.name}
             className="w-full max-w-lg h-44 lg:h-80 object-cover rounded-2xl"
         />

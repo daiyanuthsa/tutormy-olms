@@ -4,7 +4,7 @@ import PrimaryButton from "@/Components/PrimaryButton";
 const TESTIMONIALS_PER_SLIDE = 3;
 const SLIDE_INTERVAL = 3000;
 
-const ReviewCard = ({ content, avatar, name, role }) => (
+const ReviewCard = ({  content, image_url, name, role }) => (
     <div
         className="rounded-2xl p-[2px] shadow-2xl bg-gradient-to-br from-primary-4 to-primary-2"
     >
@@ -14,7 +14,7 @@ const ReviewCard = ({ content, avatar, name, role }) => (
             </div>
             <div className="flex items-center gap-3">
                 <img
-                    src={avatar}
+                    src={'storage/'+image_url}
                     alt={name}
                     className="w-12 h-12 rounded-full object-cover"
                 />
@@ -29,7 +29,7 @@ const ReviewCard = ({ content, avatar, name, role }) => (
 
 const Review = ({ testimonials }) => {
     const [startIndex, setStartIndex] = useState(0);
-
+console.log("testimonials", testimonials);
     useEffect(() => {
         const interval = setInterval(() => {
             setStartIndex((prev) => (prev + TESTIMONIALS_PER_SLIDE) % testimonials.length);

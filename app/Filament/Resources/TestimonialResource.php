@@ -31,6 +31,8 @@ class TestimonialResource extends Resource
                     ->required()
                     ->maxLength(255),
                 Forms\Components\FileUpload::make('image_url')
+                    ->directory('testimonials')
+                    ->visibility('public')
                     ->image(),
                 Forms\Components\Textarea::make('content')
                     ->required()

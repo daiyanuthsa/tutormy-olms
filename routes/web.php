@@ -26,19 +26,6 @@ Route::get('/pricing', [FrontController::class, 'pricing'])->name('pricing');
 Route::get('/auth/{provider}/redirect', ProviderRedirectController::class)->name('auth.redirect');
 Route::get('/auth/{provider}/callback', ProviderCallbackController::class)->name('auth.callback');
 
-Route::get('/tips', [TipsController::class, 'index'])->name('tips.index');
-Route::get('/tips/search', [TipsController::class, 'searchTips'])->name('tips.search');
-Route::get('/tips/{article:slug}', [TipsController::class, 'tipsDetails'])->name('tips.details');
-
-Route::get('/courses', [CourseController::class, 'index'])->name('course.index');
-Route::get('/courses/search', [CourseController::class, 'search'])->name('course.search');
-Route::get('/courses/{course:slug}', [CourseController::class, 'show'])->name('course.details');
-
-Route::get('/webinar', [WebinarController::class, 'index'])->name('webinar.index');
-Route::get('/webinar/search', [WebinarController::class, 'search'])->name('webinar.search');
-Route::get('/webinar/register/{agenda:slug}', [WebinarController::class, 'showUpcomingAgenda'])->name('webinar.upcoming');
-Route::get('/webinar/{agenda:slug}', [WebinarController::class, 'showPastAgenda'])->name('webinar.past');
-
 Route::get('/documents/{document:slug}', [DocumentController::class, 'show'])->name('document.show');
 
 Route::get('/profile', [ProfileController::class, 'show'])->middleware(['auth', 'verified'])->name('dashboard');
@@ -48,30 +35,49 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/complete-profile', [ProfileController::class, 'completeProfile'])->name('profile.complete.post');
 
     Route::middleware(['profile.completed'])->group(function () {
-        Route::get('/profile/edit', [ProfileController::class, 'edit'])->name('profile.edit');
-        Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-        Route::post('/profile/picture', [ProfileController::class, 'updateProfilePicture'])->name('profile.photo.update');
-        Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-        Route::post('/profile/portofolio/update', [ProfileController::class, 'updatePortofolio'])->name('portofolio.update');
+        Route::prefix('profile')->group(function () {
+            Route::get('/edit', [ProfileController::class, 'edit'])->name('profile.edit');
+            Route::patch('/', [ProfileController::class, 'update'])->name('profile.update');
+            Route::post('/picture', [ProfileController::class, 'updateProfilePicture'])->name('profile.photo.update');
+            Route::delete('/', [ProfileController::class, 'destroy'])->name('profile.destroy');
+            Route::post('/portofolio/update', [ProfileController::class, 'updatePortofolio'])->name('portofolio.update');
+        });
+        Route::get('/riwayat-pembelian', [FrontController::class, 'showTransactionHistory'])->name('riwayat-pembelian');
+        Route::get('/checkout/{pricing}', [FrontController::class, 'checkout'])->name('front.checkout');
         // middleware isSubscribed user
         Route::middleware(['isSubscribed'])->group(function () {
-            Route::get('/courses/join/{course:slug}', [CourseController::class, 'join'])
-                ->name('course.join');
-            // web-design-hack/1/12
-            Route::get('/courses/learning/{course:slug}/{courseSection}/{sectionContent}', [CourseController::class, 'learning'])
-                ->name('courses.learning');
+            Route::prefix('courses')->group(function () {
+                Route::get('/', [CourseController::class, 'index'])->name('course.index');
+                Route::get('/search', [CourseController::class, 'search'])->name('course.search');
+                Route::get('/{course:slug}', [CourseController::class, 'show'])->name('course.details');
+                Route::get('/join/{course:slug}', [CourseController::class, 'join'])
+                    ->name('course.join');
+                // web-design-hack/1/12
+                Route::get('/learning/{course:slug}/{courseSection}/{sectionContent}', [CourseController::class, 'learning'])
+                    ->name('courses.learning');
 
-            Route::get('/courses/finished/{course:slug}', [CourseController::class, 'finished'])
-                ->name('courses.finished');
+                Route::get('/finished/{course:slug}', [CourseController::class, 'finished'])
+                    ->name('courses.finished');
 
-            Route::get('/courses/certificate/{course:slug}', [CertificateController::class, 'show'])
-                ->name('courses.certificate.show');
-            Route::post('/courses/certificate/{course:slug}', [CertificateController::class, 'store'])
-                ->name('courses.certificate.store');
+                Route::get('/certificate/{course:slug}', [CertificateController::class, 'show'])
+                    ->name('courses.certificate.show');
+                Route::post('/certificate/{course:slug}', [CertificateController::class, 'store'])
+                    ->name('courses.certificate.store');
+            });
+            
+            Route::prefix('webinar')->group(function () {
+                Route::get('/', [WebinarController::class, 'index'])->name('webinar.index');
+                Route::get('/search', [WebinarController::class, 'search'])->name('webinar.search');
+                Route::get('/register/{agenda:slug}', [WebinarController::class, 'showUpcomingAgenda'])->name('webinar.upcoming');
+                Route::get('/{agenda:slug}', [WebinarController::class, 'showPastAgenda'])->name('webinar.past');
+            });
 
-            Route::get('/riwayat-pembelian', [FrontController::class, 'showTransactionHistory'])->name('riwayat-pembelian');
+            Route::prefix('tips')->group(function () {
+                Route::get('/', [TipsController::class, 'index'])->name('tips.index');
+                Route::get('/search', [TipsController::class, 'searchTips'])->name('tips.search');
+                Route::get('/{article:slug}', [TipsController::class, 'tipsDetails'])->name('tips.details');
+            });
         });
-        Route::get('/checkout/{pricing}', [FrontController::class, 'checkout'])->name('front.checkout');
     });
     Route::post('/booking/payment/doku', [FrontController::class, 'paymentStore'])->name('payment.store');
     Route::get('/payment-success', function () {
@@ -89,11 +95,3 @@ Route::get('/profile-public', function () {
         'user' => auth()->user(),
     ]);
 })->name('profile.public');
-
-// Route::get('/riwayat-pembelian', function () {
-//     return Inertia::render('RiwayatPembelian/Index');
-// })->name('riwayat-pembelian');
-
-// Route::get('/course-sertifikat', function () {
-//     return Inertia::render('Course/Sertifikat');
-// })->name('course-sertifikat');

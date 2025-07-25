@@ -1,30 +1,33 @@
 import React from 'react';
 
 const steps = [
-
     {
-        id: '01',
-        title: 'Update Otomatis ke 100+ Modul Terbaru',
-        desc: 'Tanpa biaya tambahan, kamu akan terus dapat materi baru yang relevan dengan perkembangan teknologi.',
-        imgPosition: 'left',
+        id: "01",
+        title: "Update Otomatis ke 100+ Modul Terbaru",
+        desc: "Tanpa biaya tambahan, kamu akan terus dapat materi baru yang relevan dengan perkembangan teknologi.",
+        imgPosition: "left",
+        img: "/assets/get-image2.webp",
     },
     {
-        id: '02',
-        title: 'Komunitas Belajar Seumur Hidup',
-        desc: 'Gabung dalam komunitas aktif tempat kamu bisa bertanya, berdiskusi, dan saling membantu!',
-        imgPosition: 'right',
+        id: "02",
+        title: "Komunitas Belajar Seumur Hidup",
+        desc: "Gabung dalam komunitas aktif tempat kamu bisa bertanya, berdiskusi, dan saling membantu!",
+        imgPosition: "right",
+        img: "/assets/get-image3.webp",
     },
     {
-        id: '03',
-        title: 'Belajar Langsung dari Mentor Praktisi',
-        desc: 'Materi kamu dapat belajar dari pengalaman nyata para praktisi industri.',
-        imgPosition: 'left',
+        id: "03",
+        title: "Belajar Langsung dari Mentor Praktisi",
+        desc: "Materi kamu dapat belajar dari pengalaman nyata para praktisi industri.",
+        imgPosition: "left",
+        img: "/assets/get-image4.webp",
     },
     {
-        id: '04',
-        title: 'Modul Belajar dari Basic hingga Mahir',
-        desc: 'Ngga perlu takut mulai dari 0! Semua materi disusun bertahap dari yang paling dasar hingga mahir.',
-        imgPosition: 'right',
+        id: "04",
+        title: "Modul Belajar dari Basic hingga Mahir",
+        desc: "Ngga perlu takut mulai dari 0! Semua materi disusun bertahap dari yang paling dasar hingga mahir.",
+        imgPosition: "right",
+        img: "/assets/get-image5.webp",
     },
 ];
 
@@ -44,11 +47,14 @@ const Get = () => {
                             key={step.id}
                             className="grid grid-cols-3 items-center space-y-6 md:space-y-3 md:gap-6 relative"
                         >
-                            {step.imgPosition === 'left' && (
+                            {step.imgPosition === "left" && (
                                 <>
                                     <div className="col-span-1">
                                         <img
-                                            src="/assets/get-image.webp"
+                                            src={
+                                                step.img ||
+                                                "/assets/get-image.webp"
+                                            }
                                             alt={step.title}
                                             className="rounded-xl w-full shadow-lg"
                                         />
@@ -64,19 +70,25 @@ const Get = () => {
                                         <h3 className="text-purple-300 font-bold text-sm lg:text-2xl mb-2">
                                             {step.title}
                                         </h3>
-                                        <p className="hidden lg:block text-gray-300 font-medium text-sm">{step.desc}</p>
+                                        <p className="hidden lg:block text-gray-300 font-medium text-sm">
+                                            {step.desc}
+                                        </p>
                                     </div>
                                 </>
                             )}
 
-                            {step.imgPosition === 'right' && (
+                            {step.imgPosition === "right" && (
                                 <>
                                     <div className="col-span-1">
                                         <h3 className="text-purple-300 text-right font-bold text-sm lg:text-2xl mb-2">
                                             {step.title}
                                         </h3>
-                                        <p className="hidden lg:block text-gray-300 text-right
-                                        font-medium text-sm">{step.desc}</p>
+                                        <p
+                                            className="hidden lg:block text-gray-300 text-right
+                                        font-medium text-sm"
+                                        >
+                                            {step.desc}
+                                        </p>
                                     </div>
                                     <div className="col-span-1 flex justify-center items-center relative z-10">
                                         <div className="bg-gradient-to-r from-primary-4 to-primary-1 p-0.5 rounded-lg">

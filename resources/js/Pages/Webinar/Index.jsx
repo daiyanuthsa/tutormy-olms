@@ -42,11 +42,11 @@ const Index = ({ webinars, categories }) => {
 
         // Jika ada kategori yang dipilih, filter kedua array
         const filteredUpcoming = upcoming.filter(
-            (webinar) => webinar.category.name === activeCategory
+            (webinar) => webinar.category?.name === activeCategory
         );
 
         const filteredPast = past.filter(
-            (webinar) => webinar.category.name === activeCategory
+            (webinar) => webinar.category?.name === activeCategory
         );
 
         return {
@@ -55,36 +55,6 @@ const Index = ({ webinars, categories }) => {
         };
     }, [webinars, activeCategory]); // Dependensi: jalankan ulang jika webinars atau activeCategory berubah
 
-    // const categories = [
-    //     {
-    //         name: "Semua Kategori",
-    //         slug: "semua-kategori",
-    //     },
-    //     {
-    //         name: "Teknologi",
-    //         slug: "teknologi",
-    //     },
-    //     {
-    //         name: "Gaya Hidup",
-    //         slug: "gaya-hidup",
-    //     },
-    //     {
-    //         name: "Bisnis & Keuangan",
-    //         slug: "bisnis-keuangan",
-    //     },
-    //     {
-    //         name: "Pendidikan",
-    //         slug: "pendidikan",
-    //     },
-    //     {
-    //         name: "Kesehatan",
-    //         slug: "kesehatan",
-    //     },
-    //     {
-    //         name: "Hiburan",
-    //         slug: "hiburan",
-    //     },
-    // ];
 
     return (
         <MainLayout>
@@ -195,7 +165,7 @@ const Index = ({ webinars, categories }) => {
                                 dolor arcu ullamcorper dictum nulla ph
                             </p>
                         </div>
-                        <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
+                        <div className="grid grid-cols-2 lg:grid-cols-3 gap-6">
                             {filteredWebinars.past_agendas.length > 0 ? (
                                 filteredWebinars.past_agendas.map((item) => (
                                     <WebminarCard

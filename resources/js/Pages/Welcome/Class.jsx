@@ -34,11 +34,11 @@ const Class = ( { courses }) => {
                         {coursesToShow.map((course) => (
                             <div
                                 key={course.id}
-                                className="bg-neutral-5 border-b-2 border-b-primary-2 rounded-b-xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300"
+                                className="bg-neutral-5 border-b-2 border-b-primary-2 rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300"
                             >
                                 <div className="aspect-video">
                                     <img
-                                        src={course.image}
+                                        src={course.thumbnail ? `storage/${course.thumbnail}` : '/assets/placeholder.png'}
                                         alt={course.name}
                                         className="w-full h-full object-cover"
                                     ></img>
@@ -48,7 +48,7 @@ const Class = ( { courses }) => {
                                         {course.name}
                                     </h3>
                                     <p className="bg-neutral-700 px-2 py-1 font-bold rounded-full text-xs lg:text-sm inline-block max-w-max">
-                                        {course.section_content_count}
+                                        {course.section_content_count + " Materi"}
                                     </p>
                                 </div>
                             </div>

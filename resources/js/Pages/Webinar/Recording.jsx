@@ -180,10 +180,7 @@ export default function Recording({ webinarDetail }) {
                                                 className="absolute inset-0 w-full h-full cursor-pointer group"
                                                 onClick={handlePlay}
                                                 style={{
-                                                    backgroundImage: `url(${
-                                                        webinarDetail.thumbnail ||
-                                                        "/assets/hero.png"
-                                                    })`,
+                                                    backgroundImage: `url("/storage/${webinarDetail.thumbnail || "assets/hero.png"}")`,
                                                     backgroundSize: "cover",
                                                     backgroundPosition:
                                                         "center",

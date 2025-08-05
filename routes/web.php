@@ -72,11 +72,11 @@ Route::middleware(['auth'])->group(function () {
                 Route::get('/{agenda:slug}', [WebinarController::class, 'showPastAgenda'])->name('webinar.past');
             });
 
-            Route::prefix('tips')->group(function () {
-                Route::get('/', [TipsController::class, 'index'])->name('tips.index');
-                Route::get('/search', [TipsController::class, 'searchTips'])->name('tips.search');
-                Route::get('/{article:slug}', [TipsController::class, 'tipsDetails'])->name('tips.details');
-            });
+            // Route::prefix('tips')->group(function () {
+            //     Route::get('/', [TipsController::class, 'index'])->name('tips.index');
+            //     Route::get('/search', [TipsController::class, 'searchTips'])->name('tips.search');
+            //     Route::get('/{article:slug}', [TipsController::class, 'tipsDetails'])->name('tips.details');
+            // });
         });
     });
     Route::post('/booking/payment/doku', [FrontController::class, 'paymentStore'])->name('payment.store');

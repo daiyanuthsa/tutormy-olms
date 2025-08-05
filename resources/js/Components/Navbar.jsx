@@ -8,7 +8,7 @@ const navLinks = [
     { name: "Home", href: "/" },
     { name: "Course", href: "/courses" },
     { name: "Webinar", href: "/webinar" },
-    { name: "Tips", href: "/tips" },
+    // { name: "Tips", href: "/tips" },
 ];
 
 export default function Navbar() {

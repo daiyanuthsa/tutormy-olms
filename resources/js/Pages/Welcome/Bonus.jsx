@@ -15,7 +15,7 @@ const bonuses = [
         value: "Rp3.800.000",
     },
     {
-        image: "/assets/bonus-image.webp",
+        image: "/assets/bonus-image1.webp",
         title: "1-on-1 Konsultasi dengan Mentor",
         benefits: [],
         caption:

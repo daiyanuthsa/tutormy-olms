@@ -39,10 +39,10 @@ const Hero = () => {
                     </div>
                 </div>
             </div>
-            <button className="fixed bottom-10 right-5 md:right-8 lg:right-28 z-50 flex items-center gap-3 bg-success-2 text-lg lg:text-2xl font-bold rounded-xl py-2 px-4">
+            {/* <button className="fixed bottom-10 right-5 md:right-8 lg:right-28 z-50 flex items-center gap-3 bg-success-2 text-lg lg:text-2xl font-bold rounded-xl py-2 px-4">
                 <Icon icon="logos:whatsapp-icon" className="w-6 h-6 lg:w-9 lg:h-9" />
                 Whatsapp
-            </button>
+            </button> */}
         </section>
     )
 }

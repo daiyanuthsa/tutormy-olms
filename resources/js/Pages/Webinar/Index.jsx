@@ -134,18 +134,21 @@ const Index = ({ webinars, categories }) => {
                                 Webinar yang akan datang
                             </h2>
                             <p className="text-sm lg:text-base">
-                                Lorem ipsum dolor sit amet consectetur. Odio
-                                dolor arcu ullamcorper dictum nulla ph
+                                Nantikan sesi interaktif terbaru bersama para
+                                ahli industri untuk mempersiapkan karir
+                                impianmu.
                             </p>
                         </div>
                         <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
                             {filteredWebinars.upcoming_agendas.length > 0 ? (
-                                filteredWebinars.upcoming_agendas.map((item) => (
-                                    <WebminarCard
-                                        key={item.id}
-                                        webinar={item}
-                                    />
-                                ))
+                                filteredWebinars.upcoming_agendas.map(
+                                    (item) => (
+                                        <WebminarCard
+                                            key={item.id}
+                                            webinar={item}
+                                        />
+                                    )
+                                )
                             ) : (
                                 <p className="text-neutral-2">
                                     Tidak ada webinar yang mendatang.
@@ -161,8 +164,9 @@ const Index = ({ webinars, categories }) => {
                                 Kumpulan Webinar
                             </h2>
                             <p className="text-sm lg:text-base">
-                                Lorem ipsum dolor sit amet consectetur. Odio
-                                dolor arcu ullamcorper dictum nulla ph
+                                Ketinggalan sesi live? Tonton ulang semua
+                                rekaman webinar kami yang kaya akan wawasan di
+                                sini.
                             </p>
                         </div>
                         <div className="grid grid-cols-2 lg:grid-cols-3 gap-6">

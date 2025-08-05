@@ -38,7 +38,7 @@ const Data = () => {
                 Whatsapp
             </button>
 
-            <div className="relative bg-gradient-to-b from-[#24063A] to-[#11141D] rounded-3xl px-5 py-7 lg:px-16 lg:py-12 text-center overflow-hidden">
+            {/* <div className="relative bg-gradient-to-b from-[#24063A] to-[#11141D] rounded-3xl px-5 py-7 lg:px-16 lg:py-12 text-center overflow-hidden">
                 <div className="absolute top-[-150px] left-1/2 -translate-x-1/2 w-[400px] h-[250px] bg-purple-700 opacity-30 blur-3xl rounded-full z-0" />
                 <div className="relative z-10">
                     <h2 className="text-2xl lg:text-4xl font-bold mb-6 xl:px-32 2xl:px-60">
@@ -59,7 +59,7 @@ const Data = () => {
                         ))}
                     </div>
                 </div>
-            </div>
+            </div> */}
 
             <div className="flex flex-col items-center gap-6 lg:gap-8 text-center">
                 <h5 className="text-xl lg:text-4xl font-semibold">

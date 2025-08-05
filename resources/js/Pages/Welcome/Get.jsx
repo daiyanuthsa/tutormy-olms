@@ -99,7 +99,10 @@ const Get = () => {
                                     </div>
                                     <div className="col-span-1">
                                         <img
-                                            src="/assets/get-image.webp"
+                                            src={
+                                                step.img ||
+                                                "/assets/get-image.webp"
+                                            }
                                             alt={step.title}
                                             className="rounded-xl w-full shadow-lg"
                                         />

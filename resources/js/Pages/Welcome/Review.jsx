@@ -29,7 +29,6 @@ const ReviewCard = ({  content, image_url, name, role }) => (
 
 const Review = ({ testimonials }) => {
     const [startIndex, setStartIndex] = useState(0);
-console.log("testimonials", testimonials);
     useEffect(() => {
         const interval = setInterval(() => {
             setStartIndex((prev) => (prev + TESTIMONIALS_PER_SLIDE) % testimonials.length);

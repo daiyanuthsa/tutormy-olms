@@ -33,7 +33,7 @@ const HeroComponents = () => {
                     <div className="absolute w-[350px] h-[300px] md:h-[200px] lg:w-[400px] xl:w-[600px] lg:h-[400px] bg-purple-700 opacity-40 blur-xl md:blur-3xl rounded-full z-0" />
                     <div className="relative z-10 w-full h-full md:h-60 lg:h-80 xl:h-96 bg-neutral-800 rounded-3xl overflow-hidden shadow-lg flex items-center justify-center">
                         <img
-                            src="/assets/hero.png"
+                            src="/assets/foto-1.webp"
                             alt="Belajar Online"
                             className="object-cover w-full h-full"
                         />

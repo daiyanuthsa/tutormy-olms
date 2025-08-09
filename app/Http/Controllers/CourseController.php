@@ -27,7 +27,7 @@ class CourseController extends Controller
     {
         $courses = $this->courseRepository->getCourseThumbnail();
         $categories = $this->courseRepository->getCourseCategory();
-        // dd($courses);
+       
         return inertia('Course/Course', ['courses' => $courses, 'categories' => $categories ]);
     }
 
@@ -35,6 +35,7 @@ class CourseController extends Controller
     {
         // $course->load(['category', 'benefits']);
         $course = $this->courseRepository->getCourseForPublicView($course->id);
+        dd($course);
         $course->load(['benefits', 'sections.contents']);
         if (!Auth()->check()) {
             $course->group_url = null;

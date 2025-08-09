@@ -8,6 +8,7 @@ import { DUMMY_COURSES, DUMMY_CATEGORIES } from '../../../../public/js/data/Dumm
 
 const filterCourses = (courses, category, keyword) => {
     let result = courses;
+    
 
     if (category && category !== 'Discover') {
         result = result.filter(course =>
@@ -27,6 +28,7 @@ const filterCourses = (courses, category, keyword) => {
 };
 
 const Course = ({courses, categories}) => {
+    
     const [searchTerm, setSearchTerm] = useState('');
     const [activeCategory, setActiveCategory] = useState('Discover');
 

@@ -13,7 +13,7 @@ const Dashboard = ({ profiledata, courses, portofolio }) => {
             <main className="pt-28 w-full space-y-7">
                 <Hero profiledata={profiledata} />
                 <ClassUser courses={courses} />
-                <Portofolio portfolio={portofolio} />
+                {/* <Portofolio portfolio={portofolio} /> */}
             </main>
         </MainLayout>
     );

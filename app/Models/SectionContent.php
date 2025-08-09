@@ -11,6 +11,7 @@ class SectionContent extends Model
     protected $fillable = [
         'name',
         'content',
+        'duration',
         'free_access',
         'position',
         'course_section_id',
@@ -20,6 +21,7 @@ class SectionContent extends Model
     {
         return [
             'free_access' => 'boolean',
+            'duration' => 'integer',
         ];
     }
     public function section()

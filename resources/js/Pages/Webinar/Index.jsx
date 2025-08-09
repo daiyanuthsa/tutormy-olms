@@ -6,12 +6,14 @@ import { Icon } from "@iconify/react";
 import { useState, useMemo } from "react";
 import { router } from "@inertiajs/react";
 const Index = ({ webinars, categories }) => {
+    console.log("webinars:", { webinars });
     const [searchTerm, setSearchTerm] = useState("");
     const [activeCategory, setActiveCategory] = useState("Semua Kategori");
 
     const onCategoryChange = (category) => {
         setActiveCategory(category);
     };
+    
 
     // fungsi untuk handle submit form
     const handleSearchSubmit = (e) => {
@@ -42,11 +44,11 @@ const Index = ({ webinars, categories }) => {
 
         // Jika ada kategori yang dipilih, filter kedua array
         const filteredUpcoming = upcoming.filter(
-            (webinar) => webinar.category.name === activeCategory
+            (webinar) => webinar.category?.name === activeCategory
         );
 
         const filteredPast = past.filter(
-            (webinar) => webinar.category.name === activeCategory
+            (webinar) => webinar.category?.name === activeCategory
         );
 
         return {
@@ -54,37 +56,6 @@ const Index = ({ webinars, categories }) => {
             past_agendas: filteredPast,
         };
     }, [webinars, activeCategory]); // Dependensi: jalankan ulang jika webinars atau activeCategory berubah
-
-    // const categories = [
-    //     {
-    //         name: "Semua Kategori",
-    //         slug: "semua-kategori",
-    //     },
-    //     {
-    //         name: "Teknologi",
-    //         slug: "teknologi",
-    //     },
-    //     {
-    //         name: "Gaya Hidup",
-    //         slug: "gaya-hidup",
-    //     },
-    //     {
-    //         name: "Bisnis & Keuangan",
-    //         slug: "bisnis-keuangan",
-    //     },
-    //     {
-    //         name: "Pendidikan",
-    //         slug: "pendidikan",
-    //     },
-    //     {
-    //         name: "Kesehatan",
-    //         slug: "kesehatan",
-    //     },
-    //     {
-    //         name: "Hiburan",
-    //         slug: "hiburan",
-    //     },
-    // ];
 
     return (
         <MainLayout>
@@ -164,18 +135,21 @@ const Index = ({ webinars, categories }) => {
                                 Webinar yang akan datang
                             </h2>
                             <p className="text-sm lg:text-base">
-                                Lorem ipsum dolor sit amet consectetur. Odio
-                                dolor arcu ullamcorper dictum nulla ph
+                                Nantikan sesi interaktif terbaru bersama para
+                                ahli industri untuk mempersiapkan karir
+                                impianmu.
                             </p>
                         </div>
                         <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
                             {filteredWebinars.upcoming_agendas.length > 0 ? (
-                                filteredWebinars.upcoming_agendas.map((item) => (
-                                    <WebminarCard
-                                        key={item.id}
-                                        webinar={item}
-                                    />
-                                ))
+                                filteredWebinars.upcoming_agendas.map(
+                                    (item) => (
+                                        <WebminarCard
+                                            key={item.id}
+                                            webinar={item}
+                                        />
+                                    )
+                                )
                             ) : (
                                 <p className="text-neutral-2">
                                     Tidak ada webinar yang mendatang.
@@ -191,11 +165,12 @@ const Index = ({ webinars, categories }) => {
                                 Kumpulan Webinar
                             </h2>
                             <p className="text-sm lg:text-base">
-                                Lorem ipsum dolor sit amet consectetur. Odio
-                                dolor arcu ullamcorper dictum nulla ph
+                                Ketinggalan sesi live? Tonton ulang semua
+                                rekaman webinar kami yang kaya akan wawasan di
+                                sini.
                             </p>
                         </div>
-                        <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
+                        <div className="grid grid-cols-2 lg:grid-cols-3 gap-6">
                             {filteredWebinars.past_agendas.length > 0 ? (
                                 filteredWebinars.past_agendas.map((item) => (
                                     <WebminarCard

@@ -76,7 +76,7 @@ const ProfilePhoto = ({ photo }) => {
     // Tentukan sumber foto: jika null, pakai default
     let photoUrl = photo;
     if (!photoUrl) {
-        photoUrl = "/assets/teacher.png";
+        photoUrl = "/assets/profile.png";
     } else {
         // Tambahkan prefix /storage/ jika path dari backend
         photoUrl = "/storage/" + photoUrl.replace(/^storage[\\/]/, "");

@@ -31,21 +31,19 @@ class AgendaResource extends Resource
             ->schema([
                 Fieldset::make('Webminar')
                     ->schema([
-
                         Forms\Components\TextInput::make('name')
                         ->label('Nama Webminar')
                             ->required()
                             ->maxLength(255),
                         Forms\Components\Select::make(name: 'category_id')
                             ->label('Kategori Webminar')
-
                             ->relationship('category', 'name')
                             ->searchable()
                             ->preload(),
                         Forms\Components\DateTimePicker::make('event_datetime')
                             ->required()
                             ->label('Tanggal dan Waktu Webminar'),
-                        Forms\Components\Textarea::make('description')
+                        Forms\Components\RichEditor::make('description')
                         ->label('Deskripsi Webminar')
                             ->columnSpanFull(),
                         Forms\Components\FileUpload::make('thumbnail')
@@ -62,8 +60,6 @@ class AgendaResource extends Resource
                             ->imageResizeMode('cover')
                             ->imageCropAspectRatio('16:9')
                             ->visibility('public'),
-                        
-
                         Forms\Components\Toggle::make('is_active')
                             ->default(true)
                             ->hint('Aktifkan agenda ini untuk ditampilkan di halaman webminar.')

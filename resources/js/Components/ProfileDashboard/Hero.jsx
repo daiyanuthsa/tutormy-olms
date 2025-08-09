@@ -7,7 +7,7 @@ const UserProfile = ({ profiledata }) => (
             src={
                 profiledata.photo
                     ? profiledata.photo
-                    : "/assets/teacher.png"
+                    : "/assets/profile.png"
             }
             alt="profile"
             className="w-24 h-24 md:w-28 md:h-28 rounded-full object-cover"

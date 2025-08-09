@@ -4,8 +4,8 @@ import PrimaryButton from "@/Components/PrimaryButton";
 
 const bonuses = [
     {
-        image: "/assets/bonus-image.webp",
-        title: "Akses ke Event Offline & Networking",
+        image: "/assets/foto-15.jpg",
+        title: "Akses GRATIS ke Event Offline & Networking",
         benefits: [
             "Acara offline eksklusif dengan berbagai speaker",
             "Bangun networking dengan berbagai komunitas",
@@ -15,7 +15,7 @@ const bonuses = [
         value: "Rp3.800.000",
     },
     {
-        image: "/assets/bonus-image.webp",
+        image: "/assets/foto-16.jpg",
         title: "1-on-1 Konsultasi dengan Mentor",
         benefits: [],
         caption:
@@ -23,13 +23,19 @@ const bonuses = [
         value: "Rp2.500.000",
     },
     {
-        image: "/assets/bonus-image.webp",
-        title: "Akses Premium Materi Belajar",
-        benefits: [
-
-        ],
+        image: "/assets/foto-17.jpg",
+        title: "GRATIS Akses Webminar Eksklusif",
+        benefits: [],
         caption:
-            "Butuh bimbingan lebih dalam? Kamu bisa konsultasi langsung dengan mentor<br>lewat sesi private member yang fleksibel secara berkala.",
+            "Langkah awal menuju perubahan besar bisa dimulai dari satu sesi ini. Dapatkan ilmu dan insight dari para praktisi berpengalaman, yang tidak kamu temukan di tempat lain - dan semuanya tanpa biaya.",
+        value: "Rp2.500.000",
+    },
+    {
+        image: "/assets/foto-1.webp",
+        title: "Monthly Meet-Up Dengan Mentor & Circle Support",
+        benefits: [],
+        caption:
+            "Diskusi langsung dengan sesama member & mentor tentang perkembangan  belajar, saling sharing pemikiran, startegi, dan diskusi secara dua arah.",
         value: "Rp1.800.000",
     },
 ];

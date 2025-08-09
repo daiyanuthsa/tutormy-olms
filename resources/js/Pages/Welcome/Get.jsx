@@ -3,31 +3,36 @@ import React from 'react';
 const steps = [
     {
         id: "01",
-        title: "Update Otomatis ke 100+ Modul Terbaru",
-        desc: "Tanpa biaya tambahan, kamu akan terus dapat materi baru yang relevan dengan perkembangan teknologi.",
+        title: "Komunitas Belajar Seumur Hidup.",
+        desc: [
+            "☑️Akses komunitas tanpa batas waktu, terus berkembang bareng orang-orang yang satu visi.",
+            "☑️Akses ke modul pembelajaran tambahan yang terus diperbarui.",
+            "☑️Akses ke berbagai materi pembelajaran yang relevan dengan perkembangan teknologi.",
+        ],
         imgPosition: "left",
         img: "/assets/get-image2.webp",
     },
     {
         id: "02",
-        title: "Komunitas Belajar Seumur Hidup",
-        desc: "Gabung dalam komunitas aktif tempat kamu bisa bertanya, berdiskusi, dan saling membantu!",
+        title: "35+ Blueprint Strategi Meningkatkan Omset Bisnis & Tambah Sumber Penghasilan",
+        desc: [
+            "☑️Akses komunitas tanpa batas waktu, terus berkembang bareng orang-orang yang satu visi.",
+            "☑️Akses ke modul pembelajaran tambahan yang terus diperbarui.",
+            "☑️Akses ke berbagai materi pembelajaran yang relevan dengan perkembangan teknologi.",
+        ],
         imgPosition: "right",
         img: "/assets/get-image3.webp",
     },
     {
         id: "03",
-        title: "Belajar Langsung dari Mentor Praktisi",
-        desc: "Materi kamu dapat belajar dari pengalaman nyata para praktisi industri.",
+        title: "Modul Pembelajaran Tambahan dari Basic Hingga Mahir",
+        desc: [
+            "☑️Akses komunitas tanpa batas waktu, terus berkembang bareng orang-orang yang satu visi.",
+            "☑️Akses ke modul pembelajaran tambahan yang terus diperbarui.",
+            "☑️Akses ke berbagai materi pembelajaran yang relevan dengan perkembangan teknologi.",
+        ],
         imgPosition: "left",
         img: "/assets/get-image4.webp",
-    },
-    {
-        id: "04",
-        title: "Modul Belajar dari Basic hingga Mahir",
-        desc: "Ngga perlu takut mulai dari 0! Semua materi disusun bertahap dari yang paling dasar hingga mahir.",
-        imgPosition: "right",
-        img: "/assets/get-image5.webp",
     },
 ];
 
@@ -70,25 +75,34 @@ const Get = () => {
                                         <h3 className="text-purple-300 font-bold text-sm lg:text-2xl mb-2">
                                             {step.title}
                                         </h3>
-                                        <p className="hidden lg:block text-gray-300 font-medium text-sm">
-                                            {step.desc}
-                                        </p>
+                                        {step.desc.map((item, index) => (
+                                            <p
+                                                key={index}
+                                                className="hidden lg:block text-gray-100 
+                                        font-medium text-sm mb-2"
+                                            >
+                                                {item}
+                                            </p>
+                                        ))}
                                     </div>
                                 </>
                             )}
 
                             {step.imgPosition === "right" && (
                                 <>
-                                    <div className="col-span-1">
-                                        <h3 className="text-purple-300 text-right font-bold text-sm lg:text-2xl mb-2">
+                                    <div className="col-span-1 py-8">
+                                        <h3 className="text-purple-300  font-bold text-sm lg:text-2xl mb-2">
                                             {step.title}
                                         </h3>
-                                        <p
-                                            className="hidden lg:block text-gray-300 text-right
-                                        font-medium text-sm"
-                                        >
-                                            {step.desc}
-                                        </p>
+                                        {step.desc.map((item, index) => (
+                                            <p
+                                                key={index}
+                                                className="hidden lg:block text-gray-300 
+                                        font-medium text-sm mb-2"
+                                            >
+                                                {item}
+                                            </p>
+                                        ))}
                                     </div>
                                     <div className="col-span-1 flex justify-center items-center relative z-10">
                                         <div className="bg-gradient-to-r from-primary-4 to-primary-1 p-0.5 rounded-lg">

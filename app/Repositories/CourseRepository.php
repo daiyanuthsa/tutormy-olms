@@ -9,6 +9,7 @@ use App\Models\CourseStudent;
 use App\Models\SectionContent;
 use Carbon\Carbon;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Cache;
 
 class CourseRepository implements CourseRepositoryInterface
 {
@@ -92,23 +93,48 @@ class CourseRepository implements CourseRepositoryInterface
     }
     public function getCourseThumbnail(int $limit = null): Collection
     {
-        return Course::with(['sections.contents'])
-            ->select('id', 'name', 'thumbnail', 'slug')
-            ->when($limit, fn($query) => $query->limit($limit))
-            ->get()
-            ->map(function ($course) {
-                // Hitung total konten dari semua section
-                $contentCount = $course->sections->pluck('contents')->flatten()->count();
+        $cacheKey = 'course_thumbnail_' . ($limit ?? 'all');
 
-                return [
-                    'name' => $course->name,
-                    'thumbnail' => $course->thumbnail,
-                    'section_content_count' => $contentCount,
-                    'slug' => $course->slug,
-                    'id' => $course->id,
-                ];
-            });
+        return Cache::remember($cacheKey, now()->addHours(2), function () use ($limit) {
+            return Course::with([
+                'category:id,name,slug',
+                'sections' => fn($query) => $query->orderBy('position'),
+                'sections.contents' => fn($query) => $query->orderBy('position')
+            ])
+                ->select('id', 'name', 'thumbnail', 'slug', 'category_id', 'about')
+                ->when($limit, fn($query) => $query->limit($limit))
+                ->get()
+                ->map(function ($course) {
+                    $contentCount = $course->sections->pluck('contents')->flatten()->count();
+                    $contents = $course->sections
+                        ->flatMap(function ($section) {
+                            return $section->contents
+                                ->map(fn($content) => [
+                                    'id' => $content->id,
+                                    'name' => $content->name,
+                                    'duration' => $content->duration,
+                                ]);
+                        })
+                        ->values();
+
+                    return [
+                        'id' => $course->id,
+                        'name' => $course->name,
+                        'thumbnail' => $course->thumbnail,
+                        'about' => $course->about,
+                        'slug' => $course->slug,
+                        'content_count' => $contentCount,
+                        'category' => [
+                            'id' => $course->category->id,
+                            'name' => $course->category->name,
+                            'slug' => $course->category->slug,
+                        ],
+                        'contents' => $contents,
+                    ];
+                });
+        });
     }
+
 
     public function getUserCourseProgress($userId)
     {

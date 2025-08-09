@@ -6,12 +6,14 @@ import { Icon } from "@iconify/react";
 import { useState, useMemo } from "react";
 import { router } from "@inertiajs/react";
 const Index = ({ webinars, categories }) => {
+    console.log("webinars:", { webinars });
     const [searchTerm, setSearchTerm] = useState("");
     const [activeCategory, setActiveCategory] = useState("Semua Kategori");
 
     const onCategoryChange = (category) => {
         setActiveCategory(category);
     };
+    
 
     // fungsi untuk handle submit form
     const handleSearchSubmit = (e) => {
@@ -54,7 +56,6 @@ const Index = ({ webinars, categories }) => {
             past_agendas: filteredPast,
         };
     }, [webinars, activeCategory]); // Dependensi: jalankan ulang jika webinars atau activeCategory berubah
-
 
     return (
         <MainLayout>

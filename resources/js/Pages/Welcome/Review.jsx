@@ -4,23 +4,31 @@ import PrimaryButton from "@/Components/PrimaryButton";
 const TESTIMONIALS_PER_SLIDE = 3;
 const SLIDE_INTERVAL = 3000;
 
-const ReviewCard = ({  content, image_url, name, role }) => (
-    <div
-        className="rounded-2xl p-[2px] shadow-2xl bg-gradient-to-br from-primary-4 to-primary-2"
-    >
-        <div className="bg-neutral-5 rounded-2xl h-full xl:h-80 flex flex-col justify-between p-6 lg:p-12">
-            <div className="flex-1 mb-10 xl:mb-0">
-                <p className="text-gray-300 text-sm leading-relaxed">{content}</p>
+const ReviewCard = ({ content, image_url, name, ocupation }) => (
+    <div className="rounded-2xl p-[2px] shadow-2xl bg-gradient-to-br from-primary-4 to-primary-2">
+        <div className="bg-neutral-5 rounded-2xl h-full min-h-80 flex flex-col p-6 lg:p-12">
+            {/* Content area - flexible height */}
+            <div className="flex-grow min-h-0 mb-6">
+                <p className="text-gray-300 text-sm leading-relaxed h-full">
+                    {content}
+                </p>
             </div>
-            <div className="flex items-center gap-3">
+
+            {/* Footer - always at bottom */}
+            <div className="flex items-center gap-3 flex-shrink-0">
                 <img
-                    src={'storage/'+image_url}
-                    alt={name}
+                    src={
+                        "storage/" + image_url ||
+                        "https://via.placeholder.com/48"
+                    }
+                    alt={name || "User"}
                     className="w-12 h-12 rounded-full object-cover"
                 />
                 <div>
-                    <h4 className="font-semibold text-sm mb-1">{name}</h4>
-                    <p className="text-gray-400 text-xs">{role}</p>
+                    <h4 className="font-semibold text-sm mb-1 text-white">
+                        {name || "John Doe"}
+                    </h4>
+                    <p className="text-gray-400 text-xs">{ocupation || "Role"}</p>
                 </div>
             </div>
         </div>

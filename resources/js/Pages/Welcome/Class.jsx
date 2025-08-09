@@ -30,7 +30,7 @@ const Class = ( { courses }) => {
                         </p>
                     </div>
 
-                    <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-12">
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
                         {coursesToShow.map((course) => (
                             <div
                                 key={course.id}

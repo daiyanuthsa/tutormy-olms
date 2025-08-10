@@ -41,7 +41,7 @@ const Get = () => {
         <div className=" text-white py-16 px-4">
             <div className="container mx-auto max-w-7xl">
                 <h2 className="text-center text-2xl lg:text-4xl font-bold mb-16">
-                    Apa yang kamu dapatkan apabila belajar di platform Tutormy!
+                    Kenapa Harus Belajar Bersama Tutormy?
                 </h2>
 
                 <div className="relative">

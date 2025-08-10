@@ -85,13 +85,13 @@ const Data = () => {
 
             <div className="flex flex-col items-center gap-6 lg:gap-8 text-center">
                 <h5 className="text-xl lg:text-4xl font-semibold">
-                    Kuota TERBATAS untuk dapatkan bonus senilai{" "}
-                    <span className="font-bold">Rp10.500.000</span> + Diskon
-                    hingga 98%.
+                    Dapatkan Keseluruhan Benefit Exclusive, Serta Diskon
+                    Terbatas Hingga 95%
                 </h5>
 
                 <h6 className="text-xl lg:text-3xl font-bold">
-                    Berbagai manfaat + promo akan berubah setelah KAMU!
+                    Benefit & Diskon Akan Berubah Setelah Penawaran Kamu
+                    Berakhir
                 </h6>
 
                 <div className="w-screen py-2.5 bg-primary-4 text-center">

@@ -13,7 +13,7 @@ import Bonus from './Welcome/Bonus'
 
 const Divider = () => (
     <div className="flex justify-center">
-        <div className="w-96 lg:w-[973px] h-[5px] bg-gradient-to-r from-zinc-900 via-primary-2 to-zinc-900"></div>
+        <div className="w-96 lg:w-[973px] h-[5px] bg-gradient-to-r from-zinc-900 via-warning-3 to-zinc-900"></div>
     </div>
 )
 
@@ -23,6 +23,7 @@ const Welcome = ({ pricing, testimonials, courses }) => {
             <Head title="Welcome" />
             <main className="py-28 w-full">
                 <HeroComponents />
+                <Divider />
                 <Review testimonials={testimonials} />
                 <Divider />
                 <Get />
@@ -40,7 +41,7 @@ const Welcome = ({ pricing, testimonials, courses }) => {
                 <Question />
             </main>
         </MainLayout>
-    )
+    );
 }
 
 export default Welcome

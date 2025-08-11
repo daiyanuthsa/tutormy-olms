@@ -16,17 +16,28 @@ const HeroComponents = () => {
             style={{ backgroundImage: "url('/assets/stars-component.webp')" }}
         >
             <div className="absolute w-60 h-60 lg:w-80 lg:h-80 bg-purple-700 opacity-30 blur-3xl rounded-full left-[-100px] top-1/4 z-0" />
-            <div className='container text-white grid grid-cols-1 md:grid-cols-2 gap-10 items-center relative z-10'>
+            <div className="container text-white grid grid-cols-1 md:grid-cols-2 gap-10 items-center relative z-10">
                 <div>
-                    <h1 className='text-3xl md:text-2xl lg:text-5xl font-extrabold text-start mb-5 lg:mb-7'>
-                        Upgrade Skill Tanpa Ribet, Belajar Bisa di Mana Aja!
+                    <h1 className="text-3xl md:text-2xl lg:text-4xl font-extrabold text-start mb-5 lg:mb-7">
+                        96% Member Kami Berhasil{" "}
+                        <span className="text-primary-3">
+                            Meningkatkan Omset Bisnis & Mendapatkan Penghasilan
+                        </span>{" "}
+                        Tambahan
                     </h1>
-                    <p className='text-sm font-medium mb-4'>
-                        Dunia kerja terus berkembang, dan kami pastikan kamu tidak tertinggal. Di Tutormy.id, kami menghadirkan materi terkini yang disesuaikan dengan kebutuhan industri saat ini!
+                    <p className="text-sm font-medium mb-4">
+                        Gabung ke Komunitas - Kami Bantu Dari "NOL" Meningkatkan
+                        Omset Bisnis Anda & Mendapatkan Penghasilan Tambahan
                     </p>
-                    <PrimaryButton className='rounded-full' onClick={handleScrollToPricelist}>
+                    <PrimaryButton
+                        className="rounded-full"
+                        onClick={handleScrollToPricelist}
+                    >
                         Berlangganan Sekarang
-                        <Icon icon="line-md:arrow-up" className='ml-2 rotate-45' />
+                        <Icon
+                            icon="line-md:arrow-up"
+                            className="ml-2 rotate-45"
+                        />
                     </PrimaryButton>
                 </div>
                 <div className="relative w-full flex items-center justify-center">
@@ -41,7 +52,7 @@ const HeroComponents = () => {
                 </div>
             </div>
         </section>
-    )
+    );
 }
 
 export default HeroComponents

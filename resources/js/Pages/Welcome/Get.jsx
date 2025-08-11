@@ -1,4 +1,5 @@
-import React from 'react';
+import React, {useEffect} from "react";
+import AOS from "aos";
 
 const steps = [
     {
@@ -37,11 +38,19 @@ const steps = [
 ];
 
 const Get = () => {
+    useEffect(() => {
+        AOS.init();
+    }, []);
     return (
         <div className=" text-white py-16 px-4">
             <div className="container mx-auto max-w-7xl">
-                <h2 className="text-center text-2xl lg:text-4xl font-bold mb-16">
-                    Kenapa Harus Belajar Bersama Tutormy?
+                <h2
+                    data-aos="fade-up"
+                    className="text-center text-2xl lg:text-5xl font-bold mb-16"
+                >
+                    Kenapa{" "}
+                    <span className="text-primary-3">Harus Belajar </span>
+                    Bersama Tutormy?
                 </h2>
 
                 <div className="relative">
@@ -54,7 +63,10 @@ const Get = () => {
                         >
                             {step.imgPosition === "left" && (
                                 <>
-                                    <div className="col-span-1">
+                                    <div
+                                        className="col-span-1"
+                                        data-aos="fade-up-right"
+                                    >
                                         <img
                                             src={
                                                 step.img ||
@@ -71,7 +83,10 @@ const Get = () => {
                                             </div>
                                         </div>
                                     </div>
-                                    <div className="col-span-1">
+                                    <div
+                                        className="col-span-1"
+                                        data-aos="fade-up-left"
+                                    >
                                         <h3 className="text-purple-300 font-bold text-sm lg:text-2xl mb-2">
                                             {step.title}
                                         </h3>
@@ -90,7 +105,10 @@ const Get = () => {
 
                             {step.imgPosition === "right" && (
                                 <>
-                                    <div className="col-span-1 py-8">
+                                    <div
+                                        className="col-span-1 py-8"
+                                        data-aos="fade-up-right"
+                                    >
                                         <h3 className="text-purple-300  font-bold text-sm lg:text-2xl mb-2">
                                             {step.title}
                                         </h3>
@@ -111,7 +129,8 @@ const Get = () => {
                                             </div>
                                         </div>
                                     </div>
-                                    <div className="col-span-1">
+                                    <div className="col-span-1"
+                                        data-aos="fade-up-left">
                                         <img
                                             src={
                                                 step.img ||

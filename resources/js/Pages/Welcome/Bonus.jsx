@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Check } from "lucide-react";
 import PrimaryButton from "@/Components/PrimaryButton";
+import AOS from "aos";
 
 const bonuses = [
     {
@@ -12,15 +13,17 @@ const bonuses = [
             "Kesempatan bangun kerjasama dengan berbagai member komunitas",
         ],
 
-        value: "Rp3.800.000",
+        value: "Rp1.800.000",
     },
     {
         image: "/assets/foto-16.jpg",
         title: "1-on-1 Konsultasi dengan Mentor",
-        benefits: [],
+        benefits: [
+            "Punya banyak pertanyaan? Kamu dapat konsultasi langsung  secara private dengan admin & mentor kami.",
+        ],
         caption:
             "Dapatkan akses ke sesi spesial bersama para expert dari berbagai industri. Topik terkini, insight mendalam,<br> dan pengalaman langsung—<b>hanya bisa diakses oleh member.</b>",
-        value: "Rp2.500.000",
+        value: "Rp3.200.000",
     },
     {
         image: "/assets/foto-17.jpg",
@@ -28,7 +31,7 @@ const bonuses = [
         benefits: [],
         caption:
             "Langkah awal menuju perubahan besar bisa dimulai dari satu sesi ini. Dapatkan ilmu dan insight dari para praktisi berpengalaman, yang tidak kamu temukan di tempat lain - dan semuanya tanpa biaya.",
-        value: "Rp2.500.000",
+        value: "Rp300.000",
     },
     {
         image: "/assets/foto-1.webp",
@@ -36,7 +39,7 @@ const bonuses = [
         benefits: [],
         caption:
             "Diskusi langsung dengan sesama member & mentor tentang perkembangan  belajar, saling sharing pemikiran, startegi, dan diskusi secara dua arah.",
-        value: "Rp1.800.000",
+        value: "Rp1.900.000",
     },
 ];
 
@@ -55,12 +58,22 @@ const Bonus = () => {
         (acc, item) => acc + parseValue(item.value),
         0
     );
+    useEffect(() => {
+        AOS.init();
+    }, []);
 
     return (
         <section className="text-white">
             <div className="container mx-auto py-16 lg:py-20 space-y-20">
-                <h2 className="text-center text-2xl lg:text-5xl font-bold">
-                    Bonus Benefit Exclusive Khusus Pendaftaran SEKARANG!
+                <h2
+                    data-aos="fade-up"
+                    data-aos-anchor-placement="bottom-bottom"
+                    className="text-center text-2xl lg:text-5xl font-bold"
+                >
+                    Bonus
+                    <span className="text-primary-3"> Benefit Exclusive </span>
+                    Khusus <br /> Pendaftaran
+                    <span className="text-primary-3"> SEKARANG!</span>
                 </h2>
 
                 {bonuses.map((bonus, index) => (
@@ -82,15 +95,34 @@ const Bonus = () => {
                                 {bonus.title}
                             </h3>
 
-                            <div
+                            {/* <div
                                 className="text-center text-lg lg:text-2xl"
                                 dangerouslySetInnerHTML={{
                                     __html: bonus.caption,
                                 }}
-                            />
-                            {bonus.benefits && bonus.benefits.length > 0 && (
+                            /> */}
+                            {bonus.benefits && bonus.benefits.length === 3 && (
                                 <div className="border border-primary-3 p-8 rounded-3xl bg-black bg-opacity-60 backdrop-blur-md w-full max-w-5xl">
                                     <div className="grid grid-cols-1 lg:grid-cols-3 gap-2 lg:gap-8">
+                                        {bonus.benefits.map((benefit, idx) => (
+                                            <div
+                                                key={idx}
+                                                className="flex items-start gap-3"
+                                            >
+                                                <div className="bg-primary-3 rounded-full p-1 mt-1">
+                                                    <Check className="w-4 h-4 text-white" />
+                                                </div>
+                                                <p className="text-base">
+                                                    {benefit}
+                                                </p>
+                                            </div>
+                                        ))}
+                                    </div>
+                                </div>
+                            )}
+                            {bonus.benefits && bonus.benefits.length === 1 && (
+                                <div className="border border-primary-3 p-8 rounded-3xl bg-black bg-opacity-60 backdrop-blur-md w-full max-w-5xl">
+                                    <div className="grid grid-cols-1 justify-items-center gap-2 lg:gap-8">
                                         {bonus.benefits.map((benefit, idx) => (
                                             <div
                                                 key={idx}
@@ -115,20 +147,27 @@ const Bonus = () => {
                     </div>
                 ))}
 
-                <div className="text-center space-y-5 lg:space-y-10">
+                <div className="grid grid-cols-1 text-center space-y-5 lg:space-y-10">
                     <h2 className="text-2xl lg:text-4xl font-bold">
-                        Total Value GRATIS Khusus Pendaftar SEKARANG!
+                        Total Value
+                        <span className="text-primary-3"> GRATIS </span>
+                        Khusus Pendaftar
+                        <span className="text-primary-3"> SEKARANG!</span>
                     </h2>
-                    <button className="bg-error-4 py-2.5 px-4 font-bold text-2xl lg:text-4xl">
-                        Value: {formatValue(totalValue)}
-                    </button>
 
-                    <PrimaryButton
-                        onClick={handleScrollToPricelist}
-                        className="rounded-2xl"
-                    >
-                        Langganan Sekarang
-                    </PrimaryButton>
+                    <div>
+                        <button className="bg-error-4 py-2.5 px-4 font-bold text-2xl lg:text-4xl">
+                            Value: {formatValue(totalValue)}
+                        </button>
+                    </div>
+                    <div>
+                        <PrimaryButton
+                            onClick={handleScrollToPricelist}
+                            className="rounded-2xl"
+                        >
+                            Langganan Sekarang
+                        </PrimaryButton>
+                    </div>
                 </div>
             </div>
         </section>

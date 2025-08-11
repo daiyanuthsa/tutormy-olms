@@ -1,7 +1,7 @@
-import React from 'react';
-import { Link } from '@inertiajs/react';
-import PrimaryButton from '@/Components/PrimaryButton';
-import { Icon } from '@iconify/react';
+import React from "react";
+import { Link } from "@inertiajs/react";
+import PrimaryButton from "@/Components/PrimaryButton";
+import { Icon } from "@iconify/react";
 
 const CourseOverview = ({ course }) => (
     <div className="flex flex-col lg:flex-row gap-6 lg:gap-12 items-center">
@@ -28,30 +28,34 @@ const CourseOverview = ({ course }) => (
             <div className="space-y-2 text-base">
                 <p className="flex items-center gap-3">
                     <Icon icon="tabler:video-filled" className="w-5 h-5" />
-                    {course.total_videos} Video Pembelajaran
+                    {course.content_count} Video Pembelajaran
                 </p>
                 <p className="flex items-center gap-3">
                     <Icon icon="icons8:student" className="w-5 h-5" />
-                    {course.students_joined} Siswa
+                    {course.student_count} Siswa
                 </p>
             </div>
             <div className="flex flex-wrap gap-3">
-                {course.hasPaid ? (
+                {course.is_enrolled ? (
                     <>
                         <Link href={`/courses/join/${course.slug}/learn`}>
                             <PrimaryButton className="rounded-full">
                                 Belajar Sekarang
                             </PrimaryButton>
                         </Link>
-                        <Link href={`/courses/${course.slug}/group`}>
-                            <PrimaryButton className="rounded-full">
+                        
+                            <PrimaryButton
+                                onClick={() =>
+                                    window.open(course.group_url, "_blank")
+                                }
+                                className="rounded-full"
+                            >
                                 <Icon
                                     icon="logos:whatsapp-icon"
                                     className="w-6 h-6 mr-2"
                                 />
-                                Lihat Grup
+                                Gabung Grup
                             </PrimaryButton>
-                        </Link>
                     </>
                 ) : (
                     <Link href={`/courses/join/${course.slug}`}>

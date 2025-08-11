@@ -1,10 +1,28 @@
-import React, { useState } from 'react';
-import { Icon } from '@iconify/react';
+import React, { useState } from "react";
+import { Icon } from "@iconify/react";
 
 const CurriculumAccordion = ({ curriculum }) => {
-    const [open, setOpen] = useState(null);
-    const toggle = id => setOpen(prev => (prev === id ? null : id));
+    // const [openSections, setOpenSections] = useState(new Set());
+     const [openSections, setOpenSections] = useState(
+         new Set(curriculum?.map((section) => section.id) || [])
+     );
+    const toggle = (id) => {
+        setOpenSections((prev) => {
+            const newSet = new Set(prev);
+            if (newSet.has(id)) {
+                newSet.delete(id); // Tutup jika sudah terbuka
+            } else {
+                newSet.add(id); // Buka jika masih tertutup
+            }
+            return newSet;
+        });
+    };
+    const secondsToMinutesString = (seconds) => {
+        if (!seconds || seconds <= 0) return "0 Menit";
 
+        const minutes = Math.round(seconds / 60);
+        return `${minutes} Menit`;
+    };
     return (
         <div className="space-y-4">
             {curriculum.map((section) => (
@@ -20,11 +38,11 @@ const CurriculumAccordion = ({ curriculum }) => {
                         <Icon
                             icon="tabler:chevron-down"
                             className={`w-5 h-5 transition-transform ${
-                                open === section.id ? "rotate-180" : ""
+                                openSections.has(section.id) ? "rotate-180" : ""
                             }`}
                         />
                     </button>
-                    {open === section.id && (
+                    {openSections.has(section.id) && (
                         <ul className="bg-neutral-3 p-2 lg:p-5 space-y-3">
                             {section.contents.map((lesson) => (
                                 <li
@@ -50,7 +68,11 @@ const CurriculumAccordion = ({ curriculum }) => {
                                                 {lesson.name}
                                             </p>
                                             <span className="text-sm">
-                                                1000
+                                                {lesson.duration
+                                                    ? secondsToMinutesString(
+                                                          lesson.duration
+                                                      )
+                                                    : "Tidak ada durasi"}
                                             </span>
                                         </div>
                                     </div>

@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Plus } from "lucide-react";
 import Faq from "../../../../public/js/data/Faq";
 import { Icon } from "@iconify/react";
+import AOS from "aos";
 
 const Question = () => {
     const [openIndex, setOpenIndex] = useState(0);
@@ -9,23 +10,44 @@ const Question = () => {
     const toggleItem = (index) => {
         setOpenIndex((prev) => (prev === index ? null : index));
     };
+    useEffect(() => {
+        AOS.init();
+    }, []);
 
     return (
         <section className="overflow-hidden flex justify-center">
             <div className="relative container mx-auto text-white py-16 lg:py-20 flex flex-col items-center gap-10">
-                <div className="absolute right-[-190px] top-16 w-60 h-60 lg:w-80 lg:h-96 bg-purple-700 opacity-40 blur-3xl rounded-full z-0" />
+                <div
+                    data-aos="zoom-in"
+                    className="absolute right-[-190px] top-16 w-60 h-60 lg:w-80 lg:h-96 bg-purple-700 opacity-40 blur-3xl rounded-full z-0"
+                />
 
                 <div className="text-center space-y-2 lg:space-y-4 max-w-3xl z-10">
-                    <p className="text-primary-2 text-sm font-semibold">
+                    <p
+                        data-aos="fade-up"
+                        className="text-primary-2 text-sm font-semibold"
+                    >
                         Frequently Ask Question
                     </p>
-                    <h2 className="text-primary-1 text-2xl lg:text-4xl font-bold">
+                    <h2
+                        data-aos="fade-up"
+                        data-aos-delay="100"
+                        className="text-primary-3 text-2xl lg:text-4xl font-bold"
+                    >
                         Pertanyaan yang Sering Diajukan
                     </h2>
-                    <p className="lg:text-xl text-gray-300">
+                    <p
+                        data-aos="fade-up"
+                        data-aos-delay="200"
+                        className="lg:text-xl text-gray-300"
+                    >
                         Punya pertanyaan lainnya? Silakan hubungi kami melalui
                     </p>
-                    <div className="flex justify-center pt-4">
+                    <div
+                        data-aos="zoom-in"
+                        data-aos-delay="300"
+                        className="flex justify-center pt-4"
+                    >
                         <button
                             onClick={() =>
                                 window.open(
@@ -33,7 +55,7 @@ const Question = () => {
                                     "_blank"
                                 )
                             }
-                            className="inline-flex items-center gap-3 bg-gradient-light text-md lg:text-xl font-bold rounded-xl py-2 px-4"
+                            className="group inline-flex items-center gap-3 bg-gradient-light text-md lg:text-xl font-bold rounded-xl py-2 px-4 transition-all duration-300 ease-out transform hover:scale-105 hover:-translate-y-1 hover:shadow-2xl hover:shadow-green-500/25 active:scale-95 active:translate-y-0 focus:outline-none focus:ring-4 focus:ring-green-300 focus:ring-opacity-50 hover:bg-gradient-to-r hover:from-green-400 hover:to-green-600"
                         >
                             <Icon
                                 icon="ic:baseline-whatsapp"
@@ -49,6 +71,8 @@ const Question = () => {
                         const isOpen = openIndex === index;
                         return (
                             <div
+                                data-aos="fade-up"
+                                data-aos-delay={index * 100}
                                 key={index}
                                 className="bg-neutral-4 rounded-lg px-6 py-5 relative overflow-hidden transition-all duration-300"
                             >
@@ -58,7 +82,7 @@ const Question = () => {
                                     onClick={() => toggleItem(index)}
                                     className="w-full flex items-center justify-between text-left"
                                 >
-                                    <span className="lg:text-xl text-sm font-medium text-primary-1 pr-4">
+                                    <span className="lg:text-xl text-sm font-medium text-primary-2 pr-4">
                                         {item.question}
                                     </span>
                                     <div

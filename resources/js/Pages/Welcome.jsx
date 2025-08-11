@@ -1,5 +1,5 @@
 import { Head } from '@inertiajs/react'
-import React from 'react'
+import React, { useEffect } from 'react'
 import MainLayout from '@/Layouts/MainLayout'
 import HeroComponents from './Welcome/HeroComponents'
 import Data from './Welcome/Data'
@@ -10,6 +10,7 @@ import Pricelist from './Welcome/Pricelist'
 import Review from './Welcome/Review'
 import Get from './Welcome/Get'
 import Bonus from './Welcome/Bonus'
+import AOS from "aos";
 
 const Divider = () => (
     <div className="flex justify-center">
@@ -18,6 +19,9 @@ const Divider = () => (
 )
 
 const Welcome = ({ pricing, testimonials, courses }) => {
+    useEffect(() => {
+        AOS.init();
+    }, []);
     return (
         <MainLayout>
             <Head title="Welcome" />

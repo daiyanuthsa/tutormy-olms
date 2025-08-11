@@ -128,8 +128,8 @@ const Review = ({ testimonials }) => {
 
                 <div className="flex flex-col items-center space-y-8">
                     {/* divider */}
-                    <h2 className="text-center text-2xl lg:text-4xl font-bold">
-                        Bukti Nyata Member Kami Setelah Bergabung Bersama Kami!
+                    <h2 className="text-center text-2xl lg:text-5xl font-bold">
+                        <span className="text-primary-3">Bukti Nyata Member</span> Kami Setelah <br /> Bergabung Bersama Kami!
                     </h2>
                     <img src="/assets/testimoni.webp" alt="Testimoni" />
                     <PrimaryButton

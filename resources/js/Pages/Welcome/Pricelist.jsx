@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import AOS from "aos";
 
 const Pricelist = ({ pricings }) => {
     const [selectedPlan, setSelectedPlan] = useState(2);
@@ -29,15 +30,18 @@ const Pricelist = ({ pricings }) => {
         "Akses Private Mentoring 1-on-1",
         "Akses GRATIS ke Event Offline & Networking",
     ];
+    useEffect(() => { 
+        AOS.init();
+    }, []);
 
     return (
         <section id="pricelist">
             <div className="container mx-auto py-16 lg:py-20 space-y-20 text-white">
                 <div className="space-y-5 flex flex-col items-center">
-                    <h2 className="text-center text-2xl lg:text-4xl font-bold">
+                    <h2 data-aos="fade-up" className="text-center text-primary-3 shadow-xl text-2xl lg:text-5xl font-bold">
                         Gabung Member Sekarang
                     </h2>
-                    <p className="text-center lg:text-xl max-w-3xl">
+                    <p data-aos="fade-up" data-aos-delay="100" className="text-center lg:text-xl max-w-3xl">
                         Join member kita sekarang untuk dapatkan & lipat
                         gandakan penghasilan!
                     </p>
@@ -170,17 +174,17 @@ const Pricelist = ({ pricings }) => {
 
                             <div className="text-center mb-6 text-white">
                                 <h3 className="text-xl md:text-3xl lg:text-2xl font-bold mb-2">
-                                    Paket Premium
+                                    {pricings[0].name}
                                 </h3>
                                 <div className="mb-4">
                                     <div className="text-base md:text-xl lg:text-2xl font-semibold mb-1">
-                                        Akses Membership 3 Bulan
+                                        Akses Membership {pricings[0].duration} Bulan
                                     </div>
                                     <div className="text-3xl md:text-4xl lg:text-5xl font-bold mb-2">
-                                        Rp 379.000
+                                        {formatRupiah(pricings[0].price)    }
                                     </div>
                                     <div className="text-xs md:text-sm">
-                                        <span>Hanya </span>Rp 4.200
+                                        <span>Hanya </span>{formatRupiah(pricings[0].normal_price / 30)}
                                         <span>/hari</span>
                                     </div>
                                 </div>
@@ -188,6 +192,7 @@ const Pricelist = ({ pricings }) => {
 
                             <div className="mb-6">
                                 <button
+                                    data-aos="zoom-in"
                                     type="button"
                                     onClick={(e) => {
                                         e.stopPropagation();
@@ -202,6 +207,9 @@ const Pricelist = ({ pricings }) => {
                             <div className="space-y-3 text-white">
                                 {features.map((feature, index) => (
                                     <div
+                                        data-aos="fade-up"
+                                        data-aos-delay={index * 100}
+                                        data-aos-anchor-placement="top-bottom"
                                         key={index}
                                         className="flex items-start gap-3"
                                     >

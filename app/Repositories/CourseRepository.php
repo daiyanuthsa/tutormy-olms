@@ -91,6 +91,12 @@ class CourseRepository implements CourseRepositoryInterface
 
         return $course;
     }
+    /**
+     * Mengambil thumbnail kursus dengan batasan jumlah.
+     *
+     * @param int|null $limit Batasan jumlah kursus yang akan diambil. Jika null, ambil semua.
+     * @return Collection
+     */
     public function getCourseThumbnail(int $limit = null): Collection
     {
         $cacheKey = 'course_thumbnail_' . ($limit ?? 'all');

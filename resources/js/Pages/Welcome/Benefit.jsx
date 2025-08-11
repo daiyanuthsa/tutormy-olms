@@ -1,5 +1,6 @@
 import PrimaryButton from "@/Components/PrimaryButton";
-import React from "react";
+import React, { useEffect } from "react";
+import AOS from "aos";
 
 const Benefit = () => {
     const handleScrollToPricelist = () => {
@@ -8,11 +9,22 @@ const Benefit = () => {
             section.scrollIntoView({ behavior: "smooth" });
         }
     };
+    useEffect(() => {
+        AOS.init(); 
+    }, []);
     return (
         <>
             <section className="relative text-white py-16 lg:py-20">
-                <div className="relative container w-full">
-
+                <div
+                    data-aos="zoom-in"
+                    className="absolute left-[-190px] top-16 w-60 h-60 lg:w-80 lg:h-96 bg-secondary-4 opacity-40 blur-3xl rounded-full z-0"
+                />
+                <div
+                    data-aos="zoom-in-up"
+                    data-aos-duration="1000"
+                    data-aos-anchor-placement="top-center"
+                    className="relative container w-full"
+                >
                     <picture>
                         <source
                             media="(min-width: 768px)"
@@ -43,7 +55,6 @@ const Benefit = () => {
                     </div> */}
                 </div>
             </section>
-
         </>
     );
 };

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Icon } from "@iconify/react";
 import PrimaryButton from "@/Components/PrimaryButton";
 import Profile from "../../../../public/assets/teacher.png";
+import AOS from "aos";
 
 const MasterTeacherCard = ({ name, role }) => (
     <div className="relative h-36 md:h-48 rounded-2xl overflow-hidden bg-gradient-to-br from-purple-100 to-purple-200">
@@ -25,6 +26,7 @@ const Data = () => {
     const [timeLeft, setTimeLeft] = useState(TOTAL_SECONDS);
 
     useEffect(() => {
+        AOS.init();
         const timer = setInterval(() => {
             setTimeLeft((prevTime) => {
                 if (prevTime <= 1) {
@@ -84,19 +86,28 @@ const Data = () => {
             </div> */}
 
             <div className="flex flex-col items-center gap-6 lg:gap-8 text-center">
-                <h5 className="text-xl lg:text-4xl font-semibold">
-                    Dapatkan Keseluruhan Benefit Exclusive, Serta Diskon
-                    Terbatas Hingga 95%
+                <h5 className="text-xl lg:text-5xl font-bold">
+                    Dapatkan Keseluruhan{" "}
+                    <span className="text-primary-3">
+                        Benefit Exclusive,
+                        <br />
+                        Serta Diskon
+                    </span>{" "}
+                    Terbatas Hingga
+                    <span className="text-primary-3"> 95%</span>
                 </h5>
 
-                <h6 className="text-xl lg:text-3xl font-bold">
+                <h6 className="text-xl lg:text-2xl font-semibold">
                     Benefit & Diskon Akan Berubah Setelah Penawaran Kamu
                     Berakhir
                 </h6>
 
                 <div className="w-screen py-2.5 bg-primary-4 text-center">
                     <div className="grid grid-flow-col gap-5 text-center auto-cols-max justify-center">
-                        <div className="flex flex-col p-2 bg-gray-800 rounded-box text-white">
+                        <div
+                            data-aos="zoom-in"
+                            className="flex flex-col p-2 bg-gray-800 rounded-box text-white"
+                        >
                             <span className="countdown font-mono text-2xl md:text-4xl lg:text-8xl">
                                 <span
                                     style={{ "--value": days }}
@@ -108,7 +119,11 @@ const Data = () => {
                             </span>
                             <span className="text-sm">Hari</span>
                         </div>
-                        <div className="flex flex-col p-2 bg-gray-800 rounded-box text-white">
+                        <div
+                            data-aos="zoom-in"
+                            data-aos-delay="100"
+                            className="flex flex-col p-2 bg-gray-800 rounded-box text-white"
+                        >
                             <span className="countdown font-mono text-2xl md:text-4xl lg:text-8xl">
                                 <span
                                     style={{ "--value": hours }}
@@ -120,7 +135,11 @@ const Data = () => {
                             </span>
                             <span className="text-sm">Jam</span>
                         </div>
-                        <div className="flex flex-col p-2 bg-gray-800 rounded-box text-white">
+                        <div
+                            data-aos="zoom-in"
+                            data-aos-delay="200"
+                            className="flex flex-col p-2 bg-gray-800 rounded-box text-white"
+                        >
                             <span className="countdown font-mono text-2xl md:text-4xl lg:text-8xl">
                                 <span
                                     style={{ "--value": minutes }}
@@ -132,7 +151,11 @@ const Data = () => {
                             </span>
                             <span className="text-sm">Menit</span>
                         </div>
-                        <div className="flex flex-col p-2 bg-gray-800 rounded-box text-white">
+                        <div
+                            data-aos="zoom-in"
+                            data-aos-delay="300"
+                            className="flex flex-col p-2 bg-gray-800 rounded-box text-white"
+                        >
                             <span className="countdown font-mono text-2xl md:text-4xl lg:text-8xl">
                                 <span
                                     style={{ "--value": seconds }}

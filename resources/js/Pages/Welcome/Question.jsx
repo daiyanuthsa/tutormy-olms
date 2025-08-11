@@ -11,7 +11,7 @@ const Question = () => {
         setOpenIndex((prev) => (prev === index ? null : index));
     };
     useEffect(() => {
-        AOS.init();
+        AOS.refresh();
     }, []);
 
     return (

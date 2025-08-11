@@ -1,0 +1,1 @@
+import{j as o,L as s}from"./app-DUN3Yeit.js";const t="/build/assets/Logo-D7l-uALG.webp";function e(r){return o.jsx(s,{href:"/",children:o.jsx("img",{src:t,alt:"logo",className:"w-36 -mt-2"})})}export{e as A};

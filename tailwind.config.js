@@ -14,8 +14,8 @@ export default {
     theme: {
         extend: {
             fontFamily: {
-                inter: ['Inter"', "sans-serif"],
-                paytone: ['Paytone One"', "sans-serif"],
+                inter: ["Inter", "sans-serif"],
+                paytone: ["Paytone One", "sans-serif"],
             },
             container: {
                 center: true,

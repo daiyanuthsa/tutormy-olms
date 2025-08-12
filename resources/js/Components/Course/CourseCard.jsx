@@ -14,7 +14,7 @@ const CourseCard = ({ course }) => {
                 <div className="p-4">
                     <h3 className="font-semibold text-xs lg:text-lg mb-2">{course.name}</h3>
                     <div className="bg-neutral-700 px-2 py-1 font-bold rounded-full text-xs lg:text-sm inline-block max-w-max">
-                        <span>{course.section_content_count || 'N/A'} Pelajaran</span>
+                        <span>{course.content_count || 'N/A'} Pelajaran</span>
                     </div>
                 </div>
             </div>

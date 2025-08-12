@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import AOS from "aos";
+import GradientText from "@/Components/GradientText";
 
 const Pricelist = ({ pricings }) => {
     const [selectedPlan, setSelectedPlan] = useState(2);
@@ -30,8 +31,8 @@ const Pricelist = ({ pricings }) => {
         "Akses Private Mentoring 1-on-1",
         "Akses GRATIS ke Event Offline & Networking",
     ];
-    useEffect(() => { 
-        AOS.init();
+    useEffect(() => {
+        AOS.refresh();
     }, []);
 
     return (
@@ -39,7 +40,9 @@ const Pricelist = ({ pricings }) => {
             <div className="container mx-auto py-16 lg:py-20 space-y-20 text-white">
                 <div className="space-y-5 flex flex-col items-center">
                     <h2 data-aos="fade-up" className="text-center text-primary-3 shadow-xl text-2xl lg:text-5xl font-bold">
-                        Gabung Member Sekarang
+                        <GradientText className="font-bold">
+                            Gabung Member Sekarang
+                        </GradientText>
                     </h2>
                     <p data-aos="fade-up" data-aos-delay="100" className="text-center lg:text-xl max-w-3xl">
                         Join member kita sekarang untuk dapatkan & lipat

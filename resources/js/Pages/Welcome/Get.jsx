@@ -1,5 +1,6 @@
 import React, {useEffect} from "react";
 import AOS from "aos";
+import GradientText from "@/Components/GradientText";
 
 const steps = [
     {
@@ -39,7 +40,7 @@ const steps = [
 
 const Get = () => {
     useEffect(() => {
-        AOS.init();
+        AOS.refresh();
     }, []);
     return (
         <div className=" text-white py-16 px-4">
@@ -48,8 +49,7 @@ const Get = () => {
                     data-aos="fade-up"
                     className="text-center text-2xl lg:text-5xl font-bold mb-16"
                 >
-                    Kenapa{" "}
-                    <span className="text-primary-3">Harus Belajar </span>
+                    Kenapa <GradientText>Harus Belajar </GradientText>
                     Bersama Tutormy?
                 </h2>
 
@@ -88,7 +88,9 @@ const Get = () => {
                                         data-aos="fade-up-left"
                                     >
                                         <h3 className="text-purple-300 font-bold text-sm lg:text-2xl mb-2">
-                                            {step.title}
+                                            <GradientText toColor="primary-2">
+                                                {step.title}
+                                            </GradientText>
                                         </h3>
                                         {step.desc.map((item, index) => (
                                             <p
@@ -110,7 +112,9 @@ const Get = () => {
                                         data-aos="fade-up-right"
                                     >
                                         <h3 className="text-purple-300  font-bold text-sm lg:text-2xl mb-2">
-                                            {step.title}
+                                            <GradientText toColor="primary-2">
+                                                {step.title}
+                                            </GradientText>
                                         </h3>
                                         {step.desc.map((item, index) => (
                                             <p
@@ -129,8 +133,10 @@ const Get = () => {
                                             </div>
                                         </div>
                                     </div>
-                                    <div className="col-span-1"
-                                        data-aos="fade-up-left">
+                                    <div
+                                        className="col-span-1"
+                                        data-aos="fade-up-left"
+                                    >
                                         <img
                                             src={
                                                 step.img ||

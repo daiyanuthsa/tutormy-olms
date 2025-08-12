@@ -6,7 +6,7 @@ const Class = ({ courses }) => {
     const [isMobile, setIsMobile] = useState(false);
 
     useEffect(() => {
-        AOS.init();
+        AOS.refresh();
         const checkMobile = () => setIsMobile(window.innerWidth < 768);
         checkMobile();
 

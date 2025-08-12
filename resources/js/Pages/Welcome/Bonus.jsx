@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { Check } from "lucide-react";
 import PrimaryButton from "@/Components/PrimaryButton";
 import AOS from "aos";
+import GradientText from "@/Components/GradientText";
 
 const bonuses = [
     {
@@ -28,7 +29,9 @@ const bonuses = [
     {
         image: "/assets/foto-17.jpg",
         title: "GRATIS Akses Webminar Eksklusif",
-        benefits: [],
+        benefits: [
+            "Langkah awal menuju perubahan besar bisa dimulai dari satu sesi ini. Dapatkan ilmu dan insight dari para praktisi berpengalaman, yang tidak kamu temukan di tempat lain - dan semuanya tanpa biaya.",
+        ],
         caption:
             "Langkah awal menuju perubahan besar bisa dimulai dari satu sesi ini. Dapatkan ilmu dan insight dari para praktisi berpengalaman, yang tidak kamu temukan di tempat lain - dan semuanya tanpa biaya.",
         value: "Rp300.000",
@@ -36,7 +39,9 @@ const bonuses = [
     {
         image: "/assets/foto-1.webp",
         title: "Monthly Meet-Up Dengan Mentor & Circle Support",
-        benefits: [],
+        benefits: [
+            "Diskusi langsung dengan sesama member & mentor tentang perkembangan  belajar, saling sharing pemikiran, startegi, dan diskusi secara dua arah.",
+        ],
         caption:
             "Diskusi langsung dengan sesama member & mentor tentang perkembangan  belajar, saling sharing pemikiran, startegi, dan diskusi secara dua arah.",
         value: "Rp1.900.000",
@@ -59,27 +64,27 @@ const Bonus = () => {
         0
     );
     useEffect(() => {
-        AOS.init();
+        AOS.refresh();
     }, []);
 
     return (
-        <section className="text-white">
-            <div className="container mx-auto py-16 lg:py-20 space-y-20">
+        <section className="text-white ">
+            <div className="container  mx-auto py-16 lg:py-20 space-y-20">
                 <h2
                     data-aos="fade-up"
                     data-aos-anchor-placement="bottom-bottom"
                     className="text-center text-2xl lg:text-5xl font-bold"
                 >
                     Bonus
-                    <span className="text-primary-3"> Benefit Exclusive </span>
+                    <GradientText> Benefit Exclusive </GradientText>
                     Khusus <br /> Pendaftaran
-                    <span className="text-primary-3"> SEKARANG!</span>
+                    <GradientText> SEKARANG!</GradientText>
                 </h2>
 
                 {bonuses.map((bonus, index) => (
                     <div
                         key={index}
-                        className="space-y-8 justify-items-center border-2 border-warning-3  border-spacing-1  lg:py-6 rounded-3xl bg-black bg-opacity-60 backdrop-blur-md"
+                        className="space-y-8 justify-items-center border-2 border-secondary-3  border-spacing-1  lg:py-6 rounded-3xl bg-black bg-opacity-60 backdrop-blur-md"
                     >
                         <div className="relative lg:w-4/5 sm:w-full overflow-hidden rounded-3xl">
                             <img
@@ -102,7 +107,7 @@ const Bonus = () => {
                                 }}
                             /> */}
                             {bonus.benefits && bonus.benefits.length === 3 && (
-                                <div className="border border-primary-3 p-8 rounded-3xl bg-black bg-opacity-60 backdrop-blur-md w-full max-w-5xl">
+                                <div className="border border-primary-3 p-8 rounded-3xl bg-black bg-opacity-60 backdrop-blur-md w-4/5 lg:w-full max-w-5xl">
                                     <div className="grid grid-cols-1 lg:grid-cols-3 gap-2 lg:gap-8">
                                         {bonus.benefits.map((benefit, idx) => (
                                             <div
@@ -121,7 +126,7 @@ const Bonus = () => {
                                 </div>
                             )}
                             {bonus.benefits && bonus.benefits.length === 1 && (
-                                <div className="border border-primary-3 p-8 rounded-3xl bg-black bg-opacity-60 backdrop-blur-md w-full max-w-5xl">
+                                <div className="border border-primary-3 p-8 rounded-3xl bg-black bg-opacity-60 backdrop-blur-md w-4/5 lg:w-full max-w-5xl">
                                     <div className="grid grid-cols-1 justify-items-center gap-2 lg:gap-8">
                                         {bonus.benefits.map((benefit, idx) => (
                                             <div
@@ -140,23 +145,23 @@ const Bonus = () => {
                                 </div>
                             )}
 
-                            <button className="bg-error-4 py-2.5 px-4 font-bold lg:text-2xl ">
+                            <button className="bg-primary-4 rounded-xl py-2.5 px-4 font-bold lg:text-2xl ">
                                 Value: {bonus.value}
                             </button>
                         </div>
                     </div>
                 ))}
 
-                <div className="grid grid-cols-1 text-center space-y-5 lg:space-y-10">
+                <div className="grid grid-cols-1 md:w-4/5 mx-auto text-center border-2 border-warning-3 rounded-3xl py-4 space-y-5 lg:space-y-10">
                     <h2 className="text-2xl lg:text-4xl font-bold">
                         Total Value
-                        <span className="text-primary-3"> GRATIS </span>
+                        <GradientText> GRATIS </GradientText>
                         Khusus Pendaftar
-                        <span className="text-primary-3"> SEKARANG!</span>
+                        <GradientText> SEKARANG!</GradientText>
                     </h2>
 
                     <div>
-                        <button className="bg-error-4 py-2.5 px-4 font-bold text-2xl lg:text-4xl">
+                        <button className="bg-primary-4 rounded-2xl py-2.5 px-4 font-bold text-2xl lg:text-4xl">
                             Value: {formatValue(totalValue)}
                         </button>
                     </div>

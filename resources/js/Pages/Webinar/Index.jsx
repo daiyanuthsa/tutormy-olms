@@ -129,7 +129,7 @@ const Index = ({ webinars, categories }) => {
 
                 <main className="container mx-auto space-y-10">
                     {/* Webinar Mendatang */}
-                    <div className="space-y-8">
+                    {/* <div className="space-y-8">
                         <div className="space-y-3">
                             <h2 className="lg:text-2xl font-bold">
                                 Webinar yang akan datang
@@ -156,7 +156,7 @@ const Index = ({ webinars, categories }) => {
                                 </p>
                             )}
                         </div>
-                    </div>
+                    </div> */}
 
                     {/* Webinar Sebelumnya */}
                     <div className="space-y-8">

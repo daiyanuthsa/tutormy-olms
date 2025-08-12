@@ -3,6 +3,7 @@ import { Icon } from "@iconify/react";
 import PrimaryButton from "@/Components/PrimaryButton";
 import Profile from "../../../../public/assets/teacher.png";
 import AOS from "aos";
+import GradientText from "@/Components/GradientText";
 
 const MasterTeacherCard = ({ name, role }) => (
     <div className="relative h-36 md:h-48 rounded-2xl overflow-hidden bg-gradient-to-br from-purple-100 to-purple-200">
@@ -94,13 +95,15 @@ const Data = () => {
             <div className="flex flex-col items-center gap-6 lg:gap-8 text-center">
                 <h5 className="text-xl lg:text-5xl font-bold">
                     Dapatkan Keseluruhan{" "}
-                    <span className="text-primary-3">
+                    <GradientText className="font-bold">
                         Benefit Exclusive,
+                    </GradientText>
+                    <GradientText className="font-bold">
                         <br />
                         Serta Diskon
-                    </span>{" "}
+                    </GradientText>{" "}
                     Terbatas Hingga
-                    <span className="text-primary-3"> 95%</span>
+                    <GradientText className="font-bold"> 95%</GradientText>
                 </h5>
 
                 <h6 className="text-xl lg:text-2xl font-semibold">
@@ -112,7 +115,7 @@ const Data = () => {
                     <div className="grid grid-flow-col gap-5 text-center auto-cols-max justify-center">
                         <div
                             data-aos="zoom-in"
-                            className="flex flex-col p-2 bg-gray-800 rounded-box text-white"
+                            className="flex flex-col p-2 bg-gray-800 rounded-md lg:rounded-xl text-white"
                         >
                             <span className="countdown font-mono text-2xl md:text-4xl lg:text-8xl">
                                 <span
@@ -128,7 +131,7 @@ const Data = () => {
                         <div
                             data-aos="zoom-in"
                             data-aos-delay="100"
-                            className="flex flex-col p-2 bg-gray-800 rounded-box text-white"
+                            className="flex flex-col p-2 bg-gray-800 rounded-md lg:rounded-xl text-white"
                         >
                             <span className="countdown font-mono text-2xl md:text-4xl lg:text-8xl">
                                 <span
@@ -144,7 +147,7 @@ const Data = () => {
                         <div
                             data-aos="zoom-in"
                             data-aos-delay="200"
-                            className="flex flex-col p-2 bg-gray-800 rounded-box text-white"
+                            className="flex flex-col p-2 bg-gray-800 rounded-md lg:rounded-xl text-white"
                         >
                             <span className="countdown font-mono text-2xl md:text-4xl lg:text-8xl">
                                 <span
@@ -160,7 +163,7 @@ const Data = () => {
                         <div
                             data-aos="zoom-in"
                             data-aos-delay="300"
-                            className="flex flex-col p-2 bg-gray-800 rounded-box text-white"
+                            className="flex flex-col p-2 bg-gray-800 rounded-md lg:rounded-xl text-white"
                         >
                             <span className="countdown font-mono text-2xl md:text-4xl lg:text-8xl">
                                 <span

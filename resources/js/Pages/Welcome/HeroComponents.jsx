@@ -1,3 +1,4 @@
+import GradientText from '@/Components/GradientText';
 import PrimaryButton from '@/Components/PrimaryButton'
 import { Icon } from '@iconify/react'
 import React from 'react'
@@ -20,9 +21,9 @@ const HeroComponents = () => {
                 <div>
                     <h1 className="text-3xl md:text-2xl lg:text-4xl font-extrabold text-start mb-5 lg:mb-7">
                         96% Member Kami Berhasil{" "}
-                        <span className="text-primary-3">
+                        <GradientText toColor='primary-1' className="font-extrabold">
                             Meningkatkan Omset Bisnis & Mendapatkan Penghasilan
-                        </span>{" "}
+                        </GradientText>{" "}
                         Tambahan
                     </h1>
                     <p className="text-sm font-medium mb-4">

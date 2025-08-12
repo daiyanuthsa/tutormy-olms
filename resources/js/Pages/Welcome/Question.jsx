@@ -17,8 +17,8 @@ const Question = () => {
 
     return (
         <section className="overflow-hidden flex justify-center">
-            <div className=" container grid grid-cols-1 md:grid-cols-2 ">
-                <div className="relative text-white py-16 lg:py-20 flex flex-col items-start gap-10">
+            <div className=" container grid grid-cols-1 lg:grid-cols-2 ">
+                <div className="relative text-white py-16 lg:py-20 flex flex-col items-center lg:items-start gap-10">
                     <div
                         data-aos="zoom-in"
                         className="absolute left-[-190px] top-60 w-60 h-60 lg:w-80 lg:h-96 bg-purple-700 opacity-40 blur-3xl rounded-full z-0"
@@ -31,16 +31,18 @@ const Question = () => {
                         <h2
                             data-aos="fade-up"
                             data-aos-delay="100"
-                            className="text-white text-2xl lg:text-6xl font-semibold"
+                            className="text-white text-2xl lg:text-6xl text-center lg:text-start font-semibold"
                         >
                             Frequently
                             <br />
-                            <GradientText className="font-bold">Ask Question</GradientText>
+                            <GradientText className="font-bold">
+                                Ask Question
+                            </GradientText>
                         </h2>
                         <p
                             data-aos="fade-up"
                             data-aos-delay="200"
-                            className="lg:text-xl text-gray-300"
+                            className="lg:text-xl text-gray-300 text-center lg:text-start"
                         >
                             Punya pertanyaan lainnya? Silakan hubungi kami
                             melalui
@@ -48,7 +50,7 @@ const Question = () => {
                         <div
                             data-aos="zoom-in"
                             data-aos-delay="300"
-                            className="flex justify-start pt-4"
+                            className="flex justify-center lg:justify-start pt-4"
                         >
                             <button
                                 onClick={() =>
@@ -68,7 +70,7 @@ const Question = () => {
                         </div>
                     </div>
                 </div>
-                <div className="relative  text-white py-16 lg:py-20 flex flex-col items-center gap-10">
+                <div className="relative  text-white py-4 lg:py-20 flex flex-col items-center gap-10">
                     <div className="space-y-4 max-w-3xl w-full z-10">
                         {Faq.map((item, index) => {
                             const isOpen = openIndex === index;

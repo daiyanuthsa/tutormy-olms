@@ -112,12 +112,8 @@ const Course = ({courses, categories}) => {
                 ) : (
                     <>
                         {renderCoursesSection(
-                            "Popular Course",
-                            "Lorem ipsum dolor sit amet consectetur. Odio dolor arcu ullamcorper dictum nulla ph"
-                        )}
-                        {renderCoursesSection(
-                            "Course Course",
-                            "Lorem ipsum dolor sit amet consectetur. Odio dolor arcu ullamcorper dictum nulla ph"
+                            "Kelas",
+                            "Belajar langsung dari para ahli di industrinya dengan kurikulum terstruktur yang relevan dengan kebutuhan pasar kerja saat ini. "
                         )}
                     </>
                 )}

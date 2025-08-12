@@ -165,7 +165,7 @@ class CourseRepository implements CourseRepositoryInterface
                     !$certificate => 'ongoing',
                     filled($certificate->path) => 'completed',
                     default => 'ongoing',
-                };                
+                };
 
                 return [
                     'course_id' => $courseStudent->course_id,

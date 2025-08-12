@@ -81,4 +81,14 @@ class CourseService
 
         return (['is_finished' => $isFinished]);
     }
+    public function enrollCourseCheck(Course $course)
+    {
+        $user = auth()->user();
+
+        // Cek apakah user sudah terdaftar di course ini
+        $isEnrolled = $course->courseStudents()->where('user_id', $user->id)->exists();
+        $studentCount = $course->courseStudents()->count();
+        $contentCount = $course->contentsCount();
+        return ['is_enrolled' => $isEnrolled ? true : false, 'student_count' => $studentCount, 'content_count' => $contentCount];
+    }
 }

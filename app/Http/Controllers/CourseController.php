@@ -33,15 +33,17 @@ class CourseController extends Controller
 
     public function show(Course $course)
     {
-        // $course->load(['category', 'benefits']);
         $course = $this->courseRepository->getCourseForPublicView($course->id);
-        dd($course);
-        $course->load(['benefits', 'sections.contents']);
+        $isEnrolled = $this->courseService->enrollCourseCheck($course);
+        $course->load([ 'sections.contents']);
         if (!Auth()->check()) {
             $course->group_url = null;
         }
         if (!$course) {
             abort(404);
+        }
+        foreach ($isEnrolled as $key => $value) {
+            $course->$key = $value;
         }
         return inertia('Course/CourseDetails', compact('course'));
     }

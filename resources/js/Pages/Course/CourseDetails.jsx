@@ -1,12 +1,12 @@
 import React from 'react';
 import { usePage, Head } from '@inertiajs/react';
 import MainLayout from '@/Layouts/MainLayout';
-import { DUMMY_COURSES } from '../../../../public/js/data/DummyData';
+
 import Breadcrumb from '@/Components/Course/Breadcrumb';
 import CourseOverview from '@/Components/Course/CourseOverview';
 import BenefitList from '@/Components/Course/BenefitList';
 import CurriculumAccordion from '@/Components/Course/CurriculumAccordion';
-import NotFound from '@/Components/Course/NotFound';
+
 import { Icon } from '@iconify/react';
 
 

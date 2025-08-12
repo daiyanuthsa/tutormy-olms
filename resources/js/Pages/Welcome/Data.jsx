@@ -21,6 +21,12 @@ const MasterTeacherCard = ({ name, role }) => (
 );
 
 const Data = () => {
+    const handleScrollToPricelist = () => {
+        const section = document.getElementById("pricelist");
+        if (section) {
+            section.scrollIntoView({ behavior: "smooth" });
+        }
+    };
     const TOTAL_SECONDS = 3 * 60 * 60;
 
     const [timeLeft, setTimeLeft] = useState(TOTAL_SECONDS);
@@ -170,7 +176,10 @@ const Data = () => {
                     </div>
                 </div>
 
-                <PrimaryButton className="rounded-2xl">
+                <PrimaryButton
+                    onClick={handleScrollToPricelist}
+                    className="rounded-2xl"
+                >
                     Langganan Sekarang
                 </PrimaryButton>
             </div>

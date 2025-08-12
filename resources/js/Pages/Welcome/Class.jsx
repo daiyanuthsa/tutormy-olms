@@ -26,16 +26,16 @@ const Class = ({ courses }) => {
                             data-aos-delay="100"
                             className="text-center text-2xl lg:text-4xl font-bold lg:w-2/3"
                         >
-                            Belajar Nggak Pernah Semudah Ini! Yuk Jelajahi
-                            Ratusan Video di TutorMy.id!
+                            Akses Modul Belajar Praktis Meningkatkan Omset
+                            Bisnis dan Mendapatkan Penghasilan Tambahan
                         </h2>
                         <p
                             data-aos="zoom-in"
                             data-aos-delay="200"
                             className="text-center lg:text-xl text-gray-300"
                         >
-                            Ribuan pelajar sudah membuktikan, sekarang giliran
-                            kamu belajar bareng TutorMy.id!
+                            Ribuan pelajar dari berbagai daerah sudah
+                            membuktikan, sekarang giliran kamu!
                         </p>
                     </div>
 
@@ -60,23 +60,16 @@ const Class = ({ courses }) => {
                                     ></img>
                                 </div>
                                 <div className="p-4">
-                                    <h3 className="font-semibold text-xs lg:text-lg mb-2">
+                                    <h3 className="font-semibold text-base lg:text-2xl mb-2">
                                         {course.name}
                                     </h3>
-                                    <p className="bg-neutral-700 px-2 py-1 font-bold rounded-full text-xs lg:text-sm inline-block max-w-max">
-                                        {course.content_count + " Materi"}
-                                    </p>
+                                    
                                 </div>
                             </div>
                         ))}
                     </div>
 
-                    <div className="flex justify-center">
-                        <div className="text-center text-2xl lg:text-4xl font-semibold">
-                            Modul + materinya hingga seperti "NETFLIX" yang
-                            tentunya sesuai kebutuhan indutri & tren!
-                        </div>
-                    </div>
+
                 </div>
             </div>
         </section>

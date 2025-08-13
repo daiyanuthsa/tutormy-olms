@@ -50,8 +50,8 @@ const Pricelist = ({ pricings }) => {
                     </p>
                 </div>
 
-                <div className="flex flex-col lg:flex-row justify-center items-center xl:items-stretch gap-14 lg:gap-10 xl:gap-14 max-w-6xl mx-auto">
-                    {/* {pricings.map((plan) => (
+                {/* <div className="flex flex-col lg:flex-row justify-center items-center xl:items-stretch gap-14 lg:gap-10 xl:gap-14 max-w-6xl mx-auto">
+                    {pricings.map((plan) => (
                         <div
                             key={plan.id}
                             onClick={() => setSelectedPlan(plan.id)}
@@ -152,10 +152,10 @@ const Pricelist = ({ pricings }) => {
                                 </div>
                             </div>
                         </div>
-                    ))} */}
-                </div>
+                    ))}
+                </div> */}
 
-                <div className="flex justify-center items-center md:px-8 md:py-8">
+                <div className="flex justify-center items-center md:px-8 py-2 md:py-8">
                     {" "}
                     {/* Tambahan padding */}
                     <div
@@ -163,7 +163,7 @@ const Pricelist = ({ pricings }) => {
                         onClick={() => setSelectedPlan(pricings[0].id)}
                         className={`relative cursor-pointer transition-all duration-300 transform hover:scale-105 ${
                             selectedPlan === pricings[0].id
-                                ? "scale-110 z-10"
+                                ? "lg:scale-110 z-10"
                                 : "scale-100"
                         }`}
                     >

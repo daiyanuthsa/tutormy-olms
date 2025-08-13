@@ -72,7 +72,7 @@ const Footer = () => {
                             support@tutormy.id
                         </a>
                     </div>
-                    <div className="flex items-center gap-2 text-sm">|</div>
+                    <div className="md:flex items-center gap-2 text-sm hidden">|</div>
                     <div className="flex items-center gap-2 text-sm">
                         <Icon
                             icon="material-symbols:call"

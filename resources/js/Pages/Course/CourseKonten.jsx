@@ -32,7 +32,7 @@ const CourseKonten = ({ course, sectionId, contentId }) => {
     const isInvalid = !course || !currentLesson;
     const isFirst = activeLessonIndex === 0;
     const isLast = activeLessonIndex === allLessons.length - 1;
-    console.log("Current Lesson:", currentLesson);
+
     // handleChangeLesson hanya untuk tombol navigasi
     const handleChangeLesson = (offset) => {
         const newIndex = activeLessonIndex + offset;

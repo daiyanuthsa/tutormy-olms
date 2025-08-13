@@ -1,41 +1,44 @@
-import React, { useState, useMemo } from 'react';
-import { Head } from '@inertiajs/react';
-import MainLayout from '@/Layouts/MainLayout';
-import CourseSearch from '@/Components/Course/CourseSearch';
-import CourseFilter from '@/Components/Course/CourseFilter';
-import CourseCard from '@/Components/Course/CourseCard';
-import { DUMMY_COURSES, DUMMY_CATEGORIES } from '../../../../public/js/data/DummyData';
+import React, { useState, useMemo } from "react";
+import { Head } from "@inertiajs/react";
+import MainLayout from "@/Layouts/MainLayout";
+import CourseSearch from "@/Components/Course/CourseSearch";
+import CourseFilter from "@/Components/Course/CourseFilter";
+import CourseCard from "@/Components/Course/CourseCard";
+import {
+    DUMMY_COURSES,
+    DUMMY_CATEGORIES,
+} from "../../../../public/js/data/DummyData";
 
 const filterCourses = (courses, category, keyword) => {
     let result = courses;
-    
 
-    if (category && category !== 'Discover') {
-        result = result.filter(course =>
-            course.category?.name === category
-        );
+    if (category && category !== "Discover") {
+        result = result.filter((course) => course.category?.name === category);
     }
 
     if (keyword) {
         const term = keyword.toLowerCase();
-        result = result.filter(course =>
-            course.title.toLowerCase().includes(term) ||
-            course.description?.toLowerCase().includes(term)
+        result = result.filter(
+            (course) =>
+                course.title.toLowerCase().includes(term) ||
+                course.description?.toLowerCase().includes(term)
         );
     }
 
     return result;
 };
 
-const Course = ({courses, categories}) => {
-    
-    const [searchTerm, setSearchTerm] = useState('');
-    const [activeCategory, setActiveCategory] = useState('Discover');
+const Course = ({ courses, categories }) => {
+    const [searchTerm, setSearchTerm] = useState("");
+    const [activeCategory, setActiveCategory] = useState("Semua Kategori");
 
-    const filteredCourses = useMemo(
-        () => filterCourses(courses, activeCategory, searchTerm),
-        [searchTerm, activeCategory]
-    );
+    const filteredCourses = useMemo(() => {
+        if (activeCategory === "Semua Kategori") {
+            return courses;
+        }
+        return filterCourses(courses, activeCategory, searchTerm);
+    }, [courses, activeCategory, searchTerm]);
+    
 
     const handleSearchChange = (e) => setSearchTerm(e.target.value);
     const handleSearchSubmit = (e) => e.preventDefault();
@@ -51,11 +54,13 @@ const Course = ({courses, categories}) => {
             </section>
             <section className="container grid grid-cols-2 lg:grid-cols-4 gap-6">
                 {filteredCourses.length > 0 ? (
-                    filteredCourses.map(course => (
+                    filteredCourses.map((course) => (
                         <CourseCard key={course.id} course={course} />
                     ))
                 ) : (
-                    <div className="col-span-full text-center">No courses found.</div>
+                    <div className="col-span-full text-center">
+                        No courses found.
+                    </div>
                 )}
             </section>
         </>

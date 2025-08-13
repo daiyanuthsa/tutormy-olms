@@ -48,7 +48,7 @@ const VideoPlayer = ({ video, thumbnail }) => {
 
         // Periksa apakah YouTube IFrame API sudah dimuat
         if (!window.YT) {
-            console.log("Loading YouTube IFrame API...");
+
             const tag = document.createElement("script");
             tag.src = "https://www.youtube.com/iframe_api"; // URL yang benar
             document.body.appendChild(tag);
@@ -64,23 +64,23 @@ const VideoPlayer = ({ video, thumbnail }) => {
                 playerRef.current &&
                 typeof playerRef.current.destroy === "function"
             ) {
-                console.log("Destroying YouTube player");
+
                 playerRef.current.destroy();
             }
         };
     }, [videoId]); // Hanya bergantung pada videoId
 
-    const handlePlay = () => {
-        if (
-            playerRef.current &&
-            typeof playerRef.current.playVideo === "function"
-        ) {
-            console.log("Playing video...");
-            playerRef.current.playVideo();
-        } else {
-            console.log("Player not ready or does not exist.");
-        }
-    };
+    // const handlePlay = () => {
+    //     if (
+    //         playerRef.current &&
+    //         typeof playerRef.current.playVideo === "function"
+    //     ) {
+    //         console.log("Playing video...");
+    //         playerRef.current.playVideo();
+    //     } else {
+    //         console.log("Player not ready or does not exist.");
+    //     }
+    // };
     return (
         <div className="aspect-video bg-black rounded-xl overflow-hidden">
             {videoId ? (

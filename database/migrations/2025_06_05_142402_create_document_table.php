@@ -23,7 +23,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('document_id')->constrained('documents')->cascadeOnDelete();
             $table->string('version_number')->unique();
-            $table->string('title');
+            $table->string('title')->nullable(); // Title of the document version
             $table->text('content');
             $table->string('language_code')->default('id'); // Default language set to English
             $table->date('effective_date')->nullable(); // Path to the file if applicable

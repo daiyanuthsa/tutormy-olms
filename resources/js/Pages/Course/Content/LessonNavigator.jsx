@@ -2,6 +2,12 @@ import React from "react";
 import { Icon } from "@iconify/react";
 import { router } from "@inertiajs/react";
 
+const secondsToMinutesString = (seconds) => {
+    if (!seconds || seconds <= 0) return "0 Menit";
+
+    const minutes = Math.round(seconds / 60);
+    return `${minutes} Menit`;
+};
 const LessonNavigator = ({
     sections,
     activeLessonIndex,
@@ -72,7 +78,9 @@ const LessonNavigator = ({
                                         <div className="flex flex-col items-start">
                                             <p>{lesson.name}</p>
                                             <p className="text-xs text-neutral-2">
-                                                {lesson.duration}
+                                                {secondsToMinutesString(
+                                                    lesson.duration
+                                                )}
                                             </p>
                                         </div>
                                     </button>

@@ -15,6 +15,7 @@ class SectionContent extends Model
         'free_access',
         'position',
         'course_section_id',
+        'duration',
     ];
 
     protected function casts(): array

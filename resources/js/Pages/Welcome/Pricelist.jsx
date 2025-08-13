@@ -39,12 +39,19 @@ const Pricelist = ({ pricings }) => {
         <section id="pricelist">
             <div className="container mx-auto py-16 lg:py-20 space-y-20 text-white">
                 <div className="space-y-5 flex flex-col items-center">
-                    <h2 data-aos="fade-up" className="text-center text-primary-3 shadow-xl text-2xl lg:text-5xl font-bold">
+                    <h2
+                        data-aos="fade-up"
+                        className="text-center text-primary-3 shadow-xl text-2xl lg:text-5xl font-bold"
+                    >
                         <GradientText className="font-bold">
                             Gabung Member Sekarang
                         </GradientText>
                     </h2>
-                    <p data-aos="fade-up" data-aos-delay="100" className="text-center lg:text-xl max-w-3xl">
+                    <p
+                        data-aos="fade-up"
+                        data-aos-delay="100"
+                        className="text-center lg:text-xl max-w-3xl"
+                    >
                         Join member kita sekarang untuk dapatkan & lipat
                         gandakan penghasilan!
                     </p>
@@ -181,13 +188,15 @@ const Pricelist = ({ pricings }) => {
                                 </h3>
                                 <div className="mb-4">
                                     <div className="text-base md:text-xl lg:text-2xl font-semibold mb-1">
-                                        Akses Membership {pricings[0].duration} Bulan
+                                        Akses Membership {pricings[0].duration}{" "}
+                                        Bulan
                                     </div>
                                     <div className="text-3xl md:text-4xl lg:text-5xl font-bold mb-2">
-                                        {formatRupiah(pricings[0].price)    }
+                                        {formatRupiah(pricings[0].price)}
                                     </div>
                                     <div className="text-xs md:text-sm">
-                                        <span>Hanya </span>{formatRupiah(pricings[0].normal_price / 30)}
+                                        <span>Hanya </span>
+                                        {formatRupiah(pricings[0].normal_price)}
                                         <span>/hari</span>
                                     </div>
                                 </div>

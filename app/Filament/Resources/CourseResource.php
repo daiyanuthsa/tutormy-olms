@@ -51,21 +51,21 @@ class CourseResource extends Resource
 
                     ]),
 
-                Forms\Components\Section::make('Manfaat')
-                    ->schema([
-                        Forms\Components\Repeater::make('benefits')
-                            ->label('')
-                            ->relationship('benefits')
-                            ->schema([
-                                Forms\Components\TextInput::make('name')
-                                    ->label('Nama Manfaat')
-                                    ->required(),
-                            ])
-                            ->columnSpanFull()
-                            ->createItemButtonLabel('Tambah Manfaat')
-                            ->defaultItems(2),
-                    ])
-                ,
+                // Forms\Components\Section::make('Manfaat')
+                //     ->schema([
+                //         Forms\Components\Repeater::make('benefits')
+                //             ->label('')
+                //             ->relationship('benefits')
+                //             ->schema([
+                //                 Forms\Components\TextInput::make('name')
+                //                     ->label('Nama Manfaat')
+                //                     ->required(),
+                //             ])
+                //             ->columnSpanFull()
+                //             ->createItemButtonLabel('Tambah Manfaat')
+                //             ->defaultItems(2),
+                //     ])
+                // ,
 
 
             ]);

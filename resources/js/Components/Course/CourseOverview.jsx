@@ -38,7 +38,7 @@ const CourseOverview = ({ course }) => (
             <div className="flex flex-wrap gap-3">
                 {course.is_enrolled ? (
                     <>
-                        <Link href={`/courses/join/${course.slug}/learn`}>
+                        <Link href={`/courses/join/${course.slug}`}>
                             <PrimaryButton className="rounded-full">
                                 Belajar Sekarang
                             </PrimaryButton>

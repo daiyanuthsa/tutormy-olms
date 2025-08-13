@@ -1,15 +1,16 @@
-import React, { useState } from 'react';
-import { Head, usePage } from '@inertiajs/react';
-import MainLayout from '@/Layouts/MainLayout';
-import Breadcrumb from '@/Components/Course/Breadcrumb';
-import { DUMMY_COURSES } from '../../../../public/js/data/DummyData';
-import VideoPlayer from './Content/VideoPlayer';
-import LessonNavigator from './Content/LessonNavigator';
-import VideoDescription from './Content/VideoDescription';
-import CourseMeta from './Content/CourseMeta';
+import React, { useState } from "react";
+import { Head, usePage } from "@inertiajs/react";
+import MainLayout from "@/Layouts/MainLayout";
+import Breadcrumb from "@/Components/Course/Breadcrumb";
+import { DUMMY_COURSES } from "../../../../public/js/data/DummyData";
+import VideoPlayer from "./Content/VideoPlayer";
+import LessonNavigator from "./Content/LessonNavigator";
+import VideoDescription from "./Content/VideoDescription";
+import CourseMeta from "./Content/CourseMeta";
 import { router } from "@inertiajs/react";
 
 const CourseKonten = ({ course, sectionId, contentId }) => {
+
     const allLessons =
         course?.sections?.flatMap((section) =>
             (section.contents || []).map((content) => ({
@@ -31,7 +32,7 @@ const CourseKonten = ({ course, sectionId, contentId }) => {
     const isInvalid = !course || !currentLesson;
     const isFirst = activeLessonIndex === 0;
     const isLast = activeLessonIndex === allLessons.length - 1;
-
+    console.log("Current Lesson:", currentLesson);
     // handleChangeLesson hanya untuk tombol navigasi
     const handleChangeLesson = (offset) => {
         const newIndex = activeLessonIndex + offset;
@@ -71,7 +72,7 @@ const CourseKonten = ({ course, sectionId, contentId }) => {
                                 {currentLesson.name}
                             </p>
                         </div>
-                        <VideoPlayer />
+                        <VideoPlayer video={currentLesson.content} thumbnail={course.thumbnail} />
                     </div>
 
                     <LessonNavigator
@@ -87,7 +88,7 @@ const CourseKonten = ({ course, sectionId, contentId }) => {
                 </div>
 
                 <VideoDescription description={course.about} />
-                <CourseMeta course={course} />
+                {/* <CourseMeta course={course} /> */}
             </section>
         </MainLayout>
     );

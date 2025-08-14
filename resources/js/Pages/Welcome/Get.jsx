@@ -23,7 +23,7 @@ const steps = [
             "☑️Akses ke berbagai materi pembelajaran yang relevan dengan perkembangan teknologi.",
         ],
         imgPosition: "right",
-        img: "/assets/get-image3.webp",
+        img: "/assets/get-image6.png",
     },
     {
         id: "03",
@@ -34,7 +34,7 @@ const steps = [
             "☑️Akses ke berbagai materi pembelajaran yang relevan dengan perkembangan teknologi.",
         ],
         imgPosition: "left",
-        img: "/assets/get-image4.webp",
+        img: "/assets/get-image7.png",
     },
 ];
 

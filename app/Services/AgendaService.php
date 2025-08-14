@@ -24,6 +24,7 @@ class AgendaService
     }
     public function getPastAgendaDetail(Agenda $agenda){
         $agenda = $this->agendaRepository->findAgendaById($agenda);
+        $agenda->load('category'); // Memuat relasi category
         if (empty($agenda->recording_url)) {
             return null;
         }

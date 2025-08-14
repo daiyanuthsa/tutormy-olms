@@ -4,7 +4,7 @@ import { useState, useRef, useEffect } from "react";
 
 export default function Recording({ webinarDetail }) {
     // if (!webinarDetail) return null;
-
+console.log(webinarDetail);
     const formattedDate = new Date(
         webinarDetail.event_datetime
     ).toLocaleDateString("id-ID", {
@@ -108,7 +108,10 @@ export default function Recording({ webinarDetail }) {
                         <div className="md:w-1/2 xl:w-auto rounded-xl overflow-hidden bg-neutral-3">
                             <div className="lg:h-96 relative">
                                 <img
-                                    src={`/storage/${webinarDetail.thumbnail || "assets/hero.png"}`}
+                                    src={`/storage/${
+                                        webinarDetail.thumbnail ||
+                                        "assets/hero.png"
+                                    }`}
                                     alt={webinarDetail.name}
                                     className="w-full h-full object-cover"
                                 />
@@ -126,45 +129,40 @@ export default function Recording({ webinarDetail }) {
                             <div className="space-y-3">
                                 <div className="flex items-center gap-2 text-base lg:text-lg font-medium">
                                     <Icon
-                                        icon="mdi:calendar-month"
+                                        icon="mdi:folder"
                                         className="text-lg"
                                     />
-                                    <span>{formattedDate}</span>
+                                    <span>{webinarDetail.category.name}</span>
                                 </div>
 
                                 <div className="flex items-center gap-2 text-base lg:text-lg font-medium">
                                     <Icon
-                                        icon="lets-icons:clock"
+                                        icon="mdi:access-time"
                                         className="text-lg"
                                     />
-                                    <span>{startTime} WIB - selesai</span>
+                                    <span>
+                                        {webinarDetail.duration_minutes} menit
+                                    </span>
                                 </div>
 
-                                <div className="flex items-center gap-2 text-base lg:text-lg font-medium">
+                                {/* <div className="flex items-center gap-2 text-base lg:text-lg font-medium">
                                     <Icon
                                         icon="ic:outline-place"
                                         className="text-lg"
                                     />
                                     <span>Zoom Meeting</span>
-                                </div>
+                                </div> */}
                             </div>
                         </div>
                     </div>
 
                     <div className="space-y-5">
-                        <h6 className="lg:text-2xl font-bold">
-                            Deskripsi Webinar
-                        </h6>
-                        <p className="text-neutral-2">
-                            {webinarDetail.description}
-                        </p>
-
                         {/* Player */}
                         {/* Player */}
                         <div className="space-y-4">
-                            <h2 className="font-semibold text-lg">
+                            {/* <h2 className="font-semibold text-lg">
                                 Rekaman Webinar
-                            </h2>
+                            </h2> */}
                             <div className="relative w-full h-64 md:h-96 lg:h-[500px] xl:h-[600px] rounded-xl overflow-hidden bg-black">
                                 {videoId ? (
                                     <>
@@ -180,7 +178,10 @@ export default function Recording({ webinarDetail }) {
                                                 className="absolute inset-0 w-full h-full cursor-pointer group"
                                                 onClick={handlePlay}
                                                 style={{
-                                                    backgroundImage: `url("/storage/${webinarDetail.thumbnail || "assets/hero.png"}")`,
+                                                    backgroundImage: `url("/storage/${
+                                                        webinarDetail.thumbnail ||
+                                                        "assets/hero.png"
+                                                    }")`,
                                                     backgroundSize: "cover",
                                                     backgroundPosition:
                                                         "center",
@@ -203,6 +204,12 @@ export default function Recording({ webinarDetail }) {
                                 )}
                             </div>
                         </div>
+                        <h6 className="lg:text-2xl font-bold">
+                            Deskripsi Webinar
+                        </h6>
+                        <p className="text-neutral-2">
+                            {webinarDetail.description}
+                        </p>
                     </div>
                 </div>
             </section>

@@ -33,16 +33,13 @@ const WebminarCard = ({ webinar }) => {
 
                     <div className="space-y-2 flex-shrink-0">
                         <div className="flex items-center gap-2 text-xs lg:text-sm font-medium">
-                            <Icon
-                                icon="mdi:calendar-month"
-                                className="text-lg"
-                            />
-                            <span>{formattedDate}</span>
+                            <Icon icon="mdi:folder" className="text-lg" />
+                            <span>{webinar.category.name}</span>
                         </div>
 
                         <div className="flex items-center gap-2 text-xs lg:text-sm font-medium">
-                            <Icon icon={accessIcon} className="text-lg" />
-                            <span>{accessLabel}</span>
+                            <Icon icon="mdi:access-time" className="text-lg" />
+                            <span>{webinar.duration_minutes} menit</span>
                         </div>
                     </div>
                 </div>

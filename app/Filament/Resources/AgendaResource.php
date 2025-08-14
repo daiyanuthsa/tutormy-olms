@@ -65,20 +65,20 @@ class AgendaResource extends Resource
                             ->hint('Aktifkan agenda ini untuk ditampilkan di halaman webminar.')
                             ->required(),
                     ]),
-                Fieldset::make('Pendaftaran')
-                    ->schema([
-                        Forms\Components\TextInput::make('registration_link')
-                        ->label('Tautan Pendaftaran')
-                            ->maxLength(255)
-                            ->columnSpanFull(),
-                        Forms\Components\DateTimePicker::make('registration_deadline')
-                            ->label('Batas Waktu Pendaftaran')
-                            ,
-                        Forms\Components\TextInput::make('participant_quota')
-                        ->hint('Kosongkan jika tidak membatasi jumlah peserta.')
-                        ->label('Kuota Peserta')
-                            ->numeric(),
-                    ]),
+                // Fieldset::make('Pendaftaran')
+                //     ->schema([
+                //         Forms\Components\TextInput::make('registration_link')
+                //         ->label('Tautan Pendaftaran')
+                //             ->maxLength(255)
+                //             ->columnSpanFull(),
+                //         Forms\Components\DateTimePicker::make('registration_deadline')
+                //             ->label('Batas Waktu Pendaftaran')
+                //             ,
+                //         Forms\Components\TextInput::make('participant_quota')
+                //         ->hint('Kosongkan jika tidak membatasi jumlah peserta.')
+                //         ->label('Kuota Peserta')
+                //             ->numeric(),
+                //     ]),
                 Fieldset::make('Rekaman')
                     ->schema([
                         Forms\Components\TextInput::make('duration_minutes')
@@ -99,26 +99,21 @@ class AgendaResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('name')
                     ->searchable(),
+                Tables\Columns\TextColumn::make('category.name')
+                    ->searchable()
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: false),
                 Tables\Columns\TextColumn::make('slug')
-                    ->searchable(),
+                    ->searchable()->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('thumbnail')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('event_datetime')
-                    ->dateTime()
-                    ->sortable(),
+                    ->searchable()->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('duration_minutes')
                     ->numeric()
                     ->sortable(),
-                Tables\Columns\TextColumn::make('registration_link')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('registration_deadline')
-                    ->dateTime()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('participant_quota')
-                    ->numeric()
-                    ->sortable(),
+
                 Tables\Columns\TextColumn::make('recording_url')
-                    ->searchable(),
+                    ->searchable()
+                    ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\IconColumn::make('is_active')
                     ->boolean(),
                 Tables\Columns\TextColumn::make('created_at')

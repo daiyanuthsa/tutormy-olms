@@ -37,6 +37,7 @@ class WebinarController extends Controller
     public function showPastAgenda(Agenda $agenda)
     {
         $webinarDetail = $this->agendaService->getPastAgendaDetail($agenda);
+    ;
         if (empty($webinarDetail)) {
             return redirect()->route('webinar.index')->with('error', 'Agenda tidak memiliki rekaman');
         }

@@ -12,7 +12,7 @@ import {
 const filterCourses = (courses, category, keyword) => {
     let result = courses;
 
-    if (category && category !== "Discover") {
+    if (category && category !== "Semua Kategori") {
         result = result.filter((course) => course.category?.name === category);
     }
 
@@ -70,11 +70,11 @@ const Course = ({ courses, categories }) => {
         <MainLayout>
             <Head title="Course" />
             <main className="py-24 lg:py-28 w-full text-white">
-                <CourseSearch
+                {/* <CourseSearch
                     value={searchTerm}
                     onChange={handleSearchChange}
                     onSubmit={handleSearchSubmit}
-                />
+                /> */}
 
                 <CourseFilter
                     categories={categories}

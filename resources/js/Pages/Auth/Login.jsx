@@ -47,7 +47,7 @@ const Login = ({ status, canResetPassword }) => {
                                     Masuk Sekarang!<br />
                                     Kembangkan Diri dengan
                                 </h1>
-                                <p className="text-xl font-normal font-['Paytone_One']">Tutormy.id</p>
+                                <p className="text-2xl font-normal font-['Paytone_One']">Tutormy</p>
                             </div>
 
                             {status && (

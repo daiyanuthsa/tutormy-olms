@@ -69,8 +69,9 @@ const Register = () => {
         });
     };
 
-    const handleGoogleLogin = () => {
-        console.log('Google login clicked');
+    const handleGoogleLogin = (e) => {
+        e.preventDefault();
+        window.location.href = route("auth.redirect", "google");
     };
 
     return (

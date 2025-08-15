@@ -31,10 +31,10 @@ class ProfileController extends Controller
     }
     public function show()
     {
-        $profiledata = Auth::user()->only(['id', 'name', 'email', 'status', 'about']); // ganti field sesuai kebutuhan
+        $profiledata = Auth::user()->only(['id', 'name', 'email', 'status', 'about', 'photo']); // ganti field sesuai kebutuhan
         $courses = $this->courseRepository->getUserCourseProgress(Auth::id()); // Ambil semua kursus untuk ditampilkan di dashboard
-        $portofolio = $this->portofolioRepository->getbyUserId(Auth::id()); // Ambil portofolio berdasarkan user ID
-        return Inertia::render('Dashboard', compact('profiledata', 'courses','portofolio'));
+        // $portofolio = $this->portofolioRepository->getbyUserId(Auth::id()); // Ambil portofolio berdasarkan user ID
+        return Inertia::render('Dashboard', compact('profiledata', 'courses'));
     }
     public function edit(Request $request): Response
     {

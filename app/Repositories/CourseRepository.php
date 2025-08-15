@@ -157,7 +157,6 @@ class CourseRepository implements CourseRepositoryInterface
 
                 $progress = $totalContents > 0 ? round(($currentPosition / $totalContents) * 100) : 0;
 
-                // Determine status & button
                 $certificate = $courseStudent->certificate;
                 $isFinished = $progress >= 100;
 
@@ -167,6 +166,16 @@ class CourseRepository implements CourseRepositoryInterface
                     default => 'ongoing',
                 };
 
+                // Tentukan next course path hanya jika belum selesai
+                $nextCoursePath = null;
+                if (!$isFinished && $courseStudent->course_section_id && $courseStudent->section_content_id) {
+                    $nextCoursePath = route('courses.learning', [
+                        'course' => $courseStudent->course->slug,
+                        'courseSection' => $courseStudent->course_section_id,
+                        'sectionContent' => $courseStudent->section_content_id,
+                    ]);
+                }
+
                 return [
                     'course_id' => $courseStudent->course_id,
                     'title' => $courseStudent->course->name,
@@ -175,15 +184,10 @@ class CourseRepository implements CourseRepositoryInterface
                     'progress' => $progress,
                     'status' => $status,
                     'is_finished' => $isFinished,
-                    'next_course_path' => route('courses.learning', [
-                        'course' => $courseStudent->course->slug,
-                        'courseSection' => $courseStudent->course_section_id,
-                        'sectionContent' => $courseStudent->section_content_id,
-                    ]),
+                    'next_course_path' => $nextCoursePath,
                     'certificate_path' => $certificate?->path,
                 ];
             });
-            
     }
 
     protected function getCurrentProgress($courseStudent)

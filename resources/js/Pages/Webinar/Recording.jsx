@@ -207,9 +207,12 @@ console.log(webinarDetail);
                         <h6 className="lg:text-2xl font-bold">
                             Deskripsi Webinar
                         </h6>
-                        <p className="text-neutral-2">
-                            {webinarDetail.description}
-                        </p>
+                        <div
+                            className="text-neutral-2"
+                            dangerouslySetInnerHTML={{
+                                __html: webinarDetail.description,
+                            }}
+                        ></div>
                     </div>
                 </div>
             </section>

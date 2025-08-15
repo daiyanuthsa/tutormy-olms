@@ -6,7 +6,7 @@ const UserProfile = ({ profiledata }) => (
         <img
             src={
                 profiledata.photo
-                    ? profiledata.photo
+                    ? `/storage/${profiledata.photo}`
                     : "/assets/profile.png"
             }
             alt="profile"

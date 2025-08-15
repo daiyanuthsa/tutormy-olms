@@ -25,7 +25,8 @@ const FilterButton = ({ label, filter, activeFilter, setActiveFilter }) => {
 };
 
 const CourseCard = ({ course, isPublicView = false }) => {
-    const isCompleted = !!course.certificate_path;
+    
+    const isCompleted = course.is_finished || course.progress === 100;
     const isOngoing = !isCompleted;
 
     const progressColor = isCompleted ? "bg-primary-4" : "bg-primary-4";
@@ -35,7 +36,7 @@ const CourseCard = ({ course, isPublicView = false }) => {
             ? "Cek Kredensial"
             : "Lihat Kelas"
         : isCompleted
-        ? "Unduh Sertifikat"
+        ? "Selesai"
         : "Lanjutkan";
 
     const handleCertificate = () => {
@@ -55,7 +56,7 @@ const CourseCard = ({ course, isPublicView = false }) => {
     };
 
     return (
-        <div  className="bg-neutral-5 border-b-2 border-b-primary-2 rounded-b-xl overflow-hidden">
+        <div className="bg-neutral-5 border-b-2 border-b-primary-2 rounded-b-xl overflow-hidden">
             <div className="aspect-video">
                 <img
                     src={course.image}
@@ -86,12 +87,11 @@ const CourseCard = ({ course, isPublicView = false }) => {
                 <button
                     className={`w-full py-2 px-4 rounded-xl font-medium ${
                         isCompleted
-                            ? "bg-neutral-3 hover:bg-neutral-4"
+                            ? "bg-neutral-3 cursor-not-allowed"
                             : "bg-primary-3 hover:bg-primary-4"
                     } text-white`}
-                    onClick={
-                        isCompleted ? handleCertificate : handleNextCourses
-                    }
+                    disabled={isCompleted}
+                    onClick={isCompleted ? undefined : handleNextCourses}
                 >
                     {actionText}
                 </button>
@@ -101,6 +101,7 @@ const CourseCard = ({ course, isPublicView = false }) => {
 };
 
 const ClassUser = ({ isPublicView = false, hideHeader = false, courses }) => {
+
     const [activeFilter, setActiveFilter] = useState("all");
 
     const filteredCourses = useMemo(
@@ -142,7 +143,7 @@ const ClassUser = ({ isPublicView = false, hideHeader = false, courses }) => {
                     </>
                 )}
 
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                     {filteredCourses.map((course) => (
                         <CourseCard
                             key={course.course_id}

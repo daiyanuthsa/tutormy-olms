@@ -24,7 +24,7 @@ const CourseFinished = ({ course }) => {
                     </div>
 
                     <div className="text-sm md:text-base font-medium text-gray-300 max-w-md">
-                        Anda telah menyelesaikan course ini dengan baik. Yuk,
+                        Anda telah menyelesaikan kelas ini dengan baik. Yuk,
                         claim sertifikat Anda sekarang sebagai bukti pencapaian
                         dan tambahan portofolio yang keren!
                     </div>
@@ -59,7 +59,7 @@ const CourseFinished = ({ course }) => {
                     </div>
 
                     <div className="flex flex-col md:flex-row gap-3 md:gap-5 w-full justify-center">
-                        <PrimaryButton
+                        {/* <PrimaryButton
                             variant="outline"
                             className="rounded-full text-white w-full md:w-auto"
                             onClick={() => {
@@ -67,14 +67,14 @@ const CourseFinished = ({ course }) => {
                             }}
                         >
                             Download Sertifikat
-                        </PrimaryButton>
+                        </PrimaryButton> */}
                         <PrimaryButton
                             className="rounded-full w-full md:w-auto"
                             onClick={() => {
                                 window.location.href = "/courses";
                             }}
                         >
-                            Course Lainnya
+                            Lihat Kelas Lainnya
                         </PrimaryButton>
                     </div>
                 </div>

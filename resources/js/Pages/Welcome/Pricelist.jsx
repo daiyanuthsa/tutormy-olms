@@ -38,7 +38,7 @@ const Pricelist = ({ pricings }) => {
     return (
         <section id="pricelist">
             <div className="container mx-auto py-16 lg:py-20 space-y-20 text-white">
-                <div className="space-y-5 flex flex-col items-center">
+                <div className="space-y-1 flex flex-col items-center">
                     <h2
                         data-aos="fade-up"
                         className="text-center text-primary-3 shadow-xl text-2xl lg:text-5xl font-bold"
@@ -50,7 +50,7 @@ const Pricelist = ({ pricings }) => {
                     <p
                         data-aos="fade-up"
                         data-aos-delay="100"
-                        className="text-center lg:text-xl max-w-3xl"
+                        className="text-center lg:text-xl max-w-3xl "
                     >
                         Join member kita sekarang untuk dapatkan & lipat
                         gandakan penghasilan!
@@ -162,7 +162,7 @@ const Pricelist = ({ pricings }) => {
                     ))}
                 </div> */}
 
-                <div className="flex justify-center items-center md:px-8 py-2 md:py-8">
+                <div className="flex justify-center items-center md:px-8 py-2 md:py-3">
                     {" "}
                     {/* Tambahan padding */}
                     <div

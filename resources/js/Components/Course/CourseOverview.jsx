@@ -12,7 +12,7 @@ const CourseOverview = ({ course }) => (
         />
         <div className="space-y-5 w-full">
             <h1 className="text-2xl xl:text-4xl font-bold">{course.name}</h1>
-            <div className="flex items-center gap-5">
+            {/* <div className="flex items-center gap-5">
                 <img
                     src="/assets/teacher.png"
                     alt="mentor"
@@ -24,7 +24,7 @@ const CourseOverview = ({ course }) => (
                     </p>
                     <p className="text-sm">{course.mentor_title}</p>
                 </div>
-            </div>
+            </div> */}
             <div className="space-y-2 text-base">
                 <p className="flex items-center gap-3">
                     <Icon icon="tabler:video-filled" className="w-5 h-5" />

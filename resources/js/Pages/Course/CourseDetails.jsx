@@ -31,7 +31,7 @@ const CourseDetails = ({ course }) => {
                 <Breadcrumb title={course.name} />
                 <CourseOverview course={course} />
 
-                <div className="flex flex-col lg:flex-row w-full items-start gap-16">
+                <div className="flex flex-col lg:flex-row w-full lg:w-2/3 items-start gap-16">
                     <div className="space-y-10 flex-1 w-full">
                         <div className="space-y-5">
                             <h6 className="lg:text-2xl font-bold">
@@ -51,7 +51,7 @@ const CourseDetails = ({ course }) => {
                         </div>
                     </div>
                     {/* ...aside content... */}
-                    <aside className="lg:w-2/5 w-1/10 space-y-10">
+                    {/* <aside className="lg:w-2/5 w-1/10 space-y-10">
                         <div
                             className="relative rounded-xl overflow-hidden bg-primary-3 text-white"
                             style={{
@@ -86,7 +86,7 @@ const CourseDetails = ({ course }) => {
                                 </ul>
                             </div>
                         </div>
-                    </aside>
+                    </aside> */}
                 </div>
             </section>
         </MainLayout>

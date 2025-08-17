@@ -28,7 +28,7 @@ const bonuses = [
     },
     {
         image: "/assets/foto-17.jpg",
-        title: "GRATIS Akses Webminar Eksklusif",
+        title: "GRATIS Akses Webinar Eksklusif",
         benefits: [
             "Langkah awal menuju perubahan besar bisa dimulai dari satu sesi ini. Dapatkan ilmu dan insight dari para praktisi berpengalaman, yang tidak kamu temukan di tempat lain - dan semuanya tanpa biaya.",
         ],

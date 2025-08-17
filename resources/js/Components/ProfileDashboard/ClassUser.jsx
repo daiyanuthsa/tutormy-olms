@@ -59,7 +59,7 @@ const CourseCard = ({ course, isPublicView = false }) => {
         <div className="bg-neutral-5 border-b-2 border-b-primary-2 rounded-b-xl overflow-hidden">
             <div className="aspect-video">
                 <img
-                    src={course.image}
+                    src={'storage/' + course.image}
                     alt="image"
                     className="w-full h-full object-cover"
                 />

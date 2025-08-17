@@ -37,7 +37,7 @@ const Pricelist = ({ pricings }) => {
 
     return (
         <section id="pricelist">
-            <div className="container mx-auto py-16 lg:py-20 space-y-20 text-white">
+            <div className="container mx-auto py-16 lg:py-20 space-y-8 text-white">
                 <div className="space-y-1 flex flex-col items-center">
                     <h2
                         data-aos="fade-up"
@@ -168,11 +168,7 @@ const Pricelist = ({ pricings }) => {
                     <div
                         key={pricings[0].id}
                         onClick={() => setSelectedPlan(pricings[0].id)}
-                        className={`relative cursor-pointer transition-all duration-300 transform hover:scale-105 ${
-                            selectedPlan === pricings[0].id
-                                ? "lg:scale-110 z-10"
-                                : "scale-100"
-                        }`}
+                        className={`relative cursor-pointer transition-all duration-300 transform hover:scale-105`}
                     >
                         <div className="rounded-2xl p-4 sm:p-6 xl:p-8 mx-0 lg:mx-20 lg:w-96 h-auto relative bg-gradient-to-b from-purple-700 to-purple-900 shadow-2xl shadow-purple-500/25 border border-purple-400">
                             <div className="absolute -top-3 left-1/2 transform -translate-x-1/2">

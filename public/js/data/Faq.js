@@ -1,7 +1,7 @@
 const Faq = [
     {
         question: "Siapa saja yang bisa ikut program ini?",
-        answer: "Tutormy.id terbuka untuk pelajar SD, SMP, SMA, mahasiswa, bahkan umum yang ingin meningkatkan pengetahuan di bidang tertentu.",
+        answer: "Program ini dirancang agar cocok untuk siapapun yang ingin menaikkan omset dan mendapatkan penghasilan tambahan.",
     },
     {
         question:

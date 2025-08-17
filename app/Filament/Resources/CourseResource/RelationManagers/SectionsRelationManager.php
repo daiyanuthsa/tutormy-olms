@@ -51,10 +51,16 @@ class SectionsRelationManager extends RelationManager
         return $table
             ->recordTitleAttribute('name')
             ->columns([
-                Tables\Columns\TextColumn::make('name')->label('Nama Bagian'),
+                Tables\Columns\TextColumn::make('position')
+                    ->label('Urutan')->sortable(),
+                Tables\Columns\TextColumn::make('name')
+                ->label('Nama Bagian')
+                ->sortable(),
                 Tables\Columns\TextColumn::make('contents_count')->counts('contents')->label('Jumlah Konten'),
-                Tables\Columns\TextColumn::make('position')->label('Urutan'),
-            ])->reorderable('position')
+
+            ])
+            ->reorderable('position')
+            ->defaultSort('position', 'asc')
             ->filters([
                 //
             ])
@@ -65,8 +71,8 @@ class SectionsRelationManager extends RelationManager
                 Tables\Actions\ViewAction::make(),
                 Tables\Actions\EditAction::make(),
                 Tables\Actions\DeleteAction::make(),
-                
+
             ])
-;
+        ;
     }
 }

@@ -78,9 +78,15 @@ const ReviewCard = ({ content, image_url, name, occupation }) => {
 
 const PhotoReviewCard = () => {
     const [photoUrl, setPhotoUrl] = useState("");
-
+    const plugin = useRef(
+        Autoplay({
+            delay: 3000,
+            stopOnInteraction: true,
+            stopOnMouseEnter: true,
+        })
+    );
     useEffect(() => {
-        setPhotoUrl("/assets/wa-hand-1.png");
+        setPhotoUrl("/assets/chat1.png");
     }, []);
 
     const scrollToPricelist = () =>
@@ -89,7 +95,7 @@ const PhotoReviewCard = () => {
     return (
         <section className="relative flex flex-col items-center space-y-8 min-h-screen px-4 md:px-8">
             <div className="absolute inset-0">
-                <div className="absolute bottom-20 left-10 md:left-20 w-48 h-48 md:w-72 md:h-72 translate-y-full bg-purple-500/20 rounded-full blur-3xl" />
+                <div className="absolute bottom-80 left-10 md:left-20 w-48 h-48 md:w-72 md:h-72 translate-y-full bg-purple-500/20 rounded-full blur-3xl" />
             </div>
             <div className="container relative flex flex-col items-center justify-center text-center space-y-6 z-10 text-white py-12">
                 <h2 className="text-2xl md:text-4xl lg:text-5xl font-bold leading-snug">
@@ -97,27 +103,65 @@ const PhotoReviewCard = () => {
                     <br className="hidden md:block" /> Bergabung Bersama Kami!
                 </h2>
 
-                <div className="flex flex-col lg:flex-row w-full items-center">
+                <div className="flex flex-col lg:flex-row w-full items-center gap-4 lg:gap-0">
                     <div className="flex-1 flex flex-col gap-8">
                         {[features[0], features[2]].map((f, i) => (
                             <div key={i} className="space-y-3 text-left">
                                 <div className="w-12 h-12 border border-primary-3 rounded-2xl flex items-center justify-center">
-                                    <Icon icon={f.icon} className="text-white text-2xl" />
+                                    <Icon
+                                        icon={f.icon}
+                                        className="text-white text-2xl"
+                                    />
                                 </div>
                                 <h3 className="text-lg font-bold">{f.title}</h3>
-                                <p className="text-gray-200 text-sm leading-relaxed">{f.description}</p>
+                                <p className="text-gray-200 text-sm leading-relaxed">
+                                    {f.description}
+                                </p>
                             </div>
                         ))}
                     </div>
-
-                    <div className="flex-[2] flex justify-center">
-                        {photoUrl && (
-                            <img
-                                src={photoUrl}
-                                alt="Member Testimonial"
-                                className="w-full max-w-4xl h-auto object-contain rounded-2xl shadow-2xl"
-                            />
-                        )}
+                    <div className="flex-[2] flex justify-center items-center">
+                        <Carousel
+                            className="w-full max-w-lg"
+                            opts={{
+                                align: "center",
+                                loop: true,
+                                skipSnaps: false,
+                            }}
+                            plugins={[plugin.current]}
+                            onMouseEnter={plugin.current.stop}
+                            onMouseLeave={plugin.current.reset}
+                        >
+                            <CarouselContent className="flex items-center">
+                                <CarouselItem className="flex justify-center">
+                                    <div className="flex justify-center w-full">
+                                        <img
+                                            src={photoUrl}
+                                            alt="Member Testimonial"
+                                            className="w-full max-w-sm h-auto object-contain rounded-2xl"
+                                        />
+                                    </div>
+                                </CarouselItem>
+                                <CarouselItem className="flex justify-center">
+                                    <div className="flex justify-center w-full">
+                                        <img
+                                            src="/assets/chat2.png"
+                                            alt="Member Testimonial"
+                                            className="w-full max-w-sm h-auto object-contain rounded-2xl"
+                                        />
+                                    </div>
+                                </CarouselItem>
+                                <CarouselItem className="flex justify-center">
+                                    <div className="flex justify-center w-full">
+                                        <img
+                                            src="/assets/chat3.png"
+                                            alt="Member Testimonial"
+                                            className="w-full max-w-sm h-auto object-contain rounded-2xl"
+                                        />
+                                    </div>
+                                </CarouselItem>
+                            </CarouselContent>
+                        </Carousel>
                     </div>
 
                     <div className="flex-1 flex flex-col gap-8 text-right">
@@ -125,16 +169,20 @@ const PhotoReviewCard = () => {
                             <div key={i} className="space-y-3">
                                 <div className="flex justify-end">
                                     <div className="w-12 h-12 border border-primary-3 rounded-2xl flex items-center justify-center">
-                                        <Icon icon={f.icon} className="text-white text-2xl" />
+                                        <Icon
+                                            icon={f.icon}
+                                            className="text-white text-2xl"
+                                        />
                                     </div>
                                 </div>
                                 <h3 className="text-lg font-bold">{f.title}</h3>
-                                <p className="text-gray-200 text-sm leading-relaxed">{f.description}</p>
+                                <p className="text-gray-200 text-sm leading-relaxed">
+                                    {f.description}
+                                </p>
                             </div>
                         ))}
                     </div>
                 </div>
-
 
                 <div className="flex justify-center mt-8">
                     <PrimaryButton

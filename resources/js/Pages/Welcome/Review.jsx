@@ -13,31 +13,31 @@ import GradientText from "@/Components/GradientText";
 import { Icon } from "@iconify/react";
 
 const TESTIMONIALS_PER_SLIDE = 3;
-const SLIDE_INTERVAL = 3000;
+const SLIDE_INTERVAL = 2000;
 const features = [
     {
         icon: "mdi:flash",
         title: "Akses Cepat",
         description:
-            "Belajar Mudah dengan mentor terpercaya dengan akses yang cepat dan mudah hanya dalam satu genggaman tangan",
+            "Belajar dengan mentor terpercaya dengan akses yang cepat dan mudah hanya dalam satu genggaman tangan",
     },
     {
         icon: "mdi:account-group",
         title: "Belajar dengan Expert",
         description:
-            "Mentor dan pengajar yang sudah nyata hingga sosial yang sesuai, cocok buat kamu langsung praktik dan lihat hasilnya",
+            "Mentor yang sudah terbukti berhasil di bidangnya, sehingga modul disusun untuk bisa langsung dipraktikan dan menghasilkan",
     },
     {
         icon: "mdi:infinity",
-        title: "Kemampuan Belajar Seumur Hidup",
+        title: "Kesempatan Belajar Seumur Hidup",
         description:
-            "Kami bisa mengakses konekatan tanpa batas waktu untuk focus berkembang bareng orang-orang yang punya satu tujuan sama!",
+            "Kami bisa mengakses koneksi tanpa batas waktu untuk fokus berkembang bareng orang-orang yang punya satu tujuan sama!",
     },
     {
         icon: "mdi:book-open-page-variant",
-        title: "Modul Pembelajaran hingga Materi",
+        title: "Modul Pembelajaran Mudah & Fleksibel",
         description:
-            "Materi dan dasar yang mudah dipahami hingga video yang bisa diakses kapan saja",
+            "Materi disusun dari dasar, sehingga mudah dipahami dan juga bisa diakses kapan pun, serta dimana saja",
     },
 ];
 
@@ -77,17 +77,15 @@ const ReviewCard = ({ content, image_url, name, occupation }) => {
 
 
 const PhotoReviewCard = () => {
-    const [photoUrl, setPhotoUrl] = useState("");
+    
     const plugin = useRef(
         Autoplay({
             delay: 3000,
-            stopOnInteraction: true,
+            stopOnInteraction: false,
             stopOnMouseEnter: true,
         })
     );
-    useEffect(() => {
-        setPhotoUrl("/assets/chat1.png");
-    }, []);
+
 
     const scrollToPricelist = () =>
         document.getElementById("pricelist")?.scrollIntoView({ behavior: "smooth" });
@@ -136,7 +134,7 @@ const PhotoReviewCard = () => {
                                 <CarouselItem className="flex justify-center">
                                     <div className="flex justify-center w-full">
                                         <img
-                                            src={photoUrl}
+                                            src="/assets/chat1.png"
                                             alt="Member Testimonial"
                                             className="w-full max-w-sm h-auto object-contain rounded-2xl"
                                         />
@@ -161,6 +159,9 @@ const PhotoReviewCard = () => {
                                     </div>
                                 </CarouselItem>
                             </CarouselContent>
+
+                            <CarouselPrevious className="left-2 bg-primary-3 border-primary-3 text-white hover:bg-primary-2 hover:border-primary-2" />
+                            <CarouselNext className="right-2 bg-primary-3 border-primary-3 text-white hover:bg-primary-2 hover:border-primary-2" />
                         </Carousel>
                     </div>
 

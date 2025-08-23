@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import PrimaryButton from "@/Components/PrimaryButton";
 import AOS from "aos";
 
 const Class = ({ courses }) => {

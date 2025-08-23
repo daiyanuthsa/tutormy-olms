@@ -40,7 +40,17 @@ const features = [
             "Materi disusun dari dasar, sehingga mudah dipahami dan juga bisa diakses kapan pun, serta dimana saja",
     },
 ];
-
+const reviewImage = [
+    "/assets/chat1.png",
+    "/assets/chat2.png",
+    "/assets/chat3.png",
+    "/assets/chat4.png",
+    "/assets/chat5.png",
+    "/assets/chat6.png",
+    "/assets/chat7.png",
+    "/assets/chat8.png",
+    "/assets/chat9.png",
+];
 const ReviewCard = ({ content, image_url, name, occupation }) => {
     return (
         <div className="rounded-2xl p-[2px] shadow-2xl bg-gradient-to-br from-primary-4 to-primary-2 w-full">
@@ -131,39 +141,24 @@ const PhotoReviewCard = () => {
                             onMouseLeave={plugin.current.reset}
                         >
                             <CarouselContent className="flex items-center">
-                                <CarouselItem className="flex justify-center">
-                                    <div className="flex justify-center w-full">
-                                        <img
-                                            src="/assets/chat1.png"
-                                            alt="Member Testimonial"
-                                            className="w-full max-w-sm h-auto object-contain rounded-2xl"
-                                        />
-                                    </div>
-                                </CarouselItem>
-                                <CarouselItem className="flex justify-center">
-                                    <div className="flex justify-center w-full">
-                                        <img
-                                            src="/assets/chat2.png"
-                                            alt="Member Testimonial"
-                                            className="w-full max-w-sm h-auto object-contain rounded-2xl"
-                                        />
-                                    </div>
-                                </CarouselItem>
-                                <CarouselItem className="flex justify-center">
-                                    <div className="flex justify-center w-full">
-                                        <img
-                                            src="/assets/chat3.png"
-                                            alt="Member Testimonial"
-                                            className="w-full max-w-sm h-auto object-contain rounded-2xl"
-                                        />
-                                    </div>
-                                </CarouselItem>
+                                {reviewImage.map((src, index) => (
+                                    <CarouselItem key={index} className="flex justify-center">
+                                        <div className="flex justify-center w-full">
+                                            <img
+                                                src={src}
+                                                alt={`Member Testimonial ${index + 1}`}
+                                                className="w-full max-w-sm h-auto object-contain rounded-2xl"
+                                            />
+                                        </div>
+                                    </CarouselItem>
+                                ))}
                             </CarouselContent>
 
                             <CarouselPrevious className="left-2 bg-primary-3 border-primary-3 text-white hover:bg-primary-2 hover:border-primary-2" />
                             <CarouselNext className="right-2 bg-primary-3 border-primary-3 text-white hover:bg-primary-2 hover:border-primary-2" />
                         </Carousel>
                     </div>
+
 
                     <div className="flex-1 flex flex-col gap-8 text-right">
                         {[features[1], features[3]].map((f, i) => (

@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useMemo, useRef } from "react";
+import React, { useEffect, useState, useMemo, useRef, use } from "react";
 import PrimaryButton from "@/Components/PrimaryButton";
 import {
     Carousel,
@@ -11,6 +11,7 @@ import {
 import Autoplay from "embla-carousel-autoplay";
 import GradientText from "@/Components/GradientText";
 import { Icon } from "@iconify/react";
+import AOS from "aos";
 
 const TESTIMONIALS_PER_SLIDE = 3;
 const SLIDE_INTERVAL = 2000;
@@ -51,7 +52,7 @@ const reviewImage = [
     "/assets/chat8.png",
     "/assets/chat9.png",
 ];
-const ReviewCard = ({ content, image_url, name, occupation }) => {
+const ReviewCard = ({ content, image_url, name, ocupation }) => {
     return (
         <div className="rounded-2xl p-[2px] shadow-2xl bg-gradient-to-br from-primary-4 to-primary-2 w-full">
             <div className="bg-neutral-5 rounded-2xl h-full min-h-80 flex flex-col p-6 lg:p-12">
@@ -76,7 +77,7 @@ const ReviewCard = ({ content, image_url, name, occupation }) => {
                             {name || "John Doe"}
                         </h4>
                         <p className="text-gray-400 text-xs">
-                            {occupation || "Role"}
+                            {ocupation || "Role"}
                         </p>
                     </div>
                 </div>
@@ -87,7 +88,11 @@ const ReviewCard = ({ content, image_url, name, occupation }) => {
 
 
 const PhotoReviewCard = () => {
-    
+
+    useEffect(() => {
+        AOS.refresh();
+    }, []);
+
     const plugin = useRef(
         Autoplay({
             delay: 3000,
@@ -114,7 +119,12 @@ const PhotoReviewCard = () => {
                 <div className="flex flex-col lg:flex-row w-full items-center gap-4 lg:gap-0">
                     <div className="flex-1 flex flex-col gap-8">
                         {[features[0], features[2]].map((f, i) => (
-                            <div key={i} className="space-y-3 text-left">
+                            <div
+                                key={i}
+                                className="space-y-3 text-left"
+                                data-aos="fade-right"
+                                data-aos-delay={i * 50}
+                            >
                                 <div className="w-12 h-12 border border-primary-3 rounded-2xl flex items-center justify-center">
                                     <Icon
                                         icon={f.icon}
@@ -142,11 +152,16 @@ const PhotoReviewCard = () => {
                         >
                             <CarouselContent className="flex items-center">
                                 {reviewImage.map((src, index) => (
-                                    <CarouselItem key={index} className="flex justify-center">
+                                    <CarouselItem
+                                        key={index}
+                                        className="flex justify-center"
+                                    >
                                         <div className="flex justify-center w-full">
                                             <img
                                                 src={src}
-                                                alt={`Member Testimonial ${index + 1}`}
+                                                alt={`Member Testimonial ${
+                                                    index + 1
+                                                }`}
                                                 className="w-full max-w-sm h-auto object-contain rounded-2xl"
                                             />
                                         </div>
@@ -159,10 +174,14 @@ const PhotoReviewCard = () => {
                         </Carousel>
                     </div>
 
-
                     <div className="flex-1 flex flex-col gap-8 text-right">
                         {[features[1], features[3]].map((f, i) => (
-                            <div key={i} className="space-y-3">
+                            <div
+                                key={i}
+                                className="space-y-3"
+                                data-aos="fade-left"
+                                data-aos-delay={i * 50}
+                            >
                                 <div className="flex justify-end">
                                     <div className="w-12 h-12 border border-primary-3 rounded-2xl flex items-center justify-center">
                                         <Icon

@@ -3,17 +3,32 @@ import Hero from "@/Components/Webminar/Hero";
 import MainLayout from "@/Layouts/MainLayout";
 import WebminarCard from "@/Components/Webminar/WebminarCard";
 import { Icon } from "@iconify/react";
-import { useState, useMemo } from "react";
+import { useState, useMemo, useRef } from "react";
 import { router } from "@inertiajs/react";
+import Autoplay from "embla-carousel-autoplay";
+import {
+    Carousel,
+    CarouselContent,
+    CarouselItem,
+    CarouselNext,
+    CarouselPrevious,
+} from "@/components/ui/carousel";
+
 const Index = ({ webinars, categories }) => {
-    console.log("webinars:", { webinars });
     const [searchTerm, setSearchTerm] = useState("");
     const [activeCategory, setActiveCategory] = useState("Semua Kategori");
 
     const onCategoryChange = (category) => {
         setActiveCategory(category);
     };
-    
+
+    const plugin = useRef(
+        Autoplay({
+            delay: 3000,
+            stopOnInteraction: false,
+            stopOnMouseEnter: true,
+        })
+    );
 
     // fungsi untuk handle submit form
     const handleSearchSubmit = (e) => {
@@ -92,38 +107,49 @@ const Index = ({ webinars, categories }) => {
                         </form>
                     </div>
                     <div className="container">
-                        <div className="flex gap-6 lg:gap-12 whitespace-nowrap overflow-x-auto pb-2 scrollbar-hide">
-                            <button
-                                key={"semua-kategori"}
-                                onClick={() =>
-                                    onCategoryChange("Semua Kategori")
-                                }
-                                className={`text-base md:text-lg font-semibold transition-colors duration-200 whitespace-nowrap 
-                                    ${
-                                        activeCategory === "Semua Kategori"
-                                            ? "text-primary-3"
-                                            : "text-white hover:text-primary-3"
-                                    }`}
-                            >
-                                Semua Kategori
-                            </button>
-                            {categories.map((category) => (
-                                <button
-                                    key={category.slug}
-                                    onClick={() =>
-                                        onCategoryChange(category.name)
-                                    }
-                                    className={`text-base md:text-lg font-semibold transition-colors duration-200 whitespace-nowrap 
-                                    ${
-                                        activeCategory === category.name
-                                            ? "text-primary-3"
-                                            : "text-white hover:text-primary-3"
-                                    }`}
-                                >
-                                    {category.name}
-                                </button>
-                            ))}
-                        </div>
+                        <Carousel className="w-full">
+                            <CarouselContent className="flex gap-6 lg:gap-12 mx-10 xl:mx-0">
+                                <CarouselItem className="pl-0 basis-auto ">
+                                    <button
+                                        key={"semua-kategori"}
+                                        onClick={() =>
+                                            onCategoryChange("Semua Kategori")
+                                        }
+                                        className={`text-base md:text-lg font-semibold transition-colors duration-200 whitespace-nowrap 
+                        ${
+                            activeCategory === "Semua Kategori"
+                                ? "text-primary-3"
+                                : "text-white hover:text-primary-3"
+                        }`}
+                                    >
+                                        Semua Kategori
+                                    </button>
+                                </CarouselItem>
+                                {categories.map((category) => (
+                                    <CarouselItem
+                                        key={category.slug}
+                                        className="pl-0 basis-auto"
+                                    >
+                                        <button
+                                            onClick={() =>
+                                                onCategoryChange(category.name)
+                                            }
+                                            className={`text-base md:text-lg font-semibold transition-colors duration-200 whitespace-nowrap 
+                        ${
+                            activeCategory === category.name
+                                ? "text-primary-3"
+                                : "text-white hover:text-primary-3"
+                        }`}
+                                        >
+                                            {category.name}
+                                        </button>
+                                    </CarouselItem>
+                                ))}
+                            </CarouselContent>
+
+                            <CarouselPrevious className="left-0 bg-primary-3 border-primary-3 text-white hover:bg-primary-2 hover:border-primary-2  xl:hidden" />
+                            <CarouselNext className="right-0 bg-primary-3 border-primary-3 text-white hover:bg-primary-2 hover:border-primary-2  xl:hidden" />
+                        </Carousel>
                     </div>
                 </section>
 
